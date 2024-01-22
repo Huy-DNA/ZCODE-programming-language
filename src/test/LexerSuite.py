@@ -61,3 +61,4 @@ class LexerSuite(unittest.TestCase):
         """test comments"""
         self.assertTrue(TestLexer.test("## This is a comment", "## This is a comment,<EOF>", 119))
         self.assertTrue(TestLexer.test("## This is comment 1 \n ## This is comment 2", "## This is comment 1,## This is comment 2,<EOF>", 120))
+        self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2", "## This is comment 1 ###,## This is ## comment 2,<EOF>", 121))
