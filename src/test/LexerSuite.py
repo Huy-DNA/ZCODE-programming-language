@@ -14,3 +14,11 @@ class LexerSuite(unittest.TestCase):
     def test_unclose_string(self):
         """test unclose string"""
         self.assertTrue(TestLexer.test("\"abc", "Unclosed String: \"abc", 103))
+    
+    def test_invalid_escape(self):
+        """test invalid escape"""
+        self.assertTrue(TestLexer.test("\"abc \\v\"", "Illegal Escape In String: \"abc \\v\"", 104))
+
+    def test_valid_escape(self):
+        """test valid escape"""
+        self.assertTrue(TestLexer.test("\"abc \\f\"", "\"abc \\f\",<EOF>", 105))
