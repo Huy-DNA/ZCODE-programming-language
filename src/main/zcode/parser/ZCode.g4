@@ -85,7 +85,7 @@ fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
 
 // COMMENT token
-COMMENT: '##' .*? (NEWLINE | EOF);
+COMMENT: '##' .*? (NEWLINE | EOF) { self.text = self.text.rstrip() };
 
 // Misc tokens
 WS : [ \t\f]+ -> skip ; // skip spaces, tabs, newlineso
