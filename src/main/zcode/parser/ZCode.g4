@@ -77,8 +77,8 @@ fragment
 EXPONENT: 'e'('+'|'-')?[0-9]+;
 
 // STRING token
-ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"';
-UNCLOSE_STRING: '"' (~["] | '\'"')*? NEWLINE {raise UncloseString(self.text)};
+ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"' {raise IllegalEscape(self.text)} ;
+UNCLOSE_STRING: '"' (~["] | '\'"')*? (NEWLINE | EOF) {raise UncloseString(self.text)};
 STRING: '"' (~["\n] | '\'"')* '"';
 
 fragment

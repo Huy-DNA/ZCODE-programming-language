@@ -11,3 +11,6 @@ class LexerSuite(unittest.TestCase):
         """test complex string"""
         self.assertTrue(TestLexer.test("\"isn\\'t\"","\"isn\\'t\",<EOF>",102))
     
+    def test_unclose_string(self):
+        """test unclose string"""
+        self.assertTrue(TestLexer.test("\"abc", "Unclosed String: \"abc", 103))
