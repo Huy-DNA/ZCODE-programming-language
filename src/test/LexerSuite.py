@@ -48,3 +48,11 @@ class LexerSuite(unittest.TestCase):
     def test_full_float(self):
         """test full fledge floating point number"""
         self.assertTrue(TestLexer.test("123.456e789", "123.456e789,<EOF>", 112))
+
+    def test_identifier(self):
+        """test identifiers"""
+        self.assertTrue(TestLexer.test("a123", "a123,<EOF>", 114))
+        self.assertTrue(TestLexer.test("A123", "A123,<EOF>", 115))
+        self.assertTrue(TestLexer.test("AabC123", "AabC123,<EOF>", 116))
+        self.assertTrue(TestLexer.test("_abC_123", "_abC_123,<EOF>", 117))
+        self.assertTrue(TestLexer.test("123abc", "123,abc,<EOF>", 118))

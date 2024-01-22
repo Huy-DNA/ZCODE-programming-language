@@ -62,7 +62,7 @@ TYPE: 'number' | 'string' | 'bool';
 
 // IDENTIFIER token
 
-IDENTIFIER: [a-z] [a-z0-9]*;
+IDENTIFIER: [a-zA-Z_] [a-zA-Z_0-9]*;
 
 // NUMBER token
 NUMBER: INTEGRAL DECIMAL? EXPONENT?;
@@ -85,7 +85,7 @@ fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
 
 // COMMENT token
-COMMENT: '##' .*? NEWLINE;
+COMMENT: '##' .*? (NEWLINE | EOF);
 
 // Misc tokens
 WS : [ \t\f]+ -> skip ; // skip spaces, tabs, newlineso
