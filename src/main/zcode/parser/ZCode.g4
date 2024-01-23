@@ -47,15 +47,18 @@ expr: '(' expr ')'
 	| callee=expr'('(param=expr(','param=expr)*)?')'
 	| '-'expr
 	| 'not'expr
-	| left=expr op=('*' | '/' | '%') right=expr
-	| left=expr op=('+' | '-') right=expr
-	| left=expr op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') right=expr
-	| left=expr'...'right=expr
-	| left=expr op=('and' | 'or') right=expr
+	| expr op=('*' | '/' | '%') expr
+	| expr op=('+' | '-') expr
+	| expr_without_rel op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr_without_rel
+	| expr_without_rel;
+expr_without_rel: expr_without_str_concat'...'expr_without_str_concat
+	| expr_without_str_concat;
+expr_without_str_concat: expr_without_str_concat op=('and' | 'or') expr_without_str_concat
 	| '['(expr(','expr)*)?']'
 	| NUMBER
 	| STRING
-	| IDENTIFIER;
+	| IDENTIFIER
+	| '(' expr ')';
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
