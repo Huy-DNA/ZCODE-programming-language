@@ -50,7 +50,7 @@ expr: '(' expr ')'
 	| left=expr op=('*' | '/' | '%') right=expr
 	| left=expr op=('+' | '-') right=expr
 	| left=expr op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') right=expr
-	| '...'expr
+	| left=expr '...' right=expr
 	| left=expr op=('and' | 'or') right=expr
 	| '['(expr(','expr)*)?']'
 	| NUMBER
