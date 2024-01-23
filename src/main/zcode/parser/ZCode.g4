@@ -49,17 +49,17 @@ expr: '(' expr ')'
 	| expr op=('*' | '/' | '%') expr
 	| expr op=('+' | '-') expr
 	| expr_without_rel op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr_without_rel
-	| expr_without_rel;
+	| expr_without_rel
+	| expr op=('and' | 'or') expr;
 expr_without_rel: expr_without_str_concat'...'expr_without_str_concat
 	| expr_without_str_concat;
-expr_without_str_concat: expr_without_str_concat op=('and' | 'or') expr_without_str_concat
-	| list
+expr_without_str_concat: r_list
 	| NUMBER
 	| STRING
 	| IDENTIFIER
 	| '(' expr ')';
 
-list: '['(expr(','expr)*)?']';
+r_list: '[' (expr(','expr)*)? ']';
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
