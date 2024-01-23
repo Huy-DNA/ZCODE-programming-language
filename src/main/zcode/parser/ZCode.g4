@@ -31,7 +31,7 @@ r_for: 'for' expr 'until' expr 'by' expr NEWLINE* stm;
 
 block: 'begin' NEWLINE (stm (NEWLINE stm)* | NEWLINE* | COMMENT) NEWLINE 'end';
 
-func: 'func' IDENTIFIER args (r_return | block);
+func: 'func' IDENTIFIER args NEWLINE* (r_return | block);
 args: '(' (TYPE IDENTIFIER type_index? (',' TYPE IDENTIFIER type_index?)*)? ')';
 type_index: '[' (NUMBER (',' NUMBER)*)? ']';
 
