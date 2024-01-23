@@ -16,7 +16,9 @@ program: (stm (NEWLINE stm)* | NEWLINE* | COMMENT) EOF;
 
 // statement rule
 
-stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for;
+stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for | print;
+
+print: 'print' expr;
 
 r_break: 'break';
 
