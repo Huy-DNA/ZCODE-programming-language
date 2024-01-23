@@ -12,7 +12,7 @@ options {
 	language=Python3;
 }
 
-program: (stm (NEWLINE stm)* | NEWLINE* | COMMENT) EOF;
+program: NULL_LINES? (stm (NULL_LINES? stm)*)? EOF;
 
 // statement rule
 
@@ -26,14 +26,14 @@ r_continue: 'continue';
 
 r_return: 'return' expr;
 
-r_if: 'if' expr NEWLINE* stm
-	| 'if' expr NEWLINE* stm (NEWLINE* 'elif' expr NEWLINE* stm)*? (NEWLINE* 'else' NEWLINE* stm)?;
+r_if: 'if' expr NULL_LINES* stm
+	| 'if' expr NULL_LINES* stm (NULL_LINES* 'elif' expr NULL_LINES* stm)*? (NULL_LINES* 'else' NULL_LINES* stm)?;
 
-r_for: 'for' expr 'until' expr 'by' expr NEWLINE* stm;
+r_for: 'for' expr 'until' expr 'by' expr NULL_LINES* stm;
 
-block: 'begin' NEWLINE (stm (NEWLINE stm)* | NEWLINE* | COMMENT) NEWLINE 'end';
+block: 'begin' NULL_LINES (stm (NULL_LINES stm)*)? NULL_LINES 'end';
 
-func: 'func' IDENTIFIER args (NEWLINE* (r_return | block))?;
+func: 'func' IDENTIFIER args (NULL_LINES* (r_return | block))?;
 args: '(' (TYPE IDENTIFIER type_index? (',' TYPE IDENTIFIER type_index?)*)? ')';
 type_index: '[' (NUMBER (',' NUMBER)*)? ']';
 
@@ -89,6 +89,9 @@ STRING: '"' (~["\n] | '\'"')* '"';
 
 fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
+
+// NULL_LINES token
+NULL_LINES: NEWLINE (NEWLINE | COMMENT)*;
 
 // COMMENT token
 COMMENT: '##' .*? (NEWLINE | EOF) { self.text = self.text.rstrip() };
