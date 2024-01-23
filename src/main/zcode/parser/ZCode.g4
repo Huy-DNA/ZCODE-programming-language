@@ -12,9 +12,7 @@ options {
 	language=Python3;
 }
 
-program: line* EOF;
-
-line: (stm (NEWLINE | EOF) | COMMENT | NEWLINE);
+program: (stm (NEWLINE stm)* | NEWLINE* | COMMENT) EOF;
 
 // statement rule
 
@@ -26,11 +24,12 @@ r_continue: 'continue';
 
 r_return: 'return' expr;
 
-r_if: 'if' '('expr')' NEWLINE* expr ('elif' '('expr')' NEWLINE* expr)*? ('else' NEWLINE* expr)?;
+r_if: 'if' '('expr')' NEWLINE* stm
+	| 'if' '('expr')' NEWLINE* stm ('elif' '('expr')' NEWLINE* stm)*? ('else' NEWLINE* stm)?;
 
-r_for: 'for' expr 'until' expr 'by' expr NEWLINE* expr;
+r_for: 'for' expr 'until' expr 'by' expr NEWLINE* stm;
 
-block: 'begin' NEWLINE line* NEWLINE 'end';
+block: 'begin' NEWLINE (stm (NEWLINE stm)* | NEWLINE* | COMMENT) NEWLINE 'end';
 
 func: 'func' IDENTIFIER args (r_return | block);
 args: '(' (TYPE IDENTIFIER type_index? (',' TYPE IDENTIFIER type_index?)*)? ')';
