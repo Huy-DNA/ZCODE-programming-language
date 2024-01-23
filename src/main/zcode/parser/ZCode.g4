@@ -14,11 +14,11 @@ options {
 
 program: line* EOF;
 
-line: (stm NEWLINE | COMMENT | NEWLINE);
+line: (stm (NEWLINE | EOF) | COMMENT | NEWLINE);
 
 // statement rule
 
-stm: expr | decl | ass | block | func | r_break | r_continue | r_return;
+stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for;
 
 r_break: 'break';
 
@@ -26,9 +26,9 @@ r_continue: 'continue';
 
 r_return: 'return' expr;
 
-r_if: 'if' '('expr')' block ('elif' '('expr')' block)*? ('else' block)?;
+r_if: 'if' '('expr')' NEWLINE* expr ('elif' '('expr')' NEWLINE* expr)*? ('else' NEWLINE* expr)?;
 
-r_for: 'for' expr 'until' expr 'by' expr expr;
+r_for: 'for' expr 'until' expr 'by' expr NEWLINE* expr;
 
 block: 'begin' NEWLINE line* NEWLINE 'end';
 
