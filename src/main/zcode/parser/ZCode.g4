@@ -53,11 +53,13 @@ expr: '(' expr ')'
 expr_without_rel: expr_without_str_concat'...'expr_without_str_concat
 	| expr_without_str_concat;
 expr_without_str_concat: expr_without_str_concat op=('and' | 'or') expr_without_str_concat
-	| '['(expr(','expr)*)?']'
+	| list
 	| NUMBER
 	| STRING
 	| IDENTIFIER
 	| '(' expr ')';
+
+list: '['(expr(','expr)*)?']';
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
