@@ -26,8 +26,8 @@ r_continue: 'continue';
 
 r_return: 'return' expr;
 
-r_if: 'if' '('expr')' NEWLINE* stm
-	| 'if' '('expr')' NEWLINE* stm (NEWLINE* 'elif' '('expr')' NEWLINE* stm)*? (NEWLINE* 'else' NEWLINE* stm)?;
+r_if: 'if' expr NEWLINE* stm
+	| 'if' expr NEWLINE* stm (NEWLINE* 'elif' expr NEWLINE* stm)*? (NEWLINE* 'else' NEWLINE* stm)?;
 
 r_for: 'for' expr 'until' expr 'by' expr NEWLINE* stm;
 
