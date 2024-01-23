@@ -50,12 +50,12 @@ expr: '(' expr ')'
 	| 'not'expr
 	| expr op=('*' | '/' | '%') expr
 	| expr op=('+' | '-') expr
-	| expr_without_rel op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr_without_rel
-	| expr_without_rel
+	| concat_expr op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') concat_expr
+	| concat_expr
 	| expr op=('and' | 'or') expr;
-expr_without_rel: expr_without_str_concat'...'expr_without_str_concat
-	| expr_without_str_concat;
-expr_without_str_concat: r_list
+concat_expr: operand'...'operand
+	| operand;
+operand: r_list
 	| NUMBER
 	| STRING
 	| IDENTIFIER

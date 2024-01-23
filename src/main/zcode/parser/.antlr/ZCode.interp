@@ -114,8 +114,8 @@ type_index
 ass
 decl
 expr
-expr_without_rel
-expr_without_str_concat
+concat_expr
+operand
 r_list
 
 

@@ -178,14 +178,13 @@ class ZCodeParser ( Parser ):
     RULE_ass = 12
     RULE_decl = 13
     RULE_expr = 14
-    RULE_expr_without_rel = 15
-    RULE_expr_without_str_concat = 16
+    RULE_concat_expr = 15
+    RULE_operand = 16
     RULE_r_list = 17
 
     ruleNames =  [ "program", "stm", "print", "r_break", "r_continue", "r_return", 
                    "r_if", "r_for", "block", "func", "args", "type_index", 
-                   "ass", "decl", "expr", "expr_without_rel", "expr_without_str_concat", 
-                   "r_list" ]
+                   "ass", "decl", "expr", "concat_expr", "operand", "r_list" ]
 
     EOF = Token.EOF
     T__0=1
@@ -1296,11 +1295,11 @@ class ZCodeParser ( Parser ):
                 return self.getTypedRuleContext(ZCodeParser.ExprContext,i)
 
 
-        def expr_without_rel(self, i:int=None):
+        def concat_expr(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ZCodeParser.Expr_without_relContext)
+                return self.getTypedRuleContexts(ZCodeParser.Concat_exprContext)
             else:
-                return self.getTypedRuleContext(ZCodeParser.Expr_without_relContext,i)
+                return self.getTypedRuleContext(ZCodeParser.Concat_exprContext,i)
 
 
         def getRuleIndex(self):
@@ -1346,7 +1345,7 @@ class ZCodeParser ( Parser ):
 
             elif la_ == 4:
                 self.state = 248
-                self.expr_without_rel()
+                self.concat_expr()
                 self.state = 249
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
@@ -1356,12 +1355,12 @@ class ZCodeParser ( Parser ):
                     self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 250
-                self.expr_without_rel()
+                self.concat_expr()
                 pass
 
             elif la_ == 5:
                 self.state = 252
-                self.expr_without_rel()
+                self.concat_expr()
                 pass
 
 
@@ -1510,30 +1509,30 @@ class ZCodeParser ( Parser ):
         return localctx
 
 
-    class Expr_without_relContext(ParserRuleContext):
+    class Concat_exprContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr_without_str_concat(self, i:int=None):
+        def operand(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(ZCodeParser.Expr_without_str_concatContext)
+                return self.getTypedRuleContexts(ZCodeParser.OperandContext)
             else:
-                return self.getTypedRuleContext(ZCodeParser.Expr_without_str_concatContext,i)
+                return self.getTypedRuleContext(ZCodeParser.OperandContext,i)
 
 
         def getRuleIndex(self):
-            return ZCodeParser.RULE_expr_without_rel
+            return ZCodeParser.RULE_concat_expr
 
 
 
 
-    def expr_without_rel(self):
+    def concat_expr(self):
 
-        localctx = ZCodeParser.Expr_without_relContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_expr_without_rel)
+        localctx = ZCodeParser.Concat_exprContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 30, self.RULE_concat_expr)
         try:
             self.state = 299
             self._errHandler.sync(self)
@@ -1541,17 +1540,17 @@ class ZCodeParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 294
-                self.expr_without_str_concat()
+                self.operand()
                 self.state = 295
                 self.match(ZCodeParser.T__36)
                 self.state = 296
-                self.expr_without_str_concat()
+                self.operand()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 298
-                self.expr_without_str_concat()
+                self.operand()
                 pass
 
 
@@ -1564,7 +1563,7 @@ class ZCodeParser ( Parser ):
         return localctx
 
 
-    class Expr_without_str_concatContext(ParserRuleContext):
+    class OperandContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1589,15 +1588,15 @@ class ZCodeParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return ZCodeParser.RULE_expr_without_str_concat
+            return ZCodeParser.RULE_operand
 
 
 
 
-    def expr_without_str_concat(self):
+    def operand(self):
 
-        localctx = ZCodeParser.Expr_without_str_concatContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_expr_without_str_concat)
+        localctx = ZCodeParser.OperandContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 32, self.RULE_operand)
         try:
             self.state = 309
             self._errHandler.sync(self)
