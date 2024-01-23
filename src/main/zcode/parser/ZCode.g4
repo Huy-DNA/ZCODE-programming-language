@@ -49,36 +49,8 @@ expr: '(' expr ')'
 	| 'not'expr
 	| left=expr op=('*' | '/' | '%') right=expr
 	| left=expr op=('+' | '-') right=expr
-	| left=expr_without_relational op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') right=expr_without_relational
-	| left=expr_without_str_concat '...' right=expr_without_str_concat
-	| left=expr op=('and' | 'or') right=expr
-	| '['(expr(','expr)*)?']'
-	| NUMBER
-	| STRING
-	| IDENTIFIER;
-
-expr_without_str_concat: '(' expr_without_str_concat ')'
-	| array=expr'['indexer=expr(','indexer=expr)*']'
-	| callee=expr'('(param=expr(','param=expr)*)?')'
-	| '-'expr
-	| 'not'expr
-	| left=expr op=('*' | '/' | '%') right=expr
-	| left=expr op=('+' | '-') right=expr
-	| left=expr_without_relational op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') right=expr_without_relational
-	| left=expr op=('and' | 'or') right=expr
-	| '['(expr(','expr)*)?']'
-	| NUMBER
-	| STRING
-	| IDENTIFIER;
-
-expr_without_relational: '(' expr_without_relational ')'
-	| array=expr'['indexer=expr(','indexer=expr)*']'
-	| callee=expr'('(param=expr(','param=expr)*)?')'
-	| '-'expr
-	| 'not'expr
-	| left=expr op=('*' | '/' | '%') right=expr
-	| left=expr op=('+' | '-') right=expr
-	| left=expr_without_str_concat '...' right=expr_without_str_concat
+	| left=expr op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') right=expr
+	| left=expr'...'right=expr
 	| left=expr op=('and' | 'or') right=expr
 	| '['(expr(','expr)*)?']'
 	| NUMBER
