@@ -18,51 +18,90 @@ program: NULL_LINES? (stm (NULL_LINES stm)*)? NULL_LINES? EOF;
 
 stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for | r_print;
 
-r_print: 'print' expr;
+r_print: PRINT expr;
 
-r_break: 'break';
+r_break: BREAK;
 
-r_continue: 'continue';
+r_continue: CONTINUE;
 
-r_return: 'return' expr;
+r_return: RETURN expr;
 
-r_if: 'if' expr NULL_LINES stm
-	| 'if' expr NULL_LINES stm (NULL_LINES 'elif' expr NULL_LINES stm)*? (NULL_LINES 'else' NULL_LINES stm)?;
+r_if: IF expr NULL_LINES stm
+	| IF expr NULL_LINES stm (NULL_LINES ELIF expr NULL_LINES stm)*? (NULL_LINES ELSE NULL_LINES stm)?;
 
-r_for: 'for' expr 'until' expr 'by' expr NULL_LINES stm;
+r_for: FOR expr UNTIL expr BY expr NULL_LINES stm;
 
-block: 'begin' NULL_LINES (stm (NULL_LINES stm)*)? NULL_LINES 'end';
+block: BEGIN NULL_LINES (stm (NULL_LINES stm)*)? NULL_LINES END;
 
-func: 'func' IDENTIFIER args (NULL_LINES (r_return | block))?;
-args: '(' (TYPE IDENTIFIER type_index? (',' TYPE IDENTIFIER type_index?)*)? ')';
-type_index: '[' (NUMBER (',' NUMBER)*)? ']';
+func: FUNC IDENTIFIER args (NULL_LINES (r_return | block))?;
+args: LP (TYPE IDENTIFIER type_index? (COMMA TYPE IDENTIFIER type_index?)*)? RP;
+type_index: LB (NUMBER (COMMA NUMBER)*)? RB;
 
-ass: expr '<-' expr;
+ass: expr ASSIGN expr;
 
-decl: TYPE expr '<-' expr
-	| 'var' expr '<-' expr
-	| 'dynamic' expr;
+decl: TYPE expr ASSIGN expr
+	| VAR expr ASSIGN expr
+	| DYN expr;
  
-expr: expr op=('*' | '/' | '%') expr1 | expr1;
-expr1: expr1 op=('+' | '-') expr2 | expr2;
-expr2: expr3 op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr3 | expr3;
+expr: expr op=(MUL | DIV | MOD) expr1 | expr1;
+expr1: expr1 op=(ADD | SUB) expr2 | expr2;
+expr2: expr3 op=(EQ | DEQ | NEQ | LT | GT | LE | GE) expr3 | expr3;
 expr3: expr3 op=('and' | 'or') expr4 | expr4;
-expr4: expr5'...'expr5 | expr5;
-expr5: '-'expr5
-	| 'not'expr5
+expr4: expr5 CONCAT expr5 | expr5;
+expr5: SUB expr5
+	| NOT expr5
 	| expr6;
-expr6: array=expr6'['indexer=expr(','indexer=expr)*']'
-	| callee=expr6'('(param=expr(','param=expr)*)?')'
+expr6: array=expr6 LB indexer=expr(COMMAindexer=expr)* RB
+	| callee=expr6 LP (param=expr(COMMAparam=expr)*)? RP
 	| term;
-term: '[' (expr','expr*)? ']'
+term: LB (expr COMMA expr*)? RB
 	| NUMBER
 	| STRING
 	| IDENTIFIER	
-	| '[' (expr(','expr)*)? ']'
-	| '(' expr ')';
+	| LB (expr(COMMA expr)*)? RB
+	| LP expr RP;
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
+
+// KEYWORDS
+IF: 'if';
+ELIF: 'elif';
+ELSE: 'else';
+FOR: 'for';
+SUB: '-';
+ADD: '+';
+MUL: '*';
+DIV: '/';
+AND: 'and';
+OR: 'or';
+CONCAT: '...';
+ASSIGN: '<-';
+EQ: '=';
+DEQ: '==';
+GE: '>=';
+GT: '>';
+LE: '<=';
+LT: '<';
+LP: '(';
+RP: ')';
+LB: '[';
+RB: ']';
+BEGIN: 'begin';
+END: 'end';
+NOT: 'not';
+NEQ: '!=';
+VAR: 'var';
+DYN: 'dynamic';
+COMMA: ',';
+PRINT: 'print';
+BREAK: 'break';
+CONTINUE: 'continue';
+RETURN: 'return';
+FUNC: 'func';
+MOD: '%';
+UNTIL: 'until';
+BY: 'by';
 
 // IDENTIFIER token
 
@@ -78,7 +117,7 @@ fragment
 DECIMAL: '.'[0-9]*;
 
 fragment
-EXPONENT: 'e'('+'|'-')?[0-9]+;
+EXPONENT: 'e'(ADD|SUB)?[0-9]+;
 
 // STRING token
 ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"' {raise IllegalEscape(self.text)} ;
