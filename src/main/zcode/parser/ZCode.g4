@@ -82,7 +82,7 @@ decl: TYPE expr ASSIGN expr
 expr: expr op=(MUL | DIV | MOD) expr1 | expr1;
 expr1: expr1 op=(ADD | SUB) expr2 | expr2;
 expr2: expr3 op=(EQ | DEQ | NEQ | LT | GT | LE | GE) expr3 | expr3;
-expr3: expr3 op=('and' | 'or') expr4 | expr4;
+expr3: expr3 op=(AND | OR) expr4 | expr4;
 expr4: expr5 CONCAT expr5 | expr5;
 expr5: SUB expr5
 	| NOT expr5
