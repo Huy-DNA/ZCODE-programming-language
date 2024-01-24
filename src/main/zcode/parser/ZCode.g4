@@ -66,7 +66,6 @@ args: arg_list | ;
 arg_list: arg | arg COMMA arg_list;
 arg: TYPE IDENTIFIER (type_index | );
 
-
 type_index: LB type_index_nums RB;
 type_index_nums: type_index_num_list | ;
 type_index_num_list: NUMBER | NUMBER COMMA type_index_num_list;
@@ -87,15 +86,19 @@ expr4: expr5 CONCAT expr5 | expr5;
 expr5: SUB expr5
 	| NOT expr5
 	| expr6;
-expr6: array=expr6 LB indexer=expr(COMMA indexer=expr)* RB
-	| callee=expr6 LP (param=expr(COMMA param=expr)*)? RP
+expr6: array=expr6 LB indexer=expr_list RB
+	| callee=expr6 LP params=expr_list RP
 	| term;
-term: LB (expr COMMA expr*)? RB
+
+term: LB expr_list RB
 	| NUMBER
 	| STRING
 	| IDENTIFIER	
-	| LB (expr(COMMA expr)*)? RB
+	| LB expr_list RB
 	| LP expr RP;
+
+expr_list: exprs | ;
+exprs: expr | expr COMMA exprs;
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
