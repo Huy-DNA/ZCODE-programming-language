@@ -49,7 +49,15 @@ r_else: NULL_LINES ELSE NULL_LINES stm | ;
 
 r_for: FOR expr UNTIL expr BY expr NULL_LINES stm;
 
-block: BEGIN NULL_LINES (stm (NULL_LINES stm)*)? NULL_LINES END;
+// block statement
+
+block: BEGIN NULL_LINES block_stms NULL_LINES END;
+
+block_stms: block_stm_list | ;
+
+block_stm_list: stm | stm NULL_LINES block_stm_list;
+
+// function statement
 
 func: FUNC IDENTIFIER args (NULL_LINES (r_return | block))?;
 args: LP (TYPE IDENTIFIER type_index? (COMMA TYPE IDENTIFIER type_index?)*)? RP;
