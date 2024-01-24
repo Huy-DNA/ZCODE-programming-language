@@ -34,16 +34,16 @@ r_return: RETURN expr;
 
 // if statement
 
-r_if: IF expr NULL_LINES stm
-	| IF expr NULL_LINES stm r_elif_list r_else;
+r_if: IF expr (NULL_LINES | ) stm
+	| IF expr (NULL_LINES | ) stm r_elif_list r_else;
 
 r_elif_list: r_elifs | ;
 
 r_elifs: r_elif | r_elif r_elifs;
 
-r_elif: NULL_LINES ELIF expr NULL_LINES stm;
+r_elif: (NULL_LINES | ) ELIF expr (NULL_LINES | ) stm;
 
-r_else: NULL_LINES ELSE NULL_LINES stm | ;
+r_else: (NULL_LINES | ) ELSE (NULL_LINES | ) stm | ;
 
 // for statement
 

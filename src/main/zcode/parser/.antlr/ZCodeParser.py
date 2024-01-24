@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,48,354,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,48,372,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
@@ -18,122 +18,130 @@ def serializedATN():
         7,33,2,34,7,34,2,35,7,35,1,0,1,0,1,0,1,1,1,1,3,1,78,8,1,1,1,1,1,
         1,1,3,1,83,8,1,1,1,3,1,86,8,1,1,2,1,2,1,2,1,2,1,2,3,2,93,8,2,1,3,
         1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,106,8,3,1,4,1,4,1,4,
-        1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,
-        1,8,1,8,1,8,3,8,130,8,8,1,9,1,9,3,9,134,8,9,1,10,1,10,1,10,1,10,
-        3,10,140,8,10,1,11,1,11,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,
-        1,12,3,12,153,8,12,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,
-        163,8,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,3,14,173,8,14,1,
-        14,1,14,1,15,1,15,1,15,1,15,1,15,3,15,182,8,15,1,16,1,16,1,16,1,
-        16,1,16,3,16,189,8,16,1,16,1,16,3,16,193,8,16,1,16,3,16,196,8,16,
-        1,17,1,17,1,17,1,17,1,18,1,18,3,18,204,8,18,1,19,1,19,1,19,1,19,
-        1,19,3,19,211,8,19,1,20,1,20,1,20,1,20,3,20,217,8,20,1,21,1,21,1,
-        21,1,21,1,22,1,22,3,22,225,8,22,1,23,1,23,1,23,1,23,3,23,231,8,23,
-        1,24,1,24,1,24,1,24,1,25,1,25,1,25,1,25,3,25,241,8,25,1,25,1,25,
-        1,25,1,25,1,25,1,25,1,25,1,25,1,25,3,25,252,8,25,1,26,1,26,1,26,
-        1,26,1,26,1,26,5,26,260,8,26,10,26,12,26,263,9,26,1,27,1,27,1,27,
-        1,27,1,27,1,27,5,27,271,8,27,10,27,12,27,274,9,27,1,28,1,28,1,28,
-        1,28,1,28,3,28,281,8,28,1,29,1,29,1,29,1,29,1,29,1,29,5,29,289,8,
-        29,10,29,12,29,292,9,29,1,30,1,30,1,30,1,30,1,30,3,30,299,8,30,1,
-        31,1,31,1,31,1,31,1,31,3,31,306,8,31,1,32,1,32,1,32,1,32,1,32,1,
-        32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,5,32,321,8,32,10,32,12,32,
-        324,9,32,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,
-        1,33,1,33,1,33,1,33,3,33,341,8,33,1,34,1,34,3,34,345,8,34,1,35,1,
-        35,1,35,1,35,1,35,3,35,352,8,35,1,35,0,4,52,54,58,64,36,0,2,4,6,
-        8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,
-        52,54,56,58,60,62,64,66,68,70,0,4,2,0,8,9,36,36,1,0,6,7,2,0,14,19,
-        27,27,1,0,10,11,365,0,72,1,0,0,0,2,85,1,0,0,0,4,92,1,0,0,0,6,105,
-        1,0,0,0,8,107,1,0,0,0,10,110,1,0,0,0,12,112,1,0,0,0,14,114,1,0,0,
-        0,16,129,1,0,0,0,18,133,1,0,0,0,20,139,1,0,0,0,22,141,1,0,0,0,24,
-        152,1,0,0,0,26,154,1,0,0,0,28,166,1,0,0,0,30,181,1,0,0,0,32,183,
-        1,0,0,0,34,197,1,0,0,0,36,203,1,0,0,0,38,210,1,0,0,0,40,212,1,0,
-        0,0,42,218,1,0,0,0,44,224,1,0,0,0,46,230,1,0,0,0,48,232,1,0,0,0,
-        50,251,1,0,0,0,52,253,1,0,0,0,54,264,1,0,0,0,56,280,1,0,0,0,58,282,
-        1,0,0,0,60,298,1,0,0,0,62,305,1,0,0,0,64,307,1,0,0,0,66,340,1,0,
-        0,0,68,344,1,0,0,0,70,351,1,0,0,0,72,73,3,2,1,0,73,74,5,0,0,1,74,
-        1,1,0,0,0,75,78,5,44,0,0,76,78,1,0,0,0,77,75,1,0,0,0,77,76,1,0,0,
-        0,78,79,1,0,0,0,79,82,3,4,2,0,80,83,5,44,0,0,81,83,1,0,0,0,82,80,
-        1,0,0,0,82,81,1,0,0,0,83,86,1,0,0,0,84,86,1,0,0,0,85,77,1,0,0,0,
-        85,84,1,0,0,0,86,3,1,0,0,0,87,93,3,6,3,0,88,89,3,6,3,0,89,90,5,44,
-        0,0,90,91,3,4,2,0,91,93,1,0,0,0,92,87,1,0,0,0,92,88,1,0,0,0,93,5,
-        1,0,0,0,94,106,3,52,26,0,95,106,3,50,25,0,96,106,3,48,24,0,97,106,
-        3,28,14,0,98,106,3,32,16,0,99,106,3,10,5,0,100,106,3,12,6,0,101,
-        106,3,14,7,0,102,106,3,16,8,0,103,106,3,26,13,0,104,106,3,8,4,0,
-        105,94,1,0,0,0,105,95,1,0,0,0,105,96,1,0,0,0,105,97,1,0,0,0,105,
-        98,1,0,0,0,105,99,1,0,0,0,105,100,1,0,0,0,105,101,1,0,0,0,105,102,
-        1,0,0,0,105,103,1,0,0,0,105,104,1,0,0,0,106,7,1,0,0,0,107,108,5,
-        31,0,0,108,109,3,52,26,0,109,9,1,0,0,0,110,111,5,32,0,0,111,11,1,
-        0,0,0,112,113,5,33,0,0,113,13,1,0,0,0,114,115,5,34,0,0,115,116,3,
-        52,26,0,116,15,1,0,0,0,117,118,5,2,0,0,118,119,3,52,26,0,119,120,
-        5,44,0,0,120,121,3,6,3,0,121,130,1,0,0,0,122,123,5,2,0,0,123,124,
-        3,52,26,0,124,125,5,44,0,0,125,126,3,6,3,0,126,127,3,18,9,0,127,
-        128,3,24,12,0,128,130,1,0,0,0,129,117,1,0,0,0,129,122,1,0,0,0,130,
-        17,1,0,0,0,131,134,3,20,10,0,132,134,1,0,0,0,133,131,1,0,0,0,133,
-        132,1,0,0,0,134,19,1,0,0,0,135,140,3,22,11,0,136,137,3,22,11,0,137,
-        138,3,20,10,0,138,140,1,0,0,0,139,135,1,0,0,0,139,136,1,0,0,0,140,
-        21,1,0,0,0,141,142,5,44,0,0,142,143,5,3,0,0,143,144,3,52,26,0,144,
-        145,5,44,0,0,145,146,3,6,3,0,146,23,1,0,0,0,147,148,5,44,0,0,148,
-        149,5,4,0,0,149,150,5,44,0,0,150,153,3,6,3,0,151,153,1,0,0,0,152,
-        147,1,0,0,0,152,151,1,0,0,0,153,25,1,0,0,0,154,155,5,5,0,0,155,156,
-        3,52,26,0,156,157,5,37,0,0,157,158,3,52,26,0,158,159,5,38,0,0,159,
-        162,3,52,26,0,160,163,5,44,0,0,161,163,1,0,0,0,162,160,1,0,0,0,162,
-        161,1,0,0,0,163,164,1,0,0,0,164,165,3,6,3,0,165,27,1,0,0,0,166,172,
-        5,24,0,0,167,168,5,44,0,0,168,169,3,30,15,0,169,170,5,44,0,0,170,
-        173,1,0,0,0,171,173,5,44,0,0,172,167,1,0,0,0,172,171,1,0,0,0,173,
-        174,1,0,0,0,174,175,5,25,0,0,175,29,1,0,0,0,176,182,3,6,3,0,177,
-        178,3,6,3,0,178,179,5,44,0,0,179,180,3,30,15,0,180,182,1,0,0,0,181,
-        176,1,0,0,0,181,177,1,0,0,0,182,31,1,0,0,0,183,184,5,35,0,0,184,
-        185,5,39,0,0,185,195,3,34,17,0,186,189,5,44,0,0,187,189,1,0,0,0,
-        188,186,1,0,0,0,188,187,1,0,0,0,189,192,1,0,0,0,190,193,3,14,7,0,
-        191,193,3,28,14,0,192,190,1,0,0,0,192,191,1,0,0,0,193,196,1,0,0,
-        0,194,196,1,0,0,0,195,188,1,0,0,0,195,194,1,0,0,0,196,33,1,0,0,0,
-        197,198,5,20,0,0,198,199,3,36,18,0,199,200,5,21,0,0,200,35,1,0,0,
-        0,201,204,3,38,19,0,202,204,1,0,0,0,203,201,1,0,0,0,203,202,1,0,
-        0,0,204,37,1,0,0,0,205,211,3,40,20,0,206,207,3,40,20,0,207,208,5,
-        30,0,0,208,209,3,38,19,0,209,211,1,0,0,0,210,205,1,0,0,0,210,206,
-        1,0,0,0,211,39,1,0,0,0,212,213,5,1,0,0,213,216,5,39,0,0,214,217,
-        3,42,21,0,215,217,1,0,0,0,216,214,1,0,0,0,216,215,1,0,0,0,217,41,
-        1,0,0,0,218,219,5,22,0,0,219,220,3,44,22,0,220,221,5,23,0,0,221,
-        43,1,0,0,0,222,225,3,46,23,0,223,225,1,0,0,0,224,222,1,0,0,0,224,
-        223,1,0,0,0,225,45,1,0,0,0,226,231,5,40,0,0,227,228,5,40,0,0,228,
-        229,5,30,0,0,229,231,3,46,23,0,230,226,1,0,0,0,230,227,1,0,0,0,231,
-        47,1,0,0,0,232,233,3,52,26,0,233,234,5,13,0,0,234,235,3,52,26,0,
-        235,49,1,0,0,0,236,237,5,1,0,0,237,240,5,39,0,0,238,241,3,42,21,
-        0,239,241,1,0,0,0,240,238,1,0,0,0,240,239,1,0,0,0,241,242,1,0,0,
-        0,242,243,5,13,0,0,243,252,3,52,26,0,244,245,5,28,0,0,245,246,3,
-        52,26,0,246,247,5,13,0,0,247,248,3,52,26,0,248,252,1,0,0,0,249,250,
-        5,29,0,0,250,252,3,52,26,0,251,236,1,0,0,0,251,244,1,0,0,0,251,249,
-        1,0,0,0,252,51,1,0,0,0,253,254,6,26,-1,0,254,255,3,54,27,0,255,261,
-        1,0,0,0,256,257,10,2,0,0,257,258,7,0,0,0,258,260,3,54,27,0,259,256,
-        1,0,0,0,260,263,1,0,0,0,261,259,1,0,0,0,261,262,1,0,0,0,262,53,1,
-        0,0,0,263,261,1,0,0,0,264,265,6,27,-1,0,265,266,3,56,28,0,266,272,
-        1,0,0,0,267,268,10,2,0,0,268,269,7,1,0,0,269,271,3,56,28,0,270,267,
-        1,0,0,0,271,274,1,0,0,0,272,270,1,0,0,0,272,273,1,0,0,0,273,55,1,
-        0,0,0,274,272,1,0,0,0,275,276,3,58,29,0,276,277,7,2,0,0,277,278,
-        3,58,29,0,278,281,1,0,0,0,279,281,3,58,29,0,280,275,1,0,0,0,280,
-        279,1,0,0,0,281,57,1,0,0,0,282,283,6,29,-1,0,283,284,3,60,30,0,284,
-        290,1,0,0,0,285,286,10,2,0,0,286,287,7,3,0,0,287,289,3,60,30,0,288,
-        285,1,0,0,0,289,292,1,0,0,0,290,288,1,0,0,0,290,291,1,0,0,0,291,
-        59,1,0,0,0,292,290,1,0,0,0,293,294,3,62,31,0,294,295,5,12,0,0,295,
-        296,3,62,31,0,296,299,1,0,0,0,297,299,3,62,31,0,298,293,1,0,0,0,
-        298,297,1,0,0,0,299,61,1,0,0,0,300,301,5,6,0,0,301,306,3,62,31,0,
-        302,303,5,26,0,0,303,306,3,62,31,0,304,306,3,64,32,0,305,300,1,0,
-        0,0,305,302,1,0,0,0,305,304,1,0,0,0,306,63,1,0,0,0,307,308,6,32,
-        -1,0,308,309,3,66,33,0,309,322,1,0,0,0,310,311,10,3,0,0,311,312,
-        5,22,0,0,312,313,3,68,34,0,313,314,5,23,0,0,314,321,1,0,0,0,315,
-        316,10,2,0,0,316,317,5,20,0,0,317,318,3,68,34,0,318,319,5,21,0,0,
-        319,321,1,0,0,0,320,310,1,0,0,0,320,315,1,0,0,0,321,324,1,0,0,0,
-        322,320,1,0,0,0,322,323,1,0,0,0,323,65,1,0,0,0,324,322,1,0,0,0,325,
-        326,5,22,0,0,326,327,3,68,34,0,327,328,5,23,0,0,328,341,1,0,0,0,
-        329,341,5,40,0,0,330,341,5,43,0,0,331,341,5,39,0,0,332,333,5,22,
-        0,0,333,334,3,68,34,0,334,335,5,23,0,0,335,341,1,0,0,0,336,337,5,
-        20,0,0,337,338,3,52,26,0,338,339,5,21,0,0,339,341,1,0,0,0,340,325,
-        1,0,0,0,340,329,1,0,0,0,340,330,1,0,0,0,340,331,1,0,0,0,340,332,
-        1,0,0,0,340,336,1,0,0,0,341,67,1,0,0,0,342,345,3,70,35,0,343,345,
-        1,0,0,0,344,342,1,0,0,0,344,343,1,0,0,0,345,69,1,0,0,0,346,352,3,
-        52,26,0,347,348,3,52,26,0,348,349,5,30,0,0,349,350,3,70,35,0,350,
-        352,1,0,0,0,351,346,1,0,0,0,351,347,1,0,0,0,352,71,1,0,0,0,33,77,
-        82,85,92,105,129,133,139,152,162,172,181,188,192,195,203,210,216,
-        224,230,240,251,261,272,280,290,298,305,320,322,340,344,351
+        1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,3,8,122,8,8,1,8,1,8,
+        1,8,1,8,1,8,1,8,3,8,130,8,8,1,8,1,8,1,8,1,8,3,8,136,8,8,1,9,1,9,
+        3,9,140,8,9,1,10,1,10,1,10,1,10,3,10,146,8,10,1,11,1,11,3,11,150,
+        8,11,1,11,1,11,1,11,1,11,3,11,156,8,11,1,11,1,11,1,12,1,12,3,12,
+        162,8,12,1,12,1,12,1,12,3,12,167,8,12,1,12,1,12,3,12,171,8,12,1,
+        13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,181,8,13,1,13,1,13,1,
+        14,1,14,1,14,1,14,1,14,1,14,3,14,191,8,14,1,14,1,14,1,15,1,15,1,
+        15,1,15,1,15,3,15,200,8,15,1,16,1,16,1,16,1,16,1,16,3,16,207,8,16,
+        1,16,1,16,3,16,211,8,16,1,16,3,16,214,8,16,1,17,1,17,1,17,1,17,1,
+        18,1,18,3,18,222,8,18,1,19,1,19,1,19,1,19,1,19,3,19,229,8,19,1,20,
+        1,20,1,20,1,20,3,20,235,8,20,1,21,1,21,1,21,1,21,1,22,1,22,3,22,
+        243,8,22,1,23,1,23,1,23,1,23,3,23,249,8,23,1,24,1,24,1,24,1,24,1,
+        25,1,25,1,25,1,25,3,25,259,8,25,1,25,1,25,1,25,1,25,1,25,1,25,1,
+        25,1,25,1,25,3,25,270,8,25,1,26,1,26,1,26,1,26,1,26,1,26,5,26,278,
+        8,26,10,26,12,26,281,9,26,1,27,1,27,1,27,1,27,1,27,1,27,5,27,289,
+        8,27,10,27,12,27,292,9,27,1,28,1,28,1,28,1,28,1,28,3,28,299,8,28,
+        1,29,1,29,1,29,1,29,1,29,1,29,5,29,307,8,29,10,29,12,29,310,9,29,
+        1,30,1,30,1,30,1,30,1,30,3,30,317,8,30,1,31,1,31,1,31,1,31,1,31,
+        3,31,324,8,31,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,1,32,
+        1,32,1,32,1,32,5,32,339,8,32,10,32,12,32,342,9,32,1,33,1,33,1,33,
+        1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,1,33,3,33,
+        359,8,33,1,34,1,34,3,34,363,8,34,1,35,1,35,1,35,1,35,1,35,3,35,370,
+        8,35,1,35,0,4,52,54,58,64,36,0,2,4,6,8,10,12,14,16,18,20,22,24,26,
+        28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,
+        0,4,2,0,8,9,36,36,1,0,6,7,2,0,14,19,27,27,1,0,10,11,389,0,72,1,0,
+        0,0,2,85,1,0,0,0,4,92,1,0,0,0,6,105,1,0,0,0,8,107,1,0,0,0,10,110,
+        1,0,0,0,12,112,1,0,0,0,14,114,1,0,0,0,16,135,1,0,0,0,18,139,1,0,
+        0,0,20,145,1,0,0,0,22,149,1,0,0,0,24,170,1,0,0,0,26,172,1,0,0,0,
+        28,184,1,0,0,0,30,199,1,0,0,0,32,201,1,0,0,0,34,215,1,0,0,0,36,221,
+        1,0,0,0,38,228,1,0,0,0,40,230,1,0,0,0,42,236,1,0,0,0,44,242,1,0,
+        0,0,46,248,1,0,0,0,48,250,1,0,0,0,50,269,1,0,0,0,52,271,1,0,0,0,
+        54,282,1,0,0,0,56,298,1,0,0,0,58,300,1,0,0,0,60,316,1,0,0,0,62,323,
+        1,0,0,0,64,325,1,0,0,0,66,358,1,0,0,0,68,362,1,0,0,0,70,369,1,0,
+        0,0,72,73,3,2,1,0,73,74,5,0,0,1,74,1,1,0,0,0,75,78,5,44,0,0,76,78,
+        1,0,0,0,77,75,1,0,0,0,77,76,1,0,0,0,78,79,1,0,0,0,79,82,3,4,2,0,
+        80,83,5,44,0,0,81,83,1,0,0,0,82,80,1,0,0,0,82,81,1,0,0,0,83,86,1,
+        0,0,0,84,86,1,0,0,0,85,77,1,0,0,0,85,84,1,0,0,0,86,3,1,0,0,0,87,
+        93,3,6,3,0,88,89,3,6,3,0,89,90,5,44,0,0,90,91,3,4,2,0,91,93,1,0,
+        0,0,92,87,1,0,0,0,92,88,1,0,0,0,93,5,1,0,0,0,94,106,3,52,26,0,95,
+        106,3,50,25,0,96,106,3,48,24,0,97,106,3,28,14,0,98,106,3,32,16,0,
+        99,106,3,10,5,0,100,106,3,12,6,0,101,106,3,14,7,0,102,106,3,16,8,
+        0,103,106,3,26,13,0,104,106,3,8,4,0,105,94,1,0,0,0,105,95,1,0,0,
+        0,105,96,1,0,0,0,105,97,1,0,0,0,105,98,1,0,0,0,105,99,1,0,0,0,105,
+        100,1,0,0,0,105,101,1,0,0,0,105,102,1,0,0,0,105,103,1,0,0,0,105,
+        104,1,0,0,0,106,7,1,0,0,0,107,108,5,31,0,0,108,109,3,52,26,0,109,
+        9,1,0,0,0,110,111,5,32,0,0,111,11,1,0,0,0,112,113,5,33,0,0,113,13,
+        1,0,0,0,114,115,5,34,0,0,115,116,3,52,26,0,116,15,1,0,0,0,117,118,
+        5,2,0,0,118,121,3,52,26,0,119,122,5,44,0,0,120,122,1,0,0,0,121,119,
+        1,0,0,0,121,120,1,0,0,0,122,123,1,0,0,0,123,124,3,6,3,0,124,136,
+        1,0,0,0,125,126,5,2,0,0,126,129,3,52,26,0,127,130,5,44,0,0,128,130,
+        1,0,0,0,129,127,1,0,0,0,129,128,1,0,0,0,130,131,1,0,0,0,131,132,
+        3,6,3,0,132,133,3,18,9,0,133,134,3,24,12,0,134,136,1,0,0,0,135,117,
+        1,0,0,0,135,125,1,0,0,0,136,17,1,0,0,0,137,140,3,20,10,0,138,140,
+        1,0,0,0,139,137,1,0,0,0,139,138,1,0,0,0,140,19,1,0,0,0,141,146,3,
+        22,11,0,142,143,3,22,11,0,143,144,3,20,10,0,144,146,1,0,0,0,145,
+        141,1,0,0,0,145,142,1,0,0,0,146,21,1,0,0,0,147,150,5,44,0,0,148,
+        150,1,0,0,0,149,147,1,0,0,0,149,148,1,0,0,0,150,151,1,0,0,0,151,
+        152,5,3,0,0,152,155,3,52,26,0,153,156,5,44,0,0,154,156,1,0,0,0,155,
+        153,1,0,0,0,155,154,1,0,0,0,156,157,1,0,0,0,157,158,3,6,3,0,158,
+        23,1,0,0,0,159,162,5,44,0,0,160,162,1,0,0,0,161,159,1,0,0,0,161,
+        160,1,0,0,0,162,163,1,0,0,0,163,166,5,4,0,0,164,167,5,44,0,0,165,
+        167,1,0,0,0,166,164,1,0,0,0,166,165,1,0,0,0,167,168,1,0,0,0,168,
+        171,3,6,3,0,169,171,1,0,0,0,170,161,1,0,0,0,170,169,1,0,0,0,171,
+        25,1,0,0,0,172,173,5,5,0,0,173,174,3,52,26,0,174,175,5,37,0,0,175,
+        176,3,52,26,0,176,177,5,38,0,0,177,180,3,52,26,0,178,181,5,44,0,
+        0,179,181,1,0,0,0,180,178,1,0,0,0,180,179,1,0,0,0,181,182,1,0,0,
+        0,182,183,3,6,3,0,183,27,1,0,0,0,184,190,5,24,0,0,185,186,5,44,0,
+        0,186,187,3,30,15,0,187,188,5,44,0,0,188,191,1,0,0,0,189,191,5,44,
+        0,0,190,185,1,0,0,0,190,189,1,0,0,0,191,192,1,0,0,0,192,193,5,25,
+        0,0,193,29,1,0,0,0,194,200,3,6,3,0,195,196,3,6,3,0,196,197,5,44,
+        0,0,197,198,3,30,15,0,198,200,1,0,0,0,199,194,1,0,0,0,199,195,1,
+        0,0,0,200,31,1,0,0,0,201,202,5,35,0,0,202,203,5,39,0,0,203,213,3,
+        34,17,0,204,207,5,44,0,0,205,207,1,0,0,0,206,204,1,0,0,0,206,205,
+        1,0,0,0,207,210,1,0,0,0,208,211,3,14,7,0,209,211,3,28,14,0,210,208,
+        1,0,0,0,210,209,1,0,0,0,211,214,1,0,0,0,212,214,1,0,0,0,213,206,
+        1,0,0,0,213,212,1,0,0,0,214,33,1,0,0,0,215,216,5,20,0,0,216,217,
+        3,36,18,0,217,218,5,21,0,0,218,35,1,0,0,0,219,222,3,38,19,0,220,
+        222,1,0,0,0,221,219,1,0,0,0,221,220,1,0,0,0,222,37,1,0,0,0,223,229,
+        3,40,20,0,224,225,3,40,20,0,225,226,5,30,0,0,226,227,3,38,19,0,227,
+        229,1,0,0,0,228,223,1,0,0,0,228,224,1,0,0,0,229,39,1,0,0,0,230,231,
+        5,1,0,0,231,234,5,39,0,0,232,235,3,42,21,0,233,235,1,0,0,0,234,232,
+        1,0,0,0,234,233,1,0,0,0,235,41,1,0,0,0,236,237,5,22,0,0,237,238,
+        3,44,22,0,238,239,5,23,0,0,239,43,1,0,0,0,240,243,3,46,23,0,241,
+        243,1,0,0,0,242,240,1,0,0,0,242,241,1,0,0,0,243,45,1,0,0,0,244,249,
+        5,40,0,0,245,246,5,40,0,0,246,247,5,30,0,0,247,249,3,46,23,0,248,
+        244,1,0,0,0,248,245,1,0,0,0,249,47,1,0,0,0,250,251,3,52,26,0,251,
+        252,5,13,0,0,252,253,3,52,26,0,253,49,1,0,0,0,254,255,5,1,0,0,255,
+        258,5,39,0,0,256,259,3,42,21,0,257,259,1,0,0,0,258,256,1,0,0,0,258,
+        257,1,0,0,0,259,260,1,0,0,0,260,261,5,13,0,0,261,270,3,52,26,0,262,
+        263,5,28,0,0,263,264,3,52,26,0,264,265,5,13,0,0,265,266,3,52,26,
+        0,266,270,1,0,0,0,267,268,5,29,0,0,268,270,3,52,26,0,269,254,1,0,
+        0,0,269,262,1,0,0,0,269,267,1,0,0,0,270,51,1,0,0,0,271,272,6,26,
+        -1,0,272,273,3,54,27,0,273,279,1,0,0,0,274,275,10,2,0,0,275,276,
+        7,0,0,0,276,278,3,54,27,0,277,274,1,0,0,0,278,281,1,0,0,0,279,277,
+        1,0,0,0,279,280,1,0,0,0,280,53,1,0,0,0,281,279,1,0,0,0,282,283,6,
+        27,-1,0,283,284,3,56,28,0,284,290,1,0,0,0,285,286,10,2,0,0,286,287,
+        7,1,0,0,287,289,3,56,28,0,288,285,1,0,0,0,289,292,1,0,0,0,290,288,
+        1,0,0,0,290,291,1,0,0,0,291,55,1,0,0,0,292,290,1,0,0,0,293,294,3,
+        58,29,0,294,295,7,2,0,0,295,296,3,58,29,0,296,299,1,0,0,0,297,299,
+        3,58,29,0,298,293,1,0,0,0,298,297,1,0,0,0,299,57,1,0,0,0,300,301,
+        6,29,-1,0,301,302,3,60,30,0,302,308,1,0,0,0,303,304,10,2,0,0,304,
+        305,7,3,0,0,305,307,3,60,30,0,306,303,1,0,0,0,307,310,1,0,0,0,308,
+        306,1,0,0,0,308,309,1,0,0,0,309,59,1,0,0,0,310,308,1,0,0,0,311,312,
+        3,62,31,0,312,313,5,12,0,0,313,314,3,62,31,0,314,317,1,0,0,0,315,
+        317,3,62,31,0,316,311,1,0,0,0,316,315,1,0,0,0,317,61,1,0,0,0,318,
+        319,5,6,0,0,319,324,3,62,31,0,320,321,5,26,0,0,321,324,3,62,31,0,
+        322,324,3,64,32,0,323,318,1,0,0,0,323,320,1,0,0,0,323,322,1,0,0,
+        0,324,63,1,0,0,0,325,326,6,32,-1,0,326,327,3,66,33,0,327,340,1,0,
+        0,0,328,329,10,3,0,0,329,330,5,22,0,0,330,331,3,68,34,0,331,332,
+        5,23,0,0,332,339,1,0,0,0,333,334,10,2,0,0,334,335,5,20,0,0,335,336,
+        3,68,34,0,336,337,5,21,0,0,337,339,1,0,0,0,338,328,1,0,0,0,338,333,
+        1,0,0,0,339,342,1,0,0,0,340,338,1,0,0,0,340,341,1,0,0,0,341,65,1,
+        0,0,0,342,340,1,0,0,0,343,344,5,22,0,0,344,345,3,68,34,0,345,346,
+        5,23,0,0,346,359,1,0,0,0,347,359,5,40,0,0,348,359,5,43,0,0,349,359,
+        5,39,0,0,350,351,5,22,0,0,351,352,3,68,34,0,352,353,5,23,0,0,353,
+        359,1,0,0,0,354,355,5,20,0,0,355,356,3,52,26,0,356,357,5,21,0,0,
+        357,359,1,0,0,0,358,343,1,0,0,0,358,347,1,0,0,0,358,348,1,0,0,0,
+        358,349,1,0,0,0,358,350,1,0,0,0,358,354,1,0,0,0,359,67,1,0,0,0,360,
+        363,3,70,35,0,361,363,1,0,0,0,362,360,1,0,0,0,362,361,1,0,0,0,363,
+        69,1,0,0,0,364,370,3,52,26,0,365,366,3,52,26,0,366,367,5,30,0,0,
+        367,368,3,70,35,0,368,370,1,0,0,0,369,364,1,0,0,0,369,365,1,0,0,
+        0,370,71,1,0,0,0,39,77,82,85,92,105,121,129,135,139,145,149,155,
+        161,166,170,180,190,199,206,210,213,221,228,234,242,248,258,269,
+        279,290,298,308,316,323,338,340,358,362,369
     ]
 
 class ZCodeParser ( Parser ):
@@ -739,12 +747,12 @@ class ZCodeParser ( Parser ):
             return self.getTypedRuleContext(ZCodeParser.ExprContext,0)
 
 
-        def NULL_LINES(self):
-            return self.getToken(ZCodeParser.NULL_LINES, 0)
-
         def stm(self):
             return self.getTypedRuleContext(ZCodeParser.StmContext,0)
 
+
+        def NULL_LINES(self):
+            return self.getToken(ZCodeParser.NULL_LINES, 0)
 
         def r_elif_list(self):
             return self.getTypedRuleContext(ZCodeParser.R_elif_listContext,0)
@@ -765,34 +773,54 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.R_ifContext(self, self._ctx, self.state)
         self.enterRule(localctx, 16, self.RULE_r_if)
         try:
-            self.state = 129
+            self.state = 135
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 117
                 self.match(ZCodeParser.IF)
                 self.state = 118
                 self.expr(0)
-                self.state = 119
-                self.match(ZCodeParser.NULL_LINES)
-                self.state = 120
+                self.state = 121
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [44]:
+                    self.state = 119
+                    self.match(ZCodeParser.NULL_LINES)
+                    pass
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 43]:
+                    pass
+                else:
+                    raise NoViableAltException(self)
+
+                self.state = 123
                 self.stm()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 122
-                self.match(ZCodeParser.IF)
-                self.state = 123
-                self.expr(0)
-                self.state = 124
-                self.match(ZCodeParser.NULL_LINES)
                 self.state = 125
-                self.stm()
+                self.match(ZCodeParser.IF)
                 self.state = 126
+                self.expr(0)
+                self.state = 129
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [44]:
+                    self.state = 127
+                    self.match(ZCodeParser.NULL_LINES)
+                    pass
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 43]:
+                    pass
+                else:
+                    raise NoViableAltException(self)
+
+                self.state = 131
+                self.stm()
+                self.state = 132
                 self.r_elif_list()
-                self.state = 127
+                self.state = 133
                 self.r_else()
                 pass
 
@@ -828,12 +856,12 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.R_elif_listContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_r_elif_list)
         try:
-            self.state = 133
+            self.state = 139
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 131
+                self.state = 137
                 self.r_elifs()
                 pass
 
@@ -878,20 +906,20 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.R_elifsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_r_elifs)
         try:
-            self.state = 139
+            self.state = 145
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 135
+                self.state = 141
                 self.r_elif()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 136
+                self.state = 142
                 self.r_elif()
-                self.state = 137
+                self.state = 143
                 self.r_elifs()
                 pass
 
@@ -912,12 +940,6 @@ class ZCodeParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NULL_LINES(self, i:int=None):
-            if i is None:
-                return self.getTokens(ZCodeParser.NULL_LINES)
-            else:
-                return self.getToken(ZCodeParser.NULL_LINES, i)
-
         def ELIF(self):
             return self.getToken(ZCodeParser.ELIF, 0)
 
@@ -928,6 +950,12 @@ class ZCodeParser ( Parser ):
         def stm(self):
             return self.getTypedRuleContext(ZCodeParser.StmContext,0)
 
+
+        def NULL_LINES(self, i:int=None):
+            if i is None:
+                return self.getTokens(ZCodeParser.NULL_LINES)
+            else:
+                return self.getToken(ZCodeParser.NULL_LINES, i)
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_r_elif
@@ -941,15 +969,35 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_r_elif)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 141
-            self.match(ZCodeParser.NULL_LINES)
-            self.state = 142
+            self.state = 149
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [44]:
+                self.state = 147
+                self.match(ZCodeParser.NULL_LINES)
+                pass
+            elif token in [3]:
+                pass
+            else:
+                raise NoViableAltException(self)
+
+            self.state = 151
             self.match(ZCodeParser.ELIF)
-            self.state = 143
+            self.state = 152
             self.expr(0)
-            self.state = 144
-            self.match(ZCodeParser.NULL_LINES)
-            self.state = 145
+            self.state = 155
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [44]:
+                self.state = 153
+                self.match(ZCodeParser.NULL_LINES)
+                pass
+            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 43]:
+                pass
+            else:
+                raise NoViableAltException(self)
+
+            self.state = 157
             self.stm()
         except RecognitionException as re:
             localctx.exception = re
@@ -967,18 +1015,18 @@ class ZCodeParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NULL_LINES(self, i:int=None):
-            if i is None:
-                return self.getTokens(ZCodeParser.NULL_LINES)
-            else:
-                return self.getToken(ZCodeParser.NULL_LINES, i)
-
         def ELSE(self):
             return self.getToken(ZCodeParser.ELSE, 0)
 
         def stm(self):
             return self.getTypedRuleContext(ZCodeParser.StmContext,0)
 
+
+        def NULL_LINES(self, i:int=None):
+            if i is None:
+                return self.getTokens(ZCodeParser.NULL_LINES)
+            else:
+                return self.getToken(ZCodeParser.NULL_LINES, i)
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_r_else
@@ -991,18 +1039,38 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.R_elseContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_r_else)
         try:
-            self.state = 152
+            self.state = 170
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 147
-                self.match(ZCodeParser.NULL_LINES)
-                self.state = 148
+                self.state = 161
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [44]:
+                    self.state = 159
+                    self.match(ZCodeParser.NULL_LINES)
+                    pass
+                elif token in [4]:
+                    pass
+                else:
+                    raise NoViableAltException(self)
+
+                self.state = 163
                 self.match(ZCodeParser.ELSE)
-                self.state = 149
-                self.match(ZCodeParser.NULL_LINES)
-                self.state = 150
+                self.state = 166
+                self._errHandler.sync(self)
+                token = self._input.LA(1)
+                if token in [44]:
+                    self.state = 164
+                    self.match(ZCodeParser.NULL_LINES)
+                    pass
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 43]:
+                    pass
+                else:
+                    raise NoViableAltException(self)
+
+                self.state = 168
                 self.stm()
                 pass
 
@@ -1063,23 +1131,23 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 26, self.RULE_r_for)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 154
+            self.state = 172
             self.match(ZCodeParser.FOR)
-            self.state = 155
+            self.state = 173
             self.expr(0)
-            self.state = 156
+            self.state = 174
             self.match(ZCodeParser.UNTIL)
-            self.state = 157
+            self.state = 175
             self.expr(0)
-            self.state = 158
+            self.state = 176
             self.match(ZCodeParser.BY)
-            self.state = 159
+            self.state = 177
             self.expr(0)
-            self.state = 162
+            self.state = 180
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [44]:
-                self.state = 160
+                self.state = 178
                 self.match(ZCodeParser.NULL_LINES)
                 pass
             elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 43]:
@@ -1087,7 +1155,7 @@ class ZCodeParser ( Parser ):
             else:
                 raise NoViableAltException(self)
 
-            self.state = 164
+            self.state = 182
             self.stm()
         except RecognitionException as re:
             localctx.exception = re
@@ -1133,27 +1201,27 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_block)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 166
+            self.state = 184
             self.match(ZCodeParser.BEGIN)
-            self.state = 172
+            self.state = 190
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
             if la_ == 1:
-                self.state = 167
+                self.state = 185
                 self.match(ZCodeParser.NULL_LINES)
-                self.state = 168
+                self.state = 186
                 self.block_stms()
-                self.state = 169
+                self.state = 187
                 self.match(ZCodeParser.NULL_LINES)
                 pass
 
             elif la_ == 2:
-                self.state = 171
+                self.state = 189
                 self.match(ZCodeParser.NULL_LINES)
                 pass
 
 
-            self.state = 174
+            self.state = 192
             self.match(ZCodeParser.END)
         except RecognitionException as re:
             localctx.exception = re
@@ -1193,22 +1261,22 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Block_stmsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 30, self.RULE_block_stms)
         try:
-            self.state = 181
+            self.state = 199
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 176
+                self.state = 194
                 self.stm()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 177
+                self.state = 195
                 self.stm()
-                self.state = 178
+                self.state = 196
                 self.match(ZCodeParser.NULL_LINES)
-                self.state = 179
+                self.state = 197
                 self.block_stms()
                 pass
 
@@ -1262,21 +1330,21 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_func)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 183
+            self.state = 201
             self.match(ZCodeParser.FUNC)
-            self.state = 184
+            self.state = 202
             self.match(ZCodeParser.IDENTIFIER)
-            self.state = 185
+            self.state = 203
             self.arg_group()
-            self.state = 195
+            self.state = 213
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
             if la_ == 1:
-                self.state = 188
+                self.state = 206
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [44]:
-                    self.state = 186
+                    self.state = 204
                     self.match(ZCodeParser.NULL_LINES)
                     pass
                 elif token in [24, 34]:
@@ -1284,15 +1352,15 @@ class ZCodeParser ( Parser ):
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 192
+                self.state = 210
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [34]:
-                    self.state = 190
+                    self.state = 208
                     self.r_return()
                     pass
                 elif token in [24]:
-                    self.state = 191
+                    self.state = 209
                     self.block()
                     pass
                 else:
@@ -1342,11 +1410,11 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_arg_group)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 197
+            self.state = 215
             self.match(ZCodeParser.LP)
-            self.state = 198
+            self.state = 216
             self.args()
-            self.state = 199
+            self.state = 217
             self.match(ZCodeParser.RP)
         except RecognitionException as re:
             localctx.exception = re
@@ -1379,12 +1447,12 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.ArgsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 36, self.RULE_args)
         try:
-            self.state = 203
+            self.state = 221
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [1]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 201
+                self.state = 219
                 self.arg_list()
                 pass
             elif token in [21]:
@@ -1432,22 +1500,22 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Arg_listContext(self, self._ctx, self.state)
         self.enterRule(localctx, 38, self.RULE_arg_list)
         try:
-            self.state = 210
+            self.state = 228
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 205
+                self.state = 223
                 self.arg()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 206
+                self.state = 224
                 self.arg()
-                self.state = 207
+                self.state = 225
                 self.match(ZCodeParser.COMMA)
-                self.state = 208
+                self.state = 226
                 self.arg_list()
                 pass
 
@@ -1490,15 +1558,15 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_arg)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 212
+            self.state = 230
             self.match(ZCodeParser.TYPE)
-            self.state = 213
+            self.state = 231
             self.match(ZCodeParser.IDENTIFIER)
-            self.state = 216
+            self.state = 234
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [22]:
-                self.state = 214
+                self.state = 232
                 self.type_index()
                 pass
             elif token in [21, 30]:
@@ -1544,11 +1612,11 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_type_index)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 218
+            self.state = 236
             self.match(ZCodeParser.LB)
-            self.state = 219
+            self.state = 237
             self.type_index_nums()
-            self.state = 220
+            self.state = 238
             self.match(ZCodeParser.RB)
         except RecognitionException as re:
             localctx.exception = re
@@ -1581,12 +1649,12 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Type_index_numsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 44, self.RULE_type_index_nums)
         try:
-            self.state = 224
+            self.state = 242
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [40]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 222
+                self.state = 240
                 self.type_index_num_list()
                 pass
             elif token in [23]:
@@ -1633,22 +1701,22 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Type_index_num_listContext(self, self._ctx, self.state)
         self.enterRule(localctx, 46, self.RULE_type_index_num_list)
         try:
-            self.state = 230
+            self.state = 248
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 226
+                self.state = 244
                 self.match(ZCodeParser.NUMBER)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 227
+                self.state = 245
                 self.match(ZCodeParser.NUMBER)
-                self.state = 228
+                self.state = 246
                 self.match(ZCodeParser.COMMA)
-                self.state = 229
+                self.state = 247
                 self.type_index_num_list()
                 pass
 
@@ -1691,11 +1759,11 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 48, self.RULE_ass)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 232
+            self.state = 250
             self.expr(0)
-            self.state = 233
+            self.state = 251
             self.match(ZCodeParser.ASSIGN)
-            self.state = 234
+            self.state = 252
             self.expr(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -1750,20 +1818,20 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.DeclContext(self, self._ctx, self.state)
         self.enterRule(localctx, 50, self.RULE_decl)
         try:
-            self.state = 251
+            self.state = 269
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [1]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 236
+                self.state = 254
                 self.match(ZCodeParser.TYPE)
-                self.state = 237
+                self.state = 255
                 self.match(ZCodeParser.IDENTIFIER)
-                self.state = 240
+                self.state = 258
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [22]:
-                    self.state = 238
+                    self.state = 256
                     self.type_index()
                     pass
                 elif token in [13]:
@@ -1771,27 +1839,27 @@ class ZCodeParser ( Parser ):
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 242
+                self.state = 260
                 self.match(ZCodeParser.ASSIGN)
-                self.state = 243
+                self.state = 261
                 self.expr(0)
                 pass
             elif token in [28]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 244
+                self.state = 262
                 self.match(ZCodeParser.VAR)
-                self.state = 245
+                self.state = 263
                 self.expr(0)
-                self.state = 246
+                self.state = 264
                 self.match(ZCodeParser.ASSIGN)
-                self.state = 247
+                self.state = 265
                 self.expr(0)
                 pass
             elif token in [29]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 249
+                self.state = 267
                 self.match(ZCodeParser.DYN)
-                self.state = 250
+                self.state = 268
                 self.expr(0)
                 pass
             else:
@@ -1846,12 +1914,12 @@ class ZCodeParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 254
+            self.state = 272
             self.expr1(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 261
+            self.state = 279
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,28,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1859,11 +1927,11 @@ class ZCodeParser ( Parser ):
                     _prevctx = localctx
                     localctx = ZCodeParser.ExprContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                    self.state = 256
+                    self.state = 274
                     if not self.precpred(self._ctx, 2):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 257
+                    self.state = 275
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 68719477504) != 0)):
@@ -1871,11 +1939,11 @@ class ZCodeParser ( Parser ):
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
-                    self.state = 258
+                    self.state = 276
                     self.expr1(0) 
-                self.state = 263
+                self.state = 281
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,28,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1923,12 +1991,12 @@ class ZCodeParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 265
+            self.state = 283
             self.expr2()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 272
+            self.state = 290
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,23,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1936,11 +2004,11 @@ class ZCodeParser ( Parser ):
                     _prevctx = localctx
                     localctx = ZCodeParser.Expr1Context(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_expr1)
-                    self.state = 267
+                    self.state = 285
                     if not self.precpred(self._ctx, 2):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 268
+                    self.state = 286
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not(_la==6 or _la==7):
@@ -1948,11 +2016,11 @@ class ZCodeParser ( Parser ):
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
-                    self.state = 269
+                    self.state = 287
                     self.expr2() 
-                self.state = 274
+                self.state = 292
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,23,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2011,14 +2079,14 @@ class ZCodeParser ( Parser ):
         self.enterRule(localctx, 56, self.RULE_expr2)
         self._la = 0 # Token type
         try:
-            self.state = 280
+            self.state = 298
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 275
+                self.state = 293
                 self.expr3(0)
-                self.state = 276
+                self.state = 294
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 135249920) != 0)):
@@ -2026,13 +2094,13 @@ class ZCodeParser ( Parser ):
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 277
+                self.state = 295
                 self.expr3(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 279
+                self.state = 297
                 self.expr3(0)
                 pass
 
@@ -2083,12 +2151,12 @@ class ZCodeParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 283
+            self.state = 301
             self.expr4()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 290
+            self.state = 308
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,25,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,31,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -2096,11 +2164,11 @@ class ZCodeParser ( Parser ):
                     _prevctx = localctx
                     localctx = ZCodeParser.Expr3Context(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_expr3)
-                    self.state = 285
+                    self.state = 303
                     if not self.precpred(self._ctx, 2):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 286
+                    self.state = 304
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
                     if not(_la==10 or _la==11):
@@ -2108,11 +2176,11 @@ class ZCodeParser ( Parser ):
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
-                    self.state = 287
+                    self.state = 305
                     self.expr4() 
-                self.state = 292
+                self.state = 310
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,25,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,31,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2151,22 +2219,22 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Expr4Context(self, self._ctx, self.state)
         self.enterRule(localctx, 60, self.RULE_expr4)
         try:
-            self.state = 298
+            self.state = 316
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,32,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 293
+                self.state = 311
                 self.expr5()
-                self.state = 294
+                self.state = 312
                 self.match(ZCodeParser.CONCAT)
-                self.state = 295
+                self.state = 313
                 self.expr5()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 297
+                self.state = 315
                 self.expr5()
                 pass
 
@@ -2212,26 +2280,26 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Expr5Context(self, self._ctx, self.state)
         self.enterRule(localctx, 62, self.RULE_expr5)
         try:
-            self.state = 305
+            self.state = 323
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 300
+                self.state = 318
                 self.match(ZCodeParser.SUB)
-                self.state = 301
+                self.state = 319
                 self.expr5()
                 pass
             elif token in [26]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 302
+                self.state = 320
                 self.match(ZCodeParser.NOT)
-                self.state = 303
+                self.state = 321
                 self.expr5()
                 pass
             elif token in [20, 22, 39, 40, 43]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 304
+                self.state = 322
                 self.expr6(0)
                 pass
             else:
@@ -2295,33 +2363,33 @@ class ZCodeParser ( Parser ):
         self.enterRecursionRule(localctx, 64, self.RULE_expr6, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 308
+            self.state = 326
             self.term()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 322
+            self.state = 340
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,35,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 320
+                    self.state = 338
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
                     if la_ == 1:
                         localctx = ZCodeParser.Expr6Context(self, _parentctx, _parentState)
                         localctx.array = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr6)
-                        self.state = 310
+                        self.state = 328
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 311
+                        self.state = 329
                         self.match(ZCodeParser.LB)
-                        self.state = 312
+                        self.state = 330
                         localctx.indexer = self.expr_list()
-                        self.state = 313
+                        self.state = 331
                         self.match(ZCodeParser.RB)
                         pass
 
@@ -2329,22 +2397,22 @@ class ZCodeParser ( Parser ):
                         localctx = ZCodeParser.Expr6Context(self, _parentctx, _parentState)
                         localctx.callee = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr6)
-                        self.state = 315
+                        self.state = 333
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 316
+                        self.state = 334
                         self.match(ZCodeParser.LP)
-                        self.state = 317
+                        self.state = 335
                         localctx.params = self.expr_list()
-                        self.state = 318
+                        self.state = 336
                         self.match(ZCodeParser.RP)
                         pass
 
              
-                self.state = 324
+                self.state = 342
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,35,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -2402,54 +2470,54 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.TermContext(self, self._ctx, self.state)
         self.enterRule(localctx, 66, self.RULE_term)
         try:
-            self.state = 340
+            self.state = 358
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 325
+                self.state = 343
                 self.match(ZCodeParser.LB)
-                self.state = 326
+                self.state = 344
                 self.expr_list()
-                self.state = 327
+                self.state = 345
                 self.match(ZCodeParser.RB)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 329
+                self.state = 347
                 self.match(ZCodeParser.NUMBER)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 330
+                self.state = 348
                 self.match(ZCodeParser.STRING)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 331
+                self.state = 349
                 self.match(ZCodeParser.IDENTIFIER)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 332
+                self.state = 350
                 self.match(ZCodeParser.LB)
-                self.state = 333
+                self.state = 351
                 self.expr_list()
-                self.state = 334
+                self.state = 352
                 self.match(ZCodeParser.RB)
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 336
+                self.state = 354
                 self.match(ZCodeParser.LP)
-                self.state = 337
+                self.state = 355
                 self.expr(0)
-                self.state = 338
+                self.state = 356
                 self.match(ZCodeParser.RP)
                 pass
 
@@ -2485,12 +2553,12 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.Expr_listContext(self, self._ctx, self.state)
         self.enterRule(localctx, 68, self.RULE_expr_list)
         try:
-            self.state = 344
+            self.state = 362
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [6, 20, 22, 26, 39, 40, 43]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 342
+                self.state = 360
                 self.exprs()
                 pass
             elif token in [21, 23]:
@@ -2538,22 +2606,22 @@ class ZCodeParser ( Parser ):
         localctx = ZCodeParser.ExprsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 70, self.RULE_exprs)
         try:
-            self.state = 351
+            self.state = 369
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,32,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,38,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 346
+                self.state = 364
                 self.expr(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 347
+                self.state = 365
                 self.expr(0)
-                self.state = 348
+                self.state = 366
                 self.match(ZCodeParser.COMMA)
-                self.state = 349
+                self.state = 367
                 self.exprs()
                 pass
 
