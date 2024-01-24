@@ -87,8 +87,8 @@ expr4: expr5 CONCAT expr5 | expr5;
 expr5: SUB expr5
 	| NOT expr5
 	| expr6;
-expr6: array=expr6 LB indexer=expr(COMMAindexer=expr)* RB
-	| callee=expr6 LP (param=expr(COMMAparam=expr)*)? RP
+expr6: array=expr6 LB indexer=expr(COMMA indexer=expr)* RB
+	| callee=expr6 LP (param=expr(COMMA param=expr)*)? RP
 	| term;
 term: LB (expr COMMA expr*)? RB
 	| NUMBER
