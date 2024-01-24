@@ -48,10 +48,10 @@ expr1: expr1 op=('+' | '-') expr2 | expr2;
 expr2: expr3 op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr3 | expr3;
 expr3: expr3 op=('and' | 'or') expr4 | expr4;
 expr4: expr5'...'expr5 | expr5;
-expr5: '-'term
-	| 'not'term
-	| array=term'['indexer=expr(','indexer=expr)*']'
-	| callee=term'('(param=expr(','param=expr)*)?')'
+expr5: '-'expr5
+	| 'not'expr5
+	| array=expr5'['indexer=expr(','indexer=expr)*']'
+	| callee=expr5'('(param=expr(','param=expr)*)?')'
 	| term;
 term: '[' (expr','expr*)? ']'
 	| NUMBER
