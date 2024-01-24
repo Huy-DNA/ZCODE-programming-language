@@ -42,26 +42,23 @@ ass: expr '<-' expr;
 decl: TYPE expr '<-' expr
 	| 'var' expr '<-' expr
 	| 'dynamic' expr;
-
-expr: '(' expr ')'
-	| array=expr'['indexer=expr(','indexer=expr)*']'
-	| callee=expr'('(param=expr(','param=expr)*)?')'
-	| '-'expr
-	| 'not'expr
-	| expr op=('*' | '/' | '%') expr
-	| expr op=('+' | '-') expr
-	| concat_expr op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') concat_expr
-	| concat_expr
-	| expr op=('and' | 'or') expr;
-concat_expr: operand'...'operand
-	| operand;
-operand: r_list
+ 
+expr: expr op=('*' | '/' | '%') expr1 | expr1;
+expr1: expr1 op=('+' | '-') expr2 | expr2;
+expr2: expr3 op=('=' | '==' | '!=' | '<' | '>' | '<=' | '>=') expr3 | expr3;
+expr3: expr3 op=('and' | 'or') expr4 | expr4;
+expr4: expr5'...'expr5 | expr5;
+expr5: '-'term
+	| 'not'term
+	| array=term'['indexer=expr(','indexer=expr)*']'
+	| callee=term'('(param=expr(','param=expr)*)?')'
+	| term;
+term: '[' (expr','expr*)? ']'
 	| NUMBER
 	| STRING
-	| IDENTIFIER
+	| IDENTIFIER	
+	| '[' (expr(','expr)*)? ']'
 	| '(' expr ')';
-
-r_list: '[' (expr(','expr)*)? ']';
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
