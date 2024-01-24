@@ -175,7 +175,7 @@ class ZCodeParser ( Parser ):
 
     RULE_program = 0
     RULE_stm = 1
-    RULE_print = 2
+    RULE_r_print = 2
     RULE_r_break = 3
     RULE_r_continue = 4
     RULE_r_return = 5
@@ -195,10 +195,10 @@ class ZCodeParser ( Parser ):
     RULE_expr5 = 19
     RULE_term = 20
 
-    ruleNames =  [ "program", "stm", "print", "r_break", "r_continue", "r_return", 
-                   "r_if", "r_for", "block", "func", "args", "type_index", 
-                   "ass", "decl", "expr", "expr1", "expr2", "expr3", "expr4", 
-                   "expr5", "term" ]
+    ruleNames =  [ "program", "stm", "r_print", "r_break", "r_continue", 
+                   "r_return", "r_if", "r_for", "block", "func", "args", 
+                   "type_index", "ass", "decl", "expr", "expr1", "expr2", 
+                   "expr3", "expr4", "expr5", "term" ]
 
     EOF = Token.EOF
     T__0=1
@@ -396,8 +396,8 @@ class ZCodeParser ( Parser ):
             return self.getTypedRuleContext(ZCodeParser.R_forContext,0)
 
 
-        def print_(self):
-            return self.getTypedRuleContext(ZCodeParser.PrintContext,0)
+        def r_print(self):
+            return self.getTypedRuleContext(ZCodeParser.R_printContext,0)
 
 
         def getRuleIndex(self):
@@ -477,7 +477,7 @@ class ZCodeParser ( Parser ):
             elif la_ == 11:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 72
-                self.print_()
+                self.r_print()
                 pass
 
 
@@ -490,7 +490,7 @@ class ZCodeParser ( Parser ):
         return localctx
 
 
-    class PrintContext(ParserRuleContext):
+    class R_printContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -502,15 +502,15 @@ class ZCodeParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return ZCodeParser.RULE_print
+            return ZCodeParser.RULE_r_print
 
 
 
 
-    def print_(self):
+    def r_print(self):
 
-        localctx = ZCodeParser.PrintContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_print)
+        localctx = ZCodeParser.R_printContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_r_print)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 75

@@ -16,9 +16,9 @@ program: NULL_LINES? (stm (NULL_LINES? stm)*)? NULL_LINES? EOF;
 
 // statement rule
 
-stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for | print;
+stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for | r_print;
 
-print: 'print' expr;
+r_print: 'print' expr;
 
 r_break: 'break';
 

@@ -103,7 +103,7 @@ ERROR_CHAR
 rule names:
 program
 stm
-print
+r_print
 r_break
 r_continue
 r_return
