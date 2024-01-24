@@ -59,9 +59,19 @@ block_stm_list: stm | stm NULL_LINES block_stm_list;
 
 // function statement
 
-func: FUNC IDENTIFIER args (NULL_LINES (r_return | block))?;
-args: LP (TYPE IDENTIFIER type_index? (COMMA TYPE IDENTIFIER type_index?)*)? RP;
-type_index: LB (NUMBER (COMMA NUMBER)*)? RB;
+func: FUNC IDENTIFIER arg_group ((NULL_LINES (r_return | block)) | );
+
+arg_group: LP args RP;
+args: arg_list | ;
+arg_list: arg | arg COMMA arg_list;
+arg: TYPE IDENTIFIER (type_index | );
+
+
+type_index: LB type_index_nums RB;
+type_index_nums: type_index_num_list | ;
+type_index_num_list: NUMBER | NUMBER COMMA type_index_num_list;
+
+// assignment statement
 
 ass: expr ASSIGN expr;
 
