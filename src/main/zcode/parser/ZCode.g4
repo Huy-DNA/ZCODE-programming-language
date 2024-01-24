@@ -12,7 +12,7 @@ options {
 	language=Python3;
 }
 
-program: NULL_LINES? (stm (NULL_LINES? stm)*)? NULL_LINES? EOF;
+program: NULL_LINES? (stm (NULL_LINES stm)*)? NULL_LINES? EOF;
 
 // statement rule
 
