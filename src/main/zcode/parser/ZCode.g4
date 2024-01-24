@@ -51,11 +51,9 @@ r_for: FOR expr UNTIL expr BY expr NULL_LINES stm;
 
 // block statement
 
-block: BEGIN NULL_LINES block_stms NULL_LINES END;
+block: BEGIN (NULL_LINES block_stms NULL_LINES | NULL_LINES) END;
 
-block_stms: block_stm_list | ;
-
-block_stm_list: stm | stm NULL_LINES block_stm_list;
+block_stms: stm | stm NULL_LINES block_stms;
 
 // function statement
 
