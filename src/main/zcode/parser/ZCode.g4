@@ -59,7 +59,7 @@ block_stm_list: stm | stm NULL_LINES block_stm_list;
 
 // function statement
 
-func: FUNC IDENTIFIER arg_group ((NULL_LINES (r_return | block)) | );
+func: FUNC IDENTIFIER arg_group (((NULL_LINES | ) (r_return | block)) | );
 
 arg_group: LP args RP;
 args: arg_list | ;
