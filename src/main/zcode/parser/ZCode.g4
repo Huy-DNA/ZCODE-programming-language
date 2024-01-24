@@ -26,14 +26,14 @@ r_continue: 'continue';
 
 r_return: 'return' expr;
 
-r_if: 'if' expr NULL_LINES* stm
-	| 'if' expr NULL_LINES* stm (NULL_LINES* 'elif' expr NULL_LINES* stm)*? (NULL_LINES* 'else' NULL_LINES* stm)?;
+r_if: 'if' expr NULL_LINES stm
+	| 'if' expr NULL_LINES stm (NULL_LINES 'elif' expr NULL_LINES stm)*? (NULL_LINES 'else' NULL_LINES stm)?;
 
-r_for: 'for' expr 'until' expr 'by' expr NULL_LINES* stm;
+r_for: 'for' expr 'until' expr 'by' expr NULL_LINES stm;
 
 block: 'begin' NULL_LINES (stm (NULL_LINES stm)*)? NULL_LINES 'end';
 
-func: 'func' IDENTIFIER args (NULL_LINES* (r_return | block))?;
+func: 'func' IDENTIFIER args (NULL_LINES (r_return | block))?;
 args: '(' (TYPE IDENTIFIER type_index? (',' TYPE IDENTIFIER type_index?)*)? ')';
 type_index: '[' (NUMBER (',' NUMBER)*)? ']';
 
