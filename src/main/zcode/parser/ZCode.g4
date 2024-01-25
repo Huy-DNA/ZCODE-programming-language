@@ -91,6 +91,7 @@ expr6: array=expr6 LB indexer=expr_list RB
 term: LB expr_list RB
 	| NUMBER
 	| STRING
+	| BOOLEAN
 	| IDENTIFIER	
 	| LB expr_list RB
 	| LP expr RP;
@@ -139,6 +140,9 @@ FUNC: 'func';
 MOD: '%';
 UNTIL: 'until';
 BY: 'by';
+
+// BOOLEAN token
+BOOLEAN: 'true' | 'false';
 
 // IDENTIFIER token
 
