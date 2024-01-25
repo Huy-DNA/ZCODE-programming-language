@@ -169,7 +169,7 @@ fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
 
 // NULL_LINES token
-NULL_LINES: NEWLINE (NEWLINE | COMMENT)*;
+NULL_LINES: (NEWLINE | COMMENT)+;
 
 // COMMENT token
 COMMENT: '##' .*? (NEWLINE | EOF) { self.text = self.text.rstrip() };
