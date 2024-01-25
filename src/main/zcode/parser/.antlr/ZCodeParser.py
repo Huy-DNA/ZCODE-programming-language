@@ -42,7 +42,7 @@ def serializedATN():
         3,33,360,8,33,1,34,1,34,3,34,364,8,34,1,35,1,35,1,35,1,35,1,35,3,
         35,371,8,35,1,35,0,4,52,54,56,64,36,0,2,4,6,8,10,12,14,16,18,20,
         22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,
-        66,68,70,0,4,2,0,8,9,36,36,1,0,6,7,1,0,10,11,2,0,14,19,27,27,391,
+        66,68,70,0,4,2,0,14,19,27,27,1,0,10,11,1,0,6,7,2,0,8,9,36,36,391,
         0,72,1,0,0,0,2,85,1,0,0,0,4,92,1,0,0,0,6,105,1,0,0,0,8,107,1,0,0,
         0,10,110,1,0,0,0,12,112,1,0,0,0,14,114,1,0,0,0,16,135,1,0,0,0,18,
         139,1,0,0,0,20,145,1,0,0,0,22,149,1,0,0,0,24,170,1,0,0,0,26,172,
@@ -111,17 +111,17 @@ def serializedATN():
         0,265,266,3,52,26,0,266,270,1,0,0,0,267,268,5,29,0,0,268,270,3,52,
         26,0,269,254,1,0,0,0,269,262,1,0,0,0,269,267,1,0,0,0,270,51,1,0,
         0,0,271,272,6,26,-1,0,272,273,3,54,27,0,273,279,1,0,0,0,274,275,
-        10,2,0,0,275,276,7,0,0,0,276,278,3,54,27,0,277,274,1,0,0,0,278,281,
-        1,0,0,0,279,277,1,0,0,0,279,280,1,0,0,0,280,53,1,0,0,0,281,279,1,
-        0,0,0,282,283,6,27,-1,0,283,284,3,56,28,0,284,290,1,0,0,0,285,286,
-        10,2,0,0,286,287,7,1,0,0,287,289,3,56,28,0,288,285,1,0,0,0,289,292,
-        1,0,0,0,290,288,1,0,0,0,290,291,1,0,0,0,291,55,1,0,0,0,292,290,1,
-        0,0,0,293,294,6,28,-1,0,294,295,3,58,29,0,295,301,1,0,0,0,296,297,
-        10,2,0,0,297,298,7,2,0,0,298,300,3,58,29,0,299,296,1,0,0,0,300,303,
-        1,0,0,0,301,299,1,0,0,0,301,302,1,0,0,0,302,57,1,0,0,0,303,301,1,
-        0,0,0,304,305,3,60,30,0,305,306,7,3,0,0,306,307,3,60,30,0,307,310,
-        1,0,0,0,308,310,3,62,31,0,309,304,1,0,0,0,309,308,1,0,0,0,310,59,
-        1,0,0,0,311,312,3,62,31,0,312,313,5,12,0,0,313,314,3,62,31,0,314,
+        10,2,0,0,275,276,5,12,0,0,276,278,3,54,27,0,277,274,1,0,0,0,278,
+        281,1,0,0,0,279,277,1,0,0,0,279,280,1,0,0,0,280,53,1,0,0,0,281,279,
+        1,0,0,0,282,283,6,27,-1,0,283,284,3,56,28,0,284,290,1,0,0,0,285,
+        286,10,2,0,0,286,287,7,0,0,0,287,289,3,56,28,0,288,285,1,0,0,0,289,
+        292,1,0,0,0,290,288,1,0,0,0,290,291,1,0,0,0,291,55,1,0,0,0,292,290,
+        1,0,0,0,293,294,6,28,-1,0,294,295,3,58,29,0,295,301,1,0,0,0,296,
+        297,10,2,0,0,297,298,7,1,0,0,298,300,3,58,29,0,299,296,1,0,0,0,300,
+        303,1,0,0,0,301,299,1,0,0,0,301,302,1,0,0,0,302,57,1,0,0,0,303,301,
+        1,0,0,0,304,305,3,60,30,0,305,306,7,2,0,0,306,307,3,60,30,0,307,
+        310,1,0,0,0,308,310,3,62,31,0,309,304,1,0,0,0,309,308,1,0,0,0,310,
+        59,1,0,0,0,311,312,3,62,31,0,312,313,7,3,0,0,313,314,3,62,31,0,314,
         317,1,0,0,0,315,317,3,62,31,0,316,311,1,0,0,0,316,315,1,0,0,0,317,
         61,1,0,0,0,318,319,5,6,0,0,319,324,3,62,31,0,320,321,5,26,0,0,321,
         324,3,62,31,0,322,324,3,64,32,0,323,318,1,0,0,0,323,320,1,0,0,0,
@@ -1892,14 +1892,8 @@ class ZCodeParser ( Parser ):
             return self.getTypedRuleContext(ZCodeParser.ExprContext,0)
 
 
-        def MUL(self):
-            return self.getToken(ZCodeParser.MUL, 0)
-
-        def DIV(self):
-            return self.getToken(ZCodeParser.DIV, 0)
-
-        def MOD(self):
-            return self.getToken(ZCodeParser.MOD, 0)
+        def CONCAT(self):
+            return self.getToken(ZCodeParser.CONCAT, 0)
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr
@@ -1913,7 +1907,6 @@ class ZCodeParser ( Parser ):
         _prevctx = localctx
         _startState = 52
         self.enterRecursionRule(localctx, 52, self.RULE_expr, _p)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 272
@@ -1934,13 +1927,7 @@ class ZCodeParser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 275
-                    localctx.op = self._input.LT(1)
-                    _la = self._input.LA(1)
-                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 68719477504) != 0)):
-                        localctx.op = self._errHandler.recoverInline(self)
-                    else:
-                        self._errHandler.reportMatch(self)
-                        self.consume()
+                    localctx.op = self.match(ZCodeParser.CONCAT)
                     self.state = 276
                     self.expr1(0) 
                 self.state = 281
@@ -1972,11 +1959,26 @@ class ZCodeParser ( Parser ):
             return self.getTypedRuleContext(ZCodeParser.Expr1Context,0)
 
 
-        def ADD(self):
-            return self.getToken(ZCodeParser.ADD, 0)
+        def EQ(self):
+            return self.getToken(ZCodeParser.EQ, 0)
 
-        def SUB(self):
-            return self.getToken(ZCodeParser.SUB, 0)
+        def DEQ(self):
+            return self.getToken(ZCodeParser.DEQ, 0)
+
+        def NEQ(self):
+            return self.getToken(ZCodeParser.NEQ, 0)
+
+        def LT(self):
+            return self.getToken(ZCodeParser.LT, 0)
+
+        def GT(self):
+            return self.getToken(ZCodeParser.GT, 0)
+
+        def LE(self):
+            return self.getToken(ZCodeParser.LE, 0)
+
+        def GE(self):
+            return self.getToken(ZCodeParser.GE, 0)
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr1
@@ -2013,7 +2015,7 @@ class ZCodeParser ( Parser ):
                     self.state = 286
                     localctx.op = self._input.LT(1)
                     _la = self._input.LA(1)
-                    if not(_la==6 or _la==7):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 135249920) != 0)):
                         localctx.op = self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -2125,26 +2127,11 @@ class ZCodeParser ( Parser ):
                 return self.getTypedRuleContext(ZCodeParser.Expr4Context,i)
 
 
-        def EQ(self):
-            return self.getToken(ZCodeParser.EQ, 0)
+        def ADD(self):
+            return self.getToken(ZCodeParser.ADD, 0)
 
-        def DEQ(self):
-            return self.getToken(ZCodeParser.DEQ, 0)
-
-        def NEQ(self):
-            return self.getToken(ZCodeParser.NEQ, 0)
-
-        def LT(self):
-            return self.getToken(ZCodeParser.LT, 0)
-
-        def GT(self):
-            return self.getToken(ZCodeParser.GT, 0)
-
-        def LE(self):
-            return self.getToken(ZCodeParser.LE, 0)
-
-        def GE(self):
-            return self.getToken(ZCodeParser.GE, 0)
+        def SUB(self):
+            return self.getToken(ZCodeParser.SUB, 0)
 
         def expr5(self):
             return self.getTypedRuleContext(ZCodeParser.Expr5Context,0)
@@ -2172,7 +2159,7 @@ class ZCodeParser ( Parser ):
                 self.state = 305
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 135249920) != 0)):
+                if not(_la==6 or _la==7):
                     localctx.op = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -2203,6 +2190,7 @@ class ZCodeParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.op = None # Token
 
         def expr5(self, i:int=None):
             if i is None:
@@ -2211,8 +2199,14 @@ class ZCodeParser ( Parser ):
                 return self.getTypedRuleContext(ZCodeParser.Expr5Context,i)
 
 
-        def CONCAT(self):
-            return self.getToken(ZCodeParser.CONCAT, 0)
+        def MUL(self):
+            return self.getToken(ZCodeParser.MUL, 0)
+
+        def DIV(self):
+            return self.getToken(ZCodeParser.DIV, 0)
+
+        def MOD(self):
+            return self.getToken(ZCodeParser.MOD, 0)
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr4
@@ -2224,6 +2218,7 @@ class ZCodeParser ( Parser ):
 
         localctx = ZCodeParser.Expr4Context(self, self._ctx, self.state)
         self.enterRule(localctx, 60, self.RULE_expr4)
+        self._la = 0 # Token type
         try:
             self.state = 316
             self._errHandler.sync(self)
@@ -2233,7 +2228,13 @@ class ZCodeParser ( Parser ):
                 self.state = 311
                 self.expr5()
                 self.state = 312
-                self.match(ZCodeParser.CONCAT)
+                localctx.op = self._input.LT(1)
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 68719477504) != 0)):
+                    localctx.op = self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 313
                 self.expr5()
                 pass

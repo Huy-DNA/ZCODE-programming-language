@@ -76,11 +76,11 @@ decl: TYPE IDENTIFIER (type_index | ) ASSIGN expr
 	| VAR expr ASSIGN expr
 	| DYN expr;
  
-expr: expr op=(MUL | DIV | MOD) expr1 | expr1;
-expr1: expr1 op=(ADD | SUB) expr2 | expr2;
+expr: expr op=CONCAT expr1 | expr1;
+expr1: expr1 op=(EQ | DEQ | NEQ | LT | GT | LE | GE) expr2 | expr2;
 expr2: expr2 op=(AND | OR) expr3 | expr3;
-expr3: expr4 op=(EQ | DEQ | NEQ | LT | GT | LE | GE) expr4 | expr5;
-expr4: expr5 CONCAT expr5 | expr5;
+expr3: expr4 op=(ADD | SUB) expr4 | expr5;
+expr4: expr5 op=(MUL | DIV | MOD) expr5 | expr5;
 expr5: SUB expr5
 	| NOT expr5
 	| expr6;
