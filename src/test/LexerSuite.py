@@ -94,5 +94,6 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("1.Z+2 1e-2", "Error Token 1.Z+2", 142))
         self.assertTrue(TestLexer.test("1.Zac+2 1e-2", "Error Token 1.Zac+2", 143))
         self.assertTrue(TestLexer.test("1.Zaa02 1e-2", "Error Token 1.Zaa02", 144))
+        self.assertTrue(TestLexer.test("1.02aaa 1e-2", "Error Token 1.02aaa", 145))
     
 
