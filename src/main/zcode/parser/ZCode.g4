@@ -158,7 +158,7 @@ fragment
 DECIMAL: '.'[0-9]*;
 
 fragment
-EXPONENT: 'e'(ADD|SUB)?[0-9]+;
+EXPONENT: ('e' | 'E')(ADD|SUB)?[0-9]+;
 
 // STRING token
 ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"' {raise IllegalEscape(self.text)} ;
