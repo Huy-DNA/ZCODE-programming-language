@@ -72,9 +72,9 @@ type_index_num_list: NUMBER | NUMBER COMMA type_index_num_list;
 
 ass: expr ASSIGN expr;
 
-decl: TYPE IDENTIFIER (type_index | ) (ASSIGN expr | )
+decl: TYPE IDENTIFIER (type_index | ) ((ASSIGN expr) | )
 	| VAR expr ASSIGN expr
-	| DYN expr;
+	| DYN expr ((ASSIGN expr) | );
  
 expr: expr1 op=CONCAT expr1 | expr1;
 expr1: expr2 op=(EQ | DEQ | NEQ | LT | GT | LE | GE) expr2 | expr2;
