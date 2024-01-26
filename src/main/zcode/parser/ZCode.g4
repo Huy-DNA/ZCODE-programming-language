@@ -30,7 +30,7 @@ r_break: BREAK;
 
 r_continue: CONTINUE;
 
-r_return: RETURN expr;
+r_return: RETURN (expr | );
 
 // if statement
 
