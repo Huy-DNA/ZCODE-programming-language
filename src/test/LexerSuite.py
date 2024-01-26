@@ -122,3 +122,13 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("=", "=,<EOF>", 168))
         self.assertTrue(TestLexer.test("==", "==,<EOF>", 169))
         self.assertTrue(TestLexer.test("!=", "!=,<EOF>", 170))
+        self.assertTrue(TestLexer.test("<-", "<-,<EOF>", 171))
+        self.assertTrue(TestLexer.test(",", ",,<EOF>", 172))
+
+    def test_keyword(self):
+        self.assertTrue(TestLexer.test("var", "var,<EOF>", 173))
+        self.assertTrue(TestLexer.test("dynamic", "dynamic,<EOF>", 174))
+        self.assertTrue(TestLexer.test("number", "number,<EOF>", 175))
+        self.assertTrue(TestLexer.test("bool", "bool,<EOF>", 176))
+        self.assertTrue(TestLexer.test("string", "string,<EOF>", 177))
+        self.assertTrue(TestLexer.test("func", "func,<EOF>", 178))
