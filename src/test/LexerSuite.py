@@ -141,4 +141,9 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("for", "for,<EOF>", 185))
         self.assertTrue(TestLexer.test("until", "until,<EOF>", 186))
         self.assertTrue(TestLexer.test("by", "by,<EOF>", 187))
+
+    def test_double_dot_number(self):
+        self.assertTrue(TestLexer.test("1.2.3", "1.2,Error Token .", 188))
+        self.assertTrue(TestLexer.test("1.2e0.3", "1.2e0,Error Token .", 189))
+        self.assertTrue(TestLexer.test("1..3", "1.,Error Token .", 190))
         
