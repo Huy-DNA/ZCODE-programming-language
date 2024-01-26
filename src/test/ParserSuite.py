@@ -69,3 +69,4 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test("a = (b = c)", "successful",215))
         self.assertTrue(TestParser.test("a ... b ... c", "Error on line 1 col 8: ...",216))
         self.assertTrue(TestParser.test("(a ... b) ... c", "successful",217))
+        self.assertTrue(TestParser.test("(a % 2 = 0) or (b % 2 = 0)", "successful",218))
