@@ -151,8 +151,8 @@ BOOLEAN: 'true' | 'false';
 
 NUMBER: INTEGRAL DECIMAL? EXPONENT?;
 INVALID_NUMBER_1: INTEGRAL DECIMAL? ('e' | 'E')(ADD|SUB)? {raise ErrorToken(self.text)};
-INVALID_NUMBER_2: INTEGRAL DECIMAL? [a-zA-Z]+ (ADD|SUB)? [0-9]+ {raise ErrorToken(self.text)};
-INVALID_NUMBER_3: INTEGRAL DECIMAL? [a-zA-Z]+ {raise ErrorToken(self.text)};
+INVALID_NUMBER_2: INTEGRAL DECIMAL? [a-zA-Z_]+ (ADD|SUB)? [0-9]+ {raise ErrorToken(self.text)};
+INVALID_NUMBER_3: INTEGRAL DECIMAL? [a-zA-Z_]+ {raise ErrorToken(self.text)};
 
 // IDENTIFIER token
 
