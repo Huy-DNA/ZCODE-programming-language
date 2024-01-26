@@ -65,4 +65,30 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("abc ## This is comment 1 ### \n ## This is ## comment 2", "abc,## This is comment 1 ###,## This is ## comment 2,<EOF>", 122))
         self.assertTrue(TestLexer.test("## This is comment 1 ### \n abc ## This is ## comment 2", "## This is comment 1 ###,abc,## This is ## comment 2,<EOF>", 123))
         self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2 \n abc", "## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 124))
-        
+        self.assertTrue(TestLexer.test("1.2e10 abc## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2e10,abc,## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 125))
+        self.assertTrue(TestLexer.test("1.2E-10 cde## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2E-10,cde,## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 126))
+    
+    def test_invalid_float_with_exp(self):
+        """test invalid float with exp"""
+        self.assertTrue(TestLexer.test("12e","Error Token 12e", 127))
+        self.assertTrue(TestLexer.test("12E","Error Token 12E", 128))
+        self.assertTrue(TestLexer.test("12.e","Error Token 12.e", 129))
+        self.assertTrue(TestLexer.test("12.E","Error Token 12.E", 130))
+    
+    def test_identifiers(self):
+        """test identifiers"""
+        self.assertTrue(TestLexer.test("abc Abc aBC ABC abc_ \n ABC", "abc,Abc,aBC,ABC,abc_,\n,ABC,<EOF>", 131))
+        self.assertTrue(TestLexer.test("_abcc_ \n ABC", "_abcc_,\n,ABC,<EOF>", 132))
+        self.assertTrue(TestLexer.test("abcAbcaBCABCabc_\nABC", "abcAbcaBCABCabc_,\n,ABC,<EOF>", 133))
+        self.assertTrue(TestLexer.test("\n\n ABC", "\n,\n,ABC,<EOF>", 134))
+        self.assertTrue(TestLexer.test("\n\n\nabc Abc aBC ABC abc_ \n ABC", "\n,\n,\n,abc,Abc,aBC,ABC,abc_,\n,ABC,<EOF>", 135))
+    
+    def test_numbers(self):
+        """test numbers"""
+        self.assertTrue(TestLexer.test("1 2. 3 4.5 1.2e10 \n", "1,2.,3,4.5,1.2e10,\n,<EOF>", 136))
+        self.assertTrue(TestLexer.test("1.e 10", "Error Token 1.e", 137))
+        self.assertTrue(TestLexer.test("1.2 \n 2. e ", "1.2,\n,2.,e,<EOF>", 138))
+        self.assertTrue(TestLexer.test("0.2 E 10", "0.2,E,10,<EOF>", 139))
+        self.assertTrue(TestLexer.test("1.e-2 1e- 2", "1.e-2,Error Token 1e-", 140))
+    
+

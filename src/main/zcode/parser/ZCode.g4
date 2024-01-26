@@ -153,6 +153,7 @@ IDENTIFIER: [a-zA-Z_] [a-zA-Z_0-9]*;
 
 // NUMBER token
 NUMBER: INTEGRAL DECIMAL? EXPONENT?;
+INVALID_NUMBER: INTEGRAL DECIMAL? ('e' | 'E')(ADD|SUB)? {raise ErrorToken(self.text)};
 
 fragment
 INTEGRAL: [0-9]+;

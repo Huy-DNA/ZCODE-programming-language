@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,48,400,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,49,400,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
@@ -45,7 +45,7 @@ def serializedATN():
         35,12,35,397,1,35,0,4,54,56,58,62,36,0,2,4,6,8,10,12,14,16,18,20,
         22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,
         66,68,70,0,5,2,0,14,19,27,27,1,0,10,11,1,0,6,7,2,0,8,9,36,36,2,0,
-        45,45,47,47,424,0,72,1,0,0,0,2,85,1,0,0,0,4,92,1,0,0,0,6,105,1,0,
+        46,46,48,48,424,0,72,1,0,0,0,2,85,1,0,0,0,4,92,1,0,0,0,6,105,1,0,
         0,0,8,107,1,0,0,0,10,110,1,0,0,0,12,112,1,0,0,0,14,114,1,0,0,0,16,
         155,1,0,0,0,18,161,1,0,0,0,20,165,1,0,0,0,22,177,1,0,0,0,24,186,
         1,0,0,0,26,198,1,0,0,0,28,213,1,0,0,0,30,215,1,0,0,0,32,229,1,0,
@@ -141,7 +141,7 @@ def serializedATN():
         0,0,359,361,1,0,0,0,360,350,1,0,0,0,360,355,1,0,0,0,361,364,1,0,
         0,0,362,360,1,0,0,0,362,363,1,0,0,0,363,63,1,0,0,0,364,362,1,0,0,
         0,365,366,5,22,0,0,366,367,3,66,33,0,367,368,5,23,0,0,368,382,1,
-        0,0,0,369,382,5,41,0,0,370,382,5,44,0,0,371,382,5,39,0,0,372,382,
+        0,0,0,369,382,5,41,0,0,370,382,5,45,0,0,371,382,5,39,0,0,372,382,
         5,40,0,0,373,374,5,22,0,0,374,375,3,66,33,0,375,376,5,23,0,0,376,
         382,1,0,0,0,377,378,5,20,0,0,378,379,3,50,25,0,379,380,5,21,0,0,
         380,382,1,0,0,0,381,365,1,0,0,0,381,369,1,0,0,0,381,370,1,0,0,0,
@@ -180,8 +180,8 @@ class ZCodeParser ( Parser ):
                       "RP", "LB", "RB", "BEGIN", "END", "NOT", "NEQ", "VAR", 
                       "DYN", "COMMA", "PRINT", "BREAK", "CONTINUE", "RETURN", 
                       "FUNC", "MOD", "UNTIL", "BY", "BOOLEAN", "IDENTIFIER", 
-                      "NUMBER", "ILLEGAL_ESCAPE", "UNCLOSE_STRING", "STRING", 
-                      "COMMENT", "WS", "NEWLINE", "ERROR_CHAR" ]
+                      "NUMBER", "INVALID_NUMBER", "ILLEGAL_ESCAPE", "UNCLOSE_STRING", 
+                      "STRING", "COMMENT", "WS", "NEWLINE", "ERROR_CHAR" ]
 
     RULE_program = 0
     RULE_stms = 1
@@ -270,13 +270,14 @@ class ZCodeParser ( Parser ):
     BOOLEAN=39
     IDENTIFIER=40
     NUMBER=41
-    ILLEGAL_ESCAPE=42
-    UNCLOSE_STRING=43
-    STRING=44
-    COMMENT=45
-    WS=46
-    NEWLINE=47
-    ERROR_CHAR=48
+    INVALID_NUMBER=42
+    ILLEGAL_ESCAPE=43
+    UNCLOSE_STRING=44
+    STRING=45
+    COMMENT=46
+    WS=47
+    NEWLINE=48
+    ERROR_CHAR=49
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -358,16 +359,16 @@ class ZCodeParser ( Parser ):
             self.state = 85
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44, 45, 47]:
+            if token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45, 46, 48]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 77
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 75
                     self.null_lines()
                     pass
-                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -377,7 +378,7 @@ class ZCodeParser ( Parser ):
                 self.state = 82
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 80
                     self.null_lines()
                     pass
@@ -739,11 +740,11 @@ class ZCodeParser ( Parser ):
             self.state = 117
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [6, 20, 22, 26, 39, 40, 41, 44]:
+            if token in [6, 20, 22, 26, 39, 40, 41, 45]:
                 self.state = 115
                 self.expr()
                 pass
-            elif token in [-1, 3, 4, 45, 47]:
+            elif token in [-1, 3, 4, 46, 48]:
                 pass
             else:
                 raise NoViableAltException(self)
@@ -810,11 +811,11 @@ class ZCodeParser ( Parser ):
                 self.state = 123
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 121
                     self.null_lines()
                     pass
-                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -832,11 +833,11 @@ class ZCodeParser ( Parser ):
                 self.state = 131
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 129
                     self.null_lines()
                     pass
-                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -856,11 +857,11 @@ class ZCodeParser ( Parser ):
                 self.state = 140
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 138
                     self.null_lines()
                     pass
-                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -880,11 +881,11 @@ class ZCodeParser ( Parser ):
                 self.state = 149
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 147
                     self.null_lines()
                     pass
-                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+                elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -1000,7 +1001,7 @@ class ZCodeParser ( Parser ):
             self.state = 165
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [45, 47]:
+            if token in [46, 48]:
                 self.state = 163
                 self.null_lines()
                 pass
@@ -1016,11 +1017,11 @@ class ZCodeParser ( Parser ):
             self.state = 171
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [45, 47]:
+            if token in [46, 48]:
                 self.state = 169
                 self.null_lines()
                 pass
-            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1072,7 +1073,7 @@ class ZCodeParser ( Parser ):
             self.state = 177
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [45, 47]:
+            if token in [46, 48]:
                 self.state = 175
                 self.null_lines()
                 pass
@@ -1086,11 +1087,11 @@ class ZCodeParser ( Parser ):
             self.state = 182
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [45, 47]:
+            if token in [46, 48]:
                 self.state = 180
                 self.null_lines()
                 pass
-            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1164,11 +1165,11 @@ class ZCodeParser ( Parser ):
             self.state = 194
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [45, 47]:
+            if token in [46, 48]:
                 self.state = 192
                 self.null_lines()
                 pass
-            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 44]:
+            elif token in [1, 2, 5, 6, 20, 22, 24, 26, 28, 29, 31, 32, 33, 34, 35, 39, 40, 41, 45]:
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1364,7 +1365,7 @@ class ZCodeParser ( Parser ):
                 self.state = 220
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [45, 47]:
+                if token in [46, 48]:
                     self.state = 218
                     self.null_lines()
                     pass
@@ -1855,7 +1856,7 @@ class ZCodeParser ( Parser ):
                     self.state = 270
                     self.type_index()
                     pass
-                elif token in [-1, 3, 4, 13, 45, 47]:
+                elif token in [-1, 3, 4, 13, 46, 48]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -1869,7 +1870,7 @@ class ZCodeParser ( Parser ):
                     self.state = 275
                     self.expr()
                     pass
-                elif token in [-1, 3, 4, 45, 47]:
+                elif token in [-1, 3, 4, 46, 48]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -1901,7 +1902,7 @@ class ZCodeParser ( Parser ):
                     self.state = 287
                     self.expr()
                     pass
-                elif token in [-1, 3, 4, 45, 47]:
+                elif token in [-1, 3, 4, 46, 48]:
                     pass
                 else:
                     raise NoViableAltException(self)
@@ -2343,7 +2344,7 @@ class ZCodeParser ( Parser ):
                 self.state = 343
                 self.expr5()
                 pass
-            elif token in [20, 22, 39, 40, 41, 44]:
+            elif token in [20, 22, 39, 40, 41, 45]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 344
                 self.expr6(0)
@@ -2611,7 +2612,7 @@ class ZCodeParser ( Parser ):
             self.state = 385
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [6, 20, 22, 26, 39, 40, 41, 44]:
+            if token in [6, 20, 22, 26, 39, 40, 41, 45]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 383
                 self.exprs()
@@ -2728,7 +2729,7 @@ class ZCodeParser ( Parser ):
             while True:
                 self.state = 394
                 _la = self._input.LA(1)
-                if not(_la==45 or _la==47):
+                if not(_la==46 or _la==48):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -2736,7 +2737,7 @@ class ZCodeParser ( Parser ):
                 self.state = 397 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==45 or _la==47):
+                if not (_la==46 or _la==48):
                     break
 
         except RecognitionException as re:
