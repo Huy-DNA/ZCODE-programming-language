@@ -138,4 +138,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("if", "if,<EOF>", 182))
         self.assertTrue(TestLexer.test("elif", "elif,<EOF>", 183))
         self.assertTrue(TestLexer.test("else", "else,<EOF>", 184))
+        self.assertTrue(TestLexer.test("for", "for,<EOF>", 185))
+        self.assertTrue(TestLexer.test("until", "until,<EOF>", 186))
+        self.assertTrue(TestLexer.test("by", "by,<EOF>", 187))
         
