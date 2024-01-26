@@ -16,9 +16,9 @@ options {
 
 program: stms EOF;
 
-stms: (NULL_LINES | ) stm_lists (NULL_LINES | ) | ;
+stms: (null_lines | ) stm_lists (null_lines | ) | ;
 
-stm_lists: stm | stm NULL_LINES stm_lists;
+stm_lists: stm | stm null_lines stm_lists;
 
 // statement rule
 
@@ -34,30 +34,30 @@ r_return: RETURN (expr | );
 
 // if statement
 
-r_if: IF expr (NULL_LINES | ) stm
-	| IF expr (NULL_LINES | ) stm r_elifs
-	| IF expr (NULL_LINES | ) stm r_else
-	| IF expr (NULL_LINES | ) stm r_elifs r_else;
+r_if: IF expr (null_lines | ) stm
+	| IF expr (null_lines | ) stm r_elifs
+	| IF expr (null_lines | ) stm r_else
+	| IF expr (null_lines | ) stm r_elifs r_else;
 
 r_elifs: r_elif | r_elif r_elifs;
 
-r_elif: (NULL_LINES | ) ELIF expr (NULL_LINES | ) stm;
+r_elif: (null_lines | ) ELIF expr (null_lines | ) stm;
 
-r_else: (NULL_LINES | ) ELSE (NULL_LINES | ) stm;
+r_else: (null_lines | ) ELSE (null_lines | ) stm;
 
 // for statement
 
-r_for: FOR expr UNTIL expr BY expr (NULL_LINES | ) stm;
+r_for: FOR expr UNTIL expr BY expr (null_lines | ) stm;
 
 // block statement
 
-block: BEGIN (NULL_LINES block_stms NULL_LINES | NULL_LINES) END;
+block: BEGIN (null_lines block_stms null_lines | null_lines) END;
 
-block_stms: stm | stm NULL_LINES block_stms;
+block_stms: stm | stm null_lines block_stms;
 
 // function statement
 
-func: FUNC IDENTIFIER arg_group (((NULL_LINES | ) (r_return | block)) | );
+func: FUNC IDENTIFIER arg_group (((null_lines | ) (r_return | block)) | );
 
 arg_group: LP args RP;
 args: arg_list | ;
@@ -98,6 +98,9 @@ term: LB expr_list RB
 
 expr_list: exprs | ;
 exprs: expr | expr COMMA exprs;
+
+// null_lines
+null_lines: (NEWLINE | COMMENT)+;
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
@@ -167,9 +170,6 @@ STRING: '"' (~["\n] | '\'"')* '"';
 
 fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
-
-// NULL_LINES token
-NULL_LINES: (NEWLINE | COMMENT)+;
 
 // COMMENT token
 COMMENT: '##' .*? (NEWLINE | EOF) { self.text = self.text.rstrip() };
