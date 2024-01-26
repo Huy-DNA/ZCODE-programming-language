@@ -56,3 +56,16 @@ class ParserSuite(unittest.TestCase):
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,206))
+
+    def test_expr(self):
+        self.assertTrue(TestParser.test("1 + 2 * 3", "successful",207))
+        self.assertTrue(TestParser.test("1 / 2 * 3", "successful",208))
+        self.assertTrue(TestParser.test("1 - 2 / 3", "successful",209))
+        self.assertTrue(TestParser.test("1 + 2 or 3", "successful",210))
+        self.assertTrue(TestParser.test("(1 + 2) or (3 and 4)", "successful",211))
+        self.assertTrue(TestParser.test("1 + 2 ... 3 + 5", "successful",212))
+        self.assertTrue(TestParser.test("a = b = c", "Error on line 1 col 6: =",213))
+        self.assertTrue(TestParser.test("a % 2 = 0 or b % 2 = 0", "Error on line 1 col 19: =",214))
+        self.assertTrue(TestParser.test("a = (b = c)", "successful",215))
+        self.assertTrue(TestParser.test("a ... b ... c", "Error on line 1 col 8: ...",216))
+        self.assertTrue(TestParser.test("(a ... b) ... c", "successful",217))
