@@ -146,4 +146,14 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("1.2.3", "1.2,Error Token .", 188))
         self.assertTrue(TestLexer.test("1.2e0.3", "1.2e0,Error Token .", 189))
         self.assertTrue(TestLexer.test("1..3", "1.,Error Token .", 190))
-        
+
+    def test_mixed(self):
+        self.assertTrue(TestLexer.test("1+2*3", "1,+,2,*,3,<EOF>", 191)) 
+        self.assertTrue(TestLexer.test("1+2*3 / 4 + (3 / 2)", "1,+,2,*,3,/,4,+,(,3,/,2,),<EOF>", 192)) 
+        self.assertTrue(TestLexer.test("1,2,3", "1,,,2,,,3,<EOF>", 193)) 
+        self.assertTrue(TestLexer.test("1-2 b,3,a", "1,-,2,b,,,3,,,a,<EOF>", 194)) 
+        self.assertTrue(TestLexer.test("1+2*3a", "1,+,2,*,Error Token 3a", 195)) 
+        self.assertTrue(TestLexer.test("a[2]", "a,[,2,],<EOF>", 196))
+        self.assertTrue(TestLexer.test("f(2)", "f,(,2,),<EOF>", 197))
+        self.assertTrue(TestLexer.test("f + g(2)", "f,+,g,(,2,),<EOF>", 198))
+        self.assertTrue(TestLexer.test("\"'\"\"...\"a\"", "\"'\"\",...,\"a\",<EOF>", 199))
