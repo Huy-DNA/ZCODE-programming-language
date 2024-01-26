@@ -55,7 +55,7 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("A123", "A123,<EOF>", 115))
         self.assertTrue(TestLexer.test("AabC123", "AabC123,<EOF>", 116))
         self.assertTrue(TestLexer.test("_abC_123", "_abC_123,<EOF>", 117))
-        self.assertTrue(TestLexer.test("123abc", "123,abc,<EOF>", 118))
+        self.assertTrue(TestLexer.test("123abc", "Error Token 123abc", 118))
     
     def test_comment(self):
         """test comments"""

@@ -147,13 +147,16 @@ BY: 'by';
 // BOOLEAN token
 BOOLEAN: 'true' | 'false';
 
+// NUMBER token
+
+NUMBER: INTEGRAL DECIMAL? EXPONENT?;
+INVALID_NUMBER_1: INTEGRAL DECIMAL? ('e' | 'E')(ADD|SUB)? {raise ErrorToken(self.text)};
+INVALID_NUMBER_2: INTEGRAL DECIMAL? [a-zA-Z] (ADD|SUB)? [0-9]+ {raise ErrorToken(self.text)};
+
 // IDENTIFIER token
 
 IDENTIFIER: [a-zA-Z_] [a-zA-Z_0-9]*;
-
-// NUMBER token
-NUMBER: INTEGRAL DECIMAL? EXPONENT?;
-INVALID_NUMBER: INTEGRAL DECIMAL? ('e' | 'E')(ADD|SUB)? {raise ErrorToken(self.text)};
+INVALID_IDENTIFIER: [0-9][a-zA-Z_0-9]* {raise ErrorToken(self.text)};
 
 fragment
 INTEGRAL: [0-9]+;
