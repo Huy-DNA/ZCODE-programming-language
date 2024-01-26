@@ -72,7 +72,7 @@ type_index_num_list: NUMBER | NUMBER COMMA type_index_num_list;
 
 ass: expr ASSIGN expr;
 
-decl: TYPE IDENTIFIER (type_index | ) ASSIGN expr
+decl: TYPE IDENTIFIER (type_index | ) (ASSIGN expr | )
 	| VAR expr ASSIGN expr
 	| DYN expr;
  
