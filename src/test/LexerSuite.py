@@ -132,3 +132,10 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("bool", "bool,<EOF>", 176))
         self.assertTrue(TestLexer.test("string", "string,<EOF>", 177))
         self.assertTrue(TestLexer.test("func", "func,<EOF>", 178))
+        self.assertTrue(TestLexer.test("continue", "continue,<EOF>", 179))
+        self.assertTrue(TestLexer.test("break", "break,<EOF>", 180))
+        self.assertTrue(TestLexer.test("return", "return,<EOF>", 181))
+        self.assertTrue(TestLexer.test("if", "if,<EOF>", 182))
+        self.assertTrue(TestLexer.test("elif", "elif,<EOF>", 183))
+        self.assertTrue(TestLexer.test("else", "else,<EOF>", 184))
+        
