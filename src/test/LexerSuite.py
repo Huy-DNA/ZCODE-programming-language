@@ -9,7 +9,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_complex_string(self):
         """test complex string"""
-        self.assertTrue(TestLexer.test("\"isn\\'t\"","\"isn\\'t\",<EOF>",102))
+        self.assertTrue(TestLexer.test("\"isn\\'t\"","\"isn't\",<EOF>",102))
     
     def test_unclose_string(self):
         """test unclose string"""
@@ -22,7 +22,7 @@ class LexerSuite(unittest.TestCase):
 
     def test_valid_escape(self):
         """test valid escape"""
-        self.assertTrue(TestLexer.test("\"abc \\f\"", "\"abc \\f\",<EOF>", 105))
+        self.assertTrue(TestLexer.test("\"abc \\f\"", "\"abc \f\",<EOF>", 105))
     
     def test_integer(self):
         """test integer"""
@@ -156,4 +156,4 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("a[2]", "a,[,2,],<EOF>", 196))
         self.assertTrue(TestLexer.test("f(2)", "f,(,2,),<EOF>", 197))
         self.assertTrue(TestLexer.test("f + g(2)", "f,+,g,(,2,),<EOF>", 198))
-        self.assertTrue(TestLexer.test("\"'\"\"...\"a\"", "\"'\"\",...,\"a\",<EOF>", 199))
+        self.assertTrue(TestLexer.test("\"'\"\"...\"a\"", "\"\"\",...,\"a\",<EOF>", 199))
