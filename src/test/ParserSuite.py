@@ -288,4 +288,30 @@ class ParserSuite(unittest.TestCase):
             number a[] <- [1,2,3,4]
         """
         expect = "successful"
-        self.assertTrue(TestParser.test(input,expect,251))
+        self.assertTrue(TestParser.test(input,expect,253))
+
+        input = """
+            var a
+            number b <- 3
+        """
+        expect = "Error on line 2 col 17: \n"
+        self.assertTrue(TestParser.test(input,expect,254))
+
+        input = """
+            var a <- 3
+            var c <- "aaa'""
+            var t <- true
+            number b <- 3
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,255))
+
+        input = """
+            dynamic a <- 3
+            dynamic c <- "aaa'""
+            dynamic t <- true
+            dynamic b
+            b <- 3
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,256))
