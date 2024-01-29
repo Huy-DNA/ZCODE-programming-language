@@ -1,0 +1,3 @@
+
+            func begin() return 10 end
+        

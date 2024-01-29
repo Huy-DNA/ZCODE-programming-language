@@ -378,3 +378,297 @@ class ParserSuite(unittest.TestCase):
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,262))
+    
+    def test_complex_assignment(self):
+        input = """
+            a[a[i + 1] + f()] <- [1, 2, 3]
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,263))
+        
+        input = """
+            a[f(f(f()))][1] <- [1] 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,264))
+
+        input = """
+            a[f(f(f()))][1][f() + a[3]] <- 10 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,265))
+
+        input = """
+            a[f(f(f()))][1][f() + a[3]] <- 10 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,266))
+
+        input = """
+            a[[3][1]] <- 10 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,267))
+
+        input = """
+            a[ord("Hello"[1])] <- 10 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,268))
+
+
+        input = """
+            a[1,f(),a[i]] <- 10 ## This is a comment
+            b[1,2,3] <- 3 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,269))
+
+    def test_programs(self):
+        """Test programs"""
+        input = """
+            func areDivisors(number num1, number num2)
+                return ((num1 % num2 = 0) or (num2 % num1 = 0))
+            
+            func main()
+                begin
+                    var num1 <- readNumber()
+                    var num2 <- readNumber()
+                    if (areDivisors(num1, num2)) writeString("Yes")
+                    else writeString("No")
+                end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,270))
+
+        input = """
+            func isPrime(number x)
+            
+            func main()
+                begin
+                    number x <- readNumber()
+                        if (isPrime(x)) writeString("Yes")
+                    else writeString("No")
+                end
+            
+                func isPrime(number x)
+                    begin
+                        if (x <= 1) return false
+                        var i <- 2
+                        for i until i > x / 2 by 1
+                            begin
+                                if (x % i = 0) return false
+                            end
+                        return true
+                    end
+            """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,271))
+    
+    def test_invalid_programs(self):
+        """Test invalid programs"""
+        input = """
+            a[3][ <- 3
+        """
+        expect = "Error on line 2 col 18: <-"
+        self.assertTrue(TestParser.test(input,expect,272))
+
+        input = """
+            number a[ <- [1]
+        """
+        expect = "Error on line 2 col 22: <-"
+        self.assertTrue(TestParser.test(input,expect,273))
+ 
+        input = """
+            number [a] <- 3
+        """
+        expect = "Error on line 2 col 19: ["
+        self.assertTrue(TestParser.test(input,expect,274))
+ 
+        input = """
+            dynamic [a] <- 3
+        """
+        expect = "Error on line 2 col 20: ["
+        self.assertTrue(TestParser.test(input,expect,275))
+
+        input = """
+            var [a] <- 3
+        """
+        expect = "Error on line 2 col 16: ["
+        self.assertTrue(TestParser.test(input,expect,276))
+
+        input = """
+            var [a]
+        """
+        expect = "Error on line 2 col 16: ["
+        self.assertTrue(TestParser.test(input,expect,278))
+
+        input = """
+            for until 3 by 1
+                do_something()
+        """
+        expect = "Error on line 2 col 16: until"
+        self.assertTrue(TestParser.test(input,expect,279))
+
+        input = """
+            for until 3 by 1
+                do_something()
+        """
+        expect = "Error on line 2 col 16: until"
+        self.assertTrue(TestParser.test(input,expect,280))
+
+        input = """
+            for i until by 1
+                do_something()
+        """
+        expect = "Error on line 2 col 24: by"
+        self.assertTrue(TestParser.test(input,expect,281))
+
+        input = """
+            for i until 10 by
+                do_something()
+        """
+        expect = "Error on line 2 col 29: \n"
+        self.assertTrue(TestParser.test(input,expect,282))
+
+        input = """
+            for i until 10 by do_something()
+        """
+        expect = "Error on line 3 col 8: <EOF>"
+        self.assertTrue(TestParser.test(input,expect,283))
+        
+        input = """
+            f(()
+        """
+        expect = "Error on line 2 col 15: )"
+        self.assertTrue(TestParser.test(input,expect,284))
+
+        input = """
+            f(a[)
+        """
+        expect = "Error on line 2 col 16: )"
+        self.assertTrue(TestParser.test(input,expect,285))
+
+        input = """
+            f[(])
+        """
+        expect = "Error on line 2 col 15: ]"
+        self.assertTrue(TestParser.test(input,expect,286))
+
+        input = """
+            [[1,2,3,4],[1,2,3,5]][0 1] <- 3
+        """
+        expect = "Error on line 2 col 36: 1"
+        self.assertTrue(TestParser.test(input,expect,287))
+
+        input = """
+            [[1 +, 2]][0,0] <- 3
+        """
+        expect = "Error on line 2 col 17: ,"
+        self.assertTrue(TestParser.test(input,expect,288))
+
+        input = """
+            1, 2
+        """
+        expect = "Error on line 2 col 13: ,"
+        self.assertTrue(TestParser.test(input,expect,289))
+  
+        input = """
+            (1, 2)
+        """
+        expect = "Error on line 2 col 14: ,"
+        self.assertTrue(TestParser.test(input,expect,290))
+
+        input = """
+            f(1 + , 2)
+        """
+        expect = "Error on line 2 col 18: ,"
+        self.assertTrue(TestParser.test(input,expect,291))
+
+        input = """
+            func return 10
+        """
+        expect = "Error on line 2 col 17: return"
+        self.assertTrue(TestParser.test(input,expect,292))
+
+        input = """
+            func begin() return 10 end
+        """
+        expect = "Error on line 2 col 17: begin"
+        self.assertTrue(TestParser.test(input,expect,293))
+
+        input = """
+            func
+            main()
+            return 10
+        """
+        expect = "Error on line 2 col 16: \n"
+        self.assertTrue(TestParser.test(input,expect,294))
+
+        input = """
+            func return return 10
+        """
+        expect = "Error on line 2 col 17: return"
+        self.assertTrue(TestParser.test(input,expect,295))
+
+    def test_newlines(self):
+        """Test newlines""" 
+        input = """
+            func main()
+
+
+
+
+            ## 121202
+
+
+
+
+
+
+
+
+            return 10
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,296))
+
+
+        input = """
+            for i until 10 by 1 ## 123
+            ##1212
+
+
+
+
+
+            ### 1212
+                do_something()
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,297))
+
+        input = """
+            if 5 ### abc
+            ## 12312
+                3 ### 122
+            ## 121212
+            elif 5 ## 1212
+            ###1 1212
+                10
+            ### else
+            else ## 2
+                3 ### 4
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,298))
+
+        input = """
+            begin
+            ##1211
+
+            ## 121212
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,299))
