@@ -340,3 +340,41 @@ class ParserSuite(unittest.TestCase):
         """
         expect = "Error on line 2 col 17: ## This is a comment"
         self.assertTrue(TestParser.test(input,expect,259))
+
+    def test_for(self): 
+        input = """
+            for i until 10 by 1
+            ## 1212
+
+            ### 1221
+
+
+                a <- a + 1
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,260))
+
+        input = """
+            for a[i] until x + 10 by 2 begin
+                b <- a[i]
+                a <- x + 10
+                if a[i] % 3 == 0
+                    break
+            end 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,261))
+
+        input = """
+            for f() until a[i] by 1 + 1
+            ## 123
+            ## 12212
+
+            begin
+                f()
+                f()
+                continue
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,262))

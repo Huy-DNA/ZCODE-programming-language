@@ -1,0 +1,8 @@
+
+            for a[i] until x + 10 by 2 begin
+                b <- a[i]
+                a <- x + 10
+                if a[i] % 3 == 0
+                    break
+            end 
+        
