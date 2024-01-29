@@ -315,3 +315,28 @@ class ParserSuite(unittest.TestCase):
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,256))
+
+        input = """
+            var a <- ### This a decl
+            3
+        """
+        expect = "Error on line 2 col 21: ### This a decl"
+        self.assertTrue(TestParser.test(input,expect,257))
+
+    def test_assignment(self):
+        """Test assignment"""
+        input = """
+           a <- 3
+           b <- "aaa" ... "bbb"
+           c <- 1 + 2 + 3
+           d <- 1 * 3 / 2 % true and false ... "abc" 
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,258))
+
+        input = """
+            a <- ## This is a comment
+            1 + 2
+        """
+        expect = "Error on line 2 col 17: ## This is a comment"
+        self.assertTrue(TestParser.test(input,expect,259))
