@@ -171,7 +171,7 @@ EXPONENT: ('e' | 'E')(ADD|SUB)?[0-9]+;
 // STRING token
 ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"' {raise IllegalEscape(self.text)} ;
 UNCLOSE_STRING: '"' (~["] | '\'"')*? (NEWLINE | EOF) {raise UncloseString(self.text)};
-STRING: '"' (~["\n] | '\'"')* '"' { self.text = str(bytes(self.text, "utf-8").decode("unicode_escape")).replace('\'"', '"')};
+STRING: '"' (~["\r\n] | '\'"')* '"' { self.text = str(bytes(self.text, "utf-8").decode("unicode_escape")).replace('\'"', '"')};
 
 fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
