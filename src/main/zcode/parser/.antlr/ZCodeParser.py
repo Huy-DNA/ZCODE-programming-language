@@ -142,8 +142,8 @@ def serializedATN():
         362,363,5,23,0,0,363,370,1,0,0,0,364,365,10,2,0,0,365,366,5,20,0,
         0,366,367,3,66,33,0,367,368,5,21,0,0,368,370,1,0,0,0,369,359,1,0,
         0,0,369,364,1,0,0,0,370,373,1,0,0,0,371,369,1,0,0,0,371,372,1,0,
-        0,0,372,63,1,0,0,0,373,371,1,0,0,0,374,375,5,22,0,0,375,376,3,66,
-        33,0,376,377,5,23,0,0,377,391,1,0,0,0,378,391,5,40,0,0,379,391,5,
+        0,0,372,63,1,0,0,0,373,371,1,0,0,0,374,375,5,22,0,0,375,376,3,68,
+        34,0,376,377,5,23,0,0,377,391,1,0,0,0,378,391,5,40,0,0,379,391,5,
         48,0,0,380,391,5,39,0,0,381,391,5,44,0,0,382,383,5,22,0,0,383,384,
         3,66,33,0,384,385,5,23,0,0,385,391,1,0,0,0,386,387,5,20,0,0,387,
         388,3,50,25,0,388,389,5,21,0,0,389,391,1,0,0,0,390,374,1,0,0,0,390,
@@ -2516,8 +2516,8 @@ class ZCodeParser ( Parser ):
         def LB(self):
             return self.getToken(ZCodeParser.LB, 0)
 
-        def expr_list(self):
-            return self.getTypedRuleContext(ZCodeParser.Expr_listContext,0)
+        def exprs(self):
+            return self.getTypedRuleContext(ZCodeParser.ExprsContext,0)
 
 
         def RB(self):
@@ -2534,6 +2534,10 @@ class ZCodeParser ( Parser ):
 
         def IDENTIFIER(self):
             return self.getToken(ZCodeParser.IDENTIFIER, 0)
+
+        def expr_list(self):
+            return self.getTypedRuleContext(ZCodeParser.Expr_listContext,0)
+
 
         def LP(self):
             return self.getToken(ZCodeParser.LP, 0)
@@ -2564,7 +2568,7 @@ class ZCodeParser ( Parser ):
                 self.state = 374
                 self.match(ZCodeParser.LB)
                 self.state = 375
-                self.expr_list()
+                self.exprs()
                 self.state = 376
                 self.match(ZCodeParser.RB)
                 pass

@@ -88,7 +88,7 @@ expr6: array=expr6 LB indexer=expr_list RB
 	| callee=expr6 LP params=expr_list RP
 	| term;
 
-term: LB expr_list RB
+term: LB exprs RB
 	| NUMBER
 	| STRING
 	| BOOLEAN
