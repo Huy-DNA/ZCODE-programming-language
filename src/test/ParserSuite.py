@@ -85,10 +85,10 @@ class ParserSuite(unittest.TestCase):
     def test_if(self):
         """If statement"""
         input = """
-        if 3 5 ## This is a comment
+        if (3) 5 ## This is a comment
         if (4) 5
         if (5) if (6) 5
-        if 1 + 2 if 3 + 4 if 5 + 6 "abcd"
+        if (1 + 2) if (3 + 4) if (5 + 6) "abcd"
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,230))
@@ -96,10 +96,10 @@ class ParserSuite(unittest.TestCase):
     def test_elif(self):
         """If and elif statement"""
         input = """
-        if 3 5 ## This is a comment
+        if (3) 5 ## This is a comment
         elif (4) 5
         elif (5) 8 elif (6) 5
-        if 1 + 2 if 3 + 4 if 5 + 6 10 elif "abcd" "aaaa" ... "bbbb"
+        if (1 + 2) if (3 + 4) if (5 + 6) 10 elif ("abcd") "aaaa" ... "bbbb"
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,231))
@@ -107,72 +107,70 @@ class ParserSuite(unittest.TestCase):
     def test_invalid_if(self):
         """Invalid if statement"""
         input = """
-        if 3 ## This is a comment
+        if (3) ## This is a comment
         """
         expect = "Error on line 3 col 8: <EOF>"
         self.assertTrue(TestParser.test(input,expect,232))
 
         input = """
         if 3 ## This is a comment
-        if 5
-        if 6 if 7
         """
-        expect = "Error on line 5 col 8: <EOF>"
+        expect = "Error on line 2 col 11: 3"
         self.assertTrue(TestParser.test(input,expect,233))
 
         input = """
         if ## This is a comment
-        elif 10 5
+        elif (10) 5
         """
         expect = "Error on line 2 col 11: ## This is a comment"
         self.assertTrue(TestParser.test(input,expect,234))
  
         input = """
-        if 3 ## This is a comment
-        elif 10
+        if (3) ## This is a comment
+        elif (10)
         """
         expect = "Error on line 3 col 8: elif"
         self.assertTrue(TestParser.test(input,expect,235))
 
         input = """
-        if 3 5 ## This is a comment
-        elif 10
+        if (3) 5 ## This is a comment
+        elif (10)
         """
         expect = "Error on line 3 col 8: elif"
         self.assertTrue(TestParser.test(input,expect,236))
 
         input = """
-        if 3 5 ## This is a comment
-        elif 10
-        elif 8 3
+        if (3) 5 ## This is a comment
+        elif (10)
+        elif (8) 3
         """
         expect = "Error on line 3 col 8: elif"
         self.assertTrue(TestParser.test(input,expect,237))
 
         input = """
-        if 3 ## This is a comment
+        if (3) ## This is a comment
         elif
         """
         expect = "Error on line 3 col 8: elif"
         self.assertTrue(TestParser.test(input,expect,238))
 
         input = """
-        if 3 ## This is a comment
+        if (3) ## This is a comment
         else
         """
         expect = "Error on line 3 col 8: else"
         self.assertTrue(TestParser.test(input,expect,239))
 
         input = """
-        if 3 ## This is a comment
-        elif 10
+        if (3) ## This is a comment
+        elif (10)
         else
         """
         expect = "Error on line 3 col 8: elif"
         self.assertTrue(TestParser.test(input,expect,240))
 
         input = """
-        if 3 ## This is a comment
+        if (3) ## This is a comment
         elif
         else
         """
@@ -190,10 +188,10 @@ class ParserSuite(unittest.TestCase):
     def test_else(self):
         """Test else"""
         input = """
-        if 3 10 ## This is a comment
-        elif 5
-            if 6 10
-            elif 5 10
+        if (3) 10 ## This is a comment
+        elif (5)
+            if (6) 10
+            elif (5) 10
             else 10
         else 10
         """
@@ -201,24 +199,24 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(input,expect,243))
 
         input = """
-        if 3 ## 1
-            if 5 ## 2
-                if 6 ## 3
+        if (3) ## 1
+            if (5) ## 2
+                if (6) ## 3
                     10 ## 4
                 else 8 ## 5
         ## 6
 
 
-        elif 5 ## 8
-            if 6 10 ## 9
-            elif 5 10 ## 10
+        elif (5) ## 8
+            if (6) 10 ## 9
+            elif (5) 10 ## 10
             else 10 ## 11
 
 
 
         else
-            if 10 10
-            elif 10 10
+            if (10) 10
+            elif (10) 10
             else 10
         """
         expect = "successful"
@@ -358,7 +356,7 @@ class ParserSuite(unittest.TestCase):
             for a[i] until x + 10 by 2 begin
                 b <- a[i]
                 a <- x + 10
-                if a[i] % 3 == 0
+                if (a[i] % 3 == 0)
                     break
             end 
         """
@@ -649,11 +647,11 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(input,expect,297))
 
         input = """
-            if 5 ### abc
+            if (5) ### abc
             ## 12312
                 3 ### 122
             ## 121212
-            elif 5 ## 1212
+            elif (5) ## 1212
             ###1 1212
                 10
             ### else

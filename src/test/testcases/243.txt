@@ -1,8 +1,8 @@
 
-        if 3 10 ## This is a comment
-        elif 5
-            if 6 10
-            elif 5 10
+        if (3) 10 ## This is a comment
+        elif (5)
+            if (6) 10
+            elif (5) 10
             else 10
         else 10
         
