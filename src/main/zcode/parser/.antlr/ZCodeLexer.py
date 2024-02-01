@@ -339,7 +339,7 @@ class ZCodeLexer(Lexer):
 
     def STRING_action(self, localctx:RuleContext , actionIndex:int):
         if actionIndex == 6:
-             self.text = str(bytes(self.text, "utf-8").decode("unicode_escape"))[1:-1].replace('\'"', '"')
+             self.text = str(bytes(self.text, "utf-8").decode("unicode_escape"))[1:-1]
      
 
     def ERROR_CHAR_action(self, localctx:RuleContext , actionIndex:int):
