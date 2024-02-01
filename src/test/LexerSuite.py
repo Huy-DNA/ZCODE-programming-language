@@ -156,4 +156,4 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("a[2]", "a,[,2,],<EOF>", 196))
         self.assertTrue(TestLexer.test("f(2)", "f,(,2,),<EOF>", 197))
         self.assertTrue(TestLexer.test("f + g(2)", "f,+,g,(,2,),<EOF>", 198))
-        self.assertTrue(TestLexer.test("\"'\"\"...\"a\"", "\",...,a,<EOF>", 199))
+        self.assertTrue(TestLexer.test("\"ab\\'cbd\\'\"\"", "ab'cbd',Unclosed String: \"", 199))
