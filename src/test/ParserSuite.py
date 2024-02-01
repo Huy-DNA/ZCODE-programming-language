@@ -261,7 +261,7 @@ class ParserSuite(unittest.TestCase):
         input = """
             number a[4,"Hello"] <- [1,2,3,4]
         """
-        expect = "Error on line 2 col 23: \"Hello\""
+        expect = "Error on line 2 col 23: Hello"
         self.assertTrue(TestParser.test(input,expect,249))
 
         input = """

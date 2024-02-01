@@ -339,7 +339,7 @@ class ZCodeLexer(Lexer):
 
     def STRING_action(self, localctx:RuleContext , actionIndex:int):
         if actionIndex == 6:
-             self.text = str(bytes(self.text, "utf-8").decode("unicode_escape")).replace('\'"', '"')
+             self.text = str(bytes(self.text, "utf-8").decode("unicode_escape")).replace('\'"', '"')[1:-1]
      
 
     def COMMENT_action(self, localctx:RuleContext , actionIndex:int):
