@@ -100,7 +100,7 @@ expr_list: exprs | ;
 exprs: expr | expr COMMA exprs;
 
 // null_lines
-null_lines: (NEWLINE | COMMENT)+;
+null_lines: NEWLINE+;
 
 // TYPE token
 TYPE: 'number' | 'string' | 'bool';
@@ -177,7 +177,7 @@ fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
 
 // COMMENT token
-COMMENT: '##' .*? (NEWLINE | EOF) { self.text = self.text.rstrip() };
+COMMENT: '##' ~[\r\n]* -> skip;
 
 // Misc tokens
 WS : [ \t\f]+ -> skip ; // skip spaces, tabs, newlineso

@@ -122,7 +122,7 @@ class ParserSuite(unittest.TestCase):
         if ## This is a comment
         elif (10) 5
         """
-        expect = "Error on line 2 col 11: ## This is a comment"
+        expect = "Error on line 2 col 31: \n"
         self.assertTrue(TestParser.test(input,expect,234))
  
         input = """
@@ -318,7 +318,7 @@ class ParserSuite(unittest.TestCase):
             var a <- ### This a decl
             3
         """
-        expect = "Error on line 2 col 21: ### This a decl"
+        expect = "Error on line 2 col 36: \n"
         self.assertTrue(TestParser.test(input,expect,257))
 
     def test_assignment(self):
@@ -336,7 +336,7 @@ class ParserSuite(unittest.TestCase):
             a <- ## This is a comment
             1 + 2
         """
-        expect = "Error on line 2 col 17: ## This is a comment"
+        expect = "Error on line 2 col 37: \n"
         self.assertTrue(TestParser.test(input,expect,259))
 
     def test_for(self): 

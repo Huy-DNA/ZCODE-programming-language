@@ -59,14 +59,14 @@ class LexerSuite(unittest.TestCase):
     
     def test_comment(self):
         """test comments"""
-        self.assertTrue(TestLexer.test("## This is a comment", "## This is a comment,<EOF>", 119))
-        self.assertTrue(TestLexer.test("## This is comment 1 \n ## This is comment 2", "## This is comment 1,## This is comment 2,<EOF>", 120))
-        self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2", "## This is comment 1 ###,## This is ## comment 2,<EOF>", 121))
-        self.assertTrue(TestLexer.test("abc ## This is comment 1 ### \n ## This is ## comment 2", "abc,## This is comment 1 ###,## This is ## comment 2,<EOF>", 122))
-        self.assertTrue(TestLexer.test("## This is comment 1 ### \n abc ## This is ## comment 2", "## This is comment 1 ###,abc,## This is ## comment 2,<EOF>", 123))
-        self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2 \n abc", "## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 124))
-        self.assertTrue(TestLexer.test("1.2e10 abc## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2e10,abc,## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 125))
-        self.assertTrue(TestLexer.test("1.2E-10 cde## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2E-10,cde,## This is comment 1 ###,## This is ## comment 2,abc,<EOF>", 126))
+        self.assertTrue(TestLexer.test("## This is a comment", "<EOF>", 119))
+        self.assertTrue(TestLexer.test("## This is comment 1 \n ## This is comment 2", "\n,<EOF>", 120))
+        self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2", "\n,<EOF>", 121))
+        self.assertTrue(TestLexer.test("abc ## This is comment 1 ### \n ## This is ## comment 2", "abc,\n,<EOF>", 122))
+        self.assertTrue(TestLexer.test("## This is comment 1 ### \n abc ## This is ## comment 2", "\n,abc,<EOF>", 123))
+        self.assertTrue(TestLexer.test("## This is comment 1 ### \n ## This is ## comment 2 \n abc", "\n,\n,abc,<EOF>", 124))
+        self.assertTrue(TestLexer.test("1.2e10 abc## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2e10,abc,\n,\n,abc,<EOF>", 125))
+        self.assertTrue(TestLexer.test("1.2E-10 cde## This is comment 1 ### \n ## This is ## comment 2 \n abc", "1.2E-10,cde,\n,\n,abc,<EOF>", 126))
     
     def test_invalid_float_with_exp(self):
         """test invalid float with exp"""
