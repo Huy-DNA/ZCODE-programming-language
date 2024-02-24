@@ -91,7 +91,7 @@ def serializedATN():
         185,1,0,0,0,187,186,1,0,0,0,188,189,1,0,0,0,189,192,5,4,0,0,190,
         193,3,70,35,0,191,193,1,0,0,0,192,190,1,0,0,0,192,191,1,0,0,0,193,
         194,1,0,0,0,194,195,3,6,3,0,195,23,1,0,0,0,196,197,5,5,0,0,197,198,
-        3,50,25,0,198,199,5,37,0,0,199,200,3,50,25,0,200,201,5,38,0,0,201,
+        5,44,0,0,198,199,5,37,0,0,199,200,3,50,25,0,200,201,5,38,0,0,201,
         204,3,50,25,0,202,205,3,70,35,0,203,205,1,0,0,0,204,202,1,0,0,0,
         204,203,1,0,0,0,205,206,1,0,0,0,206,207,3,6,3,0,207,25,1,0,0,0,208,
         214,5,24,0,0,209,210,3,70,35,0,210,211,3,28,14,0,211,212,3,70,35,
@@ -1155,15 +1155,18 @@ class ZCodeParser ( Parser ):
         def FOR(self):
             return self.getToken(ZCodeParser.FOR, 0)
 
+        def IDENTIFIER(self):
+            return self.getToken(ZCodeParser.IDENTIFIER, 0)
+
+        def UNTIL(self):
+            return self.getToken(ZCodeParser.UNTIL, 0)
+
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ZCodeParser.ExprContext)
             else:
                 return self.getTypedRuleContext(ZCodeParser.ExprContext,i)
 
-
-        def UNTIL(self):
-            return self.getToken(ZCodeParser.UNTIL, 0)
 
         def BY(self):
             return self.getToken(ZCodeParser.BY, 0)
@@ -1191,7 +1194,7 @@ class ZCodeParser ( Parser ):
             self.state = 196
             self.match(ZCodeParser.FOR)
             self.state = 197
-            self.expr()
+            self.match(ZCodeParser.IDENTIFIER)
             self.state = 198
             self.match(ZCodeParser.UNTIL)
             self.state = 199

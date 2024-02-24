@@ -47,7 +47,7 @@ r_else: (null_lines | ) ELSE (null_lines | ) stm;
 
 // for statement
 
-r_for: FOR expr UNTIL expr BY expr (null_lines | ) stm;
+r_for: FOR IDENTIFIER UNTIL expr BY expr (null_lines | ) stm;
 
 // block statement
 
