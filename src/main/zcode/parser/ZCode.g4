@@ -22,9 +22,7 @@ stm_lists: stm | stm null_lines stm_lists;
 
 // statement rule
 
-stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for | r_print;
-
-r_print: PRINT expr;
+stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for;
 
 r_break: BREAK;
 
@@ -134,7 +132,6 @@ NEQ: '!=';
 VAR: 'var';
 DYN: 'dynamic';
 COMMA: ',';
-PRINT: 'print';
 BREAK: 'break';
 CONTINUE: 'continue';
 RETURN: 'return';
