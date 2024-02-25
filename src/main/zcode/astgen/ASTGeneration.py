@@ -10,6 +10,8 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#stms.
     def visitStms(self, ctx:ZCodeParser.StmsContext):
+        if ctx.getChildCount() == 0:
+            return []
         return ctx.stm_lists().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#stm_lists.
