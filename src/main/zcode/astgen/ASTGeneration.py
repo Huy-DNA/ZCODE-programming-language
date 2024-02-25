@@ -103,7 +103,7 @@ class ASTGeneration(ZCodeVisitor):
     def visitArgs(self, ctx:ZCodeParser.ArgsContext):
         if ctx.getChildCount() == 0:
             return []
-        return ctx.arg_list.accept(self)
+        return ctx.arg_list().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#arg_list.
     def visitArg_list(self, ctx:ZCodeParser.Arg_listContext):
