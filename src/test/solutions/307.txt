@@ -1,1 +1,0 @@
-Program([VarDecl(Id(Votien), None, var, NumLit(1.0))])

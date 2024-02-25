@@ -1,4 +1,0 @@
-
-            string VoTien[5] <- 1
-            string VoTien[5]
-        
