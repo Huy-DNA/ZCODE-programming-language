@@ -107,7 +107,7 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#arg_list.
     def visitArg_list(self, ctx:ZCodeParser.Arg_listContext):
-        if ctx.COMMA():
+        if not ctx.COMMA():
             return [ctx.arg().accept(self)]
         return [ctx.arg().accept(self)] + ctx.arg_list().accept(self)
 
@@ -125,9 +125,7 @@ class ASTGeneration(ZCodeVisitor):
                 varType = BoolType()
         if ctx.type_index():
             varType = ArrayType(ctx.type_index().accept(self), varType)
-        modifier = (ctx.DYN() and ctx.DYN().getText()) or (ctx.VAR() and ctx.VAR().getText())
-        varInit = ctx.expr() and ctx.expr().accept(self)
-        return VarDecl(name, varType, modifier, varInit)
+        return VarDecl(name, varType, None, None)
 
     # Visit a parse tree produced by ZCodeParser#type_index.
     def visitType_index(self, ctx:ZCodeParser.Type_indexContext):
