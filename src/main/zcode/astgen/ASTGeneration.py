@@ -74,11 +74,13 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#block.
     def visitBlock(self, ctx:ZCodeParser.BlockContext):
-        return ctx.block_stms().accept(self)
+        if ctx.block_stms():
+            return Block(ctx.block_stms().accept(self))
+        return Block([])
 
     # Visit a parse tree produced by ZCodeParser#block_stms.
     def visitBlock_stms(self, ctx:ZCodeParser.Block_stmsContext):
-        if not ctx.null_lines():
+        if not ctx.block_stms():
             return [ctx.stm().accept(self)]
         return [ctx.stm().accept(self)] + ctx.block_stms().accept(self)
 
