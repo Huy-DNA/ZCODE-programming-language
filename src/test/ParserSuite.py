@@ -364,7 +364,7 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(input,expect,261))
 
         input = """
-            for f() until a[i] by 1 + 1
+            for f until a[i] by 1 + 1
             ## 123
             ## 12212
 
