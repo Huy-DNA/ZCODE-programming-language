@@ -142,8 +142,8 @@ class ASTGeneration(ZCodeVisitor):
     # Visit a parse tree produced by ZCodeParser#type_index_num_list.
     def visitType_index_num_list(self, ctx:ZCodeParser.Type_index_num_listContext):
         if not ctx.COMMA():
-            return [NumberLiteral(float(ctx.NUMBER().getText()))]
-        return [NumberLiteral(float(ctx.NUMBER().getText()))] + ctx.type_index_num_list().accept(self)
+            return [float(ctx.NUMBER().getText())]
+        return [float(ctx.NUMBER().getText())] + ctx.type_index_num_list().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#ass.
     def visitAss(self, ctx:ZCodeParser.AssContext):
