@@ -167,32 +167,32 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#expr.
     def visitExpr(self, ctx:ZCodeParser.ExprContext):
-        if ctx.op():
+        if ctx.op:
             return BinaryOp(ctx.op().getText(), ctx.expr1()[0].accept(self), ctx.expr1()[1].accept(self))
         return ctx.expr1()[0].accept(self)
 
     # Visit a parse tree produced by ZCodeParser#expr1.
     def visitExpr1(self, ctx:ZCodeParser.Expr1Context):
-        if ctx.op():
+        if ctx.op:
             return BinaryOp(ctx.op().getText(), ctx.expr2()[0].accept(self), ctx.expr2()[1].accept(self))
         return ctx.expr2()[0].accept(self)
 
     # Visit a parse tree produced by ZCodeParser#expr2.
     def visitExpr2(self, ctx:ZCodeParser.Expr2Context):
-        if ctx.op():
+        if ctx.op:
             return BinaryOp(ctx.op().getText(), ctx.expr2().accept(self), ctx.expr3().accept(self))
         return ctx.expr3().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#expr3.
     def visitExpr3(self, ctx:ZCodeParser.Expr3Context):
-        if ctx.op():
+        if ctx.op:
             return BinaryOp(ctx.op().getText(), ctx.expr3().accept(self), ctx.expr4().accept(self))
         return ctx.expr4().accept(self)
 
 
     # Visit a parse tree produced by ZCodeParser#expr4.
     def visitExpr4(self, ctx:ZCodeParser.Expr4Context):
-        if ctx.op():
+        if ctx.op:
             return BinaryOp(ctx.op().getText(), ctx.expr4().accept(self), ctx.expr5().accept(self))
         return ctx.expr5().accept(self)
 
@@ -206,9 +206,9 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#expr6.
     def visitExpr6(self, ctx:ZCodeParser.Expr6Context):
-        if ctx.array():
+        if ctx.array:
             return ArrayCell(ctx.array().accept(self), ctx.expr_list().accept(self))
-        if ctx.callee():
+        if ctx.callee:
             return CallExpr(ctx.callee().accept(self), ctx.expr_list().accept(self))
         if ctx.term():
             return ctx.term().accept(self)
