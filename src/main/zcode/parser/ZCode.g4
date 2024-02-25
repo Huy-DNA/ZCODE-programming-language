@@ -82,8 +82,8 @@ expr4: expr4 op=(MUL | DIV | MOD) expr5 | expr5;
 expr5: SUB expr5
 	| NOT expr5
 	| expr6;
-expr6: array=expr6 LB indexer=expr_list RB
-	| callee=expr6 LP params=expr_list RP
+expr6: expr6 LB expr_list RB
+	| expr6 LP expr_list RP
 	| term;
 
 term: NUMBER

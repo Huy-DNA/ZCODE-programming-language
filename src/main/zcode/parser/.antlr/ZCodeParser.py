@@ -2350,28 +2350,24 @@ class ZCodeParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
-            self.array = None # Expr6Context
-            self.callee = None # Expr6Context
-            self.indexer = None # Expr_listContext
-            self.params = None # Expr_listContext
 
         def term(self):
             return self.getTypedRuleContext(ZCodeParser.TermContext,0)
 
 
-        def LB(self):
-            return self.getToken(ZCodeParser.LB, 0)
-
-        def RB(self):
-            return self.getToken(ZCodeParser.RB, 0)
-
         def expr6(self):
             return self.getTypedRuleContext(ZCodeParser.Expr6Context,0)
 
 
+        def LB(self):
+            return self.getToken(ZCodeParser.LB, 0)
+
         def expr_list(self):
             return self.getTypedRuleContext(ZCodeParser.Expr_listContext,0)
 
+
+        def RB(self):
+            return self.getToken(ZCodeParser.RB, 0)
 
         def LP(self):
             return self.getToken(ZCodeParser.LP, 0)
@@ -2409,7 +2405,6 @@ class ZCodeParser ( Parser ):
                     la_ = self._interp.adaptivePredict(self._input,37,self._ctx)
                     if la_ == 1:
                         localctx = ZCodeParser.Expr6Context(self, _parentctx, _parentState)
-                        localctx.array = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr6)
                         self.state = 353
                         if not self.precpred(self._ctx, 3):
@@ -2418,14 +2413,13 @@ class ZCodeParser ( Parser ):
                         self.state = 354
                         self.match(ZCodeParser.LB)
                         self.state = 355
-                        localctx.indexer = self.expr_list()
+                        self.expr_list()
                         self.state = 356
                         self.match(ZCodeParser.RB)
                         pass
 
                     elif la_ == 2:
                         localctx = ZCodeParser.Expr6Context(self, _parentctx, _parentState)
-                        localctx.callee = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr6)
                         self.state = 358
                         if not self.precpred(self._ctx, 2):
@@ -2434,7 +2428,7 @@ class ZCodeParser ( Parser ):
                         self.state = 359
                         self.match(ZCodeParser.LP)
                         self.state = 360
-                        localctx.params = self.expr_list()
+                        self.expr_list()
                         self.state = 361
                         self.match(ZCodeParser.RP)
                         pass
