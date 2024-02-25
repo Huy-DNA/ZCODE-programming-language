@@ -149,7 +149,7 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#decl.
     def visitDecl(self, ctx:ZCodeParser.DeclContext):
-        name = ctx.IDENTIFIER().getText()
+        name = Id(ctx.IDENTIFIER().getText())
         varType = None
         if ctx.TYPE():
             _type = ctx.TYPE().getText()
