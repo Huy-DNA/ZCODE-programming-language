@@ -22,7 +22,7 @@ stm_lists: stm | stm null_lines stm_lists;
 
 // statement rule
 
-stm: expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for;
+stm: (expr6 LP expr_list RP) | expr | decl | ass | block | func | r_break | r_continue | r_return | r_if | r_for;
 
 r_break: BREAK;
 

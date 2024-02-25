@@ -126,7 +126,6 @@ class ASTGenSuite(unittest.TestCase):
                                           VarDecl(Id("a"), ArrayType([2.0], BoolType()))], None),
                     FuncDecl(Id("main"), [VarDecl(Id("Votien"), ArrayType([1.0, 2.0], NumberType()))], Return(None))
                 ]))
-        # print(expect)
         self.assertTrue(TestAST.test(input, expect, 311))
         
     def test_Expression(self):

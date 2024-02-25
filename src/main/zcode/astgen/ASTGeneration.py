@@ -22,6 +22,8 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#stm.
     def visitStm(self, ctx:ZCodeParser.StmContext):
+        if ctx.expr6():
+            return CallStmt(ctx.expr6().accept(self), ctx.expr_list().accept(self))
         return ctx.getChild(0).accept(self)
 
     # Visit a parse tree produced by ZCodeParser#r_break.
@@ -113,7 +115,7 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#arg.
     def visitArg(self, ctx:ZCodeParser.ArgContext):
-        name = ctx.IDENTIFIER().getText()
+        name = Id(ctx.IDENTIFIER().getText())
         varType = None
         if ctx.TYPE():
             _type = ctx.TYPE().getText()
@@ -125,7 +127,7 @@ class ASTGeneration(ZCodeVisitor):
                 varType = BoolType()
         if ctx.type_index():
             varType = ArrayType(ctx.type_index().accept(self), varType)
-        return VarDecl(name, varType, None, None)
+        return VarDecl(name, varType)
 
     # Visit a parse tree produced by ZCodeParser#type_index.
     def visitType_index(self, ctx:ZCodeParser.Type_indexContext):
@@ -161,7 +163,11 @@ class ASTGeneration(ZCodeVisitor):
                 varType = BoolType()
         if ctx.type_index():
             varType = ArrayType(ctx.type_index().accept(self), varType)
-        modifier = (ctx.DYN() and ctx.DYN().getText()) or (ctx.VAR() and ctx.VAR().getText())
+        modifier = None
+        if ctx.DYN():
+            modifier = ctx.DYN().getText()
+        if ctx.VAR():
+            modifier = ctx.VAR().getText()
         varInit = ctx.expr() and ctx.expr().accept(self)
         return VarDecl(name, varType, modifier, varInit)
 
