@@ -1,1 +1,1 @@
-Program([VarDecl(Id(x), None, var, BinaryOp(..., UnaryOp(-, ArrayCell(Id(a), [BinaryOp(+, NumLit(1.0), NumLit(2.0))])), NumLit(2.0)))])
+Program([FuncDecl(Id(ord), [VarDecl(Id(a), StringType, None, None)], None), FuncDecl(Id(main), [], Return(CallExpr(Id(ord), [StringLit(a)]))), FuncDecl(Id(ord), [VarDecl(Id(a), StringType, None, None)], Block([Return(NumLit(3.0))]))])

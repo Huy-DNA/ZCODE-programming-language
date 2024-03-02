@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main), [], Block([Break]))])
+Program([FuncDecl(Id(gcd), [VarDecl(Id(a), NumberType, None, None), VarDecl(Id(b), NumberType, None, None)], None), FuncDecl(Id(gcd), [VarDecl(Id(a), NumberType, None, None), VarDecl(Id(b), NumberType, None, None)], Block([If((BinaryOp(==, Id(a), Id(b)), Return(Id(a))), [], None), If((BinaryOp(<, Id(a), Id(b)), Return(CallExpr(Id(gcd), [Id(a), BinaryOp(-, Id(b), Id(a))]))), [], None), Return(CallExpr(Id(gcd), [BinaryOp(-, Id(a), Id(b)), Id(b)]))]))])

@@ -1,1 +1,1 @@
-Program([VarDecl(Id(x), None, var, ArrayLit(ArrayLit(NumLit(1.0)), ArrayLit(NumLit(1.0)))), VarDecl(Id(x), None, var, ArrayLit(ArrayLit(NumLit(1.0))))])
+Program([VarDecl(Id(a1), None, var, BooleanLit(False)), VarDecl(Id(a2), None, var, BooleanLit(True)), VarDecl(Id(a3), None, var, BinaryOp(and, BinaryOp(or, BinaryOp(and, Id(a1), Id(a2)), Id(a1)), Id(a3)))])

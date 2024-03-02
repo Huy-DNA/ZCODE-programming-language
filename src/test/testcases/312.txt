@@ -1,6 +1,11 @@
 
-            var x <- 1
-            var x <- "123"
-            var x <- true
-            var x <- false
-        
+			var a <- [1, 1, 1, 1, 1, 2, 4]
+			var i <- 0
+			for i until len(a) - 1 by 1 begin
+				if (i == 1)
+					continue
+				print(i)
+				if (i == 2)
+					break
+			end  
+		

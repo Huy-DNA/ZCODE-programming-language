@@ -1,6 +1,11 @@
 
-            func main()
-                begin
-                break
-                end
-        
+			func gcd(number a, number b)
+
+			func gcd(number a, number b) begin
+				if (a == b)
+					return a
+				if (a < b)
+					return gcd(a, b - a)
+				return gcd(a - b, b)
+			end
+		

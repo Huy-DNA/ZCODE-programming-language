@@ -1,4 +1,4 @@
 
-            dynamic Votien <- 1
-            dynamic Votien
-        
+			for i until 10 by 1
+				print(i)
+		
