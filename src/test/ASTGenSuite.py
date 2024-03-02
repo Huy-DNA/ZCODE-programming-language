@@ -262,20 +262,149 @@ class ASTGenSuite(unittest.TestCase):
 					countToN(n - 1) 
 			end
 		'''
-		expect = ''''''
+		expect = '''Program([FuncDecl(Id(countToN), [VarDecl(Id(n), NumberType, None, None)], Block([CallStmt(Id(print), [Id(n)]), If((BinaryOp(>, Id(n), NumLit(0.0)), CallStmt(Id(countToN), [BinaryOp(-, Id(n), NumLit(1.0))])), [], None)]))])'''
 		self.assertTrue(TestAST.test(input, expect, 330))
 	def test_331(self):
 		input = '''
-			
+			func main() return a
 		'''
-		expect = ''''''
+		expect = '''Program([FuncDecl(Id(main), [], Return(Id(a)))])'''
 		self.assertTrue(TestAST.test(input, expect, 331))
+	def test_332(self):
+		input = '''
+			func bar(number n) begin
+				func foo() return n + 3
+				return foo(10)
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(bar), [VarDecl(Id(n), NumberType, None, None)], Block([FuncDecl(Id(foo), [], Return(BinaryOp(+, Id(n), NumLit(3.0)))), Return(CallExpr(Id(foo), [NumLit(10.0)]))]))])'''
+		self.assertTrue(TestAST.test(input, expect, 332))
+	def test_333(self):
+		input = '''
+			func main() return main()
+		'''
+		expect = '''Program([FuncDecl(Id(main), [], Return(CallExpr(Id(main), [])))])'''
+		self.assertTrue(TestAST.test(input, expect, 333))
+	def test_334(self):
+		input = '''
+			dynamic a <- 1
+		'''
+		expect = '''Program([VarDecl(Id(a), None, dynamic, NumLit(1.0))])'''
+		self.assertTrue(TestAST.test(input, expect, 334))
+	def test_335(self):
+		input = '''
+			func read()
+
+			func main() begin
+				a <- read()
+				print(a)
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(read), [], None), FuncDecl(Id(main), [], Block([AssignStmt(Id(a), CallExpr(Id(read), [])), CallStmt(Id(print), [Id(a)])]))])'''
+		self.assertTrue(TestAST.test(input, expect, 335))
+	def test_336(self):
+		input = '''
+			func main() begin
+				main()
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(main), [], Block([CallStmt(Id(main), [])]))])'''
+		self.assertTrue(TestAST.test(input, expect, 336))
+	def test_337(self):
+		input = '''
+			func foo(bool flag) begin
+				if (flag)
+					func foo1() return 1
+				else func foo1() return 2
+				foo1()
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(foo), [VarDecl(Id(flag), BoolType, None, None)], Block([If((Id(flag), FuncDecl(Id(foo1), [], Return(NumLit(1.0)))), [], FuncDecl(Id(foo1), [], Return(NumLit(2.0)))), CallStmt(Id(foo1), [])]))])'''
+		self.assertTrue(TestAST.test(input, expect, 337))
+	def test_338(self):
+		input = '''
+			func concat(string a[10]) begin
+				var i <- 0
+				var res <- ""
+				for i until 9 by 1
+					res <- res ... a[i]
+				return res
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(concat), [VarDecl(Id(a), ArrayType([10.0], StringType), None, None)], Block([VarDecl(Id(i), None, var, NumLit(0.0)), VarDecl(Id(res), None, var, StringLit()), For(Id(i), NumLit(9.0), NumLit(1.0), AssignStmt(Id(res), BinaryOp(..., Id(res), ArrayCell(Id(a), [Id(i)])))), Return(Id(res))]))])'''
+		self.assertTrue(TestAST.test(input, expect, 338))
+	def test_339(self):
+		input = '''
+			func sum(number a[10]) begin
+				var i <- 0
+				var res <- 0
+				for i until 9 by 1
+					res <- res + a[i]
+				return res
+			end
+		'''
+		expect = '''Program([FuncDecl(Id(sum), [VarDecl(Id(a), ArrayType([10.0], NumberType), None, None)], Block([VarDecl(Id(i), None, var, NumLit(0.0)), VarDecl(Id(res), None, var, NumLit(0.0)), For(Id(i), NumLit(9.0), NumLit(1.0), AssignStmt(Id(res), BinaryOp(+, Id(res), ArrayCell(Id(a), [Id(i)])))), Return(Id(res))]))])'''
+		self.assertTrue(TestAST.test(input, expect, 339))
 	def test_340(self):
 		input = '''
-
+			a[1()] <- 1()		
 		'''
-		expect = ''''''
+		expect = '''Program([AssignStmt(ArrayCell(Id(a), [CallExpr(NumLit(1.0), [])]), CallExpr(NumLit(1.0), []))])'''
 		self.assertTrue(TestAST.test(input, expect, 340))
+	def test_341(self):
+		input = '''
+			b[f + 1()] <- c[1]
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(Id(b), [BinaryOp(+, Id(f), CallExpr(NumLit(1.0), []))]), ArrayCell(Id(c), [NumLit(1.0)]))])'''
+		self.assertTrue(TestAST.test(input, expect, 341))
+	def test_342(self):
+		input = '''
+			1 + 2[3]...3 <- 12
+		'''
+		expect = '''Program([AssignStmt(BinaryOp(..., BinaryOp(+, NumLit(1.0), ArrayCell(NumLit(2.0), [NumLit(3.0)])), NumLit(3.0)), NumLit(12.0))])'''
+		self.assertTrue(TestAST.test(input, expect, 342))
+	def test_343(self):
+		input = '''
+			1 == 2 ... 10 <- "string" 
+		'''
+		expect = '''Program([AssignStmt(BinaryOp(..., BinaryOp(==, NumLit(1.0), NumLit(2.0)), NumLit(10.0)), StringLit(string))])'''
+		self.assertTrue(TestAST.test(input, expect, 343))
+	def test_344(self):
+		input = '''
+			"string" <- 10
+		'''
+		expect = '''Program([AssignStmt(StringLit(string), NumLit(10.0))])'''
+		self.assertTrue(TestAST.test(input, expect, 344))
+	def test_345(self):
+		input = '''
+			[1,2,3][0] <- 3
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(ArrayLit(NumLit(1.0), NumLit(2.0), NumLit(3.0)), [NumLit(0.0)]), NumLit(3.0))])'''
+		self.assertTrue(TestAST.test(input, expect, 345))
+	def test_346(self):
+		input = '''
+			[1,2][0] <- 0
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(ArrayLit(NumLit(1.0), NumLit(2.0)), [NumLit(0.0)]), NumLit(0.0))])'''
+		self.assertTrue(TestAST.test(input, expect, 346))
+	def test_347(self):
+		input = '''
+			[[1,2], [2,3]][0] <- [2, 3]
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(ArrayLit(ArrayLit(NumLit(1.0), NumLit(2.0)), ArrayLit(NumLit(2.0), NumLit(3.0))), [NumLit(0.0)]), ArrayLit(NumLit(2.0), NumLit(3.0)))])'''
+		self.assertTrue(TestAST.test(input, expect, 347))
+	def test_348(self):
+		input = '''
+			"string"[0] <- " "
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(StringLit(string), [NumLit(0.0)]), StringLit( ))])'''
+		self.assertTrue(TestAST.test(input, expect, 348))
+	def test_349(self):
+		input = '''
+			("ab"..."cd")[0] <- "c"
+		'''
+		expect = '''Program([AssignStmt(ArrayCell(BinaryOp(..., StringLit(ab), StringLit(cd)), [NumLit(0.0)]), StringLit(c))])'''
+		self.assertTrue(TestAST.test(input, expect, 349))
 	def test_350(self):
 		input = '''
 

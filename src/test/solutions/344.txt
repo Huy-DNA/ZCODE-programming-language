@@ -1,0 +1,1 @@
+Program([AssignStmt(StringLit(string), NumLit(10.0))])

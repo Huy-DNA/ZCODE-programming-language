@@ -1,0 +1,6 @@
+
+			func bar(number n) begin
+				func foo() return n + 3
+				return foo(10)
+			end
+		

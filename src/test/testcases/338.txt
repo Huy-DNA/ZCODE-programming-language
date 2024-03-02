@@ -1,0 +1,9 @@
+
+			func concat(string a[10]) begin
+				var i <- 0
+				var res <- ""
+				for i until 9 by 1
+					res <- res ... a[i]
+				return res
+			end
+		

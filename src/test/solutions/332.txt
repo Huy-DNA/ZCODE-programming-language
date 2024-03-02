@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(bar), [VarDecl(Id(n), NumberType, None, None)], Block([FuncDecl(Id(foo), [], Return(BinaryOp(+, Id(n), NumLit(3.0)))), Return(CallExpr(Id(foo), [NumLit(10.0)]))]))])
