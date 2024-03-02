@@ -1,0 +1,12 @@
+
+            begin
+                var i <- 1
+                for i until 100000 by 3 begin
+                    if (i % 5 == 0)     
+                        continue    
+                    else
+                        break    
+                    end
+                end
+            end
+            

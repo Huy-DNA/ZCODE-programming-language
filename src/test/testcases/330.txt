@@ -1,7 +1,7 @@
 
-			func countToN(number n) begin
-				print(n)
-				if (n > 0)
-					countToN(n - 1) 
-			end
-		
+            func countToN(number n) begin
+                print(n)
+                if (n > 0)
+                    countToN(n - 1) 
+            end
+        

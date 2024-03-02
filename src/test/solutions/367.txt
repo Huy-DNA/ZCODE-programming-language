@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(lcm), [VarDecl(Id(a), NumberType, None, None), VarDecl(Id(b), NumberType, None, None)], Block([Return(BinaryOp(/, BinaryOp(*, Id(a), Id(b)), CallExpr(Id(gcd), [Id(a), Id(b)])))]))])

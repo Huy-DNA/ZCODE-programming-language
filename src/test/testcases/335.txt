@@ -1,8 +1,8 @@
 
-			func read()
+            func read()
 
-			func main() begin
-				a <- read()
-				print(a)
-			end
-		
+            func main() begin
+                a <- read()
+                print(a)
+            end
+        

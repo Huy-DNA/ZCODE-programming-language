@@ -1,0 +1,9 @@
+
+            begin
+                var i <- -10 
+                for i until -10 by 100 begin
+                    if (i % 2871 == 0)     
+                        break
+                end
+            end
+            

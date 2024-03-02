@@ -1,9 +1,9 @@
 
-			func sum(number a[10]) begin
-				var i <- 0
-				var res <- 0
-				for i until 9 by 1
-					res <- res + a[i]
-				return res
-			end
-		
+            func sum(number a[10]) begin
+                var i <- 0
+                var res <- 0
+                for i until 9 by 1
+                    res <- res + a[i]
+                return res
+            end
+        

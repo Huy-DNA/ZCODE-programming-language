@@ -1,0 +1,1 @@
+Program([Block([VarDecl(Id(i), None, var, NumLit(0.0))])])

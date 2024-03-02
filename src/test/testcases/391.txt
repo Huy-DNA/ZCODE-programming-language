@@ -1,0 +1,10 @@
+
+            begin
+                var arr <- [1, 2, 3, 4, 5]    
+                i <- 0
+                for i until len(arr) - 1 by 1 begin
+                    sum <- sum + arr[i]    
+                end
+                return sum    
+            end
+            

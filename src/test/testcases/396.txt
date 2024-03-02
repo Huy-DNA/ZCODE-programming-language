@@ -1,0 +1,12 @@
+
+            begin
+                var arr <- [1, 2, 3, 4, 5]    
+                var min <- arr[0]    
+                i <- 0
+                for i until len(arr) - 1 by 1 begin
+                    if (arr[i] < min)     
+                        min <- arr[i]    
+                end
+                return min    
+            end
+            

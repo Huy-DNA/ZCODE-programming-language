@@ -1,5 +1,5 @@
 
-			var a1 <- false
-			var a2 <- true
-			var a3 <- (a1 and a2) or a1 and a3
-		
+            var a1 <- false
+            var a2 <- true
+            var a3 <- (a1 and a2) or a1 and a3
+        

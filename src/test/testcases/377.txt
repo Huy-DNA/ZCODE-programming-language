@@ -1,0 +1,12 @@
+
+            begin
+                var i <- 0
+                for i until f() by 1 begin
+                    if (i % 2 == 0)     
+                        continue    
+                    else
+                        break    
+                    end
+                end
+            end
+            

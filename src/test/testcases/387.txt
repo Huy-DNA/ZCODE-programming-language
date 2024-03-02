@@ -1,0 +1,5 @@
+
+            func inverse(number n) begin
+               return 1 / n    
+           end
+		

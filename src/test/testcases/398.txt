@@ -1,0 +1,9 @@
+
+            func is_zero(number n) begin
+                if (n == 0)     
+                    return true    
+                else
+                    return false    
+                end
+            end
+            

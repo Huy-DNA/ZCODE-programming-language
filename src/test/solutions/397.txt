@@ -1,0 +1,1 @@
+Program([Block([VarDecl(Id(x), None, var, NumLit(5.0)), VarDecl(Id(y), None, var, NumLit(10.0)), If((BinaryOp(>, Id(x), Id(y)), Return(Id(x))), [], Return(Id(y)))])])

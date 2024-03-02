@@ -1,0 +1,12 @@
+
+            begin
+                var i <- g()
+                for i until a[2] by a[1] begin
+                    if (a[i] % 2 == 0)     
+                        continue    
+                    else
+                        break    
+                    end
+                end
+            end
+            

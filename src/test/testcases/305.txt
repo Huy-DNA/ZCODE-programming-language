@@ -1,7 +1,7 @@
 
-			var a <- 3
-			dynamic b
-			number c <- 3.0
-			string d <- "acb"
-			bool e <- true
-		
+            var a <- 3
+            dynamic b
+            number c <- 3.0
+            string d <- "acb"
+            bool e <- true
+        

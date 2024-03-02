@@ -1,0 +1,12 @@
+
+            begin
+                var j <- 0
+                for j until 100 by 1 begin
+                    if (i % 3 == 0)     
+                        continue    
+                    else
+                        break    
+                    end
+                end
+            end
+            

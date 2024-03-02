@@ -1,5 +1,5 @@
 
-			number a <- 3
-			number b <- 4
-			number c <- a + b * b - c - a / a % a
-		
+            number a <- 3
+            number b <- 4
+            number c <- a + b * b - c - a / a % a
+        
