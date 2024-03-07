@@ -1,6 +1,8 @@
 
+        func main() begin
         if (3) 5 ## This is a comment
         elif (4) 5
         elif (5) 8 elif (6) 5
         if (1 + 2) if (3 + 4) if (5 + 6) 10 elif ("abcd") "aaaa" ... "bbbb"
+        end
         

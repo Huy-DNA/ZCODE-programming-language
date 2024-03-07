@@ -14,11 +14,11 @@ options {
 
 // program rule
 
-program: stms EOF;
+program: decls EOF;
 
-stms: (null_lines | ) stm_lists (null_lines | ) | ;
+decls: (null_lines | ) decl_lists (null_lines | ) | ;
 
-stm_lists: stm | stm null_lines stm_lists;
+decl_lists: (func | decl) | (func | decl) null_lines decl_lists;
 
 // statement rule
 

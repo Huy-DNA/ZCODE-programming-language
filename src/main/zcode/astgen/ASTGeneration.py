@@ -7,18 +7,19 @@ class ASTGeneration(ZCodeVisitor):
     # Visit a parse tree produced by ZCodeParser#program.
     def visitProgram(self, ctx:ZCodeParser.ProgramContext):
         return Program(ctx.stms().accept(self))
-
-    # Visit a parse tree produced by ZCodeParser#stms.
-    def visitStms(self, ctx:ZCodeParser.StmsContext):
+ 
+    # Visit a parse tree produced by ZCodeParser#decls.
+    def visitDecls(self, ctx:ZCodeParser.DeclsContext):
         if ctx.getChildCount() == 0:
             return []
-        return ctx.stm_lists().accept(self)
+        return ctx.decl_lists().accept(self)
 
-    # Visit a parse tree produced by ZCodeParser#stm_lists.
-    def visitStm_lists(self, ctx:ZCodeParser.Stm_listsContext):
+    # Visit a parse tree produced by ZCodeParser#decl_lists.
+    def visitDecl_lists(self, ctx:ZCodeParser.Decl_listsContext):
+        operand = [ctx.func().accept(self)] if ctx.func() else [ctx.decl().accept(self)]
         if not ctx.null_lines():
-            return [ctx.stm().accept(self)]
-        return [ctx.stm().accept(self)] + ctx.stm_lists().accept(self)
+            return operand
+        return operand + ctx.decl_lists().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#stm.
     def visitStm(self, ctx:ZCodeParser.StmContext):

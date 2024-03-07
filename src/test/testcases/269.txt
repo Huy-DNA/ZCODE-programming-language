@@ -1,4 +1,6 @@
 
+        func main() begin
             a[1,f(),a[i]] <- 10 ## This is a comment
             b[1,2,3] <- 3 
+        end
         

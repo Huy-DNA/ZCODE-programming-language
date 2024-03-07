@@ -1,3 +1,5 @@
 
+        func main() begin
             var [a]
+        end
         

@@ -1,4 +1,6 @@
 
+        func main() begin 
             a <- ## This is a comment
             1 + 2
+        end
         

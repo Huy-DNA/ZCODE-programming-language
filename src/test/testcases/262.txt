@@ -1,4 +1,5 @@
 
+        func main() begin
             for f until a[i] by 1 + 1
             ## 123
             ## 12212
@@ -8,4 +9,5 @@
                 f()
                 continue
             end
+        end
         

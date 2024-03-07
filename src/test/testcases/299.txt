@@ -1,4 +1,5 @@
 
+        func main()
             begin
             ##1211
 

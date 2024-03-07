@@ -1,4 +1,6 @@
 
+        func main() begin
             for i until by 1
                 do_something()
+        end
         

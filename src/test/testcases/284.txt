@@ -1,3 +1,5 @@
 
+        func main() begin
             f(()
+        end
         
