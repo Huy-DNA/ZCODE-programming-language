@@ -4,6 +4,5 @@
                     return a    
                 else
                     return b    
-                end
             end
             

@@ -594,7 +594,6 @@ class ASTGenSuite(unittest.TestCase):
                     return 1    
                 else
                     return n * factorial(n - 1)    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(factorial), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, Id(n), NumLit(0.0)), Return(NumLit(1.0))), [], Return(BinaryOp(*, Id(n), CallExpr(Id(factorial), [BinaryOp(-, Id(n), NumLit(1.0))]))))]))])'''
@@ -612,7 +611,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -640,7 +638,6 @@ class ASTGenSuite(unittest.TestCase):
                     return 1    
                 else
                     return n * fac(n - 1)    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(fac), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(<=, Id(n), NumLit(0.0)), Return(NumLit(1.0))), [], Return(BinaryOp(*, Id(n), CallExpr(Id(fac), [BinaryOp(-, Id(n), NumLit(1.0))]))))]))])'''
@@ -703,7 +700,6 @@ class ASTGenSuite(unittest.TestCase):
                     return true    
                 else
                     return false    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(is_even), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, BinaryOp(%, Id(n), NumLit(2.0)), NumLit(0.0)), Return(BooleanLit(True))), [], Return(BooleanLit(False)))]))])'''
@@ -716,7 +712,6 @@ class ASTGenSuite(unittest.TestCase):
                     return false    
                 else
                     return true    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(is_odd), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, BinaryOp(%, Id(n), NumLit(2.0)), NumLit(0.0)), Return(BooleanLit(False))), [], Return(BooleanLit(True)))]))])'''
@@ -729,7 +724,6 @@ class ASTGenSuite(unittest.TestCase):
                     return -n    
                 else
                     return n    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(absolute_value), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(<, Id(n), NumLit(0.0)), Return(UnaryOp(-, Id(n)))), [], Return(Id(n)))]))])'''
@@ -742,7 +736,6 @@ class ASTGenSuite(unittest.TestCase):
                     return a    
                 else
                     return b    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(max), [VarDecl(Id(a), NumberType, None, None), VarDecl(Id(b), NumberType, None, None)], Block([If((BinaryOp(>, Id(a), Id(b)), Return(Id(a))), [], Return(Id(b)))]))])'''
@@ -758,7 +751,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -776,7 +768,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -794,7 +785,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -812,7 +802,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -830,7 +819,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -848,7 +836,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -866,7 +853,6 @@ class ASTGenSuite(unittest.TestCase):
                         continue    
                     else
                         break    
-                    end
                 end
             end
         end
@@ -1114,7 +1100,6 @@ class ASTGenSuite(unittest.TestCase):
                     return true    
                 else
                     return false    
-                end
             end
             '''
         expect = '''Program([FuncDecl(Id(is_zero), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, Id(n), NumLit(0.0)), Return(BooleanLit(True))), [], Return(BooleanLit(False)))]))])'''
