@@ -1,1 +1,1 @@
-Program([AssignStmt(ArrayCell(Id(a), [CallExpr(Id(f), [])]), CallExpr(Id(g), []))])
+Program([FuncDecl(Id(main), [], Block([AssignStmt(ArrayCell(Id(a), [CallExpr(Id(f), [])]), CallExpr(Id(g), []))]))])

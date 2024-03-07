@@ -1,1 +1,1 @@
-Program([AssignStmt(ArrayCell(StringLit(string), [NumLit(0.0)]), StringLit( ))])
+Program([FuncDecl(Id(main), [], Block([AssignStmt(ArrayCell(StringLit(string), [NumLit(0.0)]), StringLit( ))]))])

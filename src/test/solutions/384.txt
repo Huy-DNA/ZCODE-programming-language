@@ -1,1 +1,1 @@
-Program([Block([VarDecl(Id(i), None, var, NumLit(0.0))])])
+Program([FuncDecl(Id(main), [], Block([Block([VarDecl(Id(i), None, var, NumLit(0.0))])]))])

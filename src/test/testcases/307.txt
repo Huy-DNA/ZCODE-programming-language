@@ -1,4 +1,5 @@
 
+        func main() begin
             if (i == 1)
                 print(1)
             elif (i > 1)
@@ -11,4 +12,5 @@
                 if (i == 0)
                     print(0)
                 else print("i < 0")
+        end
         

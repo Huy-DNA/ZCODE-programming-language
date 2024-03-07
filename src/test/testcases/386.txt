@@ -1,4 +1,5 @@
 
+        func main() begin
             begin
                 var i <- -10 
                 for i until -10 by 100 begin
@@ -6,4 +7,5 @@
                         break
                 end
             end
+        end
             

@@ -18,7 +18,7 @@ program: decls EOF;
 
 decls: (null_lines | ) decl_lists (null_lines | ) | ;
 
-decl_lists: (func | decl) | (func | decl) null_lines decl_lists;
+decl_lists: (func | decl) | ((func | decl) null_lines decl_lists);
 
 // statement rule
 

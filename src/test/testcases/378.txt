@@ -1,4 +1,5 @@
 
+        func main() begin
             begin
                 var i <- g()
                 for i until a[2] by a[1] begin
@@ -9,4 +10,5 @@
                     end
                 end
             end
+        end
             

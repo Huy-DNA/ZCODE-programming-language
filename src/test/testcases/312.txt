@@ -1,4 +1,5 @@
 
+        func main() begin
             var a <- [1, 1, 1, 1, 1, 2, 4]
             var i <- 0
             for i until len(a) - 1 by 1 begin
@@ -7,5 +8,6 @@
                 print(i)
                 if (i == 2)
                     break
-            end  
+            end
+        end  
         

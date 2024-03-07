@@ -1,1 +1,1 @@
-Program([AssignStmt(ArrayCell(BinaryOp(..., StringLit(ab), StringLit(cd)), [NumLit(0.0)]), StringLit(c))])
+Program([FuncDecl(Id(main), [], Block([AssignStmt(ArrayCell(BinaryOp(..., StringLit(ab), StringLit(cd)), [NumLit(0.0)]), StringLit(c))]))])

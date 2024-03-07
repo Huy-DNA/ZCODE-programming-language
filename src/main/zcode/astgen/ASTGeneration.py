@@ -6,7 +6,7 @@ class ASTGeneration(ZCodeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#program.
     def visitProgram(self, ctx:ZCodeParser.ProgramContext):
-        return Program(ctx.stms().accept(self))
+        return Program(ctx.decls().accept(self))
  
     # Visit a parse tree produced by ZCodeParser#decls.
     def visitDecls(self, ctx:ZCodeParser.DeclsContext):
@@ -137,7 +137,7 @@ class ASTGeneration(ZCodeVisitor):
     def visitType_index_nums(self, ctx:ZCodeParser.Type_index_numsContext):
         if not ctx.COMMA():
             return [float(ctx.NUMBER().getText())]
-        return [float(ctx.NUMBER().getText())] + ctx.type_index_num_list().accept(self)
+        return [float(ctx.NUMBER().getText())] + ctx.type_index_nums().accept(self)
 
     # Visit a parse tree produced by ZCodeParser#ass.
     def visitAss(self, ctx:ZCodeParser.AssContext):

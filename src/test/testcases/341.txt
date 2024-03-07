@@ -1,3 +1,5 @@
 
+        func main() begin
             b[f + 1()] <- c[1]
+        end
         

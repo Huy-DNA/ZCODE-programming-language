@@ -1,1 +1,1 @@
-Program([AssignStmt(Id(a), NumLit(3.0))])
+Program([VarDecl(Id(a), None, var, NumLit(3.0))])

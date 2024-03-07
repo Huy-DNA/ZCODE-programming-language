@@ -1,4 +1,5 @@
 
+        func main() begin
             begin
                 var x <- 5    
                 var y <- 10    
@@ -7,4 +8,5 @@
                 else
                     return y    
             end
+        end
             

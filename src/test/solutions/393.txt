@@ -1,1 +1,1 @@
-Program([Block([Return(BinaryOp(+, NumLit(100.0), StringLit(abc)))])])
+Program([FuncDecl(Id(main), [], Block([Block([Return(BinaryOp(+, NumLit(100.0), StringLit(abc)))])]))])

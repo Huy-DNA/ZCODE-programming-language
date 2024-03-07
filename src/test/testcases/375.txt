@@ -1,4 +1,5 @@
 
+        func main() begin
             begin
                 var i <- 3   
                 for i until -100 by -1 begin
@@ -9,4 +10,5 @@
                     end
                 end
             end
+        end
             

@@ -1,1 +1,1 @@
-Program([Block([VarDecl(Id(i), None, var, NumLit(0.0)), For(Id(i), CallExpr(Id(f), []), NumLit(1.0), Block([If((BinaryOp(==, BinaryOp(%, Id(i), NumLit(2.0)), NumLit(0.0)), Continue), [], Break)]))])])
+Program([FuncDecl(Id(main), [], Block([Block([VarDecl(Id(i), None, var, NumLit(0.0)), For(Id(i), CallExpr(Id(f), []), NumLit(1.0), Block([If((BinaryOp(==, BinaryOp(%, Id(i), NumLit(2.0)), NumLit(0.0)), Continue), [], Break)]))])]))])

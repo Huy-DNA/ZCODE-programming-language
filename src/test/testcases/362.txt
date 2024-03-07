@@ -1,4 +1,7 @@
 
+        var a <- 3
+        func main()
+        func main() begin
             begin
                 var i <- 0
                 for i until 10 by 1 begin
@@ -9,4 +12,5 @@
                     end
                 end
             end
+        end
             

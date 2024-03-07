@@ -1,3 +1,5 @@
 
+        func main() begin
             "string"[0] <- " "
+        end
         
