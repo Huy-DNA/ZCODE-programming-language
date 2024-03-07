@@ -317,7 +317,7 @@ class ParserSuite(unittest.TestCase):
             number a[] <- [1,2,3,4]
         end
         """
-        expect = "successful"
+        expect = "Error on line 3 col 21: ]"
         self.assertTrue(TestParser.test(input,expect,251))
 
         input = """

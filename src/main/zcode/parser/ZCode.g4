@@ -63,8 +63,7 @@ arg_list: arg | arg COMMA arg_list;
 arg: TYPE IDENTIFIER (type_index | );
 
 type_index: LB type_index_nums RB;
-type_index_nums: type_index_num_list | ;
-type_index_num_list: NUMBER | NUMBER COMMA type_index_num_list;
+type_index_nums: NUMBER | NUMBER COMMA type_index_nums;
 
 // assignment statement
 

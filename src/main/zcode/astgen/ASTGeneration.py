@@ -134,14 +134,7 @@ class ASTGeneration(ZCodeVisitor):
     def visitType_index(self, ctx:ZCodeParser.Type_indexContext):
         return ctx.type_index_nums().accept(self)
 
-    # Visit a parse tree produced by ZCodeParser#type_index_nums.
     def visitType_index_nums(self, ctx:ZCodeParser.Type_index_numsContext):
-        if ctx.getChildCount() == 0:
-            return []
-        return ctx.type_index_num_list().accept(self)
-
-    # Visit a parse tree produced by ZCodeParser#type_index_num_list.
-    def visitType_index_num_list(self, ctx:ZCodeParser.Type_index_num_listContext):
         if not ctx.COMMA():
             return [float(ctx.NUMBER().getText())]
         return [float(ctx.NUMBER().getText())] + ctx.type_index_num_list().accept(self)
