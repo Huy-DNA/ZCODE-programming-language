@@ -164,12 +164,15 @@ fragment
 EXPONENT: ('e' | 'E')(ADD|SUB)?[0-9]+;
 
 // STRING token
-ILLEGAL_ESCAPE: '"' (~["] | '\'"')* INVALID_ESCAPED_SEQUENCE+ (~["] | '\'"')* '"' {raise IllegalEscape(self.text)} ;
-UNCLOSE_STRING: '"' (~["] | '\'"')*? (NEWLINE | EOF) {raise UncloseString(self.text)};
-STRING: '"' (~["\r\n\\] | '\'"' | '\\\'"' | '\\'[bft'\\])* '"' { self.text = str(bytes(self.text, "utf-8").decode("unicode_escape"))[1:-1]};
+ILLEGAL_ESCAPE: '"' STRING_FRAG* INVALID_ESCAPED_SEQUENCE+ STRING_FRAG* '"' {raise IllegalEscape(self.text)} ;
+UNCLOSE_STRING: '"' STRING_FRAG*? (NEWLINE | EOF) {raise UncloseString(self.text)};
+STRING: '"' STRING_FRAG* '"' { self.text = str(bytes(self.text, "utf-8").decode("unicode_escape"))[1:-1]};
 
 fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
+
+fragment
+STRING_FRAG: ~["\r\n\\] | '\'"' | '\\\'"' | '\\'[bft'\\];
 
 // COMMENT token
 COMMENT: '##' ~[\r\n]* -> skip;
