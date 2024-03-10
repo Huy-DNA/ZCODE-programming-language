@@ -172,7 +172,7 @@ fragment
 INVALID_ESCAPED_SEQUENCE: '\\'~[bfrnt'\\];
 
 fragment
-STRING_FRAG: ~["\r\n\\] | '\'"' | '\\\'"' | '\\'[bft'\\];
+STRING_FRAG: ~["\r\n\\] | '\'"' | '\\\'"' | '\\'[bfrtn'\\];
 
 // COMMENT token
 COMMENT: '##' ~[\r\n]* -> skip;
