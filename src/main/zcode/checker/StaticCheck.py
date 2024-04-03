@@ -28,7 +28,7 @@ class Scope:
 
     def lookup(self, name):
         if name in self.__symbolTable[name]:
-            return self.__symbolTable[name]
+            return self.__symbolTable[name], self
         if self.__parent is not None:
             return self.__parent.lookup(name)
         return None
@@ -72,87 +72,87 @@ class StaticChecker(BaseVisitor, Utils):
     def visitBinaryOp(self, ast, param):
         op = ast.op
 
-        leftType = self.visit(ast.left, param)
-        rightType = self.visit(ast.right, param)
+        leftType, leftScope = self.visit(ast.left, param)
+        rightType, rightScope = self.visit(ast.right, param)
 
         if op in ['+', '-', '*', '/', '%']:
             if leftType.__class__ is UninferredType:
-                param.scope.set(leftType.name, NumberType())
+                leftScope.set(leftType.name, NumberType())
                 leftType = NumberType()
             if rightType.__class__ is UninferredType:
-                param.scope.set(rightType.name, NumberType())
+                rightScope.set(rightType.name, NumberType())
                 rightType = NumberType()
             if leftType.__class__ is not NumberType or rightType.__class__ is not NumberType:
                 raise TypeMismatchInExpression(ast)
-            return NumberType()
+            return NumberType(), param.scope
         if op in ['and', 'or']:
             if leftType.__class__ is UninferredType:
-                param.scope.set(leftType.name, BoolType())
+                leftScope.set(leftType.name, BoolType())
                 leftType = BoolType()
             if rightType.__class__ is UninferredType:
-                param.scope.set(rightType.name, BoolType())
+                rightScope.set(rightType.name, BoolType())
                 rightType = BoolType()
             if leftType.__class__ is not BoolType or rightType.__class__ is not BoolType:
                 raise TypeMismatchInExpression(ast)
-            return BoolType()
+            return BoolType(), param.scope
         if op == '...':
             if leftType.__class__ is UninferredType:
-                param.scope.set(leftType.name, StringType())
+                leftScope.set(leftType.name, StringType())
                 leftType = StringType()
             if rightType.__class__ is UninferredType:
-                param.scope.set(rightType.name, StringType())
+                rightScope.set(rightType.name, StringType())
                 rightType = StringType()
             if leftType.__class__ is not StringType or rightType.__class__ is not StringType:
                 raise TypeMismatchInExpression(ast)
-            return StringType()
+            return StringType(), param.scope
         if op in ['=', '!=', '<', '>', '<=', '>=']:
             if leftType.__class__ is UninferredType:
-                param.scope.set(leftType.name, NumberType())
+                leftScope.set(leftType.name, NumberType())
                 leftType = NumberType()
             if rightType.__class__ is UninferredType:
-                param.scope.set(rightType.name, NumberType())
+                rightScope.set(rightType.name, NumberType())
                 rightType = NumberType()
             if leftType.__class__ is not NumberType or rightType.__class__ is not NumberType:
                 raise TypeMismatchInExpression(ast)
-            return BoolType()
+            return BoolType(), param.scope
         if op == '==':
             if leftType.__class__ is UninferredType:
-                param.scope.set(leftType.name, StringType())
+                leftScope.set(leftType.name, StringType())
                 leftType = StringType()
             if rightType.__class__ is UninferredType:
-                param.scope.set(rightType.name, StringType())
+                rightScope.set(rightType.name, StringType())
                 rightType = StringType()
             if leftType.__class__ is not StringType or rightType.__class__ is not StringType:
                 raise TypeMismatchInExpression(ast)
-            return BoolType()
+            return BoolType(), param.scope
 
         raise Exception('Unreachable')
 
     def visitUnaryOp(self, ast, param):
         op = ast.op
 
-        typ = self.visit(ast.operand, param)
+        typ, scope = self.visit(ast.operand, param)
 
         if op == '-':
             if typ.__class__ is UninferredType:
-                param.scope.set(typ.name, NumberType())
+                scope.set(typ.name, NumberType())
                 return NumberType()
             if typ.__class__ is not NumberType:
                 raise TypeMismatchInExpression(ast)
             return NumberType()
         if op == 'not':
             if typ.__class__ is UninferredType:
-                param.scope.set(typ.name, BoolType())
+                scope.set(typ.name, BoolType())
                 return BoolType()
             if typ.__class__ is not BoolType:
                 raise TypeMismatchInExpression(ast)
-            return BoolType()
+            return BoolType(), param.scope
 
         raise Exception('Unreachable')
 
     def visitCallExpr(self, ast, param):
         try:
-            calleeType = self.visit(ast.name, param)
+            calleeType, _ = self.visit(ast.name, param)
         except Undeclared:
             raise NoDefinition(ast)
         if calleeType.__class__ is not FuncType:
@@ -161,30 +161,30 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
-            argTyp = self.visit(ast.args[index], param)
+            argTyp, _ = self.visit(ast.args[index], param)
             if paramTyp.__class__ is UninferredType:
                 paramTypes[index] = argTyp
             if paramTyp.__class__ is not argTyp.__class__:
                 raise TypeMismatchInExpression(ast)
-        return calleeType.ret
+        return calleeType.ret, param.scope
 
     def visitId(self, ast, param):
-        typ = param.scope.lookup(ast.name)
+        typ, scope = param.scope.lookup(ast.name)
         if typ is None:
             raise Undeclared(Identifier(), ast.name)
-        return typ
+        return typ, scope
 
     def visitArrayCell(self, ast, param):
-        arrType = self.visit(ast.arr, param)
+        arrType, _ = self.visit(ast.arr, param)
         if arrType.__class__ is not ArrayType:
             raise TypeMismatchInExpression(ast)
         size = arrType.size
         if ast.idx.length != size.length:
             raise TypeMismatchInExpression(ast)
         for expr in ast.idx:
-            typ = self.visit(expr, param)
+            typ, exprScope = self.visit(expr, param)
             if typ.__class__ is UninferredType:
-                param.scope.set(expr.name, NumberType())
+                exprScope.set(expr.name, NumberType())
             if typ.__class__ is not NumberType:
                 raise TypeMismatchInExpression(expr)
         return arrType.eleType
