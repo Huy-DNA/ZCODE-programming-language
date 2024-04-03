@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(read), [], None), FuncDecl(Id(main), [], Block([AssignStmt(Id(a), CallExpr(Id(read), [])), CallStmt(Id(print), [Id(a)])]))])

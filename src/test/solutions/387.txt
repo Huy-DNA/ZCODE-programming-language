@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(inverse), [VarDecl(Id(n), NumberType, None, None)], Block([Return(BinaryOp(/, NumLit(1.0), Id(n)))]))])

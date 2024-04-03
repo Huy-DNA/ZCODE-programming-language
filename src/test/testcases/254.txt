@@ -1,6 +1,0 @@
-
-        func main() begin 
-            var a
-            number b <- 3
-        end
-        

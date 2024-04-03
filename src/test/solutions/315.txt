@@ -1,1 +1,0 @@
-Program([VarDecl(Id(a), StringType, None, StringLit(acbd)), VarDecl(Id(b), StringType, None, StringLit(acdb)), VarDecl(Id(c), StringType, None, BinaryOp(..., Id(a), Id(b)))])

@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main), [], Block([AssignStmt(ArrayCell(ArrayCell(CallExpr(CallExpr(CallExpr(NumLit(2.0), []), []), []), [NumLit(1.0)]), [NumLit(1.0)]), NumLit(3.0))]))])

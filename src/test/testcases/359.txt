@@ -1,8 +1,0 @@
-
-        func main() begin
-            begin
-                var x <- 10
-                return x
-            end
-        end
-            

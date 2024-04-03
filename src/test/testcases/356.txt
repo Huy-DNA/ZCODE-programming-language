@@ -1,8 +1,0 @@
-
-            func is_13(number n) begin
-                if (n == 13)     
-                    return true    
-                else
-                    return false    
-            end
-            

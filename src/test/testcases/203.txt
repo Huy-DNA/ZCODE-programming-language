@@ -1,7 +1,0 @@
-func main () ## This is the main function
-        ## This is before the body
-        begin
-            ## This is the body
-            return "abc'""
-        end
-        

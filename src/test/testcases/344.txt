@@ -1,5 +1,0 @@
-
-        func main() begin
-            "string" <- 10
-        end
-        

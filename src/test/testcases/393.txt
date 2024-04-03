@@ -1,7 +1,0 @@
-
-        func main() begin
-            begin
-                return 100 + "abc"
-            end
-        end
-            

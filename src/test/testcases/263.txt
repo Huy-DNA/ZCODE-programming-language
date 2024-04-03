@@ -1,5 +1,0 @@
-
-        func main() begin
-            a[a[i + 1] + f()] <- [1, 2, 3]
-        end
-        

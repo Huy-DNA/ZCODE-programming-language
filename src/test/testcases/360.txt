@@ -1,5 +1,0 @@
-
-            func sum(number a, number b) begin
-                return a + b    
-            end
-            

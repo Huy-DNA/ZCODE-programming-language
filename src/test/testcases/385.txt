@@ -1,5 +1,0 @@
-
-            func mod(number a, number b) begin
-                return a % b    
-            end
-            

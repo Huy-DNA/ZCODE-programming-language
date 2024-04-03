@@ -1,8 +1,0 @@
-
-        func main() begin 
-            var a <- 3
-            var c <- "aaa'""
-            var t <- true
-            number b <- 3
-        end
-        

@@ -1,5 +1,0 @@
-
-        func main() begin
-            ("ab"..."cd")[0] <- "c"
-        end
-        

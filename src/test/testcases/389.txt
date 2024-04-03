@@ -1,9 +1,0 @@
-
-            func max(number a, number b, number c) begin
-                if ((a > b) and (a > c))     
-                    return a    
-                elif (b > c)
-                    return b    
-                return c
-            end
-            

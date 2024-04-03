@@ -1,7 +1,0 @@
-
-        func main() begin
-        if (3) ## This is a comment
-        elif
-        else
-        end
-        

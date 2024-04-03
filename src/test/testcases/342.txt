@@ -1,5 +1,0 @@
-
-        func main() begin
-            1 + 2[3]...3 <- 12
-        end
-        

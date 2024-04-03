@@ -1,3 +1,0 @@
-func main () ## This is the main function
-        ## This is after the decl
-        

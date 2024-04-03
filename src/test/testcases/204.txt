@@ -1,6 +1,0 @@
-func main () ## This is the main function
-        ## This is before the body
-        
-
-        return 100
-        

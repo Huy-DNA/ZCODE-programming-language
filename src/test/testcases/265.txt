@@ -1,5 +1,0 @@
-
-        func main() begin
-            a[f(f(f()))][1][f() + a[3]] <- 10 
-        end
-        

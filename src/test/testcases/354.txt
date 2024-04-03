@@ -1,8 +1,0 @@
-
-            func is_positive(number n) begin
-                if (n > 0)     
-                    return true    
-                else
-                    return false    
-            end
-            

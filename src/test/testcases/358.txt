@@ -1,5 +1,0 @@
-
-            func negate(number n) begin
-                return -n    
-            end
-            

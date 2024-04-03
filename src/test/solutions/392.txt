@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(power_2), [VarDecl(Id(exp), NumberType, None, None)], Block([VarDecl(Id(result), None, var, NumLit(1.0)), VarDecl(Id(i), None, var, NumLit(1.0)), For(Id(i), Id(exp), NumLit(1.0), Block([AssignStmt(Id(result), BinaryOp(*, Id(result), NumLit(2.0)))])), Return(Id(result))]))])

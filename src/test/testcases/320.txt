@@ -1,8 +1,0 @@
-
-        func main() begin
-            a
-            a1
-            b2
-            _a
-        end
-        

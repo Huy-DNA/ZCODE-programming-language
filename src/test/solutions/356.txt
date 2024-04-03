@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(is_13), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, Id(n), NumLit(13.0)), Return(BooleanLit(True))), [], Return(BooleanLit(False)))]))])

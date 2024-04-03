@@ -1,5 +1,0 @@
-
-,
-,
-,abc,Abc,aBC,ABC,abc_,
-,ABC,<EOF>

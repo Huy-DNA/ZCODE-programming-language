@@ -1,5 +1,0 @@
-
-        func main() begin
-            a[ord("Hello"[1])] <- 10 
-        end
-        

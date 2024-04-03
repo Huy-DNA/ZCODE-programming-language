@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main), [], Block([AssignStmt(Id(x), BinaryOp(+, NumLit(10.0), BinaryOp(*, NumLit(20.0), NumLit(3.0))))]))])

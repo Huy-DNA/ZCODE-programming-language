@@ -1,1 +1,0 @@
-Program([VarDecl(Id(a), None, dynamic, NumLit(1.0))])

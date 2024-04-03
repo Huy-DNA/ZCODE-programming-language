@@ -1,5 +1,0 @@
-
-        func main() begin
-            a[[3][1]] <- 10 
-        end
-        

@@ -1,5 +1,0 @@
-
-            func is_not_zero(number n) begin
-                return n != 0
-            end
-            

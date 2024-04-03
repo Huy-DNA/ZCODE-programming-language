@@ -1,8 +1,0 @@
-
-            func max(number a, number b) begin
-                if (a > b)     
-                    return a    
-                else
-                    return b    
-            end
-            

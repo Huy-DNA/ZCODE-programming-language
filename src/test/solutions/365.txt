@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(is_prime), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(<=, Id(n), NumLit(1.0)), Return(BooleanLit(False))), [], None), AssignStmt(Id(i), NumLit(2.0)), For(Id(i), CallExpr(Id(sqrt), [Id(n)]), NumLit(1.0), Block([If((BinaryOp(==, BinaryOp(%, Id(n), Id(i)), NumLit(0.0)), Return(BooleanLit(False))), [], None)])), Return(BooleanLit(True))]))])

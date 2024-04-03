@@ -1,7 +1,0 @@
-
-            func plusOne(number arr[10]) begin
-                var i <- 0
-                for i until 9 by 1
-                    arr[0] = arr[0] + 1
-            end
-        

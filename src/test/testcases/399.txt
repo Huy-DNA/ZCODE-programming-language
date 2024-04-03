@@ -1,5 +1,0 @@
-
-            func is_one(number n) begin
-                return n == 1  
-            end
-            

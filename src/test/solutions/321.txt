@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(main), [], Block([VarDecl(Id(a), None, var, CallExpr(Id(int), [CallExpr(Id(input), [StringLit(prompt)])])), Return(Id(a))]))])

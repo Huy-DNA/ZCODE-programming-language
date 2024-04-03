@@ -1,1 +1,0 @@
-Program([FuncDecl(Id(is_even), [VarDecl(Id(n), NumberType, None, None)], Block([If((BinaryOp(==, BinaryOp(%, Id(n), NumLit(2.0)), NumLit(0.0)), Return(BooleanLit(True))), [], Return(BooleanLit(False)))]))])

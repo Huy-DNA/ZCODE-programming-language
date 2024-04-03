@@ -1,6 +1,0 @@
-
-        func main() begin
-        if ## This is a comment
-        elif (10) 5
-        end
-        

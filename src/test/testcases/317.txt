@@ -1,9 +1,0 @@
-
-            func ord(string a)
-
-            func main() return ord("a")
-
-            func ord(string a) begin
-                return 3
-            end
-        
