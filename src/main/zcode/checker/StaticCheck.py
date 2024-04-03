@@ -69,18 +69,6 @@ class StaticChecker(BaseVisitor, Utils):
     def visitFuncDecl(self, ast, param):
         pass
 
-    def visitNumberType(self, ast, param):
-        pass
-
-    def visitBoolType(self, ast, param):
-        pass
-
-    def visitStringType(self, ast, param):
-        pass
-
-    def visitArrayType(self, ast, param):
-        pass
-
     def visitBinaryOp(self, ast, param):
         op = ast.op
 
