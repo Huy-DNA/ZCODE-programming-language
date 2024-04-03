@@ -309,8 +309,13 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitReturn(self, ast, param):
         if ast.expr is None:
+            if param.retType is not None and param.retType.__class__ is not VoidType:
+                raise TypeMismatchInStatement(ast)
             return CheckerResult(VoidType(), param.scope)
-        return self.visit(ast.expr, param)
+        res = self.visit(ast.expr, param)
+        if param.retType is not None and param.retType.__class__ is not res.type.__class__:
+            raise TypeMismatchInStatement(ast)
+        return res
 
     def visitAssign(self, ast, param):
         pass
