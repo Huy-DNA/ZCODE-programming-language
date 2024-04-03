@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(mod), [VarDecl(Id(a), NumberType, None, None), VarDecl(Id(b), NumberType, None, None)], Block([Return(BinaryOp(%, Id(a), Id(b)))]))])

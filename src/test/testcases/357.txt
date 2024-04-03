@@ -1,0 +1,8 @@
+
+            func negate_absolute_value(number n) begin
+                if (n < 0)     
+                    return n    
+                else
+                    return -n    
+            end
+            

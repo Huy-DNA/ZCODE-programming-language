@@ -1,0 +1,8 @@
+
+            func foo(bool flag) begin
+                if (flag)
+                    func foo1() return 1
+                else func foo1() return 2
+                foo1()
+            end
+        

@@ -1,0 +1,8 @@
+
+            func is_two(number n) begin
+                if (n == 2)     
+                    return false    
+                else
+                    return true
+            end
+            

@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main), [], Block([VarDecl(Id(a), None, var, NumLit(3.0)), VarDecl(Id(b), None, dynamic, None), VarDecl(Id(c), NumberType, None, NumLit(3.0)), VarDecl(Id(d), StringType, None, StringLit(acb)), VarDecl(Id(e), BoolType, None, BooleanLit(True))]))])

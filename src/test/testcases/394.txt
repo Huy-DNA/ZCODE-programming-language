@@ -1,0 +1,13 @@
+
+        func main() begin
+            begin
+                var arr <- [1, 2, 3, 4, 5]    
+                var product <- 1    
+                i <- 0
+                for i until len(arr) - 1 by 1 begin
+                    product <- product * arr[i]    
+                end
+                return product    
+            end
+        end
+            

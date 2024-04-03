@@ -1,0 +1,7 @@
+
+            func t(bool flag, number i) begin
+                if (flag)
+                    return i
+                return 0
+            end
+        

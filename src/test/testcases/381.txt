@@ -1,0 +1,5 @@
+
+            func minus(number a, number b) begin
+                return a - b    
+            end
+            

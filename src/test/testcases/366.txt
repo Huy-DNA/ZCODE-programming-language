@@ -1,0 +1,10 @@
+
+            func gcd(number a, number b) begin
+                if (b != 0) begin
+                    var temp <- b    
+                    b <- a % b    
+                    a <- temp    
+                end
+                return gcd(b, a)  
+            end
+            

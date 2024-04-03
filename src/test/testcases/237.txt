@@ -1,0 +1,7 @@
+
+        func main() begin
+        if (3) 5 ## This is a comment
+        elif (10)
+        elif (8) 3
+        end
+        

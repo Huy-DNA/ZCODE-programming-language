@@ -1,0 +1,14 @@
+
+        func main() begin
+            begin
+                var arr <- [1, 2, 3, 4, 5]    
+                var max <- arr[0]    
+                i <- 0
+                for i until len(arr) - 1 by 1 begin
+                    if (arr[i] > max)     
+                        max <- arr[i]    
+                end
+                return max    
+            end
+        end
+            

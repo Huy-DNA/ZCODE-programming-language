@@ -1,0 +1,11 @@
+
+        func main() begin 
+            for i until 10 by 1
+            ## 1212
+
+            ### 1221
+
+
+                a <- a + 1
+        end
+        

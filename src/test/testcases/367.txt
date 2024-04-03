@@ -1,0 +1,5 @@
+
+            func lcm(number a, number b) begin
+                return (a * b) / gcd(a, b)    
+            end
+            

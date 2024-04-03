@@ -1,0 +1,8 @@
+
+            func is_odd(number n) begin
+                if (n % 2 == 0)     
+                    return false    
+                else
+                    return true    
+            end
+            

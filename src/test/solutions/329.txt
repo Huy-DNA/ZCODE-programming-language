@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(t), [VarDecl(Id(flag), BoolType, None, None), VarDecl(Id(i), NumberType, None, None)], Block([If((Id(flag), Return(Id(i))), [], None), Return(NumLit(0.0))]))])

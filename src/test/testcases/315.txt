@@ -1,0 +1,5 @@
+
+            string a <- "acbd"
+            string b <- "acdb"
+            string c <- a ... b
+        

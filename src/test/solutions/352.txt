@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(sum_of_array), [VarDecl(Id(arr), ArrayType([100.0], NumberType), None, None)], Block([VarDecl(Id(sum), None, var, NumLit(0.0)), VarDecl(Id(i), None, var, NumLit(0.0)), For(Id(i), NumLit(99.0), NumLit(1.0), Block([AssignStmt(Id(sum), BinaryOp(+, Id(sum), ArrayCell(Id(arr), [Id(i)])))])), Return(Id(sum))]))])

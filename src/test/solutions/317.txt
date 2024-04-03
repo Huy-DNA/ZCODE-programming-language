@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(ord), [VarDecl(Id(a), StringType, None, None)], None), FuncDecl(Id(main), [], Return(CallExpr(Id(ord), [StringLit(a)]))), FuncDecl(Id(ord), [VarDecl(Id(a), StringType, None, None)], Block([Return(NumLit(3.0))]))])

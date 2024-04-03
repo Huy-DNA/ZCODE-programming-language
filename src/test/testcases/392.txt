@@ -1,0 +1,10 @@
+
+            func power_2(number exp) begin
+                var result <- 1    
+                var i <- 1
+                for i until exp by 1 begin
+                    result <- result * 2    
+                end
+                return result    
+            end
+            

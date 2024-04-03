@@ -1,0 +1,10 @@
+
+            func sum_of_array(number arr[100]) begin
+                var sum <- 0    
+                var i <- 0
+                for i until 99 by 1 begin
+                    sum <- sum + arr[i]    
+                end
+                return sum    
+            end
+            
