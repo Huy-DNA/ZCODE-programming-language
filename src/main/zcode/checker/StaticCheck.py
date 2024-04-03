@@ -150,9 +150,12 @@ class StaticChecker(BaseVisitor, Utils):
         raise Exception('Unreachable')
 
     def visitCallExpr(self, ast, param):
-        calleeType = self.visit(ast.name, param)
+        try:
+            calleeType = self.visit(ast.name, param)
+        except Undeclared:
+            raise NoDefinition(ast)
         if calleeType.__class__ is not FuncType:
-            raise TypeMismatchInExpression(ast)
+            raise NoDefinition(ast)
         if calleeType.params.length != ast.args.length:
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
@@ -171,7 +174,19 @@ class StaticChecker(BaseVisitor, Utils):
         return typ
 
     def visitArrayCell(self, ast, param):
-        pass
+        arrType = self.visit(ast.arr, param)
+        if arrType.__class__ is not ArrayType:
+            raise TypeMismatchInExpression(ast)
+        size = arrType.size
+        if ast.idx.length != size.length:
+            raise TypeMismatchInExpression(ast)
+        for expr in ast.idx:
+            typ = self.visit(expr, param)
+            if typ.__class__ is UninferredType:
+                param.scope.set(expr.name, NumberType())
+            if typ.__class__ is not NumberType:
+                raise TypeMismatchInExpression(expr)
+        return arrType.eleType
 
     def visitBlock(self, ast, param):
         pass
@@ -198,13 +213,13 @@ class StaticChecker(BaseVisitor, Utils):
         pass
 
     def visitNumberLiteral(self, ast, param):
-        pass
+        return NumberType()
 
     def visitBooleanLiteral(self, ast, param):
-        pass
+        return BoolType()
 
     def visitStringLiteral(self, ast, param):
-        pass
+        return StringType()
 
     def visitArrayLiteral(self, ast, param):
         pass
