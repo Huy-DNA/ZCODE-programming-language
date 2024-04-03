@@ -54,6 +54,10 @@ class CheckerResult:
         self.scope = scope
         self.isLvalue = isLvalue
 
+def isSameType(type1, type2):
+    # TODO: Make this more precise
+    return type1.__class__ is type2.__class__ or type1 is type2 or type1.__class__ is type2 or type1 is type2.__class__
+
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
         param = CheckerParam(Scope())
@@ -88,53 +92,53 @@ class StaticChecker(BaseVisitor, Utils):
         rightScope = rightRes.scope
 
         if op in ['+', '-', '*', '/', '%']:
-            if leftType.__class__ is UninferredType:
-                leftScope.set(leftType.name, NumberType())
+            if isSameType(leftType, UninferredType):
+                leftScope.set(leftType.name, NumberType)
                 leftType = NumberType()
-            if rightType.__class__ is UninferredType:
-                rightScope.set(rightType.name, NumberType())
+            if isSameType(rightType, UninferredType):
+                rightScope.set(rightType.name, NumberType)
                 rightType = NumberType()
-            if leftType.__class__ is not NumberType or rightType.__class__ is not NumberType:
+            if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope)
         if op in ['and', 'or']:
-            if leftType.__class__ is UninferredType:
-                leftScope.set(leftType.name, BoolType())
+            if isSameType(leftType, UninferredType):
+                leftScope.set(leftType.name, BoolType)
                 leftType = BoolType()
-            if rightType.__class__ is UninferredType:
-                rightScope.set(rightType.name, BoolType())
+            if isSameType(rightType, UninferredType):
+                rightScope.set(rightType.name, BoolType)
                 rightType = BoolType()
-            if leftType.__class__ is not BoolType or rightType.__class__ is not BoolType:
+            if not isSameType(leftType, BoolType) or not isSameType(rightType, BoolType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope)
         if op == '...':
-            if leftType.__class__ is UninferredType:
-                leftScope.set(leftType.name, StringType())
+            if isSameType(leftType, UninferredType):
+                leftScope.set(leftType.name, StringType)
                 leftType = StringType()
-            if rightType.__class__ is UninferredType:
-                rightScope.set(rightType.name, StringType())
+            if isSameType(rightType, UninferredType):
+                rightScope.set(rightType.name, StringType)
                 rightType = StringType()
-            if leftType.__class__ is not StringType or rightType.__class__ is not StringType:
+            if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(StringType(), param.scope)
         if op in ['=', '!=', '<', '>', '<=', '>=']:
-            if leftType.__class__ is UninferredType:
-                leftScope.set(leftType.name, NumberType())
+            if isSameType(leftType, UninferredType):
+                leftScope.set(leftType.name, NumberType)
                 leftType = NumberType()
-            if rightType.__class__ is UninferredType:
-                rightScope.set(rightType.name, NumberType())
+            if isSameType(rightType, UninferredType):
+                rightScope.set(rightType.name, NumberType)
                 rightType = NumberType()
-            if leftType.__class__ is not NumberType or rightType.__class__ is not NumberType:
+            if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope)
         if op == '==':
-            if leftType.__class__ is UninferredType:
-                leftScope.set(leftType.name, StringType())
+            if isSameType(leftType, UninferredType):
+                leftScope.set(leftType.name, StringType)
                 leftType = StringType()
-            if rightType.__class__ is UninferredType:
-                rightScope.set(rightType.name, StringType())
+            if isSameType(rightType, UninferredType):
+                rightScope.set(rightType.name, StringType)
                 rightType = StringType()
-            if leftType.__class__ is not StringType or rightType.__class__ is not StringType:
+            if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope)
 
@@ -147,17 +151,17 @@ class StaticChecker(BaseVisitor, Utils):
         typ = res.type
         scope = res.scope
         if op == '-':
-            if typ.__class__ is UninferredType:
-                scope.set(typ.name, NumberType())
+            if isSameType(typ, UninferredType):
+                scope.set(typ.name, NumberType)
                 return CheckerResult(NumberType(), param.scope)
-            if typ.__class__ is not NumberType:
+            if isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope)
         if op == 'not':
-            if typ.__class__ is UninferredType:
-                scope.set(typ.name, BoolType())
+            if isSameType(typ, UninferredType):
+                scope.set(typ.name, BoolType)
                 return CheckerResult(BoolType(), param.scope)
-            if typ.__class__ is not BoolType:
+            if isSameType(typ, BoolType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope)
 
@@ -168,16 +172,16 @@ class StaticChecker(BaseVisitor, Utils):
             calleeType = self.visit(ast.name, param).type
         except Undeclared:
             raise NoDefinition(ast)
-        if calleeType.__class__ is not FuncType:
+        if isSameType(calleeType, FuncType):
             raise NoDefinition(ast)
         if calleeType.params.length != ast.args.length:
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
             argTyp = self.visit(ast.args[index], param).type
-            if paramTyp.__class__ is UninferredType:
+            if isSameType(paramTyp, UninferredType):
                 paramTypes[index] = argTyp
-            if paramTyp.__class__ is not argTyp.__class__:
+            if not isSameType(paramType, argTyp):
                 raise TypeMismatchInExpression(ast)
         return CheckerResult(calleeType.ret, param.scope)
 
@@ -189,7 +193,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitArrayCell(self, ast, param):
         arrType = self.visit(ast.arr, param).type
-        if arrType.__class__ is not ArrayType:
+        if isSameType(arrType, ArrayType):
             raise TypeMismatchInExpression(ast)
         size = arrType.size
         if ast.idx.length != size.length:
@@ -198,9 +202,9 @@ class StaticChecker(BaseVisitor, Utils):
             exprRes = self.visit(expr, param)
             exprType = exprRes.type
             exprScope = exprRes.scope
-            if exprType.__class__ is UninferredType:
-                exprScope.set(expr.name, NumberType())
-            if exprType.__class__ is not NumberType:
+            if isSameType(exprType, UninferredType):
+                exprScope.set(expr.name, NumberType)
+            if isSameType(exprType, NumberType):
                 raise TypeMismatchInExpression(expr)
         return CheckerResult(arrType.eleType, param.scope, True)
 
@@ -221,9 +225,9 @@ class StaticChecker(BaseVisitor, Utils):
         condRes = self.visit(ast.expr, param)
         condType = condRes.type
         condScope = condRes.scope
-        if condType.__class__ is UninferredType:
-            condScope.set(ast.expr.name, BoolType())
-        elif condType.__class__ is not BoolType:
+        if isSameType(condType, UninferredType):
+            condScope.set(ast.expr.name, BoolType)
+        elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.expr)
         retType = None
         retScope = param.scope
@@ -236,9 +240,9 @@ class StaticChecker(BaseVisitor, Utils):
             elifCondRes = self.visit(elifStmt[0])
             elifCondType = elifCondRes.type
             elifCondScope = elifCondRes.scope
-            if elifCondType.__class__ is UninferredType:
-                elifCondScope.set(elifStmt[0].name, BoolType())
-            elif elifCondType.__class__ is not BoolType:
+            if isSameType(elifCondType, UninferredType):
+                elifCondScope.set(elifStmt[0].name, BoolType)
+            elif isSameType(elifCondType, BoolType):
                 raise TypeMismatchInStatement(ast.expr)
             elifThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
             elifThenRes = self.visit(ast.thenstmt, elifThenParam)
@@ -252,9 +256,9 @@ class StaticChecker(BaseVisitor, Utils):
             elseCondRes = self.visit(ast.elseStmt, param)
             elseCondType = elseCondRes.type
             elseCondScope = elseCondRes.scope
-            if elseCondType.__class__ is UninferredType:
-                elseCondScope.set(ast.elseStmt.name, BoolType())
-            elif elseCondType.__class__ is not BoolType:
+            if isSameType(elseCondType, UninferredType):
+                elseCondScope.set(ast.elseStmt.name, BoolType)
+            elif not isSameType(elseCondType, BoolType):
                 raise TypeMismatchInStatement(ast.expr)
             elseThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
             elseThenRes = self.visit(ast.thenstmt, elseThenParam)
@@ -267,23 +271,23 @@ class StaticChecker(BaseVisitor, Utils):
         iterRes = self.visit(ast.name, param)
         iterType = iterRes.type
         iterScope = iterRes.scope
-        if iterType.__class__ is UninferredType:
-            iterScope.set(ast.name, NumberType())
-        elif iterType.__class__ is not NumberType:
+        if isSameType(iterType, UninferredType):
+            iterScope.set(ast.name, NumberType)
+        elif not isSameType(iterType, NumberType):
             raise TypeMismatchInStatement(ast.name)
         condRes = self.visit(ast.condExpr, param)
         condType = condRes.type
         condScope = condRes.scope
-        if condType.__class__ is UninferredType:
-            condScope.set(ast.condExpr.name, BoolType())
-        elif condType.__class__ is not BoolType():
+        if isSameType(condType, UninferredType):
+            condScope.set(ast.condExpr.name, BoolType)
+        elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.condExpr)
         updRes = self.visit(ast.updExpr, param)
         updType = updRes.type
         updScope = updRes.scope
-        if updType.__class__ is UninferredType:
-            updScope.set(ast.condExpr.name, NumberType())
-        elif updType.__class__ is not NumberType():
+        if isSameType(updType, UninferredType):
+            updScope.set(ast.condExpr.name, NumberType)
+        elif not isSameType(updType, NumberType):
             raise TypeMismatchInStatement(ast.updExpr)
 
         param = CheckerParam(param.scope.delegate(), True)
@@ -309,11 +313,11 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitReturn(self, ast, param):
         if ast.expr is None:
-            if param.retType is not None and param.retType.__class__ is not VoidType:
+            if param.retType is not None and not isSameType(param.retType, VoidType):
                 raise TypeMismatchInStatement(ast)
             return CheckerResult(VoidType(), param.scope)
         res = self.visit(ast.expr, param)
-        if param.retType is not None and param.retType.__class__ is not res.type.__class__:
+        if param.retType is not None and not isSameType(param.retType, res.type):
             raise TypeMismatchInStatement(ast)
         return res
 
@@ -332,7 +336,7 @@ class StaticChecker(BaseVisitor, Utils):
 
         if lhsType is UninferredType:
             lhsScope.set(ast.lhs.name, exprType)
-        elif lhsType.__class__ is not exprType.__class__:
+        elif not isSameType(lhsType, exprType):
             raise TypeMismatchInExpression(ast)
 
         return CheckerResult(None, param.scope)
@@ -342,16 +346,16 @@ class StaticChecker(BaseVisitor, Utils):
             calleeType = self.visit(ast.name, param).type
         except Undeclared:
             raise NoDefinition(ast)
-        if calleeType.__class__ is not FuncType:
+        if not isSameType(calleeType, FuncType):
             raise NoDefinition(ast)
         if calleeType.params.length != ast.args.length:
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
             argTyp = self.visit(ast.args[index], param).type
-            if paramTyp.__class__ is UninferredType:
+            if isSameType(paramTyp, UninferredType):
                 paramTypes[index] = argTyp
-            if paramTyp.__class__ is not argTyp.__class__:
+            if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInExpression(ast)
         return CheckerResult(calleeType.ret, param.scope)
 
@@ -368,7 +372,7 @@ class StaticChecker(BaseVisitor, Utils):
         typ = None
         for value in ast.value:
             curType = self.visit(value, param).type
-            if typ.__class__ is not curType.__class__ and typ is not None:
+            if typ is not None and not isSameType(typ, curType):
                 raise TypeMismatchInExpression(ast)
             typ = curType
         return CheckerResult(typ, param.scope)
