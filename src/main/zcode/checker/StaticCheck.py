@@ -43,8 +43,9 @@ class Scope:
         return Scope(self)
 
 class CheckerParam:
-    def __init__(self, scope):
+    def __init__(self, scope, isLoop = False):
         self.scope = scope
+        self.isLoop = isLoop
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
@@ -189,7 +190,9 @@ class StaticChecker(BaseVisitor, Utils):
         return arrType.eleType
 
     def visitBlock(self, ast, param):
-        pass
+        param = CheckerParam(param.scope.delegate(), param.isLoop)
+        for stmt in ast.stmt:
+            self.visit(stmt, param)
 
     def visitIf(self, ast, param):
         pass
@@ -198,10 +201,12 @@ class StaticChecker(BaseVisitor, Utils):
         pass
 
     def visitContinue(self, ast, param):
-        pass
+        if not param.inLoop:
+            raise MustInLoop(ast)
 
     def visitBreak(self, ast, param):
-        pass
+        if not param.inLoop:
+            raise MustInLoop(ast)
 
     def visitReturn(self, ast, param):
         pass
@@ -222,5 +227,12 @@ class StaticChecker(BaseVisitor, Utils):
         return StringType()
 
     def visitArrayLiteral(self, ast, param):
-        pass
+        typ = None
+        for value in ast.value:
+            curType = self.visit(value, param)
+            if typ.__class__ is not curType.__class__ and typ is not None:
+                raise TypeMismatchInExpression(ast)
+            typ = curType
+        return typ
+
 
