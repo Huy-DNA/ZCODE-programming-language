@@ -64,7 +64,19 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(Scope())
 
     def visitVarDecl(self, ast, param):
-        pass
+        if param.scope.has(ast.name):
+            raise Redeclared(ast.name)
+        if ast.varType:
+            param.scope.set(ast.name, ast.varType)
+            if ast.varInit:
+                initRes = self.visit(ast.varInit, param)
+                initType = initRes.type
+                if not isSameType(ast.varType, initType):
+                    raise TypeMismatchInStatement(ast)
+        elif ast.varInit:
+            param.scope.set(ast.name, self.visit(ast.varInit, param).type)
+        else:
+            param.scope.set(ast.name, UninferredType())
 
     def visitFuncDecl(self, ast, param):
         pass
