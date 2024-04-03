@@ -43,9 +43,10 @@ class Scope:
         return Scope(self)
 
 class CheckerParam:
-    def __init__(self, scope, isLoop = False):
+    def __init__(self, scope, isLoop = False, retType = None):
         self.scope = scope
         self.isLoop = isLoop
+        self.retType = retType
 
 class CheckerResult:
     def __init__(self, typ, scope, isLvalue = False):
@@ -204,20 +205,63 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(arrType.eleType, param.scope, True)
 
     def visitBlock(self, ast, param):
-        param = CheckerParam(param.scope.delegate(), param.isLoop)
-        retTyp = None
+        param = CheckerParam(param.scope.delegate(), param.isLoop, param.retType)
+        retType = None
         retScope = param.scope
         for stmt in ast.stmt:
             if stmt.__class__ is Return:
                 retRes = self.visit(stmt, param)
-                retTyp = retRes.type
+                retType = retRes.type
                 retScope = retRes.scope
             else:
                 self.visit(stmt, param)
-        return CheckerResult(retTyp, retScope)
+        return CheckerResult(retType, retScope)
 
     def visitIf(self, ast, param):
-        pass
+        condRes = self.visit(ast.expr, param)
+        condType = condRes.type
+        condScope = condRes.scope
+        if condType.__class__ is UninferredType:
+            condScope.set(ast.expr.name, BoolType())
+        elif condType.__class__ is not BoolType:
+            raise TypeMismatchInStatement(ast.expr)
+        retType = None
+        retScope = param.scope
+        thenParam = CheckerParam(param.scope.delegate(), param.isLoop, param.retType)
+        thenRes = self.visit(ast.thenstmt, thenParam)
+        retType = thenRes.type
+        retScope = thenRes.scope
+
+        for elifStmt in ast.elifStmt:
+            elifCondRes = self.visit(elifStmt[0])
+            elifCondType = elifCondRes.type
+            elifCondScope = elifCondRes.scope
+            if elifCondType.__class__ is UninferredType:
+                elifCondScope.set(elifStmt[0].name, BoolType())
+            elif elifCondType.__class__ is not BoolType:
+                raise TypeMismatchInStatement(ast.expr)
+            elifThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
+            elifThenRes = self.visit(ast.thenstmt, elifThenParam)
+            elifRetType = elifThenRes.type
+            elifRetScope = elifThenRes.scope
+            if retType is None:
+                retType = elifRetType
+                retScope = elifRetScope
+
+        if ast.elseStmt is not None:
+            elseCondRes = self.visit(ast.elseStmt, param)
+            elseCondType = elseCondRes.type
+            elseCondScope = elseCondRes.scope
+            if elseCondType.__class__ is UninferredType:
+                elseCondScope.set(ast.elseStmt.name, BoolType())
+            elif elseCondType.__class__ is not BoolType:
+                raise TypeMismatchInStatement(ast.expr)
+            elseThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
+            elseThenRes = self.visit(ast.thenstmt, elseThenParam)
+            if retType is None:
+                retType = elseThenRes.type
+                retScope = elseThenRes.scope
+        return CheckerResult(retType, retScope)
 
     def visitFor(self, ast, param):
         iterRes = self.visit(ast.name, param)
@@ -226,33 +270,33 @@ class StaticChecker(BaseVisitor, Utils):
         if iterType.__class__ is UninferredType:
             iterScope.set(ast.name, NumberType())
         elif iterType.__class__ is not NumberType:
-            raise TypeMismatchInExpression(ast.name)
+            raise TypeMismatchInStatement(ast.name)
         condRes = self.visit(ast.condExpr, param)
         condType = condRes.type
         condScope = condRes.scope
         if condType.__class__ is UninferredType:
             condScope.set(ast.condExpr.name, BoolType())
         elif condType.__class__ is not BoolType():
-            raise TypeMismatchInExpression(ast.condExpr)
+            raise TypeMismatchInStatement(ast.condExpr)
         updRes = self.visit(ast.updExpr, param)
         updType = updRes.type
         updScope = updRes.scope
         if updType.__class__ is UninferredType:
             updScope.set(ast.condExpr.name, NumberType())
         elif updType.__class__ is not NumberType():
-            raise TypeMismatchInExpression(ast.updExpr)
+            raise TypeMismatchInStatement(ast.updExpr)
 
         param = CheckerParam(param.scope.delegate(), True)
-        retTyp = None
+        retType = None
         retScope = param.scope
         for stmt in ast.stmt:
             if stmt.__class__ is Return:
                 retRes = self.visit(stmt, param)
-                retTyp = retRes.type
+                retType = retRes.type
                 retScope = retRes.scope
             else:
                 self.visit(stmt, param)
-        return CheckerResult(retTyp, retScope)
+        return CheckerResult(retType, retScope)
 
 
     def visitContinue(self, ast, param):
