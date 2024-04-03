@@ -321,7 +321,22 @@ class StaticChecker(BaseVisitor, Utils):
         pass
 
     def visitCallStmt(self, ast, param):
-        pass
+        try:
+            calleeType = self.visit(ast.name, param).type
+        except Undeclared:
+            raise NoDefinition(ast)
+        if calleeType.__class__ is not FuncType:
+            raise NoDefinition(ast)
+        if calleeType.params.length != ast.args.length:
+            raise TypeMismatchInExpression(ast)
+        paramTypes = calleeType.params
+        for index, paramTyp in enumerate(paramTypes):
+            argTyp = self.visit(ast.args[index], param).type
+            if paramTyp.__class__ is UninferredType:
+                paramTypes[index] = argTyp
+            if paramTyp.__class__ is not argTyp.__class__:
+                raise TypeMismatchInExpression(ast)
+        return CheckerResult(calleeType.ret, param.scope)
 
     def visitNumberLiteral(self, ast, param):
         return CheckerResult(NumberType(), param.scope)
