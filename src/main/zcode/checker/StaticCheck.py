@@ -12,6 +12,7 @@ class FuncType(Type):
         self.params = params
         self.ret = ret
 
+# TODO: Allow functions and variables to have the same name
 class Scope:
     def __init__(self, parent = None):
         self.__parent = parent
@@ -63,7 +64,7 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(Scope())
 
     def visitVarDecl(self, ast, param):
-        pass
+        param.scope.set(ast.name, ast.type)
 
     def visitFuncDecl(self, ast, param):
         pass
