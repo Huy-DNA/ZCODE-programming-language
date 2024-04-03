@@ -240,7 +240,9 @@ class StaticChecker(BaseVisitor, Utils):
             raise MustInLoop(ast)
 
     def visitReturn(self, ast, param):
-        pass
+        if ast.expr is None:
+            return VoidType(), param.scope
+        return self.visit(ast.expr, param)
 
     def visitAssign(self, ast, param):
         pass
