@@ -64,7 +64,7 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(Scope())
 
     def visitVarDecl(self, ast, param):
-        param.scope.set(ast.name, ast.type)
+        pass
 
     def visitFuncDecl(self, ast, param):
         pass
