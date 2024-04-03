@@ -192,19 +192,44 @@ class StaticChecker(BaseVisitor, Utils):
     def visitBlock(self, ast, param):
         param = CheckerParam(param.scope.delegate(), param.isLoop)
         retTyp = None
-        scope = param.scope
+        retScope = param.scope
         for stmt in ast.stmt:
             if stmt.__class__ is Return:
-                retTyp, scope = self.visit(stmt, param)
+                retTyp, retScope = self.visit(stmt, param)
             else:
                 self.visit(stmt, param)
-        return retTyp, scope
+        return retTyp, retScope
 
     def visitIf(self, ast, param):
         pass
 
     def visitFor(self, ast, param):
-        pass
+        iterType, iterScope = self.visit(ast.name, param)
+        if iterType.__class__ is UninferredType:
+            iterScope.set(ast.name, NumberType())
+        elif iterType.__class__ is not NumberType:
+            raise TypeMismatchInExpression(ast.name)
+        condType, condScope = self.visit(ast.condExpr, param)
+        if condType.__class__ is UninferredType:
+            condScope.set(ast.condExpr.name, BoolType())
+        elif condType.__class__ is not BoolType():
+            raise TypeMismatchInExpression(ast.condExpr)
+        updType, updScope = self.visit(ast.updExpr, param)
+        if updType.__class__ is UninferredType:
+            updScope.set(ast.condExpr.name, NumberType())
+        elif updType.__class__ is not NumberType():
+            raise TypeMismatchInExpression(ast.updExpr)
+
+        param = CheckerParam(param.scope.delegate(), True)
+        retTyp = None
+        retScope = param.scope
+        for stmt in ast.stmt:
+            if stmt.__class__ is Return:
+                retTyp, retScope = self.visit(stmt, param)
+            else:
+                self.visit(stmt, param)
+        return retTyp, retScope
+
 
     def visitContinue(self, ast, param):
         if not param.inLoop:
