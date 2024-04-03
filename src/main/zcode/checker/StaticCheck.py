@@ -187,12 +187,18 @@ class StaticChecker(BaseVisitor, Utils):
                 exprScope.set(expr.name, NumberType())
             if typ.__class__ is not NumberType:
                 raise TypeMismatchInExpression(expr)
-        return arrType.eleType
+        return arrType.eleType, param.scope
 
     def visitBlock(self, ast, param):
         param = CheckerParam(param.scope.delegate(), param.isLoop)
+        retTyp = None
+        scope = param.scope
         for stmt in ast.stmt:
-            self.visit(stmt, param)
+            if stmt.__class__ is Return:
+                retTyp, scope = self.visit(stmt, param)
+            else:
+                self.visit(stmt, param)
+        return retTyp, scope
 
     def visitIf(self, ast, param):
         pass
