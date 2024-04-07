@@ -12,30 +12,54 @@ class FuncType(Type):
         self.params = params
         self.ret = ret
 
-# TODO: Allow functions and variables to have the same name
 class Scope:
     def __init__(self, parent = None):
         self.__parent = parent
-        self.__symbolTable = dict()
+        self.__varSymbolTable = dict()
+        self.__fnSymbolTable = dict()
 
-    def set(self, name, typ):
-        if typ.__class__ is not Type:
+    def set(self, name, typ, kind):
+        if not isinstance(typ, Type):
             raise Exception("Only symbols can be added")
+        if not isinstance(kind, Kind):
+            raise Exception("Invalid kind")
 
-        self.__symbolTable[name] = typ
+        if isinstance(kind, Function):
+            self.__fnSymbolTable[name] = typ
+        else:
+            self.__varSymbolTable[name] = typ
 
-    def get(self, name):
-        return self.__symbolTable[name]
+    def get(self, name, kind):
+        if not isinstance(kind, Kind):
+            raise Exception("Invalid kind")
+        if isinstance(kind, Function):
+            return self.__fnSymbolTable[name]
+        else:
+            return self.__varSymbolTable[name]
 
-    def lookup(self, name):
-        if name in self.__symbolTable[name]:
-            return self.__symbolTable[name], self
-        if self.__parent is not None:
-            return self.__parent.lookup(name)
-        return None
+    def lookup(self, name, kind):
+        if not isinstance(kind, Kind):
+            raise Exception("Invalid kind")
+        if isinstance(kind, Function):
+            if name in self.__fnSymbolTable[name]:
+                return self.__fnSymbolTable[name], self
+            if self.__parent is not None:
+                return self.__parent.lookup(name, kind)
+            return None, None
+        else:
+            if name in self.__varSymbolTable[name]:
+                return self.__varSymbolTable[name], self
+            if self.__parent is not None:
+                return self.__parent.lookup(name, kind)
+            return None, None
 
-    def has(self, name):
-        return name in self.__symbolTable
+    def has(self, name, kind):
+        if not isinstance(kind, Kind):
+            raise Exception("Invalid kind")
+        if isinstance(kind, Function):
+            return name in self.__fnSymbolTable
+        else:
+            return name in self.__varSymbolTable
 
     def parent(self):
         return self.__parent
