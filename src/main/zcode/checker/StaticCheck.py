@@ -11,6 +11,11 @@ class FuncType(Type):
     def __init__(self, params, ret):
         self.params = params
         self.ret = ret
+        self.__list_of_uninferred_id = []
+    def addUninferredId(self, id, scope):
+        self.__list_of_uninferred_id.append((id, scope))
+    def resolveRet(self):
+        pass
 
 class Scope:
     def __init__(self, parent = None, associatedBlock = None):
@@ -243,17 +248,22 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(arrType.eleType, param.scope, True)
 
     def visitBlock(self, ast, param):
-        param = CheckerParam(param.scope.delegate(), param.isLoop)
-        retType = None
-        retScope = param.scope
+        param = CheckerParam(param.scope.delegate(ast), param.isLoop)
         for stmt in ast.stmt:
-            if stmt.__class__ is Return:
-                retRes = self.visit(stmt, param)
+            if isinstance(stmt, Return):
+                retRes = self.visit(stmt.expr, param)
                 retType = retRes.type
                 retScope = retRes.scope
+                if isSameType(retType, UninferredType):
+                    param.scope.associatedFn.type.addUninferredId(stmt.expr, retScope)
+                elif param.scope.associatedFn:
+                    if isSameType(param.scope.associatedFn.type.ret, UninferredType):
+                        param.scope.associatedFn.type.ret = retType
+                    if not isSameType(param.scope.associatedFn.type.ret, retType):
+                        raise TypeMismatchInStatement(ast)
             else:
                 self.visit(stmt, param)
-        return CheckerResult(retType, retScope)
+        return CheckerResult(None, param.scope)
 
     def visitIf(self, ast, param):
         condRes = self.visit(ast.expr, param)
