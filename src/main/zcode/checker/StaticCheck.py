@@ -221,9 +221,9 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(calleeType.ret, param.scope)
 
     def visitId(self, ast, param):
-        typ, scope = param.scope.lookup(ast.name)
+        typ, scope = param.scope.lookup(ast.name, param.lookupKind)
         if typ is None:
-            raise Undeclared(Identifier(), ast.name)
+            raise Undeclared(param.lookupKind, ast.name)
         return CheckerResult(typ, scope, True)
 
     def visitArrayCell(self, ast, param):
