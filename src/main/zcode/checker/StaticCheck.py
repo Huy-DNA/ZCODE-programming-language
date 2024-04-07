@@ -203,20 +203,19 @@ class StaticChecker(BaseVisitor, Utils):
         raise Exception('Unreachable')
 
     def visitCallExpr(self, ast, param):
-        try:
-            calleeType = self.visit(ast.name, param).type
-        except Undeclared:
-            raise NoDefinition(ast)
-        if isSameType(calleeType, FuncType):
-            raise NoDefinition(ast)
+        calleeType = self.visit(ast.name, (param.scope, param.isLoop, Function())).type
+        if isSameType(calleeType, VoidType()):
+            raise TypeMismatchInExpression(ast)
         if calleeType.params.length != ast.args.length:
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
-            argTyp = self.visit(ast.args[index], param).type
-            if isSameType(paramTyp, UninferredType):
-                paramTypes[index] = argTyp
-            if not isSameType(paramType, argTyp):
+            argRes = self.visit(ast.args[index], param)
+            argTyp = argRes.type
+            argScope = argRes.scope
+            if isSameType(argTyp, UninferredType):
+                argScope.set(ast.args[index].name, paramTyp, Variable())
+            if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInExpression(ast)
         return CheckerResult(calleeType.ret, param.scope)
 
