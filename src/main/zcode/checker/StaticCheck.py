@@ -321,13 +321,17 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitReturn(self, ast, param):
         if ast.expr is None:
-            if param.retType is not None and not isSameType(param.retType, VoidType):
+            if param.scope.associatedFn is not None and isSameType(param.scope.associatedFn.type.ret, UninferredType):
+                param.scope.associatedFn.type.ret = VoidType()
+            if param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type, VoidType):
                 raise TypeMismatchInStatement(ast)
-            return CheckerResult(VoidType(), param.scope)
+            return CheckerResult(None, None)
         res = self.visit(ast.expr, param)
-        if param.retType is not None and not isSameType(param.retType, res.type):
+        if isSameType(res.type, UninferredType):
+            param.scope.associatedFn.type.addUninferredType((ast.expr, res.scope))
+        elif param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type.ret, res.type):
             raise TypeMismatchInStatement(ast)
-        return res
+        return CheckerResult(None, None)
 
     def visitAssign(self, ast, param):
         lhsRes = self.visit(ast.lhs)
