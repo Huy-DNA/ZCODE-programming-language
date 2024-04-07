@@ -227,7 +227,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitArrayCell(self, ast, param):
         arrType = self.visit(ast.arr, param).type
-        if isSameType(arrType, ArrayType):
+        if not isSameType(arrType, ArrayType):
             raise TypeMismatchInExpression(ast)
         size = arrType.size
         if ast.idx.length != size.length:
