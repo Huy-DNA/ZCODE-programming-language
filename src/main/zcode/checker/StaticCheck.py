@@ -359,21 +359,22 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(None, param.scope)
 
     def visitCallStmt(self, ast, param):
-        try:
-            calleeType = self.visit(ast.name, param).type
-        except Undeclared:
-            raise NoDefinition(ast)
-        if not isSameType(calleeType, FuncType):
-            raise NoDefinition(ast)
+        calleeType = self.visit(ast.name, param).type
+        if isSameType(calleeType.ret, UninferredType):
+            calleeType.ret = VoidType()
+        if not isSameType(calleeType.ret, VoidType):
+            raise TypeMismatchInStatement(ast)
         if calleeType.params.length != ast.args.length:
-            raise TypeMismatchInExpression(ast)
+            raise TypeMismatchInStatement(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
-            argTyp = self.visit(ast.args[index], param).type
-            if isSameType(paramTyp, UninferredType):
-                paramTypes[index] = argTyp
+            argRes = self.visit(ast.args[index], param)
+            argTyp = argRes.type
+            argScope = argRes.scope
+            if isSameType(argTyp, UninferredType):
+                argScope.set(ast.args[index].name, paramTyp, Variable())
             if not isSameType(paramTyp, argTyp):
-                raise TypeMismatchInExpression(ast)
+                raise TypeMismatchInStatement(ast)
         return CheckerResult(calleeType.ret, param.scope)
 
     def visitNumberLiteral(self, ast, param):
@@ -392,6 +393,9 @@ class StaticChecker(BaseVisitor, Utils):
             if typ is not None and not isSameType(typ, curType):
                 raise TypeMismatchInExpression(ast)
             typ = curType
-        return CheckerResult(typ, param.scope)
+        if not isSameType(typ, ArrayType):
+            return CheckerResult(ArrayType([ast.value.length], typ), param.scope)
+        else:
+            return CheckerResult(ArrayType([ast.value.length] + typ.size, typ.eleType), param.scope)
 
 
