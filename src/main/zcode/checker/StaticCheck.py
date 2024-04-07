@@ -334,7 +334,7 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(None, None)
 
     def visitAssign(self, ast, param):
-        lhsRes = self.visit(ast.lhs)
+        lhsRes = self.visit(ast.lhs, param)
         lhsType = lhsRes.type
         lhsScope = lhsScope.scope
         lhsIsLvalue = lhsScope.isLvalue
@@ -345,9 +345,14 @@ class StaticChecker(BaseVisitor, Utils):
 
         exprRes = self.visit(ast.expr)
         exprType = exprRes.type
+        exprScope = exprRes.scope
 
-        if lhsType is UninferredType:
-            lhsScope.set(ast.lhs.name, exprType)
+        if isSameType(lhsType, UninferredType) and isSameType(exprType, UninferredType):
+            raise TypeCannotBeInferred(ast)
+        elif isSameType(lhsType, UninferredType):
+            lhsScope.set(ast.lhs.name, exprType, Variable())
+        elif isSameType(exprType, UninferredType):
+            exprScope.set(ast.expr.name, lhsType, Variable())
         elif not isSameType(lhsType, exprType):
             raise TypeMismatchInExpression(ast)
 
