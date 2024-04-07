@@ -304,25 +304,20 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInStatement(ast.updExpr)
 
         param = CheckerParam(param.scope.delegate(), True)
-        retType = None
-        retScope = param.scope
         for stmt in ast.stmt:
-            if stmt.__class__ is Return:
-                retRes = self.visit(stmt, param)
-                retType = retRes.type
-                retScope = retRes.scope
-            else:
-                self.visit(stmt, param)
-        return CheckerResult(retType, retScope)
+            self.visit(stmt, param)
+        return CheckerResult(None, None)
 
 
     def visitContinue(self, ast, param):
         if not param.inLoop:
             raise MustInLoop(ast)
+        return CheckerResult(None, None)
 
     def visitBreak(self, ast, param):
         if not param.inLoop:
             raise MustInLoop(ast)
+        return CheckerResult(None, None)
 
     def visitReturn(self, ast, param):
         if ast.expr is None:
