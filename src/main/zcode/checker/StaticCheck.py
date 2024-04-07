@@ -250,19 +250,7 @@ class StaticChecker(BaseVisitor, Utils):
     def visitBlock(self, ast, param):
         param = CheckerParam(param.scope.delegate(ast), param.isLoop)
         for stmt in ast.stmt:
-            if isinstance(stmt, Return):
-                retRes = self.visit(stmt.expr, param)
-                retType = retRes.type
-                retScope = retRes.scope
-                if isSameType(retType, UninferredType):
-                    param.scope.associatedFn.type.addUninferredId(stmt.expr, retScope)
-                elif param.scope.associatedFn:
-                    if isSameType(param.scope.associatedFn.type.ret, UninferredType):
-                        param.scope.associatedFn.type.ret = retType
-                    if not isSameType(param.scope.associatedFn.type.ret, retType):
-                        raise TypeMismatchInStatement(ast)
-            else:
-                self.visit(stmt, param)
+            self.visit(stmt, param)
         return CheckerResult(None, param.scope)
 
     def visitIf(self, ast, param):
