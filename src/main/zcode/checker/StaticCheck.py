@@ -68,10 +68,9 @@ class Scope:
         return Scope(self)
 
 class CheckerParam:
-    def __init__(self, scope, isLoop = False, retType = None):
+    def __init__(self, scope, isLoop = False):
         self.scope = scope
         self.isLoop = isLoop
-        self.retType = retType
 
 class CheckerResult:
     def __init__(self, typ, scope, isLvalue = False):
@@ -234,7 +233,7 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(arrType.eleType, param.scope, True)
 
     def visitBlock(self, ast, param):
-        param = CheckerParam(param.scope.delegate(), param.isLoop, param.retType)
+        param = CheckerParam(param.scope.delegate(), param.isLoop)
         retType = None
         retScope = param.scope
         for stmt in ast.stmt:
@@ -256,7 +255,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInStatement(ast.expr)
         retType = None
         retScope = param.scope
-        thenParam = CheckerParam(param.scope.delegate(), param.isLoop, param.retType)
+        thenParam = CheckerParam(param.scope.delegate(), param.isLoop)
         thenRes = self.visit(ast.thenstmt, thenParam)
         retType = thenRes.type
         retScope = thenRes.scope
@@ -269,7 +268,7 @@ class StaticChecker(BaseVisitor, Utils):
                 elifCondScope.set(elifStmt[0].name, BoolType)
             elif isSameType(elifCondType, BoolType):
                 raise TypeMismatchInStatement(ast.expr)
-            elifThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
+            elifThenParam = CheckerParam(param.scope.delegate(), param.isLoop)
             elifThenRes = self.visit(ast.thenstmt, elifThenParam)
             elifRetType = elifThenRes.type
             elifRetScope = elifThenRes.scope
@@ -285,7 +284,7 @@ class StaticChecker(BaseVisitor, Utils):
                 elseCondScope.set(ast.elseStmt.name, BoolType)
             elif not isSameType(elseCondType, BoolType):
                 raise TypeMismatchInStatement(ast.expr)
-            elseThenParam = CheckerParam(param.scope.delegate(), param.isLoop, retType)
+            elseThenParam = CheckerParam(param.scope.delegate(), param.isLoop)
             elseThenRes = self.visit(ast.thenstmt, elseThenParam)
             if retType is None:
                 retType = elseThenRes.type
