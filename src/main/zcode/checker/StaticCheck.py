@@ -13,10 +13,17 @@ class FuncType(Type):
         self.ret = ret
 
 class Scope:
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, associatedBlock = None):
         self.__parent = parent
         self.__varSymbolTable = dict()
         self.__fnSymbolTable = dict()
+        self.associatedBlock = associatedBlock
+        if isinstance(associatedBlock, FuncDecl):
+            self.associatedFn = associatedBlock
+        elif isinstance(parent.associatedFn, FuncDecl):
+            self.associatedFn = parent.associatedFn
+        else:
+            self.associatedFn = None
 
     def set(self, name, typ, kind):
         if not isinstance(typ, Type):
@@ -64,8 +71,8 @@ class Scope:
     def parent(self):
         return self.__parent
 
-    def delegate(self):
-        return Scope(self)
+    def delegate(self, associatedBlock):
+        return Scope(self, associatedBlock)
 
 class CheckerParam:
     def __init__(self, scope, isLoop = False):
