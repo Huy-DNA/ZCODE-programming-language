@@ -75,9 +75,10 @@ class Scope:
         return Scope(self, associatedBlock)
 
 class CheckerParam:
-    def __init__(self, scope, isLoop = False):
+    def __init__(self, scope, isLoop = False, lookupKind = None):
         self.scope = scope
         self.isLoop = isLoop
+        self.lookupKind = lookupKind
 
 class CheckerResult:
     def __init__(self, typ, scope, isLvalue = False):
@@ -94,19 +95,22 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(Scope())
 
     def visitVarDecl(self, ast, param):
-        if param.scope.has(ast.name):
-            raise Redeclared(ast.name)
+        if param.scope.has(ast.name, Variable()):
+            raise Redeclared(Variable(), ast.name)
         if ast.varType:
-            param.scope.set(ast.name, ast.varType)
+            param.scope.set(ast.name, ast.varType, Variable())
             if ast.varInit:
-                initRes = self.visit(ast.varInit, param)
+                initRes = self.visit(ast.varInit, (param.scope, param.isLoop, Variable()))
                 initType = initRes.type
                 if not isSameType(ast.varType, initType):
                     raise TypeMismatchInStatement(ast)
         elif ast.varInit:
-            param.scope.set(ast.name, self.visit(ast.varInit, param).type)
+            typ = self.visit(ast.varInit, param).type
+            if isSameType(typ, UninferredType):
+                raise TypeCannotBeInferred(ast)
+            param.scope.set(ast.name, typ, Variable())
         else:
-            param.scope.set(ast.name, UninferredType())
+            param.scope.set(ast.name, UninferredType(), Variable())
 
     def visitFuncDecl(self, ast, param):
         pass
