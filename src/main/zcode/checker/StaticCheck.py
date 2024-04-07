@@ -92,8 +92,9 @@ class CheckerResult:
         self.isLvalue = isLvalue
 
 def isSameType(type1, type2):
-    # TODO: Make this more precise
-    return type1.__class__ is type2.__class__ or type1 is type2 or type1.__class__ is type2 or type1 is type2.__class__
+    if isinstance(type1, ArrayType):
+        return isinstance(type2, ArrayType) and isSameType(type1.eleType, type2.eleType) and type1.size == type2.size
+    return isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2 or isinstance(type1, type2) or isinstance(type2, type1)
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
