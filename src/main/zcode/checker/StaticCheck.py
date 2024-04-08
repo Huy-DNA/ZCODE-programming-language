@@ -102,11 +102,11 @@ def isSameType(type1, type2):
     return isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2 or isinstance(type1, type2) or isinstance(type2, type1)
 
 def resolveUninferredType(checkerRes, typeHint):
-    if checkerRes.fnType:
-        checkerRes.fnType.ret = typeHint
-        checkerRes.fnType.resolveRet()
-    else:
-        checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
+    # if checkerRes.fnType:
+    #     checkerRes.fnType.ret = typeHint
+    #     checkerRes.fnType.resolveRet()
+    # else:
+    checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
