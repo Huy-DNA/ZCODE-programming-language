@@ -86,9 +86,10 @@ class CheckerParam:
         self.lookupKind = lookupKind
 
 class CheckerResult:
-    def __init__(self, typ, scope, isLvalue = False):
+    def __init__(self, typ, scope, fn = None, isLvalue = False):
         self.type = typ
         self.scope = scope
+        self.fn = None
         self.isLvalue = isLvalue
 
 def isSameType(type1, type2):
