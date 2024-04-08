@@ -107,7 +107,7 @@ def resolveUninferredType(checkerRes, typeHint):
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
-        param = CheckerParam(Scope())
+        param = CheckerParam(Scope(None, ast))
 
     def visitVarDecl(self, ast, param):
         if param.scope.has(ast.name, Variable()):
