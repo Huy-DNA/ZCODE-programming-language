@@ -78,6 +78,11 @@ class Scope:
         else:
             return name in self.__varSymbolTable
 
+    def checkNoBodyFunction(self):
+        for name, typ in self.__fnSymbolTable:
+            if not typ.defined:
+                raise NoDefinition(name)
+
     def parent(self):
         return self.__parent
 
@@ -119,6 +124,9 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(Scope(None, ast), False, Variable())
         for decl in self.decl:
             self.visit(decl, param)
+        if not param.scope.has("main", Function):
+            raise NoEntryPoint()
+        param.scope.checkNoBodyFunction()
 
     def visitVarDecl(self, ast, param):
         if param.scope.has(ast.name, Variable()):
@@ -169,6 +177,7 @@ class StaticChecker(BaseVisitor, Utils):
         bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
         self.visit(ast.body, bodyParam)
         fnType.resolveRet()
+        param.scope.checkNoBodyFunction()
         return CheckerResult(None, None)
 
     def visitBinaryOp(self, ast, param):
