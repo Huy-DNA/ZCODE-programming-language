@@ -11,10 +11,10 @@ class FuncType(Type):
     def __init__(self, params, ret, defined):
         self.params = params
         self.ret = ret
-        self.__list_of_uninferred_id = []
+        self.__list_of_uninferred_expr = []
         self.defined = defined
-    def addUninferredId(self, id, scope):
-        self.__list_of_uninferred_id.append((id, scope))
+    def addUninferredExpr(self, id, scope):
+        self.__list_of_uninferred_expr.append((id, scope))
     def resolveRet(self):
         pass
 
@@ -356,7 +356,7 @@ class StaticChecker(BaseVisitor, Utils):
             return CheckerResult(None, None)
         res = self.visit(ast.expr, param)
         if isSameType(res.type, UninferredType):
-            param.scope.associatedFn.type.addUninferredType((ast.expr, res.scope))
+            param.scope.associatedFn.type.addUninferredExpr((ast.expr, res.scope))
         elif param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type.ret, res.type):
             raise TypeMismatchInStatement(ast)
         return CheckerResult(None, None)
