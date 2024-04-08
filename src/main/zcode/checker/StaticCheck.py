@@ -224,7 +224,7 @@ class StaticChecker(BaseVisitor, Utils):
                 argScope.set(ast.args[index].name, paramTyp, Variable())
             if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInExpression(ast)
-        return CheckerResult(calleeType.ret, param.scope)
+        return CheckerResult(calleeType.ret, param.scope, calleeType)
 
     def visitId(self, ast, param):
         typ, scope = param.scope.lookup(ast.name, param.lookupKind)
@@ -363,7 +363,7 @@ class StaticChecker(BaseVisitor, Utils):
     def visitCallStmt(self, ast, param):
         calleeType = self.visit(ast.name, param).type
         if isSameType(calleeType.ret, UninferredType):
-            calleeType.ret = VoidType()
+            raise TypeMismatchInStatement(ast)
         if not isSameType(calleeType.ret, VoidType):
             raise TypeMismatchInStatement(ast)
         if calleeType.params.length != ast.args.length:
