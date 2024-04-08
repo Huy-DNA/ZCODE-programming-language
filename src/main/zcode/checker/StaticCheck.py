@@ -248,7 +248,7 @@ class StaticChecker(BaseVisitor, Utils):
         calleeType = self.visit(ast.name, (param.scope, param.isLoop, Function())).type
         if isSameType(calleeType.ret, VoidType()):
             raise TypeMismatchInExpression(ast)
-        if calleeType.params.length != ast.args.length:
+        if len(calleeType.params) != len(ast.args):
             raise TypeMismatchInExpression(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
@@ -271,7 +271,7 @@ class StaticChecker(BaseVisitor, Utils):
         if not isSameType(arrType, ArrayType):
             raise TypeMismatchInExpression(ast)
         size = arrType.size
-        if ast.idx.length != size.length:
+        if len(ast.idx) != len(size):
             raise TypeMismatchInExpression(ast)
         for expr in ast.idx:
             exprRes = self.visit(expr, param)
@@ -390,7 +390,7 @@ class StaticChecker(BaseVisitor, Utils):
             raise TypeMismatchInStatement(ast)
         if not isSameType(calleeType.ret, VoidType):
             raise TypeMismatchInStatement(ast)
-        if calleeType.params.length != ast.args.length:
+        if len(calleeType.params) != len(ast.args):
             raise TypeMismatchInStatement(ast)
         paramTypes = calleeType.params
         for index, paramTyp in enumerate(paramTypes):
@@ -420,6 +420,6 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
             typ = curType
         if not isSameType(typ, ArrayType):
-            return CheckerResult(ArrayType([ast.value.length], typ), param.scope, ast)
+            return CheckerResult(ArrayType([len(ast.value)], typ), param.scope, ast)
         else:
-            return CheckerResult(ArrayType([ast.value.length] + typ.size, typ.eleType), param.scope, ast)
+            return CheckerResult(ArrayType([len(ast.value)] + typ.size, typ.eleType), param.scope, ast)
