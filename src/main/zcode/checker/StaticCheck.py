@@ -304,9 +304,8 @@ class StaticChecker(BaseVisitor, Utils):
         elif not isSameType(updType, NumberType):
             raise TypeMismatchInStatement(ast.updExpr)
 
-        param = CheckerParam(param.scope.delegate(), True)
-        for stmt in ast.stmt:
-            self.visit(stmt, param)
+        param = CheckerParam(param.scope.delegate(ast.body), True)
+        self.visit(ast.body, param)
         return CheckerResult(None, None)
 
 
