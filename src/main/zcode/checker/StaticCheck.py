@@ -86,9 +86,10 @@ class CheckerParam:
         self.lookupKind = lookupKind
 
 class CheckerResult:
-    def __init__(self, typ, scope, fnType = None, isLvalue = False):
+    def __init__(self, typ, scope, exprNode = None, fnType = None, isLvalue = False):
         self.type = typ
         self.scope = scope
+        self.exprNode = exprNode
         self.fnType = fnType
         self.isLvalue = isLvalue
 
