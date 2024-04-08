@@ -23,6 +23,8 @@ class Scope:
         self.__varSymbolTable = dict()
         self.__fnSymbolTable = dict()
         self.associatedBlock = associatedBlock
+        if associatedBlock:
+            associatedBlock.scope = self
         if isinstance(associatedBlock, FuncDecl):
             self.associatedFn = associatedBlock
         elif isinstance(parent.associatedFn, FuncDecl):
