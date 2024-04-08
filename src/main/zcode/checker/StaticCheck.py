@@ -130,8 +130,9 @@ class StaticChecker(BaseVisitor, Utils):
         op = ast.op
 
         leftRes = self.visit(ast.left, param)
-
+        leftType = leftRes.type
         rightRes = self.visit(ast.right, param)
+        rightType = rightRes.type
 
         if op in ['+', '-', '*', '/', '%']:
             if isSameType(leftType, UninferredType):
@@ -190,16 +191,18 @@ class StaticChecker(BaseVisitor, Utils):
         op = ast.op
 
         res = self.visit(ast.operand, param)
+        typ = res.type
+
         if op == '-':
             if isSameType(typ, UninferredType):
-                resolveUninferredType(leftRes, NumberType())
+                resolveUninferredType(res, NumberType())
                 return CheckerResult(NumberType(), param.scope, ast)
             if isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
         if op == 'not':
             if isSameType(typ, UninferredType):
-                resolveUninferredType(leftRes, BoolType())
+                resolveUninferredType(res, BoolType())
                 return CheckerResult(BoolType(), param.scope, ast)
             if isSameType(typ, BoolType):
                 raise TypeMismatchInExpression(ast)
