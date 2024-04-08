@@ -142,7 +142,7 @@ class StaticChecker(BaseVisitor, Utils):
                 rightType = NumberType()
             if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(NumberType(), param.scope)
+            return CheckerResult(NumberType(), param.scope, ast)
         if op in ['and', 'or']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, BoolType())
@@ -152,7 +152,7 @@ class StaticChecker(BaseVisitor, Utils):
                 rightType = BoolType()
             if not isSameType(leftType, BoolType) or not isSameType(rightType, BoolType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(BoolType(), param.scope)
+            return CheckerResult(BoolType(), param.scope, ast)
         if op == '...':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, StringType())
@@ -162,7 +162,7 @@ class StaticChecker(BaseVisitor, Utils):
                 rightType = StringType()
             if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(StringType(), param.scope)
+            return CheckerResult(StringType(), param.scope, ast)
         if op in ['=', '!=', '<', '>', '<=', '>=']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, NumberType())
@@ -172,7 +172,7 @@ class StaticChecker(BaseVisitor, Utils):
                 rightType = NumberType()
             if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(BoolType(), param.scope)
+            return CheckerResult(BoolType(), param.scope, ast)
         if op == '==':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, StringType())
@@ -182,7 +182,7 @@ class StaticChecker(BaseVisitor, Utils):
                 rightType = StringType()
             if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(BoolType(), param.scope)
+            return CheckerResult(BoolType(), param.scope, ast)
 
         raise Exception('Unreachable')
 
@@ -193,17 +193,17 @@ class StaticChecker(BaseVisitor, Utils):
         if op == '-':
             if isSameType(typ, UninferredType):
                 resolveUninferredType(leftRes, NumberType())
-                return CheckerResult(NumberType(), param.scope)
+                return CheckerResult(NumberType(), param.scope, ast)
             if isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(NumberType(), param.scope)
+            return CheckerResult(NumberType(), param.scope, ast)
         if op == 'not':
             if isSameType(typ, UninferredType):
                 resolveUninferredType(leftRes, BoolType())
-                return CheckerResult(BoolType(), param.scope)
+                return CheckerResult(BoolType(), param.scope, ast)
             if isSameType(typ, BoolType):
                 raise TypeMismatchInExpression(ast)
-            return CheckerResult(BoolType(), param.scope)
+            return CheckerResult(BoolType(), param.scope, ast)
 
         raise Exception('Unreachable')
 
@@ -221,13 +221,13 @@ class StaticChecker(BaseVisitor, Utils):
                 resolveUninferredType(argRes, paramTyp)
             if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInExpression(ast)
-        return CheckerResult(calleeType.ret, param.scope, calleeType)
+        return CheckerResult(calleeType.ret, param.scope, ast, calleeType)
 
     def visitId(self, ast, param):
         typ, scope = param.scope.lookup(ast.name, param.lookupKind)
         if typ is None:
             raise Undeclared(param.lookupKind, ast.name)
-        return CheckerResult(typ, scope, True)
+        return CheckerResult(typ, scope, ast, None, True)
 
     def visitArrayCell(self, ast, param):
         arrType = self.visit(ast.arr, param).type
@@ -242,7 +242,7 @@ class StaticChecker(BaseVisitor, Utils):
                 resolveUninferredType(exprRes, NumberType())
             if isSameType(exprType, NumberType, Variable()):
                 raise TypeMismatchInExpression(expr)
-        return CheckerResult(arrType.eleType, param.scope, True)
+        return CheckerResult(arrType.eleType, param.scope, ast, None, True)
 
     def visitBlock(self, ast, param):
         param = CheckerParam(param.scope.delegate(ast), param.isLoop)
@@ -365,16 +365,16 @@ class StaticChecker(BaseVisitor, Utils):
                 argScope.set(ast.args[index].name, paramTyp, Variable())
             if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInStatement(ast)
-        return CheckerResult(calleeType.ret, param.scope)
+        return CheckerResult(calleeType.ret, param.scope, ast)
 
     def visitNumberLiteral(self, ast, param):
-        return CheckerResult(NumberType(), param.scope)
+        return CheckerResult(NumberType(), param.scope, ast)
 
     def visitBooleanLiteral(self, ast, param):
-        return CheckerResult(BoolType(), param.scope)
+        return CheckerResult(BoolType(), param.scope, ast)
 
     def visitStringLiteral(self, ast, param):
-        return CheckerResult(StringType(), param.scope)
+        return CheckerResult(StringType(), param.scope, ast)
 
     def visitArrayLiteral(self, ast, param):
         typ = None
@@ -384,6 +384,6 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
             typ = curType
         if not isSameType(typ, ArrayType):
-            return CheckerResult(ArrayType([ast.value.length], typ), param.scope)
+            return CheckerResult(ArrayType([ast.value.length], typ), param.scope, ast)
         else:
-            return CheckerResult(ArrayType([ast.value.length] + typ.size, typ.eleType), param.scope)
+            return CheckerResult(ArrayType([ast.value.length] + typ.size, typ.eleType), param.scope, ast)
