@@ -8,10 +8,11 @@ class UninferredType(Type):
     pass
 
 class FuncType(Type):
-    def __init__(self, params, ret):
+    def __init__(self, params, ret, defined):
         self.params = params
         self.ret = ret
         self.__list_of_uninferred_id = []
+        self.defined = defined
     def addUninferredId(self, id, scope):
         self.__list_of_uninferred_id.append((id, scope))
     def resolveRet(self):
@@ -109,7 +110,7 @@ def resolveUninferredType(checkerRes, typeHint):
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
-        param = CheckerParam(Scope(None, ast))
+        param = CheckerParam(Scope(None, ast), False, Variable())
 
     def visitVarDecl(self, ast, param):
         if param.scope.has(ast.name, Variable()):
