@@ -114,7 +114,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitVarDecl(self, ast, param):
         if param.scope.has(ast.name, Variable()):
-            raise Redeclared(Variable(), ast.name)
+            raise Redeclared(Variable(), ast.name) if isinstance(param.lookupKind, Parameter) else Redeclared(Parameter(), ast.name)
         if ast.varType:
             param.scope.set(ast.name, ast.varType, Variable())
             if ast.varInit:
@@ -131,7 +131,34 @@ class StaticChecker(BaseVisitor, Utils):
             param.scope.set(ast.name, UninferredType(), Variable())
 
     def visitFuncDecl(self, ast, param):
-        pass
+        if param.scope.has(ast.name.name, Function()) and param.scope.get(ast.name.name, Function()).defined() and ast.body is not None:
+            raise Redeclared(Function(), ast.name.name)
+
+        paramParam = CheckerParam(param.scope.delegate(ast), None, Parameter())
+        paramTypes = []
+        for parameter in ast.param:
+            res = self.visit(parameter, paramParam)
+            paramTypes.append(res.type)
+        retType = UninferredType()
+
+        if param.scope.has(ast.name.name, Function()):
+            fnType = param.scope.get(ast.name.name, Function())
+            if len(fnType.params) != len(paramTypes):
+                raise TypeMismatchInStatement(ast)
+            for index, paramType in enumerate(paramTypes):
+                if not isSameType(paramType, fnType.params[index]):
+                    raise TypeMismatchInStatement(ast)
+        fnType = FuncType(paramTypes, retType, ast.body is not None)
+        if not param.scope.has(ast.name.name, Function()):
+            param.scope.set(ast.name.name, fnType, Function())
+
+        if ast.body is None:
+            return CheckerResult(None, None, None, fnType)
+
+        bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
+        self.visit(ast.body, bodyParam)
+        fnType.resolveRet()
+        return CheckerResult(None, None)
 
     def visitBinaryOp(self, ast, param):
         op = ast.op
