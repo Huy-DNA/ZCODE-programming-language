@@ -155,6 +155,7 @@ class StaticChecker(BaseVisitor, Utils):
         if ast.body is None:
             return CheckerResult(None, None, None, fnType)
 
+        ast.type = fnType
         bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
         self.visit(ast.body, bodyParam)
         fnType.resolveRet()
