@@ -99,7 +99,10 @@ def isSameType(type1, type2):
     return isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2 or isinstance(type1, type2) or isinstance(type2, type1)
 
 def resolveUninferredType(checkerRes, typeHint):
-    pass
+    if checkerRes.fnType:
+        checkerRes.fnType.ret = typeHint
+    else:
+        checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
 
 class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
@@ -243,7 +246,7 @@ class StaticChecker(BaseVisitor, Utils):
             exprRes = self.visit(expr, param)
             if isSameType(exprType, UninferredType):
                 resolveUninferredType(exprRes, NumberType())
-            if isSameType(exprType, NumberType, Variable()):
+            if not isSameType(exprType, NumberType):
                 raise TypeMismatchInExpression(expr)
         return CheckerResult(arrType.eleType, param.scope, ast, None, True)
 
@@ -368,7 +371,7 @@ class StaticChecker(BaseVisitor, Utils):
                 argScope.set(ast.args[index].name, paramTyp, Variable())
             if not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInStatement(ast)
-        return CheckerResult(calleeType.ret, param.scope, ast)
+        return CheckerResult(VoidType(), param.scope, ast)
 
     def visitNumberLiteral(self, ast, param):
         return CheckerResult(NumberType(), param.scope, ast)
