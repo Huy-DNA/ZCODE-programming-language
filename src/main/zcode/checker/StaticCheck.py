@@ -177,7 +177,7 @@ class StaticChecker(BaseVisitor, Utils):
         bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
         self.visit(ast.body, bodyParam)
         fnType.resolveRet()
-        param.scope.checkNoBodyFunction()
+        bodyParam.scope.checkNoBodyFunction()
         return CheckerResult(None, None)
 
     def visitBinaryOp(self, ast, param):
@@ -305,6 +305,7 @@ class StaticChecker(BaseVisitor, Utils):
         param = CheckerParam(param.scope.delegate(ast), param.isLoop)
         for stmt in ast.stmt:
             self.visit(stmt, param)
+        param.scope.checkNoBodyFunction()
         return CheckerResult(None, param.scope)
 
     def visitIf(self, ast, param):
