@@ -13,12 +13,13 @@ class FuncType(Type):
         self.ret = ret
         self.__list_of_uninferred_expr = []
         self.defined = defined
-    def addUninferredExpr(self, id, scope):
-        self.__list_of_uninferred_expr.append((id, scope))
+    def addUninferredExpr(self, checkerRes, ast):
+        self.__list_of_uninferred_expr.append((checkerRes, ast))
     def resolveRet(self, ast):
         if isSameType(self.ret, UninferredType):
             raise TypeCannotBeInferred(ast)
-
+        for expr in self.__list_of_uninferred_expr:
+            resolveUninferredType(expr[0], expr[1], self.ret, False)
 class Scope:
     def __init__(self, parent = None, associatedBlock = None):
         self.__parent = parent
@@ -102,11 +103,15 @@ def isSameType(type1, type2):
         return isinstance(type2, ArrayType) and isSameType(type1.eleType, type2.eleType) and type1.size == type2.size
     return isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2 or isinstance(type1, type2) or isinstance(type2, type1)
 
-def resolveUninferredType(checkerRes, ast, typeHint):
+def resolveUninferredType(checkerRes, ast, typeHint, inExpression = True):
     if checkerRes.fnType:
+        if not isSameType(checkerRes.fnType.ret, UninferredType) and not isSameType(checkerRes.fnType.ret, typeHint):
+            raise TypeMismatchInExpression(ast) if inExpression else TypeMismatchInStatement(ast)
         checkerRes.fnType.ret = typeHint
-        checkerRes.fnType.resolveRet(ast)
     else:
+        varType = checkerRes.scope.get(checkerRes.exprNode.name, Variable())
+        if not isSameType(varType, UninferredType) and not isSameType(varType, typeHint):
+            raise TypeMismatchInExpression(ast) if inExpression else TypeMismatchInStatement(ast)
         checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
 
 class StaticChecker(BaseVisitor, Utils):
@@ -122,7 +127,7 @@ class StaticChecker(BaseVisitor, Utils):
                 initRes = self.visit(ast.varInit, (param.scope, param.isLoop, Variable()))
                 initType = initRes.type
                 if isSameType(initType, UninferredType):
-                    resolveUninferredType(initRes, ast.varInit, ast.varType)
+                    resolveUninferredType(initRes, ast, ast.varType, False)
                 if not isSameType(ast.varType, initType):
                     raise TypeMismatchInStatement(ast)
         elif ast.varInit:
@@ -295,17 +300,17 @@ class StaticChecker(BaseVisitor, Utils):
         condRes = self.visit(ast.expr, param)
         condType = condRes.type
         if isSameType(condType, UninferredType):
-            resolveUninferredType(condRes, ast, BoolType())
+            resolveUninferredType(condRes, ast.expr, BoolType())
         elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.expr)
         thenParam = CheckerParam(param.scope.delegate(ast.thenstmt), param.isLoop)
         self.visit(ast.thenstmt, thenParam)
 
         for elifStmt in ast.elifStmt:
-            elifCondRes = self.visit(elifStmt[0])
+            elifCondRes = self.visit(elifStmt[0], param)
             elifCondType = elifCondRes.type
             if isSameType(elifCondType, UninferredType):
-                resolveUninferredType(elifCondRes, ast, BoolType())
+                resolveUninferredType(elifCondRes, ast.elifStmt[0], BoolType())
             elif isSameType(elifCondType, BoolType):
                 raise TypeMismatchInStatement(ast.expr)
             elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.isLoop)
@@ -320,19 +325,19 @@ class StaticChecker(BaseVisitor, Utils):
         iterRes = self.visit(ast.name, param)
         iterType = iterRes.type
         if isSameType(iterType, UninferredType):
-            resolveUninferredType(iterRes, ast, NumberType())
+            resolveUninferredType(iterRes, ast.name, NumberType())
         elif not isSameType(iterType, NumberType):
             raise TypeMismatchInStatement(ast.name)
         condRes = self.visit(ast.condExpr, param)
         condType = condRes.type
         if isSameType(condType, UninferredType):
-            resolveUninferredType(condRes, ast, BoolType())
+            resolveUninferredType(condRes, ast.condExpr, BoolType())
         elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.condExpr)
         updRes = self.visit(ast.updExpr, param)
         updType = updRes.type
         if isSameType(updType, UninferredType):
-            resolveUninferredType(updRes, ast, NumberType())
+            resolveUninferredType(updRes, ast.updExpr, NumberType())
         elif not isSameType(updType, NumberType):
             raise TypeMismatchInStatement(ast.updExpr)
 
@@ -360,7 +365,7 @@ class StaticChecker(BaseVisitor, Utils):
             return CheckerResult(None, None)
         res = self.visit(ast.expr, param)
         if isSameType(res.type, UninferredType):
-            param.scope.associatedFn.type.addUninferredExpr((ast.expr, res.scope))
+            param.scope.associatedFn.type.addUninferredExpr(res, ast)
         elif param.scope.associatedFn is not None and isSameType(param.scope.associatedFn.type.ret, UninferredType):
             param.scope.associatedFn.type.ret = res.type
         elif param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type.ret, res.type):
@@ -382,9 +387,9 @@ class StaticChecker(BaseVisitor, Utils):
         if isSameType(lhsType, UninferredType) and isSameType(exprType, UninferredType):
             raise TypeCannotBeInferred(ast)
         elif isSameType(lhsType, UninferredType):
-            resolveUninferredType(lhsRes, ast, exprType)
+            resolveUninferredType(lhsRes, ast, exprType, False)
         elif isSameType(exprType, UninferredType):
-            resolveUninferredType(exprRes, ast, lhsType)
+            resolveUninferredType(exprRes, ast, lhsType, False)
         elif not isSameType(lhsType, exprType):
             raise TypeMismatchInExpression(ast)
 
