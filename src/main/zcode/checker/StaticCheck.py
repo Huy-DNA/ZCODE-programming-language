@@ -101,6 +101,7 @@ def isSameType(type1, type2):
 def resolveUninferredType(checkerRes, typeHint):
     if checkerRes.fnType:
         checkerRes.fnType.ret = typeHint
+        checkerRes.fnType.resolveRet()
     else:
         checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
 
