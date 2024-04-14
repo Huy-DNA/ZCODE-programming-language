@@ -146,7 +146,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitVarDecl(self, ast, param):
         if param.scope.has(ast.name.name, Variable()):
-            raise Redeclared(Variable(), ast.name.name) if isinstance(param.lookupKind, Parameter) else Redeclared(Parameter(), ast.name.name)
+            raise Redeclared(Variable(), ast.name.name) if not isinstance(param.lookupKind, Parameter) else Redeclared(Parameter(), ast.name.name)
         if ast.varType:
             param.scope.set(ast.name.name, ast.varType, Variable())
             if ast.varInit:
