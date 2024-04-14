@@ -582,3 +582,16 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 444))
+
+        input = """
+            var a <- 3
+            bool b <- not true
+            bool c <- not a
+
+            func main() begin
+            end
+        """
+        expect = "Type Mismatch In Expression: UnaryOp(not, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 445))
+
+

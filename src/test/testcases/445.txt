@@ -1,0 +1,8 @@
+
+            var a <- 3
+            bool b <- not true
+            bool c <- not a
+
+            func main() begin
+            end
+        
