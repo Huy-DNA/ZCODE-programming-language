@@ -1082,3 +1082,16 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 474))
+
+        input = """
+            func foo(number a) begin
+                for a until a = 10 by 1 begin
+                    a <- a + 1
+                    number a <- a * 1000
+                end
+            end
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 475))
