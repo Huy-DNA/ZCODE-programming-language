@@ -1,0 +1,4 @@
+
+            var a <- "string"
+            var b <- a + 3 + "string"
+        

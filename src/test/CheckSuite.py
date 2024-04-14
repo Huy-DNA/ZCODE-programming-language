@@ -445,3 +445,10 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Expression: BinaryOp(+, Id(a), StringLit(string))"
         self.assertTrue(TestChecker.test(input, expect, 430))
+
+        input = """
+            var a <- "string"
+            var b <- a + 3 + "string"
+        """
+        expect = "Type Mismatch In Expression: BinaryOp(+, Id(a), NumLit(3.0))"
+        self.assertTrue(TestChecker.test(input, expect, 431))
