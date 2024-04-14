@@ -9,3 +9,12 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "No Entry Point"
         self.assertTrue(TestChecker.test(input, expect, 400))
+
+    def test_no_body(self):
+        input = """
+            func f()
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 401))
