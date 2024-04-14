@@ -398,3 +398,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: VarDecl(Id(b), NumberType, None, Id(a))"
         self.assertTrue(TestChecker.test(input, expect, 425))
+
+        input = """
+            var a <- "string"
+            var b <- a ... " two string"
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 426))
