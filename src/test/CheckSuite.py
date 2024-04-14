@@ -384,3 +384,10 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: Return(Id(c))"
         self.assertTrue(TestChecker.test(input, expect, 423))
+
+    def test_expressions(self):
+        input = """
+            number b <- a
+        """
+        expect = "Undeclared Identifier: a"
+        self.assertTrue(TestChecker.test(input, expect, 424))
