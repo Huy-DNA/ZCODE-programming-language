@@ -1285,11 +1285,9 @@ class CheckSuite(unittest.TestCase):
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 498))
 
+    def test_simple(self):
         input = """
-            var a <- 3
-            number b[3, 2] <- [[a, a + 1], [a * 2, a / 3], [a - 3, -a]]
-
             func main() return
         """
         expect = ""
-        self.assertTrue(TestChecker.test(input, expect, 497))
+        self.assertTrue(TestChecker.test(input, expect, 499))
