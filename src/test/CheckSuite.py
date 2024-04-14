@@ -359,4 +359,28 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Expression: CallExpr(Id(g), [])"
         self.assertTrue(TestChecker.test(input, expect, 422))
 
-        
+        input = """
+            dynamic c
+            func f() begin
+                c <- 3
+                var a <- 3
+                begin
+                    return true
+                end
+                if (true) begin
+                    return false
+                end
+                elif (false)
+                    return true
+                elif (true)
+                    return false
+                return true
+                for a until a = 10 by 1
+                    return true
+                begin
+                    return c
+                end
+            end
+        """
+        expect = "Type Mismatch In Statement: Return(Id(c))"
+        self.assertTrue(TestChecker.test(input, expect, 423))

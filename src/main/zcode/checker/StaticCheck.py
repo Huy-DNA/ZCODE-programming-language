@@ -429,7 +429,7 @@ class StaticChecker(BaseVisitor, Utils):
             # TODO: raise another error
             raise TypeMismatchInStatement(ast)
 
-        exprRes = self.visit(ast.expr)
+        exprRes = self.visit(ast.rhs, param)
         exprType = exprRes.type
 
         if isSameType(lhsType, UninferredType) and isSameType(exprType, UninferredType):
