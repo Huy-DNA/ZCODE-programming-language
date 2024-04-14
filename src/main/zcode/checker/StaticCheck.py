@@ -136,6 +136,7 @@ class StaticChecker(BaseVisitor, Utils):
     def check(self):
         param = CheckerParam(Scope(None, self.ast), False, Variable())
         self.visit(self.ast, param)
+        return []
     def visitProgram(self, ast, param):
         for decl in ast.decl:
             self.visit(decl, param)
