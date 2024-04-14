@@ -164,7 +164,7 @@ class StaticChecker(BaseVisitor, Utils):
             param.scope.set(ast.name, UninferredType(), Variable())
 
     def visitFuncDecl(self, ast, param):
-        if param.scope.has(ast.name.name, Function()) and param.scope.get(ast.name.name, Function()).defined() and ast.body is not None:
+        if param.scope.has(ast.name.name, Function()) and param.scope.get(ast.name.name, Function()).defined and ast.body is not None:
             raise Redeclared(Function(), ast.name.name)
 
         paramParam = CheckerParam(param.scope.delegate(ast), None, Parameter())
