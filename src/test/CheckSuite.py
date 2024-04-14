@@ -356,7 +356,7 @@ class CheckSuite(unittest.TestCase):
                 return g()
             end
         """
-        expect = "Type Mismatch In Expression: CallExpr(Id(g), [])"
+        expect = "Type Mismatch In Statement: Return(CallExpr(Id(g), []))"
         self.assertTrue(TestChecker.test(input, expect, 422))
 
         input = """
@@ -594,4 +594,21 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Mismatch In Expression: UnaryOp(not, Id(a))"
         self.assertTrue(TestChecker.test(input, expect, 445))
 
+        input = """
+            var a <- 1
+            var b <- "1"
+            var c <- true
+            dynamic d
 
+            func f() begin
+                d <- (1 = a) and ("1" == b) or c
+                return true
+                return d
+            end
+
+            func main() begin
+                bool f <- f()
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 446))
