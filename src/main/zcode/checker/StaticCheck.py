@@ -177,13 +177,14 @@ class StaticChecker(BaseVisitor, Utils):
 
         if param.scope.has(ast.name.name, Function()):
             fnType = param.scope.get(ast.name.name, Function())
+            fnType.defined = ast.body is not None
             if len(fnType.params) != len(paramTypes):
                 raise TypeMismatchInStatement(ast)
             for index, paramType in enumerate(paramTypes):
                 if not isSameType(paramType, fnType.params[index]):
                     raise TypeMismatchInStatement(ast)
-        fnType = FuncType(paramTypes, retType, ast.body is not None)
-        if not param.scope.has(ast.name.name, Function()) or not param.scope.get(ast.name.name, Function()).defined:
+        else:
+            fnType = FuncType(paramTypes, retType, ast.body is not None)
             param.scope.set(ast.name.name, fnType, Function())
 
         if ast.body is None:
