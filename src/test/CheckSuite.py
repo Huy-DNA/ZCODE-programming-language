@@ -28,3 +28,13 @@ class CheckSuite(unittest.TestCase):
         expect = "No Function Definition: f"
         self.assertTrue(TestChecker.test(input, expect, 402))
 
+        input = """
+            func f()
+            func main() begin
+                number f <- f()
+            end
+            func f() return 3
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 403))
+
