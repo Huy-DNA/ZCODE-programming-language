@@ -28,7 +28,7 @@ class CheckSuite(unittest.TestCase):
         expect = "No Function Definition: f"
         self.assertTrue(TestChecker.test(input, expect, 402))
 
-    def forward_decl(self):
+    def test_forward_decl(self):
         input = """
             func f()
             func main() begin
@@ -38,3 +38,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 403))
+
+        input = """
+            func f()
+            func main() begin
+                number f <- f()
+            end
+            func f() return "abc"
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 404))
