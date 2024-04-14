@@ -1156,3 +1156,67 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Undeclared Function: f"
         self.assertTrue(TestChecker.test(input, expect, 482))
+
+    def test_mismatched_types(self):
+        input = """
+            number a <- 3
+            string b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), StringType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 483))
+
+        input = """
+            number a <- 3
+            bool b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), BoolType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 484))
+
+        input = """
+            number a <- 3
+            number b[1] <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), ArrayType([1.0], NumberType), None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 485))
+
+        input = """
+            bool a <- true
+            string b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), StringType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 486))
+
+        input = """
+            bool a <- true
+            number b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), NumberType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 487))
+
+        input = """
+            bool a <- true
+            bool b[1, 2] <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), ArrayType([1.0, 2.0], BoolType), None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 488))
+
+        input = """
+            string a <- "abcd"
+            number b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), NumberType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 489))
+
+        input = """
+            string a <- "abcd"
+            bool b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), BoolType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 490))
+
+        input = """
+            string a <- "abcd"
+            string b[1,2,3,4] <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), ArrayType([1.0, 2.0, 3.0, 4.0], StringType), None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 491))
