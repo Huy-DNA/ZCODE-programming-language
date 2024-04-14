@@ -1135,3 +1135,16 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(ad), NumberType, None, None), VarDecl(Id(aaaa), StringType, None, None), VarDecl(Id(b), NumberType, None, None)], None)"
         self.assertTrue(TestChecker.test(input, expect, 479))
+
+    def test_undeclared(self):
+        input = """
+            func foo(number a, string c) return b
+        """
+        expect = "Undeclared Identifier: b"
+        self.assertTrue(TestChecker.test(input, expect, 480))
+
+        input = """
+            func foo(number a, string c) return f()
+        """
+        expect = "Undeclared Function: f"
+        self.assertTrue(TestChecker.test(input, expect, 481))
