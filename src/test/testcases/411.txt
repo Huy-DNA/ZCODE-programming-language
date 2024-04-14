@@ -1,0 +1,12 @@
+
+            func f() begin
+                if (true)
+                    return false
+                elif (false)
+                    return true
+                elif (true)
+                    return true
+                else
+                    return "string"
+            end
+        
