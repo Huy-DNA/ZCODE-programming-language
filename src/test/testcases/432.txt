@@ -1,0 +1,7 @@
+
+            var a <- "string"
+            bool b <- a == "string"
+
+            func main() begin
+            end
+        
