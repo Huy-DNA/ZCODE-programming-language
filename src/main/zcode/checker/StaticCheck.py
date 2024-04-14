@@ -133,10 +133,10 @@ class StaticChecker(BaseVisitor, Utils):
         param.scope.checkNoBodyFunction()
 
     def visitVarDecl(self, ast, param):
-        if param.scope.has(ast.name, Variable()):
-            raise Redeclared(Variable(), ast.name) if isinstance(param.lookupKind, Parameter) else Redeclared(Parameter(), ast.name)
+        if param.scope.has(ast.name.name, Variable()):
+            raise Redeclared(Variable(), ast.name.name) if isinstance(param.lookupKind, Parameter) else Redeclared(Parameter(), ast.name.name)
         if ast.varType:
-            param.scope.set(ast.name, ast.varType, Variable())
+            param.scope.set(ast.name.name, ast.varType, Variable())
             if ast.varInit:
                 initRes = self.visit(ast.varInit, (param.scope, param.isLoop, Variable()))
                 initType = initRes.type
