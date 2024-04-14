@@ -140,7 +140,7 @@ class StaticChecker(BaseVisitor, Utils):
         if ast.varType:
             param.scope.set(ast.name.name, ast.varType, Variable())
             if ast.varInit:
-                initRes = self.visit(ast.varInit, (param.scope, param.isLoop, Variable()))
+                initRes = self.visit(ast.varInit, CheckerParam(param.scope, param.isLoop, Variable()))
                 initType = initRes.type
                 if isSameType(initType, UninferredType):
                     resolveUninferredType(initRes, ast, ast.varType, False)
@@ -271,7 +271,7 @@ class StaticChecker(BaseVisitor, Utils):
         raise Exception('Unreachable')
 
     def visitCallExpr(self, ast, param):
-        calleeType = self.visit(ast.name, (param.scope, param.isLoop, Function())).type
+        calleeType = self.visit(ast.name, CheckerParam(param.scope, param.isLoop, Function())).type
         if isSameType(calleeType.ret, VoidType()):
             raise TypeMismatchInExpression(ast)
         if len(calleeType.params) != len(ast.args):
