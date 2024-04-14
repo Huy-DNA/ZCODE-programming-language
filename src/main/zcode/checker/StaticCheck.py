@@ -175,8 +175,8 @@ class StaticChecker(BaseVisitor, Utils):
             paramTypes.append(res.type)
         retType = UninferredType()
 
-        if param.scope.has(ast.name.name, Function()):
-            fnType = param.scope.get(ast.name.name, Function())
+        if param.scope.lookup(ast.name.name, Function())[0]:
+            fnType, _ = param.scope.lookup(ast.name.name, Function())
             fnType.defined = ast.body is not None
             if len(fnType.params) != len(paramTypes):
                 raise TypeMismatchInStatement(ast)
