@@ -992,3 +992,11 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 467))
+
+    def test_redeclared(self):
+        input = """
+            var a <- 3
+            var a <- 4
+        """
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input, expect, 468))
