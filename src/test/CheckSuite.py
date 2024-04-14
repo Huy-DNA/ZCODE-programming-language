@@ -18,3 +18,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "No Function Definition: f"
         self.assertTrue(TestChecker.test(input, expect, 401))
+
+        input = """
+            func f()
+            func main() begin
+                number f <- f()
+            end
+        """
+        expect = "No Function Definition: f"
+        self.assertTrue(TestChecker.test(input, expect, 402))
+
