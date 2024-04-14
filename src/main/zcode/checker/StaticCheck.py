@@ -134,7 +134,7 @@ class StaticChecker(BaseVisitor, Utils):
     def __init__(self, ast):
         self.ast = ast
     def check(self):
-        param = CheckerParam(Scope(None, self.ast), False, Variable())
+        param = CheckerParam(Scope(None, self.ast), False, Identifier())
         self.visit(self.ast, param)
         return ""
     def visitProgram(self, ast, param):
@@ -150,7 +150,7 @@ class StaticChecker(BaseVisitor, Utils):
         if ast.varType:
             param.scope.set(ast.name.name, ast.varType, Variable())
             if ast.varInit:
-                initRes = self.visit(ast.varInit, CheckerParam(param.scope, param.isLoop, Variable()))
+                initRes = self.visit(ast.varInit, CheckerParam(param.scope, param.isLoop, Identifier()))
                 initType = initRes.type
                 if isSameType(initType, UninferredType):
                     resolveUninferredType(initRes, ast, ast.varType, False)
@@ -191,7 +191,7 @@ class StaticChecker(BaseVisitor, Utils):
             return CheckerResult(None, None, None, fnType)
 
         ast.type = fnType
-        bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
+        bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Identifier())
         self.visit(ast.body, bodyParam)
         fnType.resolveRet(ast)
         bodyParam.scope.checkNoBodyFunction()
