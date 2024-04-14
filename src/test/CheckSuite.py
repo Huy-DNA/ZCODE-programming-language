@@ -131,3 +131,17 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: Return(StringLit(string))"
         self.assertTrue(TestChecker.test(input, expect, 411))
+
+        input = """
+            func f() begin
+                if (true)
+                    return false
+                elif (false)
+                    return true
+                elif (true)
+                    return false
+                return 3
+            end
+        """
+        expect = "Type Mismatch In Statement: Return(NumLit(3.0))"
+        self.assertTrue(TestChecker.test(input, expect, 412))
