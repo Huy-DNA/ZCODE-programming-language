@@ -1000,3 +1000,12 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Redeclared Variable: a"
         self.assertTrue(TestChecker.test(input, expect, 468))
+
+        input = """
+            func foo() begin
+                var a <- 3
+                var a <- 4
+            end
+        """
+        expect = "Redeclared Variable: a"
+        self.assertTrue(TestChecker.test(input, expect, 469))
