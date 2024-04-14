@@ -1095,3 +1095,21 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 475))
+
+        input = """
+            func foo(number a, string c)
+
+            func foo(number b)
+        """
+        expect = "Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(b), NumberType, None, None)], None)"
+        self.assertTrue(TestChecker.test(input, expect, 476))
+
+        input = """
+            func foo(number a, string c)
+
+            func foo(number a, string c) return
+
+            func foo(number a, string c) return
+        """
+        expect = "Redeclared Function: foo"
+        self.assertTrue(TestChecker.test(input, expect, 477))
