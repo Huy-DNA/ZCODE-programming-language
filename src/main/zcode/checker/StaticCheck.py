@@ -286,14 +286,14 @@ class StaticChecker(BaseVisitor, Utils):
             if isSameType(typ, UninferredType):
                 resolveUninferredType(res, ast, NumberType())
                 return CheckerResult(NumberType(), param.scope, ast)
-            elif isSameType(typ, NumberType):
+            elif not isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
         if op == 'not':
             if isSameType(typ, UninferredType):
                 resolveUninferredType(res, ast, BoolType())
                 return CheckerResult(BoolType(), param.scope, ast)
-            elif isSameType(typ, BoolType):
+            elif not isSameType(typ, BoolType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope, ast)
 
