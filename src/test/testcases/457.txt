@@ -1,0 +1,17 @@
+
+            dynamic e
+            dynamic d
+            func t() begin
+                if (true)
+                    d <- [[1], [2]]
+                else
+                    d <- [[2], [3]]
+                e <- d
+                return e
+            end
+
+            func main() begin
+                var e <- t()
+                number t[2, 1] <- e
+            end
+        
