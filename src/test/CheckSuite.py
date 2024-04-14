@@ -391,3 +391,10 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Undeclared Identifier: a"
         self.assertTrue(TestChecker.test(input, expect, 424))
+
+        input = """
+            var a <- "string"
+            number b <- a
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(b), NumberType, None, Id(a))"
+        self.assertTrue(TestChecker.test(input, expect, 425))
