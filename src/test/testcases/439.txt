@@ -1,0 +1,7 @@
+
+            var a <- 3
+            number b <- 3 * -a
+
+            func main() begin
+            end
+        

@@ -522,3 +522,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 438))
+
+        input = """
+            var a <- 3
+            number b <- 3 * -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 439))
