@@ -350,7 +350,7 @@ class StaticChecker(BaseVisitor, Utils):
         if isSameType(condType, UninferredType):
             resolveUninferredType(condRes, ast.expr, BoolType())
         elif not isSameType(condType, BoolType):
-            raise TypeMismatchInStatement(ast.expr)
+            raise TypeMismatchInExpression(ast.expr)
         thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.inLoop, Identifier())
         self.visit(ast.thenStmt, thenParam)
 
@@ -360,7 +360,7 @@ class StaticChecker(BaseVisitor, Utils):
             if isSameType(elifCondType, UninferredType):
                 resolveUninferredType(elifCondRes, ast.elifStmt[0], BoolType())
             elif not isSameType(elifCondType, BoolType):
-                raise TypeMismatchInStatement(ast.elifStmt[0])
+                raise TypeMismatchInExpression(ast.elifStmt[0])
             elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.inLoop, Identifier())
             self.visit(elifStmt[1], elifThenParam)
 
@@ -375,19 +375,19 @@ class StaticChecker(BaseVisitor, Utils):
         if isSameType(iterType, UninferredType):
             resolveUninferredType(iterRes, ast.name, NumberType())
         elif not isSameType(iterType, NumberType):
-            raise TypeMismatchInStatement(ast.name)
+            raise TypeMismatchInExpression(ast.name)
         condRes = self.visit(ast.condExpr, param)
         condType = condRes.type
         if isSameType(condType, UninferredType):
             resolveUninferredType(condRes, ast.condExpr, BoolType())
         elif not isSameType(condType, BoolType):
-            raise TypeMismatchInStatement(ast.condExpr)
+            raise TypeMismatchInExpression(ast.condExpr)
         updRes = self.visit(ast.updExpr, param)
         updType = updRes.type
         if isSameType(updType, UninferredType):
             resolveUninferredType(updRes, ast.updExpr, NumberType())
         elif not isSameType(updType, NumberType):
-            raise TypeMismatchInStatement(ast.updExpr)
+            raise TypeMismatchInExpression(ast.updExpr)
 
         param = CheckerParam(param.scope.delegate(ast.body), True, Identifier())
         self.visit(ast.body, param)
