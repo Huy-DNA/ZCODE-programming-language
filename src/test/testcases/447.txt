@@ -1,0 +1,14 @@
+
+            dynamic e
+            dynamic d
+
+            func f() begin
+                d <- e ... "2"
+                return d
+            end
+
+            func main() begin
+                var a <- f()
+                string d <- a
+            end
+        

@@ -612,3 +612,21 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 446))
+
+    def test_inference(self):
+        input = """
+            dynamic e
+            dynamic d
+
+            func f() begin
+                d <- e ... "2"
+                return d
+            end
+
+            func main() begin
+                var a <- f()
+                string d <- a
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 447))
