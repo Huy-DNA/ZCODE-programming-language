@@ -92,9 +92,9 @@ class Scope:
         return Scope(self, associatedBlock)
 
 class CheckerParam:
-    def __init__(self, scope, isLoop = False, lookupKind = None):
+    def __init__(self, scope, inLoop = False, lookupKind = None):
         self.scope = scope
-        self.isLoop = isLoop
+        self.inLoop = inLoop
         self.lookupKind = lookupKind
 
 class CheckerResult:
@@ -150,7 +150,7 @@ class StaticChecker(BaseVisitor, Utils):
         if ast.varType:
             param.scope.set(ast.name.name, ast.varType, Variable())
             if ast.varInit:
-                initRes = self.visit(ast.varInit, CheckerParam(param.scope, param.isLoop, Identifier()))
+                initRes = self.visit(ast.varInit, CheckerParam(param.scope, param.inLoop, Identifier()))
                 initType = initRes.type
                 if isSameType(initType, UninferredType):
                     resolveUninferredType(initRes, ast, ast.varType, False)
@@ -300,7 +300,7 @@ class StaticChecker(BaseVisitor, Utils):
         raise Exception('Unreachable')
 
     def visitCallExpr(self, ast, param):
-        calleeType = self.visit(ast.name, CheckerParam(param.scope, param.isLoop, Function())).type
+        calleeType = self.visit(ast.name, CheckerParam(param.scope, param.inLoop, Function())).type
         if isSameType(calleeType.ret, VoidType):
             raise TypeMismatchInExpression(ast)
         if len(calleeType.params) != len(ast.args):
@@ -338,7 +338,7 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(arrType.eleType, param.scope, ast, None, True)
 
     def visitBlock(self, ast, param):
-        param = CheckerParam(param.scope.delegate(ast), param.isLoop, Identifier())
+        param = CheckerParam(param.scope.delegate(ast), param.inLoop, Identifier())
         for stmt in ast.stmt:
             self.visit(stmt, param)
         param.scope.checkNoBodyFunction()
@@ -351,7 +351,7 @@ class StaticChecker(BaseVisitor, Utils):
             resolveUninferredType(condRes, ast.expr, BoolType())
         elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.expr)
-        thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.isLoop, Identifier())
+        thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.inLoop, Identifier())
         self.visit(ast.thenStmt, thenParam)
 
         for elifStmt in ast.elifStmt:
@@ -361,11 +361,11 @@ class StaticChecker(BaseVisitor, Utils):
                 resolveUninferredType(elifCondRes, ast.elifStmt[0], BoolType())
             elif not isSameType(elifCondType, BoolType):
                 raise TypeMismatchInStatement(ast.elifStmt[0])
-            elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.isLoop, Identifier())
+            elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.inLoop, Identifier())
             self.visit(elifStmt[1], elifThenParam)
 
         if ast.elseStmt is not None:
-            elseParam = CheckerParam(param.scope.delegate(ast.elseStmt), param.isLoop, Identifier())
+            elseParam = CheckerParam(param.scope.delegate(ast.elseStmt), param.inLoop, Identifier())
             self.visit(ast.elseStmt, elseParam)
         return CheckerResult(None, None)
 
