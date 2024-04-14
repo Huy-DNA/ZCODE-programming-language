@@ -207,51 +207,69 @@ class StaticChecker(BaseVisitor, Utils):
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, NumberType())
                 leftType = NumberType()
+            elif not isSameType(leftType, NumberType):
+                raise TypeMismatchInExpression(ast)
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(rightRes, ast, NumberType())
                 rightType = NumberType()
-            if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
+            elif not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
         if op in ['and', 'or']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, BoolType())
                 leftType = BoolType()
+            elif not isSameType(leftType, BoolType):
+                raise TypeMismatchInExpression(ast)
+
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(rightRes, ast, BoolType())
                 rightType = BoolType()
-            if not isSameType(leftType, BoolType) or not isSameType(rightType, BoolType):
+            elif not isSameType(rightType, BoolType):
                 raise TypeMismatchInExpression(ast)
+
             return CheckerResult(BoolType(), param.scope, ast)
         if op == '...':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 leftType = StringType()
+            elif not isSameType(leftType, StringType):
+                raise TypeMismatchInExpression(ast)
+
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 rightType = StringType()
-            if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
+            elif not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
+
             return CheckerResult(StringType(), param.scope, ast)
         if op in ['=', '!=', '<', '>', '<=', '>=']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, NumberType())
                 leftType = NumberType()
+            elif not isSameType(leftType, NumberType):
+                raise TypeMismatchInExpression(ast)
+
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, NumberType())
                 rightType = NumberType()
-            if not isSameType(leftType, NumberType) or not isSameType(rightType, NumberType):
+            elif not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
+
             return CheckerResult(BoolType(), param.scope, ast)
         if op == '==':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 leftType = StringType()
+            elif not isSameType(leftType, StringType):
+                raise TypeMismatchInExpression(ast)
+
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 rightType = StringType()
-            if not isSameType(leftType, StringType) or not isSameType(rightType, StringType):
+            elif not isSameType(rightType, StringType):
                 raise TypeMismatchInExpression(ast)
+
             return CheckerResult(BoolType(), param.scope, ast)
 
         raise Exception('Unreachable')
@@ -266,14 +284,14 @@ class StaticChecker(BaseVisitor, Utils):
             if isSameType(typ, UninferredType):
                 resolveUninferredType(res, ast, NumberType())
                 return CheckerResult(NumberType(), param.scope, ast)
-            if isSameType(typ, NumberType):
+            elif isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
         if op == 'not':
             if isSameType(typ, UninferredType):
                 resolveUninferredType(res, ast, BoolType())
                 return CheckerResult(BoolType(), param.scope, ast)
-            if isSameType(typ, BoolType):
+            elif isSameType(typ, BoolType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(BoolType(), param.scope, ast)
 
@@ -291,7 +309,7 @@ class StaticChecker(BaseVisitor, Utils):
             argTyp = argRes.type
             if isSameType(argTyp, UninferredType):
                 resolveUninferredType(argRes, ast, paramTyp)
-            if not isSameType(paramTyp, argTyp):
+            elif not isSameType(paramTyp, argTyp):
                 raise TypeMismatchInExpression(ast)
         return CheckerResult(calleeType.ret, param.scope, ast, calleeType)
 
@@ -312,8 +330,9 @@ class StaticChecker(BaseVisitor, Utils):
             exprRes = self.visit(expr, param)
             if isSameType(exprType, UninferredType):
                 resolveUninferredType(exprRes, ast, NumberType())
-            if not isSameType(exprType, NumberType):
+            elif not isSameType(exprType, NumberType):
                 raise TypeMismatchInExpression(expr)
+
         return CheckerResult(arrType.eleType, param.scope, ast, None, True)
 
     def visitBlock(self, ast, param):
