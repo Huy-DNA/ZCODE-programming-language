@@ -1123,3 +1123,15 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 478))
+
+        input = """
+            func foo(number a, string c)
+
+            func foo(number b, string d)
+
+            func foo(number cd, string ed)
+
+            func foo(number ad, string aaaa, number b)
+        """
+        expect = "Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(ad), NumberType, None, None), VarDecl(Id(aaaa), StringType, None, None), VarDecl(Id(b), NumberType, None, None)], None)"
+        self.assertTrue(TestChecker.test(input, expect, 479))

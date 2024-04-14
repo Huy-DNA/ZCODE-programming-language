@@ -1,0 +1,9 @@
+
+            func foo(number a, string c)
+
+            func foo(number b, string d)
+
+            func foo(number cd, string ed)
+
+            func foo(number ad, string aaaa, number b)
+        
