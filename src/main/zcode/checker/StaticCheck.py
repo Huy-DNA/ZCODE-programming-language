@@ -338,7 +338,7 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(arrType.eleType, param.scope, ast, None, True)
 
     def visitBlock(self, ast, param):
-        param = CheckerParam(param.scope.delegate(ast), param.isLoop)
+        param = CheckerParam(param.scope.delegate(ast), param.isLoop, Identifier())
         for stmt in ast.stmt:
             self.visit(stmt, param)
         param.scope.checkNoBodyFunction()
@@ -351,7 +351,7 @@ class StaticChecker(BaseVisitor, Utils):
             resolveUninferredType(condRes, ast.expr, BoolType())
         elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.expr)
-        thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.isLoop)
+        thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.isLoop, Identifier())
         self.visit(ast.thenStmt, thenParam)
 
         for elifStmt in ast.elifStmt:
@@ -361,11 +361,11 @@ class StaticChecker(BaseVisitor, Utils):
                 resolveUninferredType(elifCondRes, ast.elifStmt[0], BoolType())
             elif not isSameType(elifCondType, BoolType):
                 raise TypeMismatchInStatement(ast.elifStmt[0])
-            elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.isLoop)
+            elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.isLoop, Identifier())
             self.visit(elifStmt[1], elifThenParam)
 
         if ast.elseStmt is not None:
-            elseParam = CheckerParam(param.scope.delegate(ast.elseStmt), param.isLoop)
+            elseParam = CheckerParam(param.scope.delegate(ast.elseStmt), param.isLoop, Identifier())
             self.visit(ast.elseStmt, elseParam)
         return CheckerResult(None, None)
 
@@ -389,7 +389,7 @@ class StaticChecker(BaseVisitor, Utils):
         elif not isSameType(updType, NumberType):
             raise TypeMismatchInStatement(ast.updExpr)
 
-        param = CheckerParam(param.scope.delegate(ast.body), True)
+        param = CheckerParam(param.scope.delegate(ast.body), True, Identifier())
         self.visit(ast.body, param)
         return CheckerResult(None, None)
 
