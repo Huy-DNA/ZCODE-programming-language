@@ -30,7 +30,7 @@ class Scope:
             associatedBlock.scope = self
         if isinstance(associatedBlock, FuncDecl):
             self.associatedFn = associatedBlock
-        elif isinstance(parent.associatedFn, FuncDecl):
+        elif parent and isinstance(parent.associatedFn, FuncDecl):
             self.associatedFn = parent.associatedFn
         else:
             self.associatedFn = None
