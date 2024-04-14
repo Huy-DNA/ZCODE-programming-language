@@ -351,8 +351,8 @@ class StaticChecker(BaseVisitor, Utils):
             resolveUninferredType(condRes, ast.expr, BoolType())
         elif not isSameType(condType, BoolType):
             raise TypeMismatchInStatement(ast.expr)
-        thenParam = CheckerParam(param.scope.delegate(ast.thenstmt), param.isLoop)
-        self.visit(ast.thenstmt, thenParam)
+        thenParam = CheckerParam(param.scope.delegate(ast.thenStmt), param.isLoop)
+        self.visit(ast.thenStmt, thenParam)
 
         for elifStmt in ast.elifStmt:
             elifCondRes = self.visit(elifStmt[0], param)
