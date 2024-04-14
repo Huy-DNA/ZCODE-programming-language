@@ -1021,3 +1021,10 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Redeclared Parameter: a"
         self.assertTrue(TestChecker.test(input, expect, 470))
+
+        input = """
+            func foo(number a, string a) begin
+            end
+        """
+        expect = "Redeclared Parameter: a"
+        self.assertTrue(TestChecker.test(input, expect, 471))
