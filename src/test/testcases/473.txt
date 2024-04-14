@@ -1,0 +1,10 @@
+
+            dynamic a
+            dynamic b
+
+            func main() begin
+                var a <- 3
+                b <- a
+                var b <- b
+            end
+        
