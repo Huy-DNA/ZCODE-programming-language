@@ -108,7 +108,16 @@ class CheckerResult:
 def isSameType(type1, type2):
     if isinstance(type1, ArrayType):
         return isinstance(type2, ArrayType) and isSameType(type1.eleType, type2.eleType) and type1.size == type2.size
-    return isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2 or isinstance(type1, type2) or isinstance(type2, type1)
+    if isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2:
+        return True
+    try:
+        return isinstance(type1, type2)
+    except Exception:
+        pass
+    try:
+        return isinstance(type2, type1)
+    except Exception:
+        return False
 
 def resolveUninferredType(checkerRes, ast, typeHint, inExpression = True):
     if checkerRes.fnType:
