@@ -326,17 +326,20 @@ class StaticChecker(BaseVisitor, Utils):
         if not isSameType(arrType, ArrayType):
             raise TypeMismatchInExpression(ast)
         size = arrType.size
-        if len(ast.idx) != len(size):
+        if len(ast.idx) > len(size):
             raise TypeMismatchInExpression(ast)
         for expr in ast.idx:
             exprRes = self.visit(expr, param)
+            exprType = exprRes.type
             if isSameType(exprType, UninferredType):
                 resolveUninferredType(exprRes, ast, NumberType())
             elif not isSameType(exprType, NumberType):
                 raise TypeMismatchInExpression(expr)
 
-        return CheckerResult(arrType.eleType, param.scope, ast, None, True)
-
+        if len(ast.idx) == len(size):
+            return CheckerResult(arrType.eleType, param.scope, ast, None, True)
+        else:
+            return CheckerResult(ArrayType(size[len(ast.idx):], arrType.eleType), param.scope, ast, None, True)
     def visitBlock(self, ast, param):
         param = CheckerParam(param.scope.delegate(ast), param.inLoop, Identifier())
         for stmt in ast.stmt:
