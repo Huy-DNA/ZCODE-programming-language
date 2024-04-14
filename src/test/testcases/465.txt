@@ -1,0 +1,9 @@
+
+            dynamic d
+            dynamic e
+
+            func main() begin
+                var d <- [[[[[[[1]]]]]]]
+                e <- d
+            end
+        

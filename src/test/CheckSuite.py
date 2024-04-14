@@ -950,4 +950,14 @@ class CheckSuite(unittest.TestCase):
         expect = "Type Cannot Be Inferred: AssignStmt(Id(d), Id(e))"
         self.assertTrue(TestChecker.test(input, expect, 464))
 
+        input = """
+            dynamic d
+            dynamic e
 
+            func main() begin
+                var d <- [[[[[[[1]]]]]]]
+                e <- d
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 465))
