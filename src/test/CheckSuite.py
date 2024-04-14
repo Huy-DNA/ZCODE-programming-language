@@ -1051,3 +1051,34 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 473))
+
+        input = """
+            dynamic a
+            func main() begin
+                dynamic a
+                begin
+                    dynamic a
+                    begin
+                        dynamic a
+                        begin
+                            dynamic a
+                        end
+                    end
+                end
+                if (true) begin
+                    dynamic a
+                end
+                elif (true) begin
+                    dynamic a
+                end
+                else begin
+                    dynamic a
+                end
+                a <- 1
+                for a until a = 10 by 1 begin
+                    dynamic a
+                end
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 474))
