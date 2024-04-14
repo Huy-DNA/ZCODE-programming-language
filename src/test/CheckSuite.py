@@ -961,3 +961,19 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 465))
+
+    def test_array_type(self):
+        input = """
+            var a_d <- [[[1, 2, 3], [1, 2, 3]]]
+            number a[1, 2, 3] <- a_d
+            dynamic b_d <- a[0]
+            number b[2, 3] <- b_d
+            dynamic c_d <- b[1]
+            number c[3] <- c_d
+            dynamic d_d <- c[0]
+            number d <- d_d
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 466))
