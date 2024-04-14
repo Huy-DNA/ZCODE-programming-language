@@ -16,7 +16,9 @@ class FuncType(Type):
     def addUninferredExpr(self, checkerRes, ast):
         self.__list_of_uninferred_expr.append((checkerRes, ast))
     def resolveRet(self, ast):
-        if isSameType(self.ret, UninferredType):
+        if len(self.__list_of_uninferred_expr) == 0:
+            self.ret = VoidType()
+        elif isSameType(self.ret, UninferredType):
             raise TypeCannotBeInferred(ast)
         for expr in self.__list_of_uninferred_expr:
             resolveUninferredType(expr[0], expr[1], self.ret, False)
@@ -79,7 +81,7 @@ class Scope:
             return name in self.__varSymbolTable
 
     def checkNoBodyFunction(self):
-        for name, typ in self.__fnSymbolTable:
+        for name, typ in self.__fnSymbolTable.items():
             if not typ.defined:
                 raise NoDefinition(name)
 
