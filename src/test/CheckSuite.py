@@ -1148,3 +1148,11 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Undeclared Function: f"
         self.assertTrue(TestChecker.test(input, expect, 481))
+
+        input = """
+            func foo(number a, string c) begin
+                f()
+            end
+        """
+        expect = "Undeclared Function: f"
+        self.assertTrue(TestChecker.test(input, expect, 482))
