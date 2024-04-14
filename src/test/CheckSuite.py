@@ -532,3 +532,53 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 439))
+
+        input = """
+            var a <- 3
+            bool b <- 3 > -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 440))
+
+        input = """
+            var a <- 3
+            bool b <- 3 >= -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 441))
+
+        input = """
+            var a <- 3
+            bool b <- 3 < -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 442))
+
+        input = """
+            var a <- 3
+            bool b <- 3 <= -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 443))
+
+        input = """
+            var a <- 3
+            bool b <- 3 = -a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 444))

@@ -1,0 +1,7 @@
+
+            var a <- 3
+            bool b <- 3 = -a
+
+            func main() begin
+            end
+        
