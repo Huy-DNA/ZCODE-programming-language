@@ -977,3 +977,18 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 466))
+
+        input = """
+            var a <- [[[1, 2, 3], [1, 2, 3]]]
+            dynamic b <- a[0]
+            dynamic c <- b[1]
+            dynamic d <- c[0]
+
+            func foo(number a[1, 2, 3], number b[2, 3], number c[3], number d) return
+
+            func main() begin
+                foo(a, b, c, d)
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 467))
