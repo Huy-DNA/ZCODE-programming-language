@@ -128,7 +128,7 @@ class StaticChecker(BaseVisitor, Utils):
     def visitProgram(self, ast, param):
         for decl in ast.decl:
             self.visit(decl, param)
-        if not param.scope.has("main", Function):
+        if not param.scope.has("main", Function()):
             raise NoEntryPoint()
         param.scope.checkNoBodyFunction()
 
