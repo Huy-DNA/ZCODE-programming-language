@@ -16,5 +16,5 @@ class CheckSuite(unittest.TestCase):
             func main() begin
             end
         """
-        expect = ""
+        expect = "No Function Definition: f"
         self.assertTrue(TestChecker.test(input, expect, 401))
