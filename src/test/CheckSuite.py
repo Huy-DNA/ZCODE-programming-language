@@ -238,3 +238,25 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: Return(Id(b))"
         self.assertTrue(TestChecker.test(input, expect, 417))
+
+        input = """
+            func f() begin
+                var a <- 3
+                var b <- a
+                begin
+                    return true
+                end
+                if (true) begin
+                    return false
+                end
+                elif (false)
+                    return true
+                elif (true)
+                    return false
+                return true
+                for a until a = 10 by 1
+                    return b
+            end
+        """
+        expect = "Type Mismatch In Statement: Return(Id(b))"
+        self.assertTrue(TestChecker.test(input, expect, 418))
