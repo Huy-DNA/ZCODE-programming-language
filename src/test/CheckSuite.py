@@ -757,3 +757,30 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Expression: Id(e)"
         self.assertTrue(TestChecker.test(input, expect, 454))
+
+        input = """
+            dynamic g
+            dynamic d
+            dynamic e
+
+            func t() begin
+                if (e)
+                    d <- 10
+                else
+                    d <- 3
+            end
+
+            func f() begin
+                g <- d
+            end
+
+            func main() begin
+                t()
+                f()
+                bool e <- e
+                number d1 <- d
+                number g1 <- g
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 455))
