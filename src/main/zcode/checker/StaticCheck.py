@@ -272,7 +272,7 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitCallExpr(self, ast, param):
         calleeType = self.visit(ast.name, CheckerParam(param.scope, param.isLoop, Function())).type
-        if isSameType(calleeType.ret, VoidType()):
+        if isSameType(calleeType.ret, VoidType):
             raise TypeMismatchInExpression(ast)
         if len(calleeType.params) != len(ast.args):
             raise TypeMismatchInExpression(ast)
