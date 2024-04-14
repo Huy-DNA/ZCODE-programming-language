@@ -702,3 +702,22 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 451))
+
+        input = """
+            dynamic d
+
+            func t() begin
+                dynamic e <- 10
+                for e until d by 1
+                    continue
+            end
+
+            func f() return d
+
+            func main() begin
+                var g <- f()
+                bool g2 <- g
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 452))
