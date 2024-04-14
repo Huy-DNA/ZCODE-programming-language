@@ -28,6 +28,7 @@ class CheckSuite(unittest.TestCase):
         expect = "No Function Definition: f"
         self.assertTrue(TestChecker.test(input, expect, 402))
 
+    def forward_decl(self):
         input = """
             func f()
             func main() begin
@@ -37,4 +38,3 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 403))
-
