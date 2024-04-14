@@ -1113,3 +1113,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Redeclared Function: foo"
         self.assertTrue(TestChecker.test(input, expect, 477))
+
+        input = """
+            func foo(number a, string c) return
+
+            func foo(number b, string d)
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 478))
