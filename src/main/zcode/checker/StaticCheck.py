@@ -218,7 +218,7 @@ class StaticChecker(BaseVisitor, Utils):
             elif not isSameType(rightType, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
-        if op in ['and', 'or']:
+        elif op in ['and', 'or']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, BoolType())
                 leftType = BoolType()
@@ -232,7 +232,7 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
 
             return CheckerResult(BoolType(), param.scope, ast)
-        if op == '...':
+        elif op == '...':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 leftType = StringType()
@@ -246,7 +246,7 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
 
             return CheckerResult(StringType(), param.scope, ast)
-        if op in ['=', '!=', '<', '>', '<=', '>=']:
+        elif op in ['=', '!=', '<', '>', '<=', '>=']:
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, NumberType())
                 leftType = NumberType()
@@ -260,7 +260,7 @@ class StaticChecker(BaseVisitor, Utils):
                 raise TypeMismatchInExpression(ast)
 
             return CheckerResult(BoolType(), param.scope, ast)
-        if op == '==':
+        elif op == '==':
             if isSameType(leftType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 leftType = StringType()
@@ -290,7 +290,7 @@ class StaticChecker(BaseVisitor, Utils):
             elif not isSameType(typ, NumberType):
                 raise TypeMismatchInExpression(ast)
             return CheckerResult(NumberType(), param.scope, ast)
-        if op == 'not':
+        elif op == 'not':
             if isSameType(typ, UninferredType):
                 resolveUninferredType(res, ast, BoolType())
                 return CheckerResult(BoolType(), param.scope, ast)
