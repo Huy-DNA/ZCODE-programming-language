@@ -880,3 +880,22 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Expression: ArrayCell(CallExpr(Id(t), []), [NumLit(0.0), NumLit(1.0), NumLit(2.0)])"
         self.assertTrue(TestChecker.test(input, expect, 460))
+
+        input = """
+            dynamic d
+            func t(bool b) begin
+                if (b)
+                    d <- [["a", "b"], ["a", "e"]]
+                else
+                    d <- [["c", "e"], ["g", "r"]]
+            end
+
+            func main() begin
+                t(true)
+                var a <- d[0, 0]
+                t(false)
+                a <- a ... d[1, 1]
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 461))

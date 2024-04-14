@@ -1,0 +1,16 @@
+
+            dynamic d
+            func t(bool b) begin
+                if (b)
+                    d <- [["a", "b"], ["a", "e"]]
+                else
+                    d <- [["c", "e"], ["g", "r"]]
+            end
+
+            func main() begin
+                t(true)
+                var a <- d[0, 0]
+                t(false)
+                a <- a ... d[1, 1]
+            end
+        
