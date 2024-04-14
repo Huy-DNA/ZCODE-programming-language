@@ -1220,3 +1220,51 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: VarDecl(Id(b), ArrayType([1.0, 2.0, 3.0, 4.0], StringType), None, Id(a))"
         self.assertTrue(TestChecker.test(input, expect, 491))
+
+    def test_matched_types(self):
+        input = """
+            var a <- 3
+            number b <- a
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 492))
+
+        input = """
+            var a <- true
+            bool b <- a
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 493))
+
+        input = """
+            var a <- "abcde"
+            string b <- a
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 494))
+
+        input = """
+            var a <- [3,10,2]
+            number b[3] <- a
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 495))
+
+        input = """
+            var a <- [[true, false], [true, false]]
+            bool b[2, 2] <- a
+
+            func main() return
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 496))
+
+        input 

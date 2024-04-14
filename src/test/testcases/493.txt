@@ -1,0 +1,6 @@
+
+            var a <- true
+            bool b <- a
+
+            func main() return
+        
