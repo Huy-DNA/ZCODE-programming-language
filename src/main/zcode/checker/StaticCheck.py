@@ -172,8 +172,8 @@ class StaticChecker(BaseVisitor, Utils):
         paramParam = CheckerParam(param.scope.delegate(ast), None, Parameter())
         paramTypes = []
         for parameter in ast.param:
-            res = self.visit(parameter, paramParam)
-            paramTypes.append(res.type)
+            self.visit(parameter, paramParam)
+            paramTypes.append(paramParam.scope.get(parameter.name.name, Parameter()))
         retType = UninferredType()
 
         if lookupRes[0]:
