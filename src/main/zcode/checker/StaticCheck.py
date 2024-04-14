@@ -120,8 +120,12 @@ def resolveUninferredType(checkerRes, ast, typeHint, inExpression = True):
         checkerRes.scope.set(checkerRes.exprNode.name, typeHint, Variable())
 
 class StaticChecker(BaseVisitor, Utils):
+    def __init__(self, ast):
+        self.ast = ast
+    def check(self):
+        param = CheckerParam(Scope(None, self.ast), False, Variable())
+        self.visit(self.ast, param)
     def visitProgram(self, ast, param):
-        param = CheckerParam(Scope(None, ast), False, Variable())
         for decl in self.decl:
             self.visit(decl, param)
         if not param.scope.has("main", Function):
