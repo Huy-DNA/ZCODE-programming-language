@@ -165,7 +165,8 @@ class StaticChecker(BaseVisitor, Utils):
             param.scope.set(ast.name.name, UninferredType(), Variable())
 
     def visitFuncDecl(self, ast, param):
-        if param.scope.has(ast.name.name, Function()) and param.scope.get(ast.name.name, Function()).defined and ast.body is not None:
+        lookupRes = param.scope.lookup(ast.name.name, Function())
+        if lookupRes[0] and lookupRes[0].defined and ast.body is not None:
             raise Redeclared(Function(), ast.name.name)
 
         paramParam = CheckerParam(param.scope.delegate(ast), None, Parameter())
@@ -175,8 +176,8 @@ class StaticChecker(BaseVisitor, Utils):
             paramTypes.append(res.type)
         retType = UninferredType()
 
-        if param.scope.lookup(ast.name.name, Function())[0]:
-            fnType, _ = param.scope.lookup(ast.name.name, Function())
+        if lookupRes[0]:
+            fnType, _ = lookupRes
             fnType.defined = ast.body is not None
             if len(fnType.params) != len(paramTypes):
                 raise TypeMismatchInStatement(ast)
