@@ -444,7 +444,7 @@ class StaticChecker(BaseVisitor, Utils):
         return CheckerResult(None, param.scope)
 
     def visitCallStmt(self, ast, param):
-        calleeType = self.visit(ast.name, param).type
+        calleeType = self.visit(ast.name, CheckerParam(param.scope, param.inLoop, Function())).type
         if isSameType(calleeType.ret, UninferredType):
             raise TypeMismatchInStatement(ast)
         if not isSameType(calleeType.ret, VoidType):
