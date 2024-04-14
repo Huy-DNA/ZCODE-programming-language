@@ -178,7 +178,7 @@ class StaticChecker(BaseVisitor, Utils):
 
         if lookupRes[0]:
             fnType, _ = lookupRes
-            fnType.defined = ast.body is not None
+            fnType.defined = fnType.defined or ast.body is not None
             if len(fnType.params) != len(paramTypes):
                 raise TypeMismatchInStatement(ast)
             for index, paramType in enumerate(paramTypes):
