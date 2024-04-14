@@ -160,9 +160,9 @@ class StaticChecker(BaseVisitor, Utils):
             typ = self.visit(ast.varInit, param).type
             if isSameType(typ, UninferredType):
                 raise TypeCannotBeInferred(ast)
-            param.scope.set(ast.name, typ, Variable())
+            param.scope.set(ast.name.name, typ, Variable())
         else:
-            param.scope.set(ast.name, UninferredType(), Variable())
+            param.scope.set(ast.name.name, UninferredType(), Variable())
 
     def visitFuncDecl(self, ast, param):
         if param.scope.has(ast.name.name, Function()) and param.scope.get(ast.name.name, Function()).defined and ast.body is not None:
