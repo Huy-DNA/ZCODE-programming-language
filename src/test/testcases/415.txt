@@ -1,0 +1,16 @@
+
+            func f() begin
+                begin
+                    return true
+                end
+                if (true) begin
+                    var a <- 3
+                    return false
+                end
+                elif (false)
+                    return true
+                elif (true)
+                    return false
+                return 3
+            end
+        
