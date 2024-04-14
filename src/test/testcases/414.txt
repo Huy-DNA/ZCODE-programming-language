@@ -1,0 +1,15 @@
+
+            func f() begin
+                if (true)
+                    return false
+                elif (false)
+                    return true
+                elif (true)
+                    return false
+                return true
+                begin
+                    return true
+                    return 3
+                end
+            end
+        
