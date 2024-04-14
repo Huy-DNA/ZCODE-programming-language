@@ -46,5 +46,5 @@ class CheckSuite(unittest.TestCase):
             end
             func f() return "abc"
         """
-        expect = ""
+        expect = "Type Mismatch In Statement: Return(StringLit(abc))"
         self.assertTrue(TestChecker.test(input, expect, 404))
