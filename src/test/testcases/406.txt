@@ -1,0 +1,8 @@
+
+            func f()
+            func main() begin
+                number f <- f()
+                number a <- f()
+                string g <- f()
+            end
+        

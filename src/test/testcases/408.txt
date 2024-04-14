@@ -1,0 +1,8 @@
+
+            func f() begin
+                if (true)
+                    return false
+                else
+                    return "string"
+            end
+        

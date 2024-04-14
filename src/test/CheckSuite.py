@@ -58,3 +58,37 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Undeclared Identifier: f"
         self.assertTrue(TestChecker.test(input, expect, 405))
+
+    def test_conflicting_return_types(self):
+        input = """
+            func f()
+            func main() begin
+                number f <- f()
+                number a <- f()
+                string g <- f()
+            end
+        """
+        expect = "Type Mismatch In Statement: VarDecl(Id(g), StringType, None, CallExpr(Id(f), []))"
+        self.assertTrue(TestChecker.test(input, expect, 406))
+
+        input = """
+            func f() begin
+                if (true)
+                    return false
+                else
+                    return 2
+            end
+        """
+        expect = "Type Mismatch In Statement: Return(NumLit(2.0))"
+        self.assertTrue(TestChecker.test(input, expect, 407))
+
+        input = """
+            func f() begin
+                if (true)
+                    return false
+                else
+                    return "string"
+            end
+        """
+        expect = "Type Mismatch In Statement: Return(StringLit(string))"
+        self.assertTrue(TestChecker.test(input, expect, 408))
