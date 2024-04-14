@@ -60,7 +60,7 @@ class Scope:
         if not isinstance(kind, Kind):
             raise Exception("Invalid kind")
         if isinstance(kind, Function):
-            if name in self.__fnSymbolTable[name]:
+            if name in self.__fnSymbolTable:
                 return self.__fnSymbolTable[name], self
             if self.__parent is not None:
                 return self.__parent.lookup(name, kind)
