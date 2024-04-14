@@ -1,0 +1,18 @@
+
+            dynamic e
+            dynamic d
+
+            func f() begin
+                if (d)
+                    return e
+                else begin
+                    d <- 4
+                    return 3
+                end
+            end
+
+            func main() begin
+                bool d <- true
+                number e <- f()
+            end
+        

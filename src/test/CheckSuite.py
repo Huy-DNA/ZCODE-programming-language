@@ -651,3 +651,24 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 448))
+
+        input = """
+            dynamic e
+            dynamic d
+
+            func f() begin
+                if (d)
+                    return e
+                else begin
+                    d <- 4
+                    return 3
+                end
+            end
+
+            func main() begin
+                bool d <- true
+                number e <- f()
+            end
+        """
+        expect = "Type Mismatch In Expression: AssignStmt(Id(d), NumLit(4.0))"
+        self.assertTrue(TestChecker.test(input, expect, 449))
