@@ -359,8 +359,8 @@ class StaticChecker(BaseVisitor, Utils):
             elifCondType = elifCondRes.type
             if isSameType(elifCondType, UninferredType):
                 resolveUninferredType(elifCondRes, ast.elifStmt[0], BoolType())
-            elif isSameType(elifCondType, BoolType):
-                raise TypeMismatchInStatement(ast.expr)
+            elif not isSameType(elifCondType, BoolType):
+                raise TypeMismatchInStatement(ast.elifStmt[0])
             elifThenParam = CheckerParam(param.scope.delegate(elifStmt[1]), param.isLoop)
             self.visit(elifStmt[1], elifThenParam)
 
