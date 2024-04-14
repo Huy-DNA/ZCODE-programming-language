@@ -411,7 +411,7 @@ class StaticChecker(BaseVisitor, Utils):
         if ast.expr is None:
             if param.scope.associatedFn is not None and isSameType(param.scope.associatedFn.type.ret, UninferredType):
                 param.scope.associatedFn.type.ret = VoidType()
-            if param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type, VoidType):
+            elif param.scope.associatedFn is not None and not isSameType(param.scope.associatedFn.type.ret, VoidType):
                 raise TypeMismatchInStatement(ast)
             return CheckerResult(None, None)
         res = self.visit(ast.expr, param)
