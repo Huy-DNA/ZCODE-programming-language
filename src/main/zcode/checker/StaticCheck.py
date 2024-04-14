@@ -153,7 +153,7 @@ class StaticChecker(BaseVisitor, Utils):
                 initType = initRes.type
                 if isSameType(initType, UninferredType):
                     resolveUninferredType(initRes, ast, ast.varType, False)
-                if not isSameType(ast.varType, initType):
+                elif not isSameType(ast.varType, initType):
                     raise TypeMismatchInStatement(ast)
         elif ast.varInit:
             typ = self.visit(ast.varInit, param).type
