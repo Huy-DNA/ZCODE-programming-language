@@ -1,0 +1,9 @@
+
+            dynamic d
+            dynamic e
+
+            func main() begin
+                d <- e
+                e <- 3
+            end
+        

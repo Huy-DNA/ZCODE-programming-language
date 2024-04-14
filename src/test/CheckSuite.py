@@ -938,4 +938,16 @@ class CheckSuite(unittest.TestCase):
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 463))
 
+        input = """
+            dynamic d
+            dynamic e
+
+            func main() begin
+                d <- e
+                e <- 3
+            end
+        """
+        expect = "Type Cannot Be Inferred: AssignStmt(Id(d), Id(e))"
+        self.assertTrue(TestChecker.test(input, expect, 464))
+
 
