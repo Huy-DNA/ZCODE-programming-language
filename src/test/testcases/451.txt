@@ -1,0 +1,15 @@
+
+            dynamic d
+
+            func t() begin
+                for d until d = 10 by 1
+                    continue
+            end
+
+            func f() return d
+
+            func main() begin
+                var g <- f()
+                number g2 <- g
+            end
+        

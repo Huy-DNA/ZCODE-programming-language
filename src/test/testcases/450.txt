@@ -1,0 +1,9 @@
+
+            dynamic d
+
+            func f() return d
+
+            func main() begin
+                number g <- f()
+            end
+        

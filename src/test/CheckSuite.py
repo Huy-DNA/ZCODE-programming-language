@@ -672,3 +672,33 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Expression: AssignStmt(Id(d), NumLit(4.0))"
         self.assertTrue(TestChecker.test(input, expect, 449))
+
+        input = """
+            dynamic d
+
+            func f() return d
+
+            func main() begin
+                number g <- f()
+            end
+        """
+        expect = "Type Cannot Be Inferred: FuncDecl(Id(f), [], Return(Id(d)))"
+        self.assertTrue(TestChecker.test(input, expect, 450))
+
+        input = """
+            dynamic d
+
+            func t() begin
+                for d until d = 10 by 1
+                    continue
+            end
+
+            func f() return d
+
+            func main() begin
+                var g <- f()
+                number g2 <- g
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 451))
