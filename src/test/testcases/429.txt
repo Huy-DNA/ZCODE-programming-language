@@ -1,0 +1,7 @@
+
+            dynamic a
+            var b <- a ... "two string"
+
+            func main() begin
+            end
+        
