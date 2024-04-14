@@ -16,7 +16,7 @@ class FuncType(Type):
     def addUninferredExpr(self, checkerRes, ast):
         self.__list_of_uninferred_expr.append((checkerRes, ast))
     def resolveRet(self, ast):
-        if len(self.__list_of_uninferred_expr) == 0:
+        if len(self.__list_of_uninferred_expr) == 0 and isSameType(self.ret, UninferredType):
             self.ret = VoidType()
         elif isSameType(self.ret, UninferredType):
             raise TypeCannotBeInferred(ast)
@@ -195,7 +195,6 @@ class StaticChecker(BaseVisitor, Utils):
         bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Identifier())
         self.visit(ast.body, bodyParam)
         fnType.resolveRet(ast)
-        bodyParam.scope.checkNoBodyFunction()
         return CheckerResult(None, None)
 
     def visitBinaryOp(self, ast, param):
