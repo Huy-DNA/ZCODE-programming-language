@@ -107,7 +107,7 @@ class CheckerResult:
 
 def isSameType(type1, type2):
     if isinstance(type1, ArrayType):
-        return isinstance(type2, ArrayType) and isSameType(type1.eleType, type2.eleType) and type1.size == type2.size
+        return type2 is ArrayType or isinstance(type2, ArrayType) and isSameType(type1.eleType, type2.eleType) and type1.size == type2.size
     if isinstance(type1, type2.__class__) or isinstance(type2, type1.__class__) or type1 is type2:
         return True
     try:
