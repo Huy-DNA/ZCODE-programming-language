@@ -462,3 +462,63 @@ class CheckSuite(unittest.TestCase):
         """
         expect = ""
         self.assertTrue(TestChecker.test(input, expect, 432))
+
+        input = """
+            var a <- 3
+            bool b <- 3 = a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 433))
+
+        input = """
+            var a <- 3
+            number b <- 3 + a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 434))
+
+        input = """
+            var a <- 3
+            number b <- 3 + a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 435))
+
+        input = """
+            var a <- 3
+            number b <- 3 - a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 436))
+
+        input = """
+            var a <- 3
+            number b <- -2 * a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 437))
+
+        input = """
+            var a <- 3
+            number b <- (3 - 2) / a
+
+            func main() begin
+            end
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 438))
