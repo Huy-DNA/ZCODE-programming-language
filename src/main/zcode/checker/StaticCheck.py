@@ -66,7 +66,7 @@ class Scope:
                 return self.__parent.lookup(name, kind)
             return None, None
         else:
-            if name in self.__varSymbolTable[name]:
+            if name in self.__varSymbolTable:
                 return self.__varSymbolTable[name], self
             if self.__parent is not None:
                 return self.__parent.lookup(name, kind)
