@@ -1,0 +1,7 @@
+
+            func foo(number a) begin
+                var a <- 3
+            end
+
+            func main() return
+        
