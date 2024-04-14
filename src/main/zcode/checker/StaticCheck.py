@@ -180,7 +180,7 @@ class StaticChecker(BaseVisitor, Utils):
         ast.type = fnType
         bodyParam = CheckerParam(paramParam.scope.delegate(ast.body), False, Variable())
         self.visit(ast.body, bodyParam)
-        fnType.resolveRet()
+        fnType.resolveRet(ast)
         bodyParam.scope.checkNoBodyFunction()
         return CheckerResult(None, None)
 
