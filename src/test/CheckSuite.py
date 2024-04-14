@@ -48,3 +48,13 @@ class CheckSuite(unittest.TestCase):
         """
         expect = "Type Mismatch In Statement: Return(StringLit(abc))"
         self.assertTrue(TestChecker.test(input, expect, 404))
+
+        input = """
+            func f()
+            func main() begin
+                number f <- f()
+            end
+            func f() return f
+        """
+        expect = "Undeclared Identifier: f"
+        self.assertTrue(TestChecker.test(input, expect, 405))

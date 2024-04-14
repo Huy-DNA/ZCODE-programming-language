@@ -1,0 +1,7 @@
+
+            func f()
+            func main() begin
+                number f <- f()
+            end
+            func f() return f
+        
