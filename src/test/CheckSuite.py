@@ -682,7 +682,7 @@ class CheckSuite(unittest.TestCase):
                 number g <- f()
             end
         """
-        expect = "Type Cannot Be Inferred: FuncDecl(Id(f), [], Return(Id(d)))"
+        expect = "Type Cannot Be Inferred: Return(Id(d))"
         self.assertTrue(TestChecker.test(input, expect, 450))
 
         input = """

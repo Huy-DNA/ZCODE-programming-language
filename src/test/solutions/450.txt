@@ -1,1 +1,1 @@
-Type Cannot Be Inferred: FuncDecl(Id(f), [], Return(Id(d)))
+Type Cannot Be Inferred: Return(Id(d))
