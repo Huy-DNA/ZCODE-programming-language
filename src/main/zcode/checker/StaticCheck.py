@@ -339,7 +339,7 @@ class StaticChecker(BaseVisitor, Utils):
             if isSameType(exprType, UninferredType):
                 resolveUninferredType(exprRes, ast, NumberType())
             elif not isSameType(exprType, NumberType):
-                raise TypeMismatchInExpression(expr)
+                raise TypeMismatchInExpression(ast)
 
         if len(ast.idx) == len(size):
             return CheckerResult(arrType.eleType, param.scope, ast, None, True)
