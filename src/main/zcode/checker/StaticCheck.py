@@ -19,6 +19,8 @@ class FuncType(Type):
         if len(self.__list_of_uninferred_expr) == 0 and isSameType(self.ret, UninferredType):
             self.ret = VoidType()
         elif isSameType(self.ret, UninferredType):
+            if len(self.__list_of_uninferred_expr) > 0:
+                raise TypeCannotBeInferred(self.__list_of_uninferred_expr[1])
             raise TypeCannotBeInferred(ast)
         for expr in self.__list_of_uninferred_expr:
             resolveUninferredType(expr[0], expr[1], self.ret, False)
