@@ -670,7 +670,7 @@ class CheckSuite(unittest.TestCase):
                 number e <- f()
             end
         """
-        expect = "Type Mismatch In Expression: AssignStmt(Id(d), NumLit(4.0))"
+        expect = "Type Mismatch In Statement: AssignStmt(Id(d), NumLit(4.0))"
         self.assertTrue(TestChecker.test(input, expect, 449))
 
         input = """

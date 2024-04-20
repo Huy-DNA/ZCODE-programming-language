@@ -1,1 +1,1 @@
-Type Mismatch In Expression: AssignStmt(Id(d), NumLit(4.0))
+Type Mismatch In Statement: AssignStmt(Id(d), NumLit(4.0))
