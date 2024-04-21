@@ -1287,7 +1287,10 @@ class CheckSuite(unittest.TestCase):
 
     def test_simple(self):
         input = """
-            func main() return
+            func main() begin
+                dynamic a
+                var b <- a + (a and a)
+            end
         """
-        expect = ""
+        expect = "Type Mismatch In Expression: BinaryOp(and, Id(a), Id(a))"
         self.assertTrue(TestChecker.test(input, expect, 499))

@@ -207,8 +207,6 @@ class StaticChecker(BaseVisitor, Utils):
 
         leftRes = self.visit(ast.left, param)
         leftType = leftRes.type
-        rightRes = self.visit(ast.right, param)
-        rightType = rightRes.type
 
         if op in ['+', '-', '*', '/', '%']:
             if isSameType(leftType, UninferredType):
@@ -216,6 +214,8 @@ class StaticChecker(BaseVisitor, Utils):
                 leftType = NumberType()
             elif not isSameType(leftType, NumberType):
                 raise TypeMismatchInExpression(ast)
+            rightRes = self.visit(ast.right, param)
+            rightType = rightRes.type
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(rightRes, ast, NumberType())
                 rightType = NumberType()
@@ -228,7 +228,8 @@ class StaticChecker(BaseVisitor, Utils):
                 leftType = BoolType()
             elif not isSameType(leftType, BoolType):
                 raise TypeMismatchInExpression(ast)
-
+            rightRes = self.visit(ast.right, param)
+            rightType = rightRes.type
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(rightRes, ast, BoolType())
                 rightType = BoolType()
@@ -242,7 +243,8 @@ class StaticChecker(BaseVisitor, Utils):
                 leftType = StringType()
             elif not isSameType(leftType, StringType):
                 raise TypeMismatchInExpression(ast)
-
+            rightRes = self.visit(ast.right, param)
+            rightType = rightRes.type
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 rightType = StringType()
@@ -256,7 +258,8 @@ class StaticChecker(BaseVisitor, Utils):
                 leftType = NumberType()
             elif not isSameType(leftType, NumberType):
                 raise TypeMismatchInExpression(ast)
-
+            rightRes = self.visit(ast.right, param)
+            rightType = rightRes.type
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, NumberType())
                 rightType = NumberType()
@@ -270,7 +273,8 @@ class StaticChecker(BaseVisitor, Utils):
                 leftType = StringType()
             elif not isSameType(leftType, StringType):
                 raise TypeMismatchInExpression(ast)
-
+            rightRes = self.visit(ast.right, param)
+            rightType = rightRes.type
             if isSameType(rightType, UninferredType):
                 resolveUninferredType(leftRes, ast, StringType())
                 rightType = StringType()
