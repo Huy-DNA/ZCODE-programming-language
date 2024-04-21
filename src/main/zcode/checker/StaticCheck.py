@@ -171,9 +171,10 @@ class StaticChecker(BaseVisitor, Utils):
 
     def visitFuncDecl(self, ast, param):
         lookupRes = param.scope.lookup(ast.name.name, Function())
-        if lookupRes[0] and lookupRes[0].defined and ast.body is not None:
+        if lookupRes[0] and lookupRes[0].defined:
             raise Redeclared(Function(), ast.name.name)
-
+        if lookupRes[0] and not lookupRes[0].defined and ast.body is None:
+            raise Redeclared(Function(), ast.name.name)
         paramParam = CheckerParam(param.scope.delegate(ast), None, Parameter())
         paramTypes = []
         for parameter in ast.param:

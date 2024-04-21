@@ -1,1 +1,1 @@
-Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(ad), NumberType, None, None), VarDecl(Id(aaaa), StringType, None, None), VarDecl(Id(b), NumberType, None, None)], None)
+Redeclared Function: foo

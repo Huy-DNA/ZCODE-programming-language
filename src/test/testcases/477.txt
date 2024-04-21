@@ -1,7 +1,7 @@
 
             func foo(number a, string c)
 
-            func foo(number a, string c) return
+            func foo(number b, string eeee) return
 
-            func foo(number a, string c) return
+            func main() return
         

@@ -1101,17 +1101,17 @@ class CheckSuite(unittest.TestCase):
 
             func foo(number b)
         """
-        expect = "Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(b), NumberType, None, None)], None)"
+        expect = "Redeclared Function: foo"
         self.assertTrue(TestChecker.test(input, expect, 476))
 
         input = """
             func foo(number a, string c)
 
-            func foo(number a, string c) return
+            func foo(number b, string eeee) return
 
-            func foo(number a, string c) return
+            func main() return
         """
-        expect = "Redeclared Function: foo"
+        expect = ""
         self.assertTrue(TestChecker.test(input, expect, 477))
 
         input = """
@@ -1121,7 +1121,7 @@ class CheckSuite(unittest.TestCase):
 
             func main() return
         """
-        expect = ""
+        expect = "Redeclared Function: foo"
         self.assertTrue(TestChecker.test(input, expect, 478))
 
         input = """
@@ -1133,7 +1133,7 @@ class CheckSuite(unittest.TestCase):
 
             func foo(number ad, string aaaa, number b)
         """
-        expect = "Type Mismatch In Statement: FuncDecl(Id(foo), [VarDecl(Id(ad), NumberType, None, None), VarDecl(Id(aaaa), StringType, None, None), VarDecl(Id(b), NumberType, None, None)], None)"
+        expect = "Redeclared Function: foo"
         self.assertTrue(TestChecker.test(input, expect, 479))
 
     def test_undeclared(self):
