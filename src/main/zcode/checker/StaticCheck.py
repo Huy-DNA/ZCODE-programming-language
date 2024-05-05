@@ -137,6 +137,13 @@ class StaticChecker(BaseVisitor, Utils):
         self.ast = ast
     def check(self):
         param = CheckerParam(Scope(None, self.ast), False, Identifier())
+        param.scope.set("readNumber", FuncType([], NumberType(), true))
+        param.scope.set("writeNumber", FuncType([NumberType()], VoidType(), true))
+        param.scope.set("readBool", FuncType([], BoolType(), true))
+        param.scope.set("writeBool", FuncType([BoolType()], VoidType(), true))
+        param.scope.set("readString", FuncType([], StringType(), true))
+        param.scope.set("writeString", FuncType([StringType()], VoidType(), true))
+
         self.visit(self.ast, param)
         return ""
     def visitProgram(self, ast, param):
