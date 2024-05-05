@@ -9,7 +9,7 @@ from antlr4 import *
 
 for path in ['./test/', './main/zcode/parser/', './main/zcode/utils/', './main/zcode/astgen/', './main/zcode/checker/', './main/zcode/codegen/']:
     sys.path.append(path)
-ANTLR_JAR = "./antlr-4.9.2-complete.jar"
+ANTLR_JAR = os.environ.get('ANTLR_JAR')
 TARGET_DIR = '../target'
 GENERATE_DIR = 'main/zcode/parser'
 
@@ -69,9 +69,9 @@ def main(argv):
         elif argv[1] == 'ASTGenSuite':
             from ASTGenSuite import ASTGenSuite
             getAndTest(ASTGenSuite)
-        elif argv[1] == 'CheckSuite':
-            from CheckSuite import CheckSuite
-            getAndTest(CheckSuite)
+        elif argv[1] == 'CheckerSuite':
+            from CheckerSuite import CheckerSuite
+            getAndTest(CheckerSuite)
         elif argv[1] == 'CodeGenSuite':
             from CodeGenSuite import CheckCodeGenSuite
             getAndTest(CheckCodeGenSuite)

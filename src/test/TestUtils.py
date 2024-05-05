@@ -10,9 +10,9 @@ from ZCodeLexer import ZCodeLexer
 from ZCodeParser import ZCodeParser
 from lexererr import *
 from ASTGeneration import ASTGeneration
-from StaticCheck import StaticChecker
-from StaticError import *
-# from CodeGenerator import CodeGenerator
+# from StaticCheck import StaticChecker
+# from StaticError import *
+from CodeGenerator import CodeGenerator
 import subprocess
 
 JASMIN_JAR = "./external/jasmin.jar"
@@ -156,7 +156,7 @@ class TestChecker:
         checker = StaticChecker(asttree)
         try:
             res = checker.check()
-            dest.write(str(res))
+            dest.write(str(list(res)))
         except StaticError as e:
             dest.write(str(e))
         finally:
