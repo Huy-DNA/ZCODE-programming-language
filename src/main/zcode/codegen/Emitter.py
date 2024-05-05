@@ -133,7 +133,6 @@ class Emitter():
 
         frame.pop()
         frame.pop()
-        frame.pop()
         frame.push()
         if type(in_) is NumberType:
             return self.jvm.emitFALOAD()
@@ -362,8 +361,6 @@ class Emitter():
         # frame: Frame
         # ..., value -> ..., result
 
-        frame.pop()
-        frame.push()
         return self.jvm.emitFNEG()
 
     def emitNOT(self, in_, frame):
@@ -373,8 +370,6 @@ class Emitter():
         label1 = frame.getNewLabel()
         label2 = frame.getNewLabel()
         result = list()
-        frame.pop()
-        frame.push()
         result.append(self.emitIFTRUE(label1, frame))
         result.append(self.emitPUSHCONST("true", in_, frame))
         result.append(self.emitGOTO(label2, frame))
@@ -396,8 +391,6 @@ class Emitter():
         # ..., value1, value2 -> ..., result
 
         frame.pop()
-        frame.pop()
-        frame.push()
         if lexeme == "+":
             return self.jvm.emitFADD()
         else:
@@ -426,16 +419,12 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        frame.pop()
-        frame.push()
         return self.jvm.emitFDIV()
 
     def emitMOD(self, frame):
         # frame: Frame
 
         frame.pop()
-        frame.pop()
-        frame.push()
         return self.jvm.emitFREM()
 
     '''
@@ -446,8 +435,6 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        frame.pop()
-        frame.push()
         return self.jvm.emitIAND()
 
     '''
@@ -458,8 +445,6 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        frame.pop()
-        frame.push()
         return self.jvm.emitIOR()
 
     def emitREOP(self, op, in_, frame):
@@ -472,7 +457,6 @@ class Emitter():
         labelF = frame.getNewLabel()
         labelO = frame.getNewLabel()
 
-        frame.pop()
         frame.pop()
         result.append(self.emitFCMPL())
         if op == ">":
@@ -487,7 +471,6 @@ class Emitter():
             result.append(self.jvm.emitIFEQ(labelF))
         elif op == "==":
             result.append(self.jvm.emitIFNE(labelF))
-        frame.push()
         result.append(self.emitPUSHCONST("true", BoolType(), frame))
         result.append(self.emitGOTO(labelO, frame))
         result.append(self.emitLABEL(labelF, frame))
@@ -598,8 +581,6 @@ class Emitter():
     def emitI2F(self, frame):
         # frame: Frame
 
-        frame.pop()
-        frame.push()
         return self.jvm.emitI2F()
 
     ''' generate code to return.
