@@ -24,6 +24,16 @@ def patch_Machine_Code_class():
         return JasminCode.INDENT + "frem" + JasminCode.END
     JasminCode.emitFREM = emitFREM 
 
+    def emitICONST(self, i):
+        # i: Int
+        if i == -1:
+            return JasminCode.INDENT + "iconst_m1" + JasminCode.END
+        elif i >= 0 or i <= 5:
+            return JasminCode.INDENT + "iconst_" + str(i) + JasminCode.END
+        else:
+            raise IllegalOperandException(str(i))
+    JasminCode.emitICONST = emitICONST
+
 class Emitter():
     def __init__(self, filename):
         patch_Frame_class()
