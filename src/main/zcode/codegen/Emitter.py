@@ -132,6 +132,9 @@ class Emitter():
         # ..., arrayref, index, value -> ...
 
         frame.pop()
+        frame.pop()
+        frame.pop()
+        frame.push()
         if type(in_) is NumberType:
             return self.jvm.emitFALOAD()
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
@@ -274,6 +277,7 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
+        frame.push()
         return self.jvm.emitPUTSTATIC(lexeme, self.getJVMType(in_))
 
     def emitGETFIELD(self, lexeme, in_, frame):
@@ -281,6 +285,7 @@ class Emitter():
         # in_: Type
         # frame: Frame
 
+        frame.push()
         return self.jvm.emitGETFIELD(lexeme, self.getJVMType(in_))
 
     def emitPUTFIELD(self, lexeme, in_, frame):
@@ -290,6 +295,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         return self.jvm.emitPUTFIELD(lexeme, self.getJVMType(in_))
 
     ''' generate code to invoke a static method
@@ -356,6 +362,8 @@ class Emitter():
         # frame: Frame
         # ..., value -> ..., result
 
+        frame.pop()
+        frame.push()
         return self.jvm.emitFNEG()
 
     def emitNOT(self, in_, frame):
@@ -365,12 +373,14 @@ class Emitter():
         label1 = frame.getNewLabel()
         label2 = frame.getNewLabel()
         result = list()
+        frame.pop()
+        frame.push()
         result.append(self.emitIFTRUE(label1, frame))
         result.append(self.emitPUSHCONST("true", in_, frame))
-        result.append(self.jvm.emitGOTO(label2, frame))
-        result.append(self.jvm.emitLABEL(label1, frame))
+        result.append(self.emitGOTO(label2, frame))
+        result.append(self.emitLABEL(label1, frame))
         result.append(self.emitPUSHCONST("false", in_, frame))
-        result.append(self.jvm.emitLABEL(label2, frame))
+        result.append(self.emitLABEL(label2, frame))
         return ''.join(result)
 
     '''
@@ -387,6 +397,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         if lexeme == "+":
             return self.jvm.emitFADD()
         else:
@@ -416,6 +427,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         return self.jvm.emitFDIV()
 
     def emitMOD(self, frame):
@@ -423,6 +435,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         return self.jvm.emitFREM()
 
     '''
@@ -434,6 +447,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         return self.jvm.emitIAND()
 
     '''
@@ -445,6 +459,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
+        frame.push()
         return self.jvm.emitIOR()
 
     def emitREOP(self, op, in_, frame):
@@ -459,7 +474,7 @@ class Emitter():
 
         frame.pop()
         frame.pop()
-        result.append(self.jvm.emitFSUB())
+        result.append(self.emitFCMPL())
         if op == ">":
             result.append(self.jvm.emitIFLE(labelF))
         elif op == ">=":
@@ -472,12 +487,12 @@ class Emitter():
             result.append(self.jvm.emitIFEQ(labelF))
         elif op == "==":
             result.append(self.jvm.emitIFNE(labelF))
+        frame.push()
         result.append(self.emitPUSHCONST("true", BoolType(), frame))
-        frame.pop()
-        result.append(self.jvm.emitGOTO(labelO, frame))
-        result.append(self.jvm.emitLABEL(labelF, frame))
+        result.append(self.emitGOTO(labelO, frame))
+        result.append(self.emitLABEL(labelF, frame))
         result.append(self.emitPUSHCONST("false", BoolType(), frame))
-        result.append(self.jvm.emitLABEL(labelO, frame))
+        result.append(self.emitLABEL(labelO, frame))
         return ''.join(result)
 
     '''   generate the method directive for a function.
@@ -583,6 +598,8 @@ class Emitter():
     def emitI2F(self, frame):
         # frame: Frame
 
+        frame.pop()
+        frame.push()
         return self.jvm.emitI2F()
 
     ''' generate code to return.
