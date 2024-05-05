@@ -70,6 +70,8 @@ class Emitter():
         elif typeIn is VoidType:
             return "void"
 
+
+    ## possibly unused
     def emitPUSHICONST(self, in_, frame):
         # in: Int or Sring
         # frame: Frame
