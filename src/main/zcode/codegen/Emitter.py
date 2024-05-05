@@ -45,7 +45,7 @@ class Emitter():
     def getJVMType(self, inType):
         typeIn = type(inType)
         if typeIn is NumberType:
-            return "D"
+            return "F"
         elif typeIn is BoolType:
             return "Z"
         elif typeIn is StringType:
@@ -62,7 +62,7 @@ class Emitter():
     def getFullType(inType):
         typeIn = type(inType)
         if typeIn is NumberType:
-            return "double"
+            return "float"
         elif typeIn is BooleanType:
             return "boolean"
         elif typeIn is StringType:
