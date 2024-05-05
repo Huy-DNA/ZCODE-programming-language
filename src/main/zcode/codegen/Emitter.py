@@ -4,10 +4,30 @@ from Utils import *
 import CodeGenerator as cgen
 from MachineCode import JasminCode
 from AST import *
+from Frame import Frame
 
+# Since the Frame.py file is not submitted, have to do it here
+def patch_Frame_class():
+    def getBreakLabel(self):
+        if not self.brkLabel:
+            raise IllegalRuntimeException("None break label")
+        return self.brkLabel[-1]
+    Frame.getBreakLabel = getBreakLabel
+
+# Since the MachineCode.py file is not submitted, have to do it here
+def patch_Machine_Code_class():
+    def emitIREM(self):
+        return JasminCode.INDENT + "irem" + JasminCode.END
+    JasminCode.emitIREM = emitIREM    
+    
+    def emitFREM(self):
+        return JasminCode.INDENT + "frem" + JasminCode.END
+    JasminCode.emitFREM = emitFREM 
 
 class Emitter():
     def __init__(self, filename):
+        patch_Frame_class()
+        patch_Machine_Code_class()
         self.filename = filename
         self.buff = list()
         self.jvm = JasminCode()
