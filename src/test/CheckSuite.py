@@ -33,6 +33,7 @@ class CheckSuite(unittest.TestCase):
             func f()
             func main() begin
                 number f <- f()
+                number a <- readNumber()
             end
             func f() return 3
         """

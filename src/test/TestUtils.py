@@ -10,8 +10,8 @@ from ZCodeLexer import ZCodeLexer
 from ZCodeParser import ZCodeParser
 from lexererr import *
 from ASTGeneration import ASTGeneration
-# from StaticCheck import StaticChecker
-# from StaticError import *
+from StaticCheck import StaticChecker
+from StaticError import *
 from CodeGenerator import CodeGenerator
 import subprocess
 
@@ -156,7 +156,7 @@ class TestChecker:
         checker = StaticChecker(asttree)
         try:
             res = checker.check()
-            dest.write(str(list(res)))
+            dest.write(str(res))
         except StaticError as e:
             dest.write(str(e))
         finally:
