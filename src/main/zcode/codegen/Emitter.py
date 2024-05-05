@@ -132,8 +132,6 @@ class Emitter():
         # ..., arrayref, index, value -> ...
 
         frame.pop()
-        frame.pop()
-        frame.push()
         if type(in_) is NumberType:
             return self.jvm.emitFALOAD()
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
@@ -275,8 +273,6 @@ class Emitter():
         # in_: Type
         # frame: Frame
 
-        frame.pop()
-        frame.push()
         return self.jvm.emitPUTSTATIC(lexeme, self.getJVMType(in_))
 
     def emitGETFIELD(self, lexeme, in_, frame):
@@ -293,8 +289,6 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        frame.pop()
-        frame.push()
         return self.jvm.emitPUTFIELD(lexeme, self.getJVMType(in_))
 
     ''' generate code to invoke a static method
