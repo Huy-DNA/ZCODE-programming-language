@@ -22,6 +22,10 @@ def patch_Machine_Code_class():
     def emitIREM(self):
         return JasminCode.INDENT + "irem" + JasminCode.END
     JasminCode.emitIREM = emitIREM    
+    
+    def emitFREM(self):
+        return JasminCode.INDENT + "frem" + JasminCode.END
+    JasminCode.emitFREM = emitFREM  
 
 class MType:
     def __init__(self, partype, rettype):
