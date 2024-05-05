@@ -480,34 +480,6 @@ class Emitter():
         result.append(self.jvm.emitLABEL(labelO, frame))
         return ''.join(result)
 
-    def emitRELOP(self, op, in_, trueLabel, falseLabel, frame):
-        # op: String
-        # in_: Type
-        # trueLabel: Int
-        # falseLabel: Int
-        # frame: Frame
-        # ..., value1, value2 -> ..., result
-
-        result = list()
-
-        frame.pop()
-        frame.pop()
-        if op == ">":
-            result.append(self.jvm.emitIFICMPLE(falseLabel))
-            result.append(self.emitGOTO(trueLabel))
-        elif op == ">=":
-            result.append(self.jvm.emitIFICMPLT(falseLabel))
-        elif op == "<":
-            result.append(self.jvm.emitIFICMPGE(falseLabel))
-        elif op == "<=":
-            result.append(self.jvm.emitIFICMPGT(falseLabel))
-        elif op == "!=":
-            result.append(self.jvm.emitIFICMPEQ(falseLabel))
-        elif op == "==":
-            result.append(self.jvm.emitIFICMPNE(falseLabel))
-        result.append(self.jvm.emitGOTO(trueLabel))
-        return ''.join(result)
-
     '''   generate the method directive for a function.
     *   @param lexeme the qualified name of the method(i.e., class-name/method-name).
     *   @param in the type descriptor of the method.
