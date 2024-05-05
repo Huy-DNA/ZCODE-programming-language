@@ -273,6 +273,7 @@ class Emitter():
         # in_: Type
         # frame: Frame
 
+        frame.pop()
         return self.jvm.emitPUTSTATIC(lexeme, self.getJVMType(in_))
 
     def emitGETFIELD(self, lexeme, in_, frame):
