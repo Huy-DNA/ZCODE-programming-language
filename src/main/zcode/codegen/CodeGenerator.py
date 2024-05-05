@@ -31,7 +31,7 @@ def patch_Machine_Code_class():
         # i: Int
         if i == -1:
             return JasminCode.INDENT + "iconst_m1" + JasminCode.END
-        elif i >= 0 or i <= 5:
+        elif i >= 0 and i <= 5:
             return JasminCode.INDENT + "iconst_" + str(i) + JasminCode.END
         else:
             raise IllegalOperandException(str(i))
