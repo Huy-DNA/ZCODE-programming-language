@@ -6,6 +6,19 @@ from abc import ABC
 from Visitor import *
 from AST import *
 
+from Utils import *
+
+# Since the Frame.py file is not submitted, have to do it here
+def patch_Frame_class():
+    def getBreakLabel(self):
+        if not self.brkLabel:
+            raise IllegalRuntimeException("None break label")
+        return self.brkLabel[-1]
+    Frame.getBreakLabel = getBreakLabel
+
+# Since the MachineCode.py file is not submitted, have to do it here
+def patch_Machine_Code_class():
+    pass
 
 class MType:
     def __init__(self, partype, rettype):
@@ -76,6 +89,8 @@ class CName(Val):
 
 class CodeGenVisitor(BaseVisitor):
     def __init__(self, astTree, env, path):
+        patch_Frame_class()
+        patch_Machine_Code_Class()
         self.astTree = astTree
         self.env = env
         self.path = path
