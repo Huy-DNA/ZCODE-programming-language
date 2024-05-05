@@ -1,5 +1,6 @@
 from Emitter import Emitter
 from functools import reduce
+from MachineCode import JasminCode
 
 from Frame import Frame
 from abc import ABC
@@ -18,7 +19,9 @@ def patch_Frame_class():
 
 # Since the MachineCode.py file is not submitted, have to do it here
 def patch_Machine_Code_class():
-    pass
+    def emitIREM(self):
+        return JasminCode.INDENT + "irem" + JasminCode.END
+    JasminCode.emitIREM = emitIREM    
 
 class MType:
     def __init__(self, partype, rettype):
