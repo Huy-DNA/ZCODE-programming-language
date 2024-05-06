@@ -137,7 +137,7 @@ class Emitter():
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
         elif type(in_) is BooleanType:
             return self.jvm.emitBALOAD()
-        elif type(in_) is ClassType or type(in_) is StringType:
+        elif type(in_) is ClassType or type(in_) is StringType or type(in_) is ArrayType:
             return self.jvm.emitAALOAD()
         else:
             raise IllegalOperandException(str(in_))
