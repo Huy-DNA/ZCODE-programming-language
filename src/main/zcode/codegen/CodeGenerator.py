@@ -103,7 +103,7 @@ class CodeGenVisitor(BaseVisitor):
         
         self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
         index = param.frame.getNewIndex()
-        foundScope.set(name, index)
+        foundScope.setIndex(name, index)
         if ast.varInit:
             param = SubBody(Frame(name, VoidType()), param.scope)
             code = self.visit(varInit, param)
@@ -183,6 +183,12 @@ class CodeGenVisitor(BaseVisitor):
         return code
 
     def visitId(self, ast, param):
+        scope = param.scope
+        in_, foundScope = scope.lookup(name, Variable())
+        name = ast.name
+        index = foundScope.getIndex(name)
+        if index is None:
+            pass
         pass
 
     def visitArrayCell(self, ast, param):
@@ -274,7 +280,7 @@ class Scope:
         self.__indexTable[name] = idx
 
     def getIndex(self, name):
-        return self.__indexTable[name]
+        return self.__indexTable[name] if name in self.__indexTable else None
 
     def get(self, name, kind):
         if not isinstance(kind, Kind):
