@@ -453,24 +453,32 @@ class Emitter():
         labelO = frame.getNewLabel()
 
         frame.pop()
-        result.append(self.emitFCMPL())
-        if op == ">":
-            result.append(self.jvm.emitIFLE(labelF))
-        elif op == ">=":
-            result.append(self.jvm.emitIFLT(labelF))
-        elif op == "<":
-            result.append(self.jvm.emitIFGE(labelF))
-        elif op == "<=":
-            result.append(self.jvm.emitIFGT(labelF))
-        elif op == "!=":
-            result.append(self.jvm.emitIFEQ(labelF))
-        elif op == "==":
-            result.append(self.jvm.emitIFNE(labelF))
+
+        if type(in_) is NumberType:
+            result.append(self.emitFCMPL())
+            if op == ">":
+                result.append(self.jvm.emitIFLE(labelF))
+            elif op == ">=":
+                result.append(self.jvm.emitIFLT(labelF))
+            elif op == "<":
+                result.append(self.jvm.emitIFGE(labelF))
+            elif op == "<=":
+                result.append(self.jvm.emitIFGT(labelF))
+            elif op == "!=":
+                result.append(self.jvm.emitIFEQ(labelF))
+            elif op == "=":
+                result.append(self.jvm.emitIFNE(labelF))
+        elif type(in_) is StringType:
+            if op == "==":
+                result.append(self.jvm.emitINVOKEVIRTUAL("java/lang/String/compareTo", "(java/lang/String;)I"))
+                result.append(self.jvm.emitIFNE(labelF))
+
         result.append(self.emitPUSHCONST("true", BoolType(), frame))
         result.append(self.emitGOTO(labelO, frame))
         result.append(self.emitLABEL(labelF, frame))
         result.append(self.emitPUSHCONST("false", BoolType(), frame))
         result.append(self.emitLABEL(labelO, frame))
+        
         return ''.join(result)
 
     '''   generate the method directive for a function.
