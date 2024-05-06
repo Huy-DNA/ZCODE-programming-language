@@ -91,7 +91,7 @@ class CodeGenVisitor(BaseVisitor):
     def visitVarDecl(self, ast, param):
         scope = param.scope
         name = param.name
-        in_, _ = scope.lookup(name, Variable())
+        in_, foundScope = scope.lookup(name, Variable())
         if param.frame is None: 
             self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
             if ast.varInit:
@@ -102,11 +102,13 @@ class CodeGenVisitor(BaseVisitor):
             return SubBody(None, param.scope)
         
         self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
+        index = param.frame.getNewIndex()
+        foundScope.set(name, index)
         if ast.varInit:
             param = SubBody(Frame(name, VoidType()), param.scope)
             code = self.visit(varInit, param)
             self.emit.printout(code)
-            self.emit.printout(self.emitWRITEVAR(name, in_, param.frame.getNewIndex(), param.frame))
+            self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
 
         return SubBody(None, param.scope)
  
@@ -267,6 +269,12 @@ class Scope:
             self.__fnSymbolTable[name] = typ
         else:
             self.__varSymbolTable[name] = typ
+
+    def setIndex(self, name, idx):
+        self.__indexTable[name] = idx
+
+    def getIndex(self, name):
+        return self.__indexTable[name]
 
     def get(self, name, kind):
         if not isinstance(kind, Kind):
