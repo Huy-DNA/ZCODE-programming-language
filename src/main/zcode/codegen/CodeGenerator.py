@@ -65,9 +65,10 @@ class CodeGenerator:
 
 
 class SubBody():
-    def __init__(self, frame, scope):
+    def __init__(self, frame, scope, isLeft = False):
         self.frame = frame
         self.scope = scope
+        self.isLeft = isLeft
 
 
 class CodeGenVisitor(BaseVisitor):
@@ -101,7 +102,7 @@ class CodeGenVisitor(BaseVisitor):
         
         self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
         if ast.varInit:
-            param = SubBody(Frame(name, VoidType()), param.sym, param.scope)
+            param = SubBody(Frame(name, VoidType()), param.scope)
             code = self.visit(varInit, param)
             self.emit.printout(code)
             self.emit.printout(self.emitWRITEVAR(name, in_, param.frame.getNewIndex(), param.frame))
