@@ -37,22 +37,6 @@ def patch_Machine_Code_class():
             raise IllegalOperandException(str(i))
     JasminCode.emitICONST = emitICONST
 
-class MType:
-    def __init__(self, partype, rettype):
-        self.partype = partype
-        self.rettype = rettype
-
-
-class Symbol:
-    def __init__(self, name, mtype, value=None):
-        self.name = name
-        self.mtype = mtype
-        self.value = value
-
-    def __str__(self):
-        return "Symbol("+self.name+","+str(self.mtype)+")"
-
-
 class CodeGenerator:
     def __init__(self):
         self.libName = "io"
@@ -81,31 +65,9 @@ class CodeGenerator:
 
 
 class SubBody():
-    def __init__(self, frame, sym):
+    def __init__(self, frame, scope):
         self.frame = frame
-        self.sym = sym
-
-
-class Access():
-    def __init__(self, frame, sym, isLeft, isFirst=False):
-        self.frame = frame
-        self.sym = sym
-        self.isLeft = isLeft
-        self.isFirst = isFirst
-
-
-class Val(ABC):
-    pass
-
-
-class Index(Val):
-    def __init__(self, value):
-        self.value = value
-
-
-class CName(Val):
-    def __init__(self, value):
-        self.value = value
+        self.scope = scope
 
 
 class CodeGenVisitor(BaseVisitor):
@@ -120,16 +82,32 @@ class CodeGenVisitor(BaseVisitor):
         self.emit = Emitter(path + "/ZCodeClass.j")
 
     def visitProgram(self, ast, c):
-        c = SubBody(None, self.env)
+        c = SubBody(None, self.env, ast.scope)
         [self.visit(i, c) for i in ast.decl]
         return c
 
     def visitVarDecl(self, ast, param):
-        newSymbols = []
-        if param.frame is None:
-            pass
-        pass
+        scope = param.scope
+        name = param.name
+        in_ = scope.get(name, Variable())
+        if param.frame is None: 
+            self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
+            if ast.varInit:
+                param = SubBody(Frame(name, VoidType()), param.scope)
+                code = self.visit(varInit, param)
+                self.emit.printout(code)
+                self.emit.printout(self.emitPUTSTATIC(name, in_, param.frame))
+            return SubBody(None, param.scope)
+        
+        self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
+        if ast.varInit:
+            param = SubBody(Frame(name, VoidType()), param.sym, param.scope)
+            code = self.visit(varInit, param)
+            self.emit.printout(code)
+            self.emit.printout(self.emitWRITEVAR(name, in_, param.frame.getNewIndex(), param.frame))
 
+        return SubBody(None, param.scope)
+ 
     def visitFuncDecl(self, ast, param):
         pass
 
