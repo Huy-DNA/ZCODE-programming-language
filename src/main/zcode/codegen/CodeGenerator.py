@@ -117,6 +117,7 @@ class CodeGenVisitor(BaseVisitor):
         self.astTree = astTree
         self.env = env
         self.path = path
+        self.emit = Emitter(path + "/ZCodeClass.j")
 
     def visitProgram(self, ast, c):
         c = SubBody(None, self.env)
@@ -124,9 +125,9 @@ class CodeGenVisitor(BaseVisitor):
         return c
 
     def visitVarDecl(self, ast, param):
+        newSymbols = []
         if param.frame is None:
             pass
-        
         pass
 
     def visitFuncDecl(self, ast, param):
