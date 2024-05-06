@@ -113,7 +113,7 @@ class CodeGenVisitor(BaseVisitor):
         self.path = path
 
     def visitProgram(self, ast, c):
-        [self.visit(i, c)for i in ast.decl]
+        [self.visit(i, c) for i in ast.decl]
         return c
 
     def visitVarDecl(self, ast, param):
