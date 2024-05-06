@@ -644,7 +644,7 @@ class Emitter():
         result.append(self.jvm.emitSOURCE(name + ".java"))
         result.append(self.jvm.emitCLASS("public " + name))
         result.append(self.jvm.emitSUPER(
-            "java/land/Object" if parent == "" else parent))
+            "java/lang/Object" if parent == "" else parent))
         return ''.join(result)
 
     def emitLIMITSTACK(self, num):
