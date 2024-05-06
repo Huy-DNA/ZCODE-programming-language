@@ -135,7 +135,27 @@ class CodeGenVisitor(BaseVisitor):
         pass
 
     def visitBinaryOp(self, ast, param):
-        pass
+        op = ast.op
+        left = ast.left
+        right = ast.right
+        codeLeft = self.visit(left, param)
+        codeRight = self.visit(right, param)
+        if op in ["-", "+"]:
+            opIns = self.emit.emitADDOP(op, NumberType(), param.frame)
+        elif op == "...":
+            opIns = self.emit.emitADDOP(op, StringType(), param.frame)
+        elif op in ['*', '/', '%']:
+            opIns = self.emit.emitMULOP(op, NumberType(), param.frame)
+        elif op in [">", ">=", "<=", "=", "!="]:
+            opIns = self.emit.emitREOP(op, NumberType(), param.frame)
+        elif op == "==":
+            opIns = self.emit.emitREOP(op, StringType(), param.frame)
+        elif op == "and":
+            opIns = self.emit.emitANDOP(param.frame)
+        elif op == "or":
+            opIns = self.emit.emitOROP(param.frame)
+        code = codeRight + opIns + codeLeft
+        return code
 
     def visitUnaryOp(self, ast, param):
         pass

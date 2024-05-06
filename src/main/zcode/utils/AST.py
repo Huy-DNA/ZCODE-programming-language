@@ -266,7 +266,7 @@ class FuncDecl(Decl):
         self.body = body
 
     def __str__(self):
-        return f"FuncDecl({str(self.name)}, [{', '.join(str(i) for i in self.param)}], {str(self.body) if self.body else 'None'})"
+        return f"FuncDecl({str(self.name)}, [{', '.join(str(i) for i in self.param)}], {str(self.body) if self.body ele 'None'})"
 
 
 class NumberType(Type):
