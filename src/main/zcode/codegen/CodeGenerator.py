@@ -91,7 +91,7 @@ class CodeGenVisitor(BaseVisitor):
     def visitVarDecl(self, ast, param):
         scope = param.scope
         name = param.name
-        in_ = scope.get(name, Variable())
+        in_, _ = scope.lookup(name, Variable())
         if param.frame is None: 
             self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
             if ast.varInit:
@@ -113,7 +113,7 @@ class CodeGenVisitor(BaseVisitor):
     def visitFuncDecl(self, ast, param):
         name = ast.name
         scope = param.scope
-        in_ = scope.get(name, Function())
+        in_, _ = scope.lookup(name, Function())
         self.emit.printout(self.emit.emitMETHOD(name, in_))
         param.frame.enterScope(True)
         for paramDecl in ast.param:
@@ -171,9 +171,10 @@ class CodeGenVisitor(BaseVisitor):
         name = ast.name
         code = ""
         scope = param.scope
+        in_, _ = scope.lookup(name, Function())
         for arg in self.args:
             code += self.visit(arg, param)
-        code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, scope.get(name, Function()), param.frame)
+        code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, in_, Function()), param.frame)
 
         return code
 
