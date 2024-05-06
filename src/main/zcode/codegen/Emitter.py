@@ -490,13 +490,12 @@ class Emitter():
     *   @param isStatic <code>true</code> if the method is static; <code>false</code> otherwise.
     '''
 
-    def emitMETHOD(self, lexeme, in_, isStatic, frame):
+    def emitMETHOD(self, lexeme, in_isStatic, frame):
         # lexeme: String
         # in_: Type
-        # isStatic: Boolean
         # frame: Frame
 
-        return self.jvm.emitMETHOD(lexeme, self.getJVMType(in_), isStatic)
+        return self.jvm.emitMETHOD(lexeme, self.getJVMType(in_), True)
 
     '''   generate the end directive for a function.
     '''

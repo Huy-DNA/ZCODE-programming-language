@@ -113,7 +113,7 @@ class CodeGenVisitor(BaseVisitor):
         name = ast.name
         scope = param.scope
         in_ = scope.get(name, Function())
-        self.emit.printout(self.emit.emitMETHOD(name, in_, False))
+        self.emit.printout(self.emit.emitMETHOD(name, in_))
         param.frame.enterScope(True)
         for paramDecl in ast.param:
             self.visit(paramDecl, SubBody(param.frame, ast.scope))
