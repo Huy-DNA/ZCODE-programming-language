@@ -80,7 +80,8 @@ class CodeGenVisitor(BaseVisitor):
         self.astTree = astTree
         self.env = env
         self.path = path
-        self.emit = Emitter(path + "/ZCodeClass.j")
+        self.classname = "ZCodeClass"
+        self.emit = Emitter(path + "/" +self.classname + ".j")
 
     def visitProgram(self, ast, c):
         c = SubBody(None, self.env, ast.scope)
@@ -97,7 +98,7 @@ class CodeGenVisitor(BaseVisitor):
                 param = SubBody(Frame(name, VoidType()), param.scope)
                 code = self.visit(varInit, param)
                 self.emit.printout(code)
-                self.emit.printout(self.emitPUTSTATIC(name, in_, param.frame))
+                self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
             return SubBody(None, param.scope)
         
         self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
@@ -167,7 +168,14 @@ class CodeGenVisitor(BaseVisitor):
         return code + opIns
 
     def visitCallExpr(self, ast, param):
-        pass
+        name = ast.name
+        code = ""
+        scope = param.scope
+        for arg in self.args:
+            code += self.visit(arg, param)
+        code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, scope.get(name, Function()), param.frame)
+
+        return code
 
     def visitId(self, ast, param):
         pass
