@@ -110,7 +110,17 @@ class CodeGenVisitor(BaseVisitor):
         return SubBody(None, param.scope)
  
     def visitFuncDecl(self, ast, param):
-        pass
+        name = ast.name
+        scope = param.scope
+        in_ = scope.get(name, Function())
+        self.emit.printout(self.emit.emitMETHOD(name, in_, False))
+        param.frame.enterScope(True)
+        for paramDecl in ast.param:
+            self.visit(paramDecl, SubBody(param.frame, ast.scope))
+        self.visit(ast.body, SubBody(param.frame, ast.body.scope))  
+        param.frame.exitScope()
+
+        return SubBody(None, param.scope)
 
     def visitNumberType(self, ast, param):
         pass
