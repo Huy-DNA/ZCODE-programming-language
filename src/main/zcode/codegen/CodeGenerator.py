@@ -112,6 +112,8 @@ class CodeGenVisitor(BaseVisitor):
     def __init__(self, astTree, env, path):
         patch_Frame_class()
         patch_Machine_Code_Class()
+        StaticChecker(astTree).check()
+        
         self.astTree = astTree
         self.env = env
         self.path = path
