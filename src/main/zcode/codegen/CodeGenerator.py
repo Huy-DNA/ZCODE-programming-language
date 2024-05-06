@@ -111,6 +111,8 @@ class CodeGenVisitor(BaseVisitor):
         return SubBody(None, param.scope)
  
     def visitFuncDecl(self, ast, param):
+        if not ast.body:
+            return
         name = ast.name
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
