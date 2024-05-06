@@ -666,6 +666,27 @@ class Emitter():
     *   @param in the code to be printed out
     '''
 
+    def emitNEW(self, lexeme, frame):
+        # lexeme: String
+        frame.push()
+        return self.jvm.emitNEW(lexeme)
+
+    def emitNEWARRAY(self, lexeme, frame):
+        # lexeme: String
+        return self.jvm.emitNEWARRAY(lexeme)
+
+    def emitANEWARRAY(self, lexeme, frame):
+        # lexeme: String
+        return self.jvm.emitANEWARRAY(lexeme)
+
+    def emitMULTIANEWARRAY(self, typ, dimensions, frame):
+        # typ: String
+        # dimensions: Int
+        for i in range(dimensions):
+            frame.pop()
+        frame.push()
+        return self.jvm.emitMULTIANEWARRAY(typ, dimensions)
+
     def printout(self, in_):
         # in_: String
 
