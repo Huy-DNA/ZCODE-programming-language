@@ -158,7 +158,13 @@ class CodeGenVisitor(BaseVisitor):
         return code
 
     def visitUnaryOp(self, ast, param):
-        pass
+        code = self.visit(ast.operand, param)
+        if op == "-":
+            opIns = self.emit.emitNEGOP(NumberType(), param.frame)
+        elif op == "not":
+            opIns = self.emit.emitNOT(BoolType(), param.frame)
+
+        return code + opIns
 
     def visitCallExpr(self, ast, param):
         pass
