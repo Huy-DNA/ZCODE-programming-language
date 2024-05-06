@@ -386,11 +386,14 @@ class Emitter():
         # ..., value1, value2 -> ..., result
 
         frame.pop()
-        if lexeme == "+":
-            return self.jvm.emitFADD()
-        else:
-            return self.jvm.emitFSUB()
-
+        if type(in_) is NumberType:
+            if lexeme == "+":
+                return self.jvm.emitFADD()
+            else:
+                return self.jvm.emitFSUB()
+        elif type(in_) is StringType:
+            if lexeme == "...":
+                return self.jvm.invokeVIRTUAL("java/lang/String/concat", "(Ljava/lang/String;)Ljava/lang/String;")
     '''
     *   generate imul, idiv, fmul or fdiv.
     *   @param lexeme the lexeme of the operator.
@@ -470,7 +473,7 @@ class Emitter():
                 result.append(self.jvm.emitIFNE(labelF))
         elif type(in_) is StringType:
             if op == "==":
-                result.append(self.jvm.emitINVOKEVIRTUAL("java/lang/String/compareTo", "(java/lang/String;)I"))
+                result.append(self.jvm.emitINVOKEVIRTUAL("java/lang/String/compareTo", "(Ljava/lang/String;)I"))
                 result.append(self.jvm.emitIFNE(labelF))
 
         result.append(self.emitPUSHCONST("true", BoolType(), frame))
