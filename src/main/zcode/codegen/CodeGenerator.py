@@ -124,6 +124,9 @@ class CodeGenVisitor(BaseVisitor):
         return c
 
     def visitVarDecl(self, ast, param):
+        if param.frame is None:
+            pass
+        
         pass
 
     def visitFuncDecl(self, ast, param):
