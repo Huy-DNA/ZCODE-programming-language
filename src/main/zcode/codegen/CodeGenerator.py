@@ -154,7 +154,7 @@ class CodeGenVisitor(BaseVisitor):
             opIns = self.emit.emitANDOP(param.frame)
         elif op == "or":
             opIns = self.emit.emitOROP(param.frame)
-        code = codeRight + opIns + codeLeft
+        code = codeLeft + codeRight + opIns
         return code
 
     def visitUnaryOp(self, ast, param):
