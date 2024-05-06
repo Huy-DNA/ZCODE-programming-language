@@ -117,6 +117,7 @@ class CodeGenVisitor(BaseVisitor):
         self.path = path
 
     def visitProgram(self, ast, c):
+        c = SubBody(None, self.env)
         [self.visit(i, c) for i in ast.decl]
         return c
 
