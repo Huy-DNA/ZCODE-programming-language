@@ -188,8 +188,12 @@ class CodeGenVisitor(BaseVisitor):
         name = ast.name
         index = foundScope.getIndex(name)
         if index is None:
-            pass
-        pass
+            if param.isLeft:
+                return self.emit.emitPUTSTATIC(name, in_, param.frame)
+            return self.emit.emitGETSTATIC(name, in_, param.frame)
+        if param.isLeft:
+            return self.emit.emitWRITEVAR(name, in_, index, param.frame)
+        return self.emit.emitREADVAR(name, in_, index, param.frame)
 
     def visitArrayCell(self, ast, param):
         pass
