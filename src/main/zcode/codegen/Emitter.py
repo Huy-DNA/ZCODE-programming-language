@@ -128,10 +128,14 @@ class Emitter():
                 if type(typ.eleType) in [BoolType, NumberType]:
                     code += self.emitNEWARRAY(typ.eleType, frame)
                 else:
-                    code += self.emitANEWARRAY(typ.eleType,frame)
+                    code += self.emitANEWARRAY(typ.eleType, frame)
                 return code
             else:
-                pass
+                code = ""
+                for s in typ.size:
+                    code += self.emitPUSHICONST(s, frame)
+                code += self.emitMULTIANEWARRAY(typ.eleType, frame)
+                return code
         else:
             raise IllegalOperandException(in_)
 
