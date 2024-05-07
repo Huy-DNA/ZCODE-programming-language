@@ -209,10 +209,14 @@ class CodeGenVisitor(BaseVisitor):
         for idx in ast.idx:
             code += self.visit(idx, param)[0]
             if len(typ.size) == 1:
-                code += self.emit.ALOAD(typ.eleType, param.frame)
+                if not param.isLeft:
+                    code += self.emit.ALOAD(typ.eleType, param.frame)
+                else:
+                    code += self.emit.ASTORE(typ.eleType, param.frame)
                 typ = typ.eleType
-            code += self.emit.ALOAD(typ, param.frame)
-            typ.size.pop(0)
+            else:
+                code += self.emit.ALOAD(typ, param.frame)
+                typ.size.pop(0)
         return code, typ 
 
     def visitBlock(self, ast, param):
