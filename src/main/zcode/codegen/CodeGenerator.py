@@ -301,7 +301,17 @@ class CodeGenVisitor(BaseVisitor):
         return self.emitPUSHCONST(self.value, StringType(), param.frame), StringType()
 
     def visitArrayLiteral(self, ast, param):
-        typ = ArrayType()
+        size = []
+        curExpr = ast
+        while type(curExpr) is ArrayLiteral:
+            size.push(len(curExpr.value))
+            curExpr = ast.value[0]
+        _, eleTyp = self.visit(curExpr, param)
+        if type(eleTyp) is ArrayType:
+            size += eleTyp.size
+            eleTyp = eleTyp.eleTyp
+        typ = ArrayType(size, eleTyp)
+
         if len(typ.size) == 1:
             code = self.emit.emitPUSHICONST(typ.size[0], param.frame)
             if type(typ.eleType) in [BoolType, NumberType]:
