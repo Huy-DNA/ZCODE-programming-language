@@ -117,9 +117,11 @@ class CodeGenVisitor(BaseVisitor):
         in_, _ = scope.lookup(name, Function())
         self.emit.printout(self.emit.emitMETHOD(name, in_))
         param.frame.enterScope(True)
+        self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
         for paramDecl in ast.param:
             self.visit(paramDecl, SubBody(param.frame, ast.scope))
         self.visit(ast.body, SubBody(param.frame, ast.body.scope))  
+        self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
         param.frame.exitScope()
         self.emit.printout(self.emit.emitENDMETHOD(param.frame)
 
@@ -216,9 +218,11 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitBlock(self, ast, param):
         param.frame.enterScope(False)
+        self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
         bodyParam = SubBody(param.frame, ast.scope)
         for stmt in ast.param:
             self.emit.printout(self.visit(stmt, bodyParam))
+        self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
         param.frame.exitScope()
 
     def visitIf(self, ast, param):
