@@ -218,7 +218,7 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.enterScope(False)
         bodyParam = SubBody(param.frame, ast.scope)
         for stmt in ast.param:
-            self.visit(stmt, bodyParam)
+            self.emit.printout(self.visit(stmt, bodyParam))
         param.frame.exitScope()
 
     def visitIf(self, ast, param):
