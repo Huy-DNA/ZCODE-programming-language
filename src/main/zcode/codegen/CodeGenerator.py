@@ -282,7 +282,8 @@ class CodeGenVisitor(BaseVisitor):
             self.emit.printout(self.emitRETURN(VoidType(), param.frame))
 
     def visitAssign(self, ast, param):
-        pass
+        self.emit.printout(self.visit(ast.rhs, param)[0])
+        self.emit.printout(self.visit(ast.lhs, SubBody(param.frame, param.scope, True))[0])
 
     def visitCallStmt(self, ast, param):
         name = ast.name
