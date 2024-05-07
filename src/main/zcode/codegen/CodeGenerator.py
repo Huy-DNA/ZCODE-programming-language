@@ -292,10 +292,10 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(code)
 
     def visitNumberLiteral(self, ast, param):
-        pass
+        self.emitPUSHCONST(str(self.value), NumberType(), param.frame)
 
     def visitBooleanLiteral(self, ast, param):
-        pass
+        self.emitPUSHCONST(str(self.value), BoolType(), param.frame)
 
     def visitStringLiteral(self, ast, param):
         pass

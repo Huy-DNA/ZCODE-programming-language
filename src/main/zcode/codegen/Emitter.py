@@ -84,9 +84,9 @@ class Emitter():
             elif i >= -32768 and i <= 32767:
                 return self.jvm.emitSIPUSH(i)
         elif type(in_) is str:
-            if in_ == "true":
+            if in_ == "True":
                 return self.emitPUSHICONST(1, frame)
-            elif in_ == "false":
+            elif in_ == "False":
                 return self.emitPUSHICONST(0, frame)
             else:
                 return self.emitPUSHICONST(int(in_), frame)
