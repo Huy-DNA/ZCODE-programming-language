@@ -84,8 +84,10 @@ class CodeGenVisitor(BaseVisitor):
         self.emit = Emitter(path + "/" +self.classname + ".j")
 
     def visitProgram(self, ast, c):
+        self.emit.emitPROLOG(self.classname)
         c = SubBody(None, self.env, ast.scope)
         [self.visit(i, c) for i in ast.decl]
+        self.emit.emitEPILOG()
 
     def visitVarDecl(self, ast, param):
         scope = param.scope
