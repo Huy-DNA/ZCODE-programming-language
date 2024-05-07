@@ -270,7 +270,12 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(self.emit.emitGOTO(brkLabel, param.frame))
 
     def visitReturn(self, ast, param):
-        pass
+        if ast.expr:
+            code, typ = self.visit(ast.expr, param)
+            self.emit.printout(code)
+            self.emit.printout(self.emitRETURN(typ, param.frame))
+        else:
+            self.emit.printout(self.emitRETURN(VoidType(), param.frame))
 
     def visitAssign(self, ast, param):
         pass
