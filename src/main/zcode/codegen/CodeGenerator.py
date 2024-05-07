@@ -86,7 +86,6 @@ class CodeGenVisitor(BaseVisitor):
     def visitProgram(self, ast, c):
         c = SubBody(None, self.env, ast.scope)
         [self.visit(i, c) for i in ast.decl]
-        return c
 
     def visitVarDecl(self, ast, param):
         scope = param.scope
@@ -100,7 +99,7 @@ class CodeGenVisitor(BaseVisitor):
                 self.emit.printout(code)
                 self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
         
-        self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
+        self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame))
         index = param.frame.getNewIndex()
         foundScope.setIndex(name, index)
         if ast.varInit:
