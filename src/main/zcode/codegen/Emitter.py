@@ -490,7 +490,7 @@ class Emitter():
     *   @param isStatic <code>true</code> if the method is static; <code>false</code> otherwise.
     '''
 
-    def emitMETHOD(self, lexeme, in_isStatic, frame):
+    def emitMETHOD(self, lexeme, in_, frame):
         # lexeme: String
         # in_: Type
         # frame: Frame
