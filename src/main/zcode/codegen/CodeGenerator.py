@@ -226,7 +226,23 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.exitScope()
 
     def visitIf(self, ast, param):
-        pass
+        self.emit.printout(self.visit(ast.expr, param))
+        endLabel = param.frame.getNewLabel()
+        elifLabel = param.frame.getNewLabel()
+        self.emit.printout(self.emit.emitIFFALSE(elifLabel, param.frame))
+        self.visit(ast.thenStmt, param)
+        self.emit.printout(self.emit.emitGOTO(endLabel, param.frame))
+        for expr, stmt in self.elifStmt:
+            self.emit.printout(self.emit.emitLABEL(elifLabel), param.frame)
+            self.visit(expr, param)
+            elifLabel = param.frame.getNewLabel()
+            self.emit.printout(self.emit.emitIFFALSE(elifLabel, param.frame))
+            self.visit(stmt, param)
+            self.emit.printout(self.emit.emitGOTO(endLabel, param.frame))
+        if ast.elseStmt:
+            self.emit.printout(self.emit.emitLABEL(elifLabel, param.frame), param.frame)
+            self.visit(ast.elseStmt, param)
+        self.emit.printout(self.emit.emitLABEL(endLabel, param.frame))
 
     def visitFor(self, ast, param):
         pass
