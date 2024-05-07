@@ -232,14 +232,14 @@ class CodeGenVisitor(BaseVisitor):
         self.visit(ast.thenStmt, param)
         self.emit.printout(self.emit.emitGOTO(endLabel, param.frame))
         for expr, stmt in self.elifStmt:
-            self.emit.printout(self.emit.emitLABEL(elifLabel), param.frame)
+            self.emit.printout(self.emit.emitLABEL(elifLabel, param.frame))
             self.emit.printout(self.visit(expr, param)[0])
             elifLabel = param.frame.getNewLabel()
             self.emit.printout(self.emit.emitIFFALSE(elifLabel, param.frame))
             self.visit(stmt, param)
             self.emit.printout(self.emit.emitGOTO(endLabel, param.frame))
         if ast.elseStmt:
-            self.emit.printout(self.emit.emitLABEL(elifLabel, param.frame), param.frame)
+            self.emit.printout(self.emit.emitLABEL(elifLabel, param.frame))
             self.visit(ast.elseStmt, param)
         self.emit.printout(self.emit.emitLABEL(endLabel, param.frame))
 
@@ -251,14 +251,14 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.enterLoop()
         startLoopLabel = param.frame.getContinueLabel()
         endLoopLabel = param.frame.getBreakLabel()
-        self.emit.printout(self.emit.emitLabel(startLoopLabel, param.frame))
+        self.emit.printout(self.emit.emitLABEL(startLoopLabel, param.frame))
         self.emit.printout(self.visit(ast.condExpr, param)[0])
         self.emit.printout(self.emit.emitIFFALSE(endLoopLabel, param.frame))
         self.visit(ast.body, param))
-        self.emit.printout(self.visit(ast.updExpr, param[0]))
+        self.emit.printout(self.visit(ast.updExpr, param)[0])
         self.emit.printout(self.visit(name, SubBody(param.frame, param.scope, True))[0])
         self.emit.printout(self.emit.emitGOTO(startLoopLabel, param.frame))
-        self.emit.printout(self.emit.emitLabel(endLoopLabel, param.frame))
+        self.emit.printout(self.emit.emitLABEL(endLoopLabel, param.frame))
         param.frame.exitLoop()
 
     def visitContinue(self, ast, param):
