@@ -292,16 +292,16 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(code)
 
     def visitNumberLiteral(self, ast, param):
-        self.emitPUSHCONST(str(self.value), NumberType(), param.frame)
+        return self.emitPUSHCONST(str(ast.value), NumberType(), param.frame), NumberType()
 
     def visitBooleanLiteral(self, ast, param):
-        self.emitPUSHCONST(str(self.value), BoolType(), param.frame)
+        return self.emitPUSHCONST(str(ast.value), BoolType(), param.frame), BoolType()
 
     def visitStringLiteral(self, ast, param):
-        pass
+        return self.emitPUSHCONST(self.value, StringType(), param.frame), StringType()
 
     def visitArrayLiteral(self, ast, param):
-        pass
+        self.emitPUSHCONST(str(self.value), , param.frame)
 
 class UninferredType(Type):
     pass

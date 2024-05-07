@@ -55,7 +55,7 @@ class Emitter():
         elif typeIn is ArrayType:
             return "[" + self.getJVMType(inType.eleType)
         elif typeIn is cgen.FuncType:
-            return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params)) + ")" + self.getJVMType(inType.ret)
+            return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params)) + ")" + self.getJVMType(inType.ret))
         elif typeIn is ClassType:
             return "L" + inType.classname.name + ";"
 
@@ -121,6 +121,17 @@ class Emitter():
         elif type(typ) is StringType:
             frame.push()
             return self.jvm.emitLDC(in_)
+        elif type(typ) is ArrayType:
+            typ = ArrayType(typ.size, typ.eleType)
+            if len(typ.size) == 1:
+                code = self.emitPUSHICONST(typ.size[0], frame)
+                if type(typ.eleType) in [BoolType, NumberType]:
+                    code += self.emitNEWARRAY(typ.eleType, frame)
+                else:
+                    code += self.emitANEWARRAY(typ.eleType,frame)
+                return code
+            else:
+                pass
         else:
             raise IllegalOperandException(in_)
 
@@ -366,10 +377,10 @@ class Emitter():
         label2 = frame.getNewLabel()
         result = list()
         result.append(self.emitIFTRUE(label1, frame))
-        result.append(self.emitPUSHCONST("true", in_, frame))
+        result.append(self.emitPUSHCONST("True", in_, frame))
         result.append(self.emitGOTO(label2, frame))
         result.append(self.emitLABEL(label1, frame))
-        result.append(self.emitPUSHCONST("false", in_, frame))
+        result.append(self.emitPUSHCONST("False", in_, frame))
         result.append(self.emitLABEL(label2, frame))
         return ''.join(result)
 
@@ -476,10 +487,10 @@ class Emitter():
                 result.append(self.jvm.emitINVOKEVIRTUAL("java/lang/String/compareTo", "(Ljava/lang/String;)I"))
                 result.append(self.jvm.emitIFNE(labelF))
 
-        result.append(self.emitPUSHCONST("true", BoolType(), frame))
+        result.append(self.emitPUSHCONST("True", BoolType(), frame))
         result.append(self.emitGOTO(labelO, frame))
         result.append(self.emitLABEL(labelF, frame))
-        result.append(self.emitPUSHCONST("false", BoolType(), frame))
+        result.append(self.emitPUSHCONST("False", BoolType(), frame))
         result.append(self.emitLABEL(labelO, frame))
         
         return ''.join(result)
