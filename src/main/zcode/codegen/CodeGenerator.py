@@ -281,7 +281,15 @@ class CodeGenVisitor(BaseVisitor):
         pass
 
     def visitCallStmt(self, ast, param):
-        pass
+        name = ast.name
+        code = ""
+        scope = param.scope
+        in_, _ = scope.lookup(name, Function())
+        for arg in self.args:
+            code += self.visit(arg, param)[0]
+        code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, in_, param.frame)
+
+        self.emit.printout(code)
 
     def visitNumberLiteral(self, ast, param):
         pass
