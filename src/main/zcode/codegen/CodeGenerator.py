@@ -245,7 +245,22 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(self.emit.emitLABEL(endLabel, param.frame))
 
     def visitFor(self, ast, param):
-        pass
+        name = ast.name
+        scope = param.scope
+        _, foundScope = scope.lookup(name.name, Variable())
+        index = foundScope.getIndex(name.name)
+        param.frame.enterLoop()
+        startLoopLabel = param.frame.getContinueLabel()
+        endLoopLabel = param.frame.getBreakLabel()
+        self.emit.printout(self.emit.emitLabel(startLoopLabel, param.frame))
+        self.emit.printout(self.visit(ast.condExpr, param))
+        self.emit.printout(self.emit.emitIFFALSE(endLoopLabel, param.frame))
+        self.visit(ast.body, param))
+        self.emit.printout(self.visit(ast.updExpr, param))
+        self.emit.printout(self.visit(name, SubBody(param.frame, param.scope, True)))
+        self.emit.printout(self.emit.emitGOTO(startLoopLabel, param.frame))
+        self.emit.printout(self.emit.emitLabel(endLoopLabel, param.frame))
+        param.frame.exitLoop()
 
     def visitContinue(self, ast, param):
         pass
