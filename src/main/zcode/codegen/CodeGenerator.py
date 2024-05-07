@@ -301,7 +301,18 @@ class CodeGenVisitor(BaseVisitor):
         return self.emitPUSHCONST(self.value, StringType(), param.frame), StringType()
 
     def visitArrayLiteral(self, ast, param):
-        self.emitPUSHCONST(str(self.value), , param.frame)
+        typ = ArrayType()
+        if len(typ.size) == 1:
+            code = self.emit.emitPUSHICONST(typ.size[0], param.frame)
+            if type(typ.eleType) in [BoolType, NumberType]:
+                code += self.emit.emitNEWARRAY(typ.eleType, param.frame)
+            else:
+                code += self.emit.emitANEWARRAY(typ.eleType, frame)
+        else:
+            code = ""
+            for s in typ.size:
+                code += self.emit.emitPUSHICONST(s, frame)
+            code += self.emit.emitMULTIANEWARRAY(typ.eleType, frame)
 
 class UninferredType(Type):
     pass

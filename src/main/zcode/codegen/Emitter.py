@@ -121,21 +121,6 @@ class Emitter():
         elif type(typ) is StringType:
             frame.push()
             return self.jvm.emitLDC(in_)
-        elif type(typ) is ArrayType:
-            typ = ArrayType(typ.size, typ.eleType)
-            if len(typ.size) == 1:
-                code = self.emitPUSHICONST(typ.size[0], frame)
-                if type(typ.eleType) in [BoolType, NumberType]:
-                    code += self.emitNEWARRAY(typ.eleType, frame)
-                else:
-                    code += self.emitANEWARRAY(typ.eleType, frame)
-                return code
-            else:
-                code = ""
-                for s in typ.size:
-                    code += self.emitPUSHICONST(s, frame)
-                code += self.emitMULTIANEWARRAY(typ.eleType, frame)
-                return code
         else:
             raise IllegalOperandException(in_)
 
