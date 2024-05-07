@@ -679,12 +679,22 @@ class Emitter():
         frame.push()
         return self.jvm.emitNEW(self.getJVMType(typ))
 
+    def emitARRAY(self, typ, frame):
+        if type(typ) in [BoolType, NumberType]:
+            return self.emitNEWARRAY(typ, frame)
+        else:
+            return self.emitANEWARRAY(typ, frame)
+
     def emitNEWARRAY(self, typ, frame):
         # typ: Type
+
+        frame.push()
         return self.jvm.emitNEWARRAY(self.getFullType(typ))
 
     def emitANEWARRAY(self, typ, frame):
         # typ: Type
+        
+        frame.push()
         return self.jvm.emitANEWARRAY(self.getJVMType(typ))
 
     def emitMULTIANEWARRAY(self, typ, dimensions, frame):

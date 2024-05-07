@@ -301,28 +301,21 @@ class CodeGenVisitor(BaseVisitor):
         return self.emitPUSHCONST(self.value, StringType(), param.frame), StringType()
 
     def visitArrayLiteral(self, ast, param):
-        size = []
-        curExpr = ast
-        while type(curExpr) is ArrayLiteral:
-            size.push(len(curExpr.value))
-            curExpr = ast.value[0]
-        _, eleTyp = self.visit(curExpr, param)
-        if type(eleTyp) is ArrayType:
-            size += eleTyp.size
-            eleTyp = eleTyp.eleTyp
-        typ = ArrayType(size, eleTyp)
-
-        if len(typ.size) == 1:
-            code = self.emit.emitPUSHICONST(typ.size[0], param.frame)
-            if type(typ.eleType) in [BoolType, NumberType]:
-                code += self.emit.emitNEWARRAY(typ.eleType, param.frame)
-            else:
-                code += self.emit.emitANEWARRAY(typ.eleType, frame)
+        size = len(ast.value)
+        code = self.emit.emitPUSHICONST(size, param.frame)
+        eleCode = ""
+        eleTyp = None
+        for index, expr in enumerate(ast.value):
+            c, typ = self.visit(expr, param)
+            eleTyp = typ
+            eleCode += self.emit.emitDUP(param.frame)
+            eleCode += self.emit.emitPUSHICONST(index, param.frame)
+            eleCode += c
+            eleCode += self.emit.emitASTORE(eleTyp, param.frame)
         else:
-            code = ""
-            for s in typ.size:
-                code += self.emit.emitPUSHICONST(s, frame)
-            code += self.emit.emitMULTIANEWARRAY(typ.eleType, frame)
+            code += self.emit.emitARRAY(eleTyp, param.frame) + eleCode
+
+        return code, ArrayType([size], eleTyp) if type(eleTyp) is not ArrayType else ArrayType([size] + eleTyp.size, eleTyp.eleTyp)
 
 class UninferredType(Type):
     pass
