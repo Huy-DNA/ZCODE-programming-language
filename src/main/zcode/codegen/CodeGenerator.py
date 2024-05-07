@@ -99,7 +99,6 @@ class CodeGenVisitor(BaseVisitor):
                 code, _ = self.visit(varInit, param)
                 self.emit.printout(code)
                 self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
-            return SubBody(None, param.scope)
         
         self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame)
         index = param.frame.getNewIndex()
@@ -109,8 +108,6 @@ class CodeGenVisitor(BaseVisitor):
             code, _ = self.visit(varInit, param)
             self.emit.printout(code)
             self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
-
-        return SubBody(None, param.scope)
  
     def visitFuncDecl(self, ast, param):
         if not ast.body:
@@ -125,7 +122,6 @@ class CodeGenVisitor(BaseVisitor):
         self.visit(ast.body, SubBody(param.frame, ast.body.scope))  
         param.frame.exitScope()
         self.emit.printout(self.emit.emitENDMETHOD(param.frame)
-        return SubBody(None, param.scope)
 
     def visitNumberType(self, ast, param):
         pass
@@ -219,7 +215,11 @@ class CodeGenVisitor(BaseVisitor):
         return code, typ 
 
     def visitBlock(self, ast, param):
-        pass
+        param.frame.enterScope(False)
+        bodyParam = SubBody(param.frame, ast.scope)
+        for stmt in ast.param:
+            self.visit(stmt, bodyParam)
+        param.frame.exitScope()
 
     def visitIf(self, ast, param):
         pass
