@@ -96,7 +96,7 @@ class CodeGenVisitor(BaseVisitor):
             self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
             if ast.varInit:
                 param = SubBody(Frame(name, VoidType()), param.scope)
-                code = self.visit(varInit, param)
+                code, _ = self.visit(varInit, param)
                 self.emit.printout(code)
                 self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
             return SubBody(None, param.scope)
@@ -106,7 +106,7 @@ class CodeGenVisitor(BaseVisitor):
         foundScope.setIndex(name, index)
         if ast.varInit:
             param = SubBody(Frame(name, VoidType()), param.scope)
-            code = self.visit(varInit, param)
+            code, _ = self.visit(varInit, param)
             self.emit.printout(code)
             self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
 
@@ -143,33 +143,42 @@ class CodeGenVisitor(BaseVisitor):
         op = ast.op
         left = ast.left
         right = ast.right
-        codeLeft = self.visit(left, param)
-        codeRight = self.visit(right, param)
+        codeLeft, _ = self.visit(left, param)
+        codeRight, _ = self.visit(right, param)
         if op in ["-", "+"]:
             opIns = self.emit.emitADDOP(op, NumberType(), param.frame)
+            typ = NumberType()
         elif op == "...":
             opIns = self.emit.emitADDOP(op, StringType(), param.frame)
+            typ = StringType()
         elif op in ['*', '/', '%']:
             opIns = self.emit.emitMULOP(op, NumberType(), param.frame)
+            typ = NumberType()
         elif op in [">", ">=", "<=", "=", "!="]:
             opIns = self.emit.emitREOP(op, NumberType(), param.frame)
+            typ = BoolType()
         elif op == "==":
             opIns = self.emit.emitREOP(op, StringType(), param.frame)
+            typ = BoolType()
         elif op == "and":
             opIns = self.emit.emitANDOP(param.frame)
+            typ = BoolType()
         elif op == "or":
             opIns = self.emit.emitOROP(param.frame)
+            typ = BoolType()
         code = codeLeft + codeRight + opIns
-        return code
+        return code, typ
 
     def visitUnaryOp(self, ast, param):
         code = self.visit(ast.operand, param)
         if op == "-":
             opIns = self.emit.emitNEGOP(NumberType(), param.frame)
+            typ = NumberType()
         elif op == "not":
             opIns = self.emit.emitNOT(BoolType(), param.frame)
+            typ = BoolType()
 
-        return code + opIns
+        return code + opIns, typ
 
     def visitCallExpr(self, ast, param):
         name = ast.name
@@ -180,7 +189,7 @@ class CodeGenVisitor(BaseVisitor):
             code += self.visit(arg, param)
         code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, in_, Function()), param.frame)
 
-        return code
+        return code, in_.ret
 
     def visitId(self, ast, param):
         scope = param.scope
@@ -189,14 +198,25 @@ class CodeGenVisitor(BaseVisitor):
         index = foundScope.getIndex(name)
         if index is None:
             if param.isLeft:
-                return self.emit.emitPUTSTATIC(name, in_, param.frame)
-            return self.emit.emitGETSTATIC(name, in_, param.frame)
+                return self.emit.emitPUTSTATIC(name, in_, param.frame), in_
+            return self.emit.emitGETSTATIC(name, in_, param.frame), in_
         if param.isLeft:
-            return self.emit.emitWRITEVAR(name, in_, index, param.frame)
-        return self.emit.emitREADVAR(name, in_, index, param.frame)
+            return self.emit.emitWRITEVAR(name, in_, index, param.frame), in_
+        return self.emit.emitREADVAR(name, in_, index, param.frame), in_
 
     def visitArrayCell(self, ast, param):
-        pass
+        subParam = SubBody(param.frame, param.scope)
+        arrCode, arrTyp = self.visit(ast.arr, param)
+        code = arrCode
+        typ = ArrayType(array(arrTyp.size), arrTyp.eleType)
+        for idx in ast.idx:
+            code, _ += self.visit(idx, param)
+            if len(typ.size) == 1:
+                code += self.emit.ALOAD(typ.eleType, param.frame)
+                typ = typ.eleType
+            code += self.emit.ALOAD(typ, param.frame)
+            typ.size.pop(0)
+        return code, typ 
 
     def visitBlock(self, ast, param):
         pass
