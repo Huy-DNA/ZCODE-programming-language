@@ -124,7 +124,7 @@ class CodeGenVisitor(BaseVisitor):
             self.visit(paramDecl, SubBody(param.frame, ast.scope))
         self.visit(ast.body, SubBody(param.frame, ast.body.scope))  
         param.frame.exitScope()
-
+        self.emit.printout(self.emit.emitENDMETHOD(param.frame)
         return SubBody(None, param.scope)
 
     def visitNumberType(self, ast, param):
