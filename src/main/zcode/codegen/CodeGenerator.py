@@ -262,11 +262,11 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.exitLoop()
 
     def visitContinue(self, ast, param):
-        continueLabel = param.frame.getContinueLabel
+        continueLabel = param.frame.getContinueLabel()
         self.emit.printout(self.emit.emitGOTO(continueLabel, param.frame))
 
     def visitBreak(self, ast, param):
-        brkLabel = param.frame.getBreakLabel
+        brkLabel = param.frame.getBreakLabel()
         self.emit.printout(self.emit.emitGOTO(brkLabel, param.frame))
 
     def visitReturn(self, ast, param):
