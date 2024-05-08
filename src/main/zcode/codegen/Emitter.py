@@ -303,8 +303,8 @@ class Emitter():
         # frame: Frame
 
         typ = in_
-        list(map(lambda x: frame.pop(), typ.partype))
-        if not type(typ.rettype) is VoidType:
+        list(map(lambda x: frame.pop(), typ.params))
+        if not type(typ.ret) is VoidType:
             frame.push()
         return self.jvm.emitINVOKESTATIC(lexeme, self.getJVMType(in_))
 
@@ -320,9 +320,9 @@ class Emitter():
 
         if not lexeme is None and not in_ is None:
             typ = in_
-            list(map(lambda x: frame.pop(), typ.partype))
+            list(map(lambda x: frame.pop(), typ.params))
             frame.pop()
-            if not type(typ.rettype) is VoidType:
+            if not type(typ.ret) is VoidType:
                 frame.push()
             return self.jvm.emitINVOKESPECIAL(lexeme, self.getJVMType(in_))
         elif lexeme is None and in_ is None:
@@ -340,9 +340,9 @@ class Emitter():
         # frame: Frame
 
         typ = in_
-        list(map(lambda x: frame.pop(), typ.partype))
+        list(map(lambda x: frame.pop(), typ.params))
         frame.pop()
-        if not type(typ) is VoidType:
+        if not type(typ.ret) is VoidType:
             frame.push()
         return self.jvm.emitINVOKEVIRTUAL(lexeme, self.getJVMType(in_))
 
