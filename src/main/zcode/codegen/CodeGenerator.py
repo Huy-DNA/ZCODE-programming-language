@@ -95,7 +95,7 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitProgram(self, ast, c):
         self.emit.emitPROLOG(self.classname, "")
-        c = SubBody(None, self.env, ast.scope)
+        c = SubBody(None, ast.scope)
         [self.visit(i, c) for i in ast.decl]
         self.emit.emitEPILOG()
 
