@@ -89,8 +89,36 @@ class CodeGenVisitor(BaseVisitor):
         self.classname = "ZCodeClass"
         self.emit = Emitter(path + "/" +self.classname + ".j")
 
+    def emitWriteNumber(self, c):
+        pass
+
+    def emitReadNumber(self, c):
+        pass
+    
+    def emitWriteBool(self, c):
+        pass
+
+    def emitReadBool(self, c):
+        pass
+
+    def emitWriteString(self, c):
+        pass
+
+    def emitReadString(self, c):
+        pass
+
+
+    def emitBuiltIn(self, c):
+        self.emitReadNumber(c) 
+        self.emitWriteNumber(c) 
+        self.emitReadString(c) 
+        self.emitWriteString(c) 
+        self.emitReadBool(c) 
+        self.emitWriteBool(c) 
+    
     def visitProgram(self, ast, c):
         self.emit.printout(self.emit.emitPROLOG(self.classname, ""))
+        self.emitBuiltIn(c)
         [self.visit(i, c) for i in ast.decl]
         self.emit.emitEPILOG()
 
