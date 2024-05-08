@@ -299,7 +299,7 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(self.visit(ast.lhs, SubBody(param.frame, param.scope, True))[0])
 
     def visitCallStmt(self, ast, param):
-        name = ast.name
+        name = ast.name.name
         code = ""
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
