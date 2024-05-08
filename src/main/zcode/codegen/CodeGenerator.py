@@ -60,7 +60,7 @@ class SubBody():
 class CodeGenVisitor(BaseVisitor):
     def __init__(self, astTree, env, path):
         patch_Frame_class()
-        patch_Machine_Code_Class()
+        patch_Machine_Code_class()
         StaticChecker(astTree).check()
         
         self.astTree = astTree
