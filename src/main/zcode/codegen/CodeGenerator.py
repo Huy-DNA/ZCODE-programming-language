@@ -62,15 +62,11 @@ def patch_Machine_Code_class():
     JasminCode.emitICONST = emitICONST
 
 class CodeGenerator:
-    def init(self):
-        return []
-
     def gen(self, ast, path):
         # ast: AST
         # dir_: String
 
-        gl = self.init()
-        gc = CodeGenVisitor(ast, gl, path)
+        gc = CodeGenVisitor(ast, path)
         c = SubBody(None, ast.scope)
         gc.visit(ast, c)
 
@@ -83,13 +79,12 @@ class SubBody():
 
 
 class CodeGenVisitor(BaseVisitor):
-    def __init__(self, astTree, env, path):
+    def __init__(self, astTree, path):
         patch_Frame_class()
         patch_Machine_Code_class()
         StaticChecker(astTree).check()
         
         self.astTree = astTree
-        # self.env = env
         self.path = path
         self.classname = "ZCodeClass"
         self.emit = Emitter(path + "/" +self.classname + ".j")
