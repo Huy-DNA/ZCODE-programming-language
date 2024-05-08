@@ -1,6 +1,7 @@
 from Utils import *
 # from StaticCheck import *
 # from StaticError import *
+from CodeGenError import *
 import CodeGenerator as cgen
 from MachineCode import JasminCode
 from AST import *

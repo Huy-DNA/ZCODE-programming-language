@@ -1,5 +1,5 @@
 from Utils import *
-
+from CodeGenError import *
 
 class Frame():
     def __init__(self, name, returnType):
