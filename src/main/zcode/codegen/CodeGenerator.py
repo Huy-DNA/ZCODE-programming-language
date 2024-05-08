@@ -195,7 +195,7 @@ class CodeGenVisitor(BaseVisitor):
         code = ""
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
-        for arg in self.args:
+        for arg in ast.args:
             code += self.visit(arg, param)[0]
         code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, in_, param.frame)
 
@@ -303,7 +303,7 @@ class CodeGenVisitor(BaseVisitor):
         code = ""
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
-        for arg in self.args:
+        for arg in ast.args:
             code += self.visit(arg, param)[0]
         code += self.emit.emitINVOKESTATIC(self.classname + "/" + name, in_, param.frame)
 
