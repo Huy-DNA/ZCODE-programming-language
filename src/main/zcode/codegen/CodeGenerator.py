@@ -426,6 +426,7 @@ class Scope:
         self.__parent = parent
         self.__varSymbolTable = dict()
         self.__fnSymbolTable = dict()
+        self.__indexTable = dict()
         self.associatedBlock = associatedBlock
         if associatedBlock:
             associatedBlock.scope = self
