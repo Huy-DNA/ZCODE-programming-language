@@ -106,14 +106,14 @@ class CodeGenVisitor(BaseVisitor):
                 self.emit.printout(code)
                 self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
         
-        self.emit.printout(self.emitVAR(in_, name, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame))
         index = param.frame.getNewIndex()
         foundScope.setIndex(name, index)
+        self.emit.printout(self.emit.emitVAR(index, name, in_, param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame))
         if ast.varInit:
             initParam = SubBody(Frame(name, VoidType()), param.scope)
             code, _ = self.visit(ast.varInit, initParam)
             self.emit.printout(code)
-            self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
+            self.emit.printout(self.emit.emitWRITEVAR(name, in_, index, param.frame))
  
     def visitFuncDecl(self, ast, param):
         param = SubBody(Frame(self.classname, VoidType()), param.scope)
@@ -122,12 +122,17 @@ class CodeGenVisitor(BaseVisitor):
         name = ast.name.name
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
-        if name != "main":
-            self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
-        else:
-            self.emit.printout(self.emit.emitMETHOD("main", FuncType([ArrayType([], StringType())], VoidType(), True), param.frame))
+        if name == "main":
+            paramType = [ArrayType([], StringType())]
+            in_ = FuncType(paramType, VoidType(), True)
+        
+        self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
         param.frame.enterScope(True)
         self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
+        if name == "main":
+            index = param.frame.getNewIndex()
+            self.emit.printout(self.emit.emitVAR(index, name, paramType[0], param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame))
+
         for paramDecl in ast.param:
             self.visit(paramDecl, SubBody(param.frame, ast.scope))
         self.visit(ast.body, SubBody(param.frame, ast.body.scope))  
