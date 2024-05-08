@@ -121,6 +121,7 @@ class CodeGenVisitor(BaseVisitor):
             self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
  
     def visitFuncDecl(self, ast, param):
+        param = SubBody(Frame(self.classname, VoidType()), param.scope)
         if not ast.body:
             return
         name = ast.name.name
