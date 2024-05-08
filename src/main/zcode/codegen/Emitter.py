@@ -55,7 +55,7 @@ class Emitter():
         elif typeIn is ArrayType:
             return "[" + self.getJVMType(inType.eleType)
         elif typeIn is cgen.FuncType:
-            return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params)) + ")" + self.getJVMType(inType.ret))
+            return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params))) + ")" + self.getJVMType(inType.ret)
         elif typeIn is ClassType:
             return "L" + inType.classname.name + ";"
 
