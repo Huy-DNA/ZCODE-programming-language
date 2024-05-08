@@ -9,6 +9,30 @@ from AST import *
 
 from Utils import *
 
+class Kind(ABC):
+    pass
+
+
+class Identifier(Kind):
+    def __str__(self):
+        return "Identifier"
+
+
+class Variable(Kind):
+    def __str__(self):
+        return "Variable"
+
+
+class Function(Kind):
+    def __str__(self):
+        return "Function"
+
+
+class Parameter(Kind):
+    def __str__(self):
+        return "Parameter"
+
+
 # Since the Frame.py file is not submitted, have to do it here
 def patch_Frame_class():
     def getBreakLabel(self):
