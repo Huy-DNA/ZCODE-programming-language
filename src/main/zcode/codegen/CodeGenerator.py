@@ -131,6 +131,7 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
         param.frame.exitScope()
         self.emit.printout(self.emit.emitENDMETHOD(param.frame))
+        self.emit.printout(self.emit.emitRETURN(VoidType(), param.frame))
 
     def visitNumberType(self, ast, param):
         pass
@@ -285,9 +286,9 @@ class CodeGenVisitor(BaseVisitor):
         if ast.expr:
             code, typ = self.visit(ast.expr, param)
             self.emit.printout(code)
-            self.emit.printout(self.emitRETURN(typ, param.frame))
+            self.emit.printout(self.emit.emitRETURN(typ, param.frame))
         else:
-            self.emit.printout(self.emitRETURN(VoidType(), param.frame))
+            self.emit.printout(self.emit.emitRETURN(VoidType(), param.frame))
 
     def visitAssign(self, ast, param):
         self.emit.printout(self.visit(ast.rhs, param)[0])
