@@ -2,7 +2,7 @@
 .class public ZCodeClass
 .super java/lang/Object
 
-.method public static main()V
+.method public static main([Ljava/lang/String;)V
 Label0:
 Label2:
 	ldc 1.0

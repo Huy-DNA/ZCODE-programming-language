@@ -122,7 +122,10 @@ class CodeGenVisitor(BaseVisitor):
         name = ast.name.name
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
-        self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
+        if name != "main":
+            self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
+        else:
+            self.emit.printout(self.emit.emitMETHOD("main", FuncType([ArrayType([], StringType())], VoidType(), True), param.frame))
         param.frame.enterScope(True)
         self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
         for paramDecl in ast.param:
