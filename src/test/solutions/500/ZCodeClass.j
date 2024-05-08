@@ -9,6 +9,7 @@ Label2:
 	invokestatic ZCodeClass/writeNumber(F)V
 Label3:
 Label1:
+	return
 .limit stack 1
 .limit locals 0
 .end method
