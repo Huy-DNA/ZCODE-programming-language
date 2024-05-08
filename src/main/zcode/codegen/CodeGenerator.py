@@ -71,7 +71,8 @@ class CodeGenerator:
 
         gl = self.init()
         gc = CodeGenVisitor(ast, gl, path)
-        gc.visit(ast, None)
+        c = SubBody(None, ast.scope)
+        gc.visit(ast, c)
 
 
 class SubBody():
@@ -95,7 +96,6 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitProgram(self, ast, c):
         self.emit.emitPROLOG(self.classname, "")
-        c = SubBody(None, ast.scope)
         [self.visit(i, c) for i in ast.decl]
         self.emit.emitEPILOG()
 
