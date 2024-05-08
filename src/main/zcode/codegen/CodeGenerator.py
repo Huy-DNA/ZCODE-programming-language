@@ -106,8 +106,8 @@ class CodeGenVisitor(BaseVisitor):
         if param.frame is None: 
             self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
             if ast.varInit:
-                param = SubBody(Frame(name, VoidType()), param.scope)
-                code, _ = self.visit(varInit, param)
+                initParam = SubBody(Frame(name, VoidType()), param.scope)
+                code, _ = self.visit(ast.varInit, initParam)
                 self.emit.printout(code)
                 self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
         
@@ -115,8 +115,8 @@ class CodeGenVisitor(BaseVisitor):
         index = param.frame.getNewIndex()
         foundScope.setIndex(name, index)
         if ast.varInit:
-            param = SubBody(Frame(name, VoidType()), param.scope)
-            code, _ = self.visit(varInit, param)
+            initParam = SubBody(Frame(name, VoidType()), param.scope)
+            code, _ = self.visit(ast.varInit, initParam)
             self.emit.printout(code)
             self.emit.printout(self.emitWRITEVAR(name, in_, index, param.frame))
  
