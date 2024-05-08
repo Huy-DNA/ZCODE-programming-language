@@ -1,0 +1,5 @@
+func main ()
+        begin
+            var a <- readString()
+        end
+        

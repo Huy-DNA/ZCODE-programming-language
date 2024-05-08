@@ -59,8 +59,6 @@ class Emitter():
             return "[" + self.getJVMType(inType.eleType)
         elif typeIn is cgen.FuncType:
             return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params))) + ")" + self.getJVMType(inType.ret)
-        elif typeIn is ClassType:
-            return "L" + inType.classname.name + ";"
 
     def getFullType(inType):
         typeIn = type(inType)
@@ -125,7 +123,7 @@ class Emitter():
             return self.emitPUSHICONST(in_, frame)
         elif type(typ) is StringType:
             frame.push()
-            return self.jvm.emitLDC(in_)
+            return self.jvm.emitLDC('"' + in_ + '"')
         else:
             raise IllegalOperandException(in_)
 
@@ -142,7 +140,7 @@ class Emitter():
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
         elif type(in_) is BoolType:
             return self.jvm.emitBALOAD()
-        elif type(in_) is ClassType or type(in_) is StringType or type(in_) is ArrayType:
+        elif type(in_) is StringType or type(in_) is ArrayType:
             return self.jvm.emitAALOAD()
         else:
             raise IllegalOperandException(str(in_))
@@ -160,7 +158,7 @@ class Emitter():
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
         elif type(in_) is BoolType:
             return self.jvm.emitBASTORE()
-        elif type(in_) is ClassType or type(in_) is StringType:
+        elif type(in_) is StringType:
             return self.jvm.emitAASTORE()
         else:
             raise IllegalOperandException(str(in_))
@@ -195,7 +193,7 @@ class Emitter():
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
         elif type(inType) is BoolType:
             return self.jvm.emitILOAD(index)
-        elif type(inType) is ClassType or type(inType) is StringType:
+        elif type(inType) is StringType:
             return self.jvm.emitALOAD(index)
 
     ''' generate the second instruction for array cell access
@@ -229,7 +227,7 @@ class Emitter():
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
         if type(inType) is BoolType:
             return self.jvm.emitISTORE(index)
-        elif type(inType) is ClassType or type(inType) is StringType:
+        elif type(inType) is StringType:
             return self.jvm.emitASTORE(index)
 
     ''' generate the second instruction for array cell access

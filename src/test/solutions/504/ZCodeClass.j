@@ -93,8 +93,8 @@ Label1:
 Label0:
 .var 0 is main [Ljava/lang/String; from Label0 to Label1
 Label2:
-	ldc 1.0
-	invokestatic ZCodeClass/writeNumber(F)V
+	ldc "Hello world!"
+	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 Label3:
 Label1:
 	return

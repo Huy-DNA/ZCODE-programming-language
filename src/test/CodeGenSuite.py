@@ -40,3 +40,21 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "true"
         self.assertTrue(TestCodeGen.test(input, expect, 503))
 
+    def test_string(self):
+        input = """func main ()
+        begin
+            writeString("Hello world!")
+        end
+        """
+        expect = "Hello world!"
+        self.assertTrue(TestCodeGen.test(input, expect, 504))
+        
+        input = """func main ()
+        begin
+            var a <- readString()
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 505))
+
+

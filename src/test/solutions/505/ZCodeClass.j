@@ -93,11 +93,12 @@ Label1:
 Label0:
 .var 0 is main [Ljava/lang/String; from Label0 to Label1
 Label2:
-	ldc 1.0
-	invokestatic ZCodeClass/writeNumber(F)V
+.var 1 is a Ljava/lang/String; from Label2 to Label3
+	invokestatic ZCodeClass/readString()Ljava/lang/String;
+	astore_1
 Label3:
 Label1:
 	return
 .limit stack 1
-.limit locals 1
+.limit locals 2
 .end method
