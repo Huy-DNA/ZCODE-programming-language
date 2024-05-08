@@ -406,11 +406,15 @@ class Emitter():
         # ..., value1, value2 -> ..., result
 
         if lexeme == "*":
-            return self.emitMUL()
+            return self.emitMUL(frame)
         elif lexeme == '/':
-            return self.emitDIV()
+            return self.emitDIV(frame)
         else:
-            return self.emitREM()
+            return self.emitREM(frame)
+
+    def emitMUL(self, frame):
+        frame.pop()
+        return self.jvm.emitFMUL()
 
     def emitDIV(self, frame):
         # frame: Frame

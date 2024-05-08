@@ -166,7 +166,7 @@ class CodeGenVisitor(BaseVisitor):
                 initParam = SubBody(Frame(name, VoidType()), param.scope)
                 code, _ = self.visit(ast.varInit, initParam)
                 self.emit.printout(code)
-                self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, param.frame))
+                self.emit.printout(self.emitPUTSTATIC(self.classname + "/" + name, in_, initParam.frame))
             return
         
         index = param.frame.getNewIndex()
@@ -176,7 +176,7 @@ class CodeGenVisitor(BaseVisitor):
             initParam = SubBody(Frame(name, VoidType()), param.scope)
             code, _ = self.visit(ast.varInit, initParam)
             self.emit.printout(code)
-            self.emit.printout(self.emit.emitWRITEVAR(in_, index, param.frame))
+            self.emit.printout(self.emit.emitWRITEVAR(in_, index, initParam.frame))
  
     def visitFuncDecl(self, ast, param):
         param = SubBody(Frame(self.classname, VoidType()), param.scope)
@@ -270,8 +270,8 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitId(self, ast, param):
         scope = param.scope
-        in_, foundScope = scope.lookup(name, Variable())
         name = ast.name
+        in_, foundScope = scope.lookup(name, Variable())
         index = foundScope.getIndex(name)
         if index is None:
             if param.isLeft:
