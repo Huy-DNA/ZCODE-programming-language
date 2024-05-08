@@ -191,7 +191,7 @@ class CodeGenVisitor(BaseVisitor):
         return code + opIns, typ
 
     def visitCallExpr(self, ast, param):
-        name = ast.name
+        name = ast.name.name
         code = ""
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
