@@ -90,7 +90,7 @@ class CodeGenVisitor(BaseVisitor):
         self.emit = Emitter(path + "/" +self.classname + ".j")
 
     def visitProgram(self, ast, c):
-        self.emit.emitPROLOG(self.classname, "")
+        self.emit.printout(self.emit.emitPROLOG(self.classname, ""))
         [self.visit(i, c) for i in ast.decl]
         self.emit.emitEPILOG()
 
