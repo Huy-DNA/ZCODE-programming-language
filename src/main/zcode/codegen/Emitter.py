@@ -44,7 +44,9 @@ class Emitter():
 
     def getJVMType(self, inType):
         typeIn = type(inType)
-        if typeIn is NumberType:
+        if typeIn is str:
+            return inType
+        elif typeIn is NumberType:
             return "F"
         elif typeIn is BoolType:
             return "Z"
@@ -61,7 +63,9 @@ class Emitter():
 
     def getFullType(inType):
         typeIn = type(inType)
-        if typeIn is NumberType:
+        if typeIn is str:
+            return inType
+        elif typeIn is NumberType:
             return "float"
         elif typeIn is BoolType:
             return "boolean"
@@ -178,8 +182,7 @@ class Emitter():
 
         return self.jvm.emitVAR(in_, varName, self.getJVMType(inType), fromLabel, toLabel)
 
-    def emitREADVAR(self, name, inType, index, frame):
-        # name: String
+    def emitREADVAR(self, inType, index, frame):
         # inType: Type
         # index: Int
         # frame: Frame
@@ -193,8 +196,6 @@ class Emitter():
             return self.jvm.emitILOAD(index)
         elif type(inType) is ClassType or type(inType) is StringType:
             return self.jvm.emitALOAD(index)
-        else:
-            raise IllegalOperandException(name)
 
     ''' generate the second instruction for array cell access
     *
@@ -214,8 +215,7 @@ class Emitter():
     *   @param name the symbol entry of the variable.
     '''
 
-    def emitWRITEVAR(self, name, inType, index, frame):
-        # name: String
+    def emitWRITEVAR(self, inType, index, frame):
         # inType: Type
         # index: Int
         # frame: Frame
@@ -230,8 +230,6 @@ class Emitter():
             return self.jvm.emitISTORE(index)
         elif type(inType) is ClassType or type(inType) is StringType:
             return self.jvm.emitASTORE(index)
-        else:
-            raise IllegalOperandException(name)
 
     ''' generate the second instruction for array cell access
     *
