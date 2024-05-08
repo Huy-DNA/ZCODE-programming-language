@@ -38,22 +38,8 @@ def patch_Machine_Code_class():
     JasminCode.emitICONST = emitICONST
 
 class CodeGenerator:
-    def __init__(self):
-        self.libName = "io"
-
     def init(self):
-        return [Symbol("readNumber", MType(list(), NumberType()), CName(self.libName)),
-                Symbol("writeNumber", MType([NumberType()],
-                       VoidType()), CName(self.libName)),
-                Symbol("readBool", MType(
-                    [BoolType()], VoidType()), CName(self.libName)),
- 
-                Symbol("writeBool", MType(
-                    [BoolType()], VoidType()), CName(self.libName)),
-                Symbol("readString", MType(list(), StringType()), CName(self.libName)),
-                Symbol("writeString", MType(
-                    [StringType()], VoidType()), CName(self.libName))
-                ]
+        return []
 
     def gen(self, ast, path):
         # ast: AST
