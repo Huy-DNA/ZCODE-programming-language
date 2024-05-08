@@ -410,7 +410,7 @@ class Emitter():
             return self.emitMUL()
         elif lexeme == '/':
             return self.emitDIV()
-        elif:
+        else:
             return self.emitREM()
 
     def emitDIV(self, frame):

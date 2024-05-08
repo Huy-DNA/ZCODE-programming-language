@@ -260,7 +260,7 @@ class CodeGenVisitor(BaseVisitor):
         self.emit.printout(self.emit.emitLABEL(startLoopLabel, param.frame))
         self.emit.printout(self.visit(ast.condExpr, param)[0])
         self.emit.printout(self.emit.emitIFFALSE(endLoopLabel, param.frame))
-        self.visit(ast.body, param))
+        self.visit(ast.body, param)
         self.emit.printout(self.visit(ast.updExpr, param)[0])
         self.emit.printout(self.visit(name, SubBody(param.frame, param.scope, True))[0])
         self.emit.printout(self.emit.emitGOTO(startLoopLabel, param.frame))
