@@ -63,7 +63,7 @@ class Emitter():
         typeIn = type(inType)
         if typeIn is NumberType:
             return "float"
-        elif typeIn is BooleanType:
+        elif typeIn is BoolType:
             return "boolean"
         elif typeIn is StringType:
             return "java/lang/String"
@@ -116,7 +116,7 @@ class Emitter():
 
         if type(typ) is NumberType:
             return self.emitPUSHFCONST(in_, frame)
-        elif type(typ) is BooleanType:
+        elif type(typ) is BoolType:
             return self.emitPUSHICONST(in_, frame)
         elif type(typ) is StringType:
             frame.push()
@@ -135,7 +135,7 @@ class Emitter():
         if type(in_) is NumberType:
             return self.jvm.emitFALOAD()
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
-        elif type(in_) is BooleanType:
+        elif type(in_) is BoolType:
             return self.jvm.emitBALOAD()
         elif type(in_) is ClassType or type(in_) is StringType or type(in_) is ArrayType:
             return self.jvm.emitAALOAD()
@@ -153,7 +153,7 @@ class Emitter():
         if type(in_) is NumberType:
             return self.jvm.emitFASTORE()
         # elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
-        elif type(in_) is BooleanType:
+        elif type(in_) is BoolType:
             return self.jvm.emitBASTORE()
         elif type(in_) is ClassType or type(in_) is StringType:
             return self.jvm.emitAASTORE()
@@ -189,7 +189,7 @@ class Emitter():
         if type(inType) is NumberType:
             return self.jvm.emitFLOAD(index)
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
-        elif type(inType) is BooleanType:
+        elif type(inType) is BoolType:
             return self.jvm.emitILOAD(index)
         elif type(inType) is ClassType or type(inType) is StringType:
             return self.jvm.emitALOAD(index)
@@ -226,7 +226,7 @@ class Emitter():
         if type(inType) is NumberType:
             return self.jvm.emitFSTORE(index)
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
-        if type(inType) is BooleanType:
+        if type(inType) is BoolType:
             return self.jvm.emitISTORE(index)
         elif type(inType) is ClassType or type(inType) is StringType:
             return self.jvm.emitASTORE(index)
@@ -590,7 +590,7 @@ class Emitter():
 
     ''' generate code to return.
     *   <ul>
-    *   <li>ireturn if the type is IntegerType or BooleanType
+    *   <li>ireturn if the type is IntegerType or BoolType
     *   <li>freturn if the type is RealType
     *   <li>return if the type is null
     *   </ul>
@@ -607,7 +607,7 @@ class Emitter():
         elif type(in_) is StringType:
             frame.pop()
             return self.jvm.emitARETURN()
-        elif type(in_) is BooleanType:
+        elif type(in_) is BoolType:
             frame.pop()
             return self.jvm.emitIRETURN()
         elif type(in_) is ArrayType:
