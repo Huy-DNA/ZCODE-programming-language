@@ -88,7 +88,7 @@ class CodeGenVisitor(BaseVisitor):
         StaticChecker(astTree).check()
         
         self.astTree = astTree
-        self.env = env
+        # self.env = env
         self.path = path
         self.classname = "ZCodeClass"
         self.emit = Emitter(path + "/" +self.classname + ".j")
@@ -101,7 +101,7 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitVarDecl(self, ast, param):
         scope = param.scope
-        name = param.name
+        name = ast.name.name
         in_, foundScope = scope.lookup(name, Variable())
         if param.frame is None: 
             self.emit.printout(self.emit.emitATTRIBUTE(name, in_)) 
@@ -123,7 +123,7 @@ class CodeGenVisitor(BaseVisitor):
     def visitFuncDecl(self, ast, param):
         if not ast.body:
             return
-        name = ast.name
+        name = ast.name.name
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
         self.emit.printout(self.emit.emitMETHOD(name, in_))
