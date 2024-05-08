@@ -129,11 +129,46 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.exitScope()
         self.emit.printout(self.emit.emitENDMETHOD(param.frame))
     
-    def emitWriteBool(self, c):
-        pass
+    def emitWriteBool(self, param):
+        param = SubBody(Frame(self.classname, VoidType()), param.scope)
+        name = "writeBool"
+        in_ = FuncType([BoolType()], VoidType(), True)
+        
+        self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
+        param.frame.enterScope(True)
+        self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
+        boolIndex = param.frame.getNewIndex() 
+        self.emit.printout(self.emit.emitVAR(boolIndex, "arg", BoolType(), param.frame.getStartLabel(), param.frame.getEndLabel(), param.frame))
 
-    def emitReadBool(self, c):
-        pass
+        self.emit.printout(self.emit.emitGETSTATIC("java/lang/System/out", "Ljava/io/PrintStream;", param.frame))
+        self.emit.printout(self.emit.emitREADVAR(BoolType(), boolIndex, param.frame))
+        self.emit.printout(self.emit.emitINVOKEVIRTUAL("java/io/PrintStream.print", FuncType([BoolType()], VoidType(), True), param.frame))
+        self.emit.printout(self.emit.emitRETURN(VoidType(), param.frame))
+
+        self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
+        param.frame.exitScope()
+        self.emit.printout(self.emit.emitENDMETHOD(param.frame))
+ 
+
+    def emitReadBool(self, param):
+        param = SubBody(Frame(self.classname, VoidType()), param.scope)
+        name = "readBool"
+        in_ = FuncType([], BoolType(), True)
+        
+        self.emit.printout(self.emit.emitMETHOD(name, in_, param.frame))
+        param.frame.enterScope(True)
+        self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
+        
+        self.emit.printout(self.emit.emitNEW("java/util/Scanner", param.frame))
+        self.emit.printout(self.emit.emitDUP(param.frame))
+        self.emit.printout(self.emit.emitGETSTATIC("java/lang/System/in", "Ljava/io/InputStream;", param.frame))
+        self.emit.printout(self.emit.emitINVOKESPECIAL(param.frame, "java/util/Scanner/<init>", FuncType(["Ljava/io/InputStream;"], VoidType(), True)))
+        self.emit.printout(self.emit.emitINVOKEVIRTUAL("java/util/Scanner.nextBoolean", FuncType([], BoolType(), True), param.frame))
+        self.emit.printout(self.emit.emitRETURN(BoolType(), param.frame))
+        self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
+        param.frame.exitScope()
+        self.emit.printout(self.emit.emitENDMETHOD(param.frame))
+
 
     def emitWriteString(self, c):
         pass

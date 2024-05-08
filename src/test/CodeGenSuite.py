@@ -21,3 +21,22 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 501))
+
+    def test_bool(self):
+        input = """func main ()
+        begin
+            writeBool(true)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 502))
+
+        input = """func main ()
+        begin
+            bool a <- readBool()
+            writeBool(a or true)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 503))
+
