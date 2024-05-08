@@ -236,7 +236,7 @@ class CodeGenVisitor(BaseVisitor):
         param.frame.enterScope(False)
         self.emit.printout(self.emit.emitLABEL(param.frame.getStartLabel(), param.frame))
         bodyParam = SubBody(param.frame, ast.scope)
-        for stmt in ast.param:
+        for stmt in ast.stmt:
             self.visit(stmt, bodyParam)
         self.emit.printout(self.emit.emitLABEL(param.frame.getEndLabel(), param.frame))
         param.frame.exitScope()
