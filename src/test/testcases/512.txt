@@ -1,0 +1,10 @@
+
+        func f()
+        func main ()
+        begin
+            bool a <- f()
+            writeBool(a)
+            writeBool(f())
+        end
+        func f() return true
+        

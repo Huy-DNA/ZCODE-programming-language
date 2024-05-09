@@ -148,4 +148,42 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "false5.0huyan\nfalse4.0anhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 510))
 
+    def test_function_definitions(self):
+        input = r"""
+        func f()
+        func main ()
+        begin
+            number a <- f()
+            writeNumber(a)
+            writeNumber(f())
+        end
+        func f() return 2
+        """
+        expect = "2.02.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 511))
+        
+        input = r"""
+        func f()
+        func main ()
+        begin
+            bool a <- f()
+            writeBool(a)
+            writeBool(f())
+        end
+        func f() return true
+        """
+        expect = "truetrue"
+        self.assertTrue(TestCodeGen.test(input, expect, 512))
 
+        input = r"""
+        func f()
+        func main ()
+        begin
+            string a <- f()
+            writeString(a)
+            writeString(f())
+        end
+        func f() return "anhuy"
+        """
+        expect = "anhuyanhuy"
+        self.assertTrue(TestCodeGen.test(input, expect, 511))

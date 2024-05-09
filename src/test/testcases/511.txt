@@ -1,0 +1,10 @@
+
+        func f()
+        func main ()
+        begin
+            string a <- f()
+            writeString(a)
+            writeString(f())
+        end
+        func f() return "anhuy"
+        
