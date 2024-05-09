@@ -198,4 +198,15 @@ class CheckCodeGenSuite(unittest.TestCase):
         end
         """
         expect = "YES"
-        self.assertTrue(TestCodeGen.test(input, expect, 513))
+        self.assertTrue(TestCodeGen.test(input, expect, 514))
+
+        input = r"""
+        func main ()
+        begin
+            if (true)
+                writeString("NO")
+            else writeString("YES")
+        end
+        """
+        expect = "NO"
+        self.assertTrue(TestCodeGen.test(input, expect, 515))

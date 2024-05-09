@@ -101,26 +101,18 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
-.var 1 is a Ljava/lang/String; from Label2 to Label3
-	invokestatic ZCodeClass/f()Ljava/lang/String;
-	astore_1
-	aload_1
+	iconst_0
+	ifle Label5
+	ldc "NO"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	invokestatic ZCodeClass/f()Ljava/lang/String;
+	goto Label4
+Label5:
+	ldc "YES"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+Label4:
 Label3:
 Label1:
 	return
-.limit stack 1
-.limit locals 2
-.end method
-
-.method public static f()Ljava/lang/String;
-Label0:
-	ldc "anhuy"
-	areturn
-Label1:
-	return
-.limit stack 1
-.limit locals 0
+.limit stack 2
+.limit locals 1
 .end method
