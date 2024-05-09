@@ -1,0 +1,12 @@
+
+        dynamic x
+        func main ()
+        begin
+            x <- 0
+            for x until x = 10 by 1 begin
+                writeNumber(x)
+                writeString(" ")
+            end
+        end
+ 
+        

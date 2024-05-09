@@ -534,7 +534,7 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        return self.jvm.emitIFGT(label)
+        return self.jvm.emitIFNE(label)
 
     '''
     *   generate code to jump to label if the value on top of operand stack is false.<p>
@@ -547,7 +547,7 @@ class Emitter():
         # frame: Frame
 
         frame.pop()
-        return self.jvm.emitIFLE(label)
+        return self.jvm.emitIFEQ(label)
 
     def emitIFICMPGT(self, label, frame):
         # label: Int

@@ -102,7 +102,7 @@ Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
 	iconst_0
-	ifle Label5
+	ifeq Label5
 	ldc "NO"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 	goto Label4

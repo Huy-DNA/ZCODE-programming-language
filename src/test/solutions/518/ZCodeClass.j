@@ -1,6 +1,7 @@
 .source ZCodeClass.java
 .class public ZCodeClass
 .super java/lang/Object
+.field static x F
 
 .method public static <clinit>()V
 Label0:
@@ -101,18 +102,34 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
+	ldc 0.0
+	putstatic ZCodeClass/x F
+Label4:
+	getstatic ZCodeClass/x F
+	ldc 10.0
+	fcmpl
+	ifne Label6
 	iconst_1
-	ifeq Label5
-	ldc "NO"
+	goto Label7
+Label6:
+	iconst_0
+Label7:
+	ifne Label5
+Label8:
+	getstatic ZCodeClass/x F
+	invokestatic ZCodeClass/writeNumber(F)V
+	ldc " "
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+Label9:
+	ldc 1.0
+	getstatic ZCodeClass/x F
+	fadd
+	putstatic ZCodeClass/x F
 	goto Label4
 Label5:
-	ldc "YES"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-Label4:
 Label3:
 Label1:
 	return
-.limit stack 2
+.limit stack 6
 .limit locals 1
 .end method
