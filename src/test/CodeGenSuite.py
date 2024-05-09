@@ -940,3 +940,321 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 565))
+
+    def test_misc(self):
+        input = r"""
+        dynamic x <- [1,2,3]
+        func main ()
+        begin
+            writeNumber(x[0])
+        end
+        """
+        expect = "1.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 566))
+        
+        input = r"""
+        dynamic x <- ["a", "b", "c"]
+        func main ()
+        begin
+            writeString(x[2])
+        end
+        """
+        expect = "c"
+        self.assertTrue(TestCodeGen.test(input, expect, 567))
+
+        input = r"""
+        dynamic x <- [true, false, false]
+        func main ()
+        begin
+            writeNumber(x[1])
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 568))
+
+        input = r"""
+        dynamic x <- [1,2,3]
+        func f(number x[3]) return [x[0]+1, x[1]+1, x[2]+1]
+        dynamic y <- [x, f(x)]
+        func main ()
+        begin
+            writeNumber(y[0][0])
+        end
+        """
+        expect = "1"
+        self.assertTrue(TestCodeGen.test(input, expect, 569))
+        
+        input = r"""
+        dynamic x <- [1,2,3]
+        func f(number x[3]) return [x[0]+1, x[1]+1, x[2]+1]
+        dynamic y <- [x, f(x)]
+        func main ()
+        begin
+            writeNumber(y[1][1])
+        end
+        """
+        expect = "3"
+        self.assertTrue(TestCodeGen.test(input, expect, 570))
+
+        input = r"""
+        dynamic x <- [[1]]
+        func main ()
+        begin
+            writeNumber(x[0][0])
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 571))
+
+        input = r"""
+        dynamic x <- [[0]]
+        func main ()
+        begin
+            writeNumber(x[0,0])
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 572))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 573))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 574))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 575))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 576))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 577))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 578))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 579))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 580))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 581))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 582))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 583))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 584))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 585))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 586))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 587))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 588))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 589))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 590))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 591))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 592))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 593))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 594))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 595))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 596))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 597))
+        
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 598))
+
+        input = r"""
+        dynamic x <- 0
+        func main ()
+        begin
+        end
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 599)) 
