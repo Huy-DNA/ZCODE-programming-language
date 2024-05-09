@@ -766,3 +766,6 @@ class JasminCode(MachineCode):
 
     def emitARETURN(self):
         return JasminCode.INDENT + "areturn" + JasminCode.END
+
+    def emitSWAP(self):
+        return JasminCode.INDENT + "swap" + JasminCode.END

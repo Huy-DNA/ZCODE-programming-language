@@ -1,0 +1,7 @@
+
+        dynamic x <- ["a", "b", "c"]
+        func main ()
+        begin
+            writeString(x[2])
+        end
+        

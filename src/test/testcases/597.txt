@@ -1,0 +1,7 @@
+
+        func any(bool b[3]) return b[0] or b[1] or b[2]
+        func main ()
+        begin
+            writeBool(any([true, false, true]))
+        end
+        

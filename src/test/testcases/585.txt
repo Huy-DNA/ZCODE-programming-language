@@ -1,0 +1,7 @@
+
+        func getArr() return [[1,2,3]]
+        func main ()
+        begin
+            writeNumber(getArr()[0,0])
+        end
+        

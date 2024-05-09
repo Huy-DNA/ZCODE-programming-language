@@ -1,0 +1,7 @@
+
+        func all(bool b[3]) return b[0] and b[1] and b[2]
+        func main ()
+        begin
+            writeBool(all([true, true, false]))
+        end
+        

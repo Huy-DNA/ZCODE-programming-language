@@ -1,0 +1,8 @@
+
+        dynamic x <- [[true], [false]]
+        func main ()
+        begin
+            writeBool(x[0][0])
+            writeBool(x[1][0])
+        end
+        

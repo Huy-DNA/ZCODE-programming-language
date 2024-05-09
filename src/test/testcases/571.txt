@@ -1,0 +1,7 @@
+
+        dynamic x <- [[1]]
+        func main ()
+        begin
+            writeNumber(x[0][0])
+        end
+        

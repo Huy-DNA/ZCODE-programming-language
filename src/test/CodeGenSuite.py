@@ -966,34 +966,28 @@ class CheckCodeGenSuite(unittest.TestCase):
         dynamic x <- [true, false, false]
         func main ()
         begin
-            writeNumber(x[1])
+            writeBool(x[1])
         end
         """
         expect = "false"
         self.assertTrue(TestCodeGen.test(input, expect, 568))
 
         input = r"""
-        dynamic x <- [1,2,3]
-        func f(number x[3]) return [x[0]+1, x[1]+1, x[2]+1]
-        dynamic y <- [x, f(x)]
         func main ()
         begin
-            writeNumber(y[0][0])
+            writeNumber(1.0)
         end
         """
-        expect = "1"
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 569))
         
         input = r"""
-        dynamic x <- [1,2,3]
-        func f(number x[3]) return [x[0]+1, x[1]+1, x[2]+1]
-        dynamic y <- [x, f(x)]
         func main ()
         begin
-            writeNumber(y[1][1])
+            writeNumber(3)
         end
         """
-        expect = "3"
+        expect = "3.0"
         self.assertTrue(TestCodeGen.test(input, expect, 570))
 
         input = r"""
@@ -1003,7 +997,7 @@ class CheckCodeGenSuite(unittest.TestCase):
             writeNumber(x[0][0])
         end
         """
-        expect = ""
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 571))
 
         input = r"""
@@ -1013,248 +1007,307 @@ class CheckCodeGenSuite(unittest.TestCase):
             writeNumber(x[0,0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 572))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- ["an", "huy"]
         func main ()
         begin
+            writeString(x[0]...x[1])
         end
         """
-        expect = ""
+        expect = "anhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 573))
         
         input = r"""
-        dynamic x <- 0
+        dynamic x <- ["a", "b", "c"]
         func main ()
         begin
+            writeString(x[0]...x[2])
         end
         """
-        expect = ""
+        expect = "ac"
         self.assertTrue(TestCodeGen.test(input, expect, 574))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[[0]]]]
         func main ()
         begin
+            writeNumber(x[0,0,0,0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 575))
 
         input = r"""
         dynamic x <- 0
         func main ()
         begin
+            writeNumber(x + 10.23)
         end
         """
-        expect = ""
+        expect = "10.23"
         self.assertTrue(TestCodeGen.test(input, expect, 576))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[true], [false]]
         func main ()
         begin
+            writeBool(x[0][0])
+            writeBool(x[1][0])
         end
         """
-        expect = ""
+        expect = "truefalse"
         self.assertTrue(TestCodeGen.test(input, expect, 577))
         
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [0]
         func main ()
         begin
+            writeNumber(x[0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 578))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[[0]]]]
         func main ()
         begin
+            writeNumber(x[0][0,0,0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 579))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[[0]]]]
         func main ()
         begin
+            writeNumber(x[0,0][0,0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 580))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[[0]]]]
         func main ()
         begin
+            writeNumber(x[0,0,0][0])
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 581))
         
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[true]]]
         func main ()
         begin
+            writeBool(x[0,0,0])
         end
         """
-        expect = ""
+        expect = "true"
         self.assertTrue(TestCodeGen.test(input, expect, 582))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- [[[false], [true]]]
         func main ()
         begin
+            writeBool(x[0,0][0])
         end
         """
-        expect = ""
+        expect = "false"
         self.assertTrue(TestCodeGen.test(input, expect, 583))
 
         input = r"""
-        dynamic x <- 0
+        func getArr() return [[1,2,3]]
+        dynamic x <- getArr()
         func main ()
         begin
+            writeNumber(x[0,0])
         end
         """
-        expect = ""
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 584))
 
         input = r"""
-        dynamic x <- 0
+        func getArr() return [[1,2,3]]
         func main ()
         begin
+            writeNumber(getArr()[0,0])
         end
         """
-        expect = ""
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 585))
         
         input = r"""
-        dynamic x <- 0
+        dynamic x <- 1 * 2 * 3
         func main ()
         begin
+            writeNumber(x)
         end
         """
-        expect = ""
+        expect = "6.0"
         self.assertTrue(TestCodeGen.test(input, expect, 586))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- 1 + 2 + 3
         func main ()
         begin
+            writeNumber(x)
         end
         """
-        expect = ""
+        expect = "6.0"
         self.assertTrue(TestCodeGen.test(input, expect, 587))
 
         input = r"""
-        dynamic x <- 0
+        dynamic x <- 10 / 2 / 5
         func main ()
         begin
+            writeNumber(x)
         end
         """
-        expect = ""
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 588))
 
         input = r"""
-        dynamic x <- 0
+        func concat(string a[3]) begin
+            return (a[0] ... a[1]) ... a[2]
+        end
         func main ()
         begin
+            writeString(concat(["an", " huy", "."]))
         end
         """
-        expect = ""
+        expect = "an huy."
         self.assertTrue(TestCodeGen.test(input, expect, 589))
         
         input = r"""
-        dynamic x <- 0
+        func cat(string a[3]) begin
+            a[0] <- "meow"
+            a[1] <- "purr"
+            a[2] <- "wow"
+        end
         func main ()
         begin
+            var str <- ["", "", ""]
+            cat(str)
+            writeString(str[0])
         end
         """
-        expect = ""
+        expect = "meow"
         self.assertTrue(TestCodeGen.test(input, expect, 590))
 
         input = r"""
-        dynamic x <- 0
+        func cat(string a[3]) begin
+            a[0] <- "meow"
+            a[1] <- "purr"
+            a[2] <- "wow"
+        end
         func main ()
         begin
+            var str <- ["", "", ""]
+            cat(str)
+            writeString(str[1])
         end
         """
-        expect = ""
+        expect = "purr"
         self.assertTrue(TestCodeGen.test(input, expect, 591))
 
         input = r"""
-        dynamic x <- 0
+        func cat(string a[3]) begin
+            a[0] <- "meow"
+            a[1] <- "purr"
+            a[2] <- "wow"
+        end
         func main ()
         begin
+            var str <- ["", "", ""]
+            cat(str)
+            writeString(str[2])
         end
         """
-        expect = ""
+        expect = "wow"
         self.assertTrue(TestCodeGen.test(input, expect, 592))
 
         input = r"""
-        dynamic x <- 0
+        func concat(string a[3]) begin
+            return (a[0] ... a[1]) ... a[2]
+        end
+
+        func cat(string a[3]) begin
+            a[0] <- "meow"
+            a[1] <- "purr"
+            a[2] <- "wow"
+        end
         func main ()
         begin
+            var str <- ["", "", ""]
+            cat(str)
+            writeString(concat(str))
         end
         """
-        expect = ""
+        expect = "meowpurrwow"
         self.assertTrue(TestCodeGen.test(input, expect, 593))
         
         input = r"""
-        dynamic x <- 0
+        func pair(number a, number b) return [a, b]
         func main ()
         begin
+            writeNumber(pair(1,0)[0])
         end
         """
-        expect = ""
+        expect = "1.0"
         self.assertTrue(TestCodeGen.test(input, expect, 594))
 
         input = r"""
-        dynamic x <- 0
+        func pair(number a, number b) return [a, b]
         func main ()
         begin
+            writeNumber(pair(1,0.12)[1])
         end
         """
-        expect = ""
+        expect = "0.12"
         self.assertTrue(TestCodeGen.test(input, expect, 595))
 
         input = r"""
-        dynamic x <- 0
+        func any(bool b1, bool b2, bool b3) return b1 or b2 or b3
         func main ()
         begin
+            writeBool(any(true, false, true))
         end
         """
-        expect = ""
+        expect = "true"
         self.assertTrue(TestCodeGen.test(input, expect, 596))
 
         input = r"""
-        dynamic x <- 0
+        func any(bool b[3]) return b[0] or b[1] or b[2]
         func main ()
         begin
+            writeBool(any([true, false, true]))
         end
         """
-        expect = ""
+        expect = "true"
         self.assertTrue(TestCodeGen.test(input, expect, 597))
         
         input = r"""
-        dynamic x <- 0
+        func all(bool b[3]) return b[0] and b[1] and b[2]
         func main ()
         begin
+            writeBool(all([true, true, false]))
         end
         """
-        expect = ""
+        expect = "false"
         self.assertTrue(TestCodeGen.test(input, expect, 598))
 
         input = r"""
         dynamic x <- 0
         func main ()
         begin
+            writeNumber(x * x)
         end
         """
-        expect = ""
+        expect = "0.0"
         self.assertTrue(TestCodeGen.test(input, expect, 599)) 

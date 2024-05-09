@@ -1,0 +1,17 @@
+
+        func concat(string a[3]) begin
+            return (a[0] ... a[1]) ... a[2]
+        end
+
+        func cat(string a[3]) begin
+            a[0] <- "meow"
+            a[1] <- "purr"
+            a[2] <- "wow"
+        end
+        func main ()
+        begin
+            var str <- ["", "", ""]
+            cat(str)
+            writeString(concat(str))
+        end
+        

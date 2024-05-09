@@ -179,9 +179,8 @@ class Emitter():
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
         elif type(inType) is BoolType:
             return self.jvm.emitILOAD(index)
-        elif type(inType) is StringType:
+        else:
             return self.jvm.emitALOAD(index)
-
     ''' generate the second instruction for array cell access
     *
     '''
@@ -213,7 +212,7 @@ class Emitter():
         # elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
         if type(inType) is BoolType:
             return self.jvm.emitISTORE(index)
-        elif type(inType) is StringType:
+        else:
             return self.jvm.emitASTORE(index)
 
     ''' generate the second instruction for array cell access
@@ -699,6 +698,9 @@ class Emitter():
             frame.pop()
         frame.push()
         return self.jvm.emitMULTIANEWARRAY(self.getJVMType(typ), dimensions)
+
+    def emitSWAP(self, frame):
+        return self.jvm.emitSWAP()
 
     def printout(self, in_):
         # in_: String

@@ -1,0 +1,7 @@
+
+        dynamic x <- [true, false, false]
+        func main ()
+        begin
+            writeBool(x[1])
+        end
+        

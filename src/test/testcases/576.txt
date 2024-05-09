@@ -1,0 +1,7 @@
+
+        dynamic x <- 0
+        func main ()
+        begin
+            writeNumber(x + 10.23)
+        end
+        

@@ -1,0 +1,9 @@
+
+        func concat(string a[3]) begin
+            return (a[0] ... a[1]) ... a[2]
+        end
+        func main ()
+        begin
+            writeString(concat(["an", " huy", "."]))
+        end
+        

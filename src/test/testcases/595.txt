@@ -1,0 +1,7 @@
+
+        func pair(number a, number b) return [a, b]
+        func main ()
+        begin
+            writeNumber(pair(1,0.12)[1])
+        end
+        

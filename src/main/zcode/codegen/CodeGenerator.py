@@ -366,16 +366,19 @@ class CodeGenVisitor(BaseVisitor):
 
     def visitArrayCell(self, ast, param):
         subParam = SubBody(param.frame, param.scope)
-        arrCode, arrTyp = self.visit(ast.arr, param)
+        arrCode, arrTyp = self.visit(ast.arr, subParam)
         code = arrCode
         typ = ArrayType(arrTyp.size.copy(), arrTyp.eleType)
         for idx in ast.idx:
+            if len(typ.size) == 1 and param.isLeft:
+                code += self.emit.emitSWAP(param.frame) 
             code += self.visit(idx, param)[0]
             code += self.emit.emitF2I(param.frame)
             if len(typ.size) == 1:
                 if not param.isLeft:
                     code += self.emit.emitALOAD(typ.eleType, param.frame)
                 else:
+                    code += self.emit.emitSWAP(param.frame) 
                     code += self.emit.emitASTORE(typ.eleType, param.frame)
                 typ = typ.eleType
             else:
