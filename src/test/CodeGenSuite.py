@@ -532,3 +532,78 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "0.0:0.0-0.0:1.0-1.0:0.0-"
         self.assertTrue(TestCodeGen.test(input, expect, 534))
 
+    def test_boolean_expressions(self):
+        input = r"""
+        func main ()
+        begin
+            writeBool(true and true) 
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 535))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(true and false) 
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 536))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(false and true) 
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 537))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(false and false) 
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 538))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(true or true) 
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 539))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(false or true) 
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 540))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(true or false) 
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 541))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(false or false) 
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 542))
+
+
+

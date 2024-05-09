@@ -1,0 +1,6 @@
+
+        func main ()
+        begin
+            writeBool(false and false) 
+        end
+        
