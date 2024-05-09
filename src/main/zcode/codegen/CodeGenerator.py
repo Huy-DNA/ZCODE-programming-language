@@ -419,7 +419,7 @@ class CodeGenVisitor(BaseVisitor):
         self.code += (self.emit.emitIFFALSE(elifLabel, param.frame))
         self.visit(ast.thenStmt, param)
         self.code += (self.emit.emitGOTO(endLabel, param.frame))
-        for expr, stmt in self.elifStmt:
+        for expr, stmt in ast.elifStmt:
             self.code += (self.emit.emitLABEL(elifLabel, param.frame))
             self.code += (self.visit(expr, param)[0])
             elifLabel = param.frame.getNewLabel()

@@ -2,9 +2,9 @@
         func f()
         func main ()
         begin
-            string a <- f()
-            writeString(a)
-            writeString(f())
+            number a <- f()
+            writeNumber(a)
+            writeNumber(f())
         end
-        func f() return "anhuy"
+        func f() return 2
         
