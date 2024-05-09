@@ -338,3 +338,17 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "huyhuyhuyhuy\nhuyhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 523))
+        
+        input = r"""
+        func getArr() return [1,2,3,4]
+        dynamic numArr 
+        func main ()
+        begin
+            numArr <- getArr()
+            var x <- 0
+            for x until x = 4 by 1
+                writeNumber(numArr[x])
+        end
+        """
+        expect = "1.02.03.04.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 524))

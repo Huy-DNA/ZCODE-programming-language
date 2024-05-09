@@ -1,0 +1,11 @@
+
+        func getArr() return [1,2,3,4]
+        dynamic numArr 
+        func main ()
+        begin
+            numArr <- getArr()
+            var x <- 0
+            for x until x = 4 by 1
+                writeNumber(numArr[x])
+        end
+        

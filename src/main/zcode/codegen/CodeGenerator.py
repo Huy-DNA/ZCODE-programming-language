@@ -368,17 +368,17 @@ class CodeGenVisitor(BaseVisitor):
         subParam = SubBody(param.frame, param.scope)
         arrCode, arrTyp = self.visit(ast.arr, param)
         code = arrCode
-        typ = ArrayType(array(arrTyp.size), arrTyp.eleType)
+        typ = ArrayType([arrTyp.size], arrTyp.eleType)
         for idx in ast.idx:
             code += self.visit(idx, param)[0]
             if len(typ.size) == 1:
                 if not param.isLeft:
-                    code += self.emit.ALOAD(typ.eleType, param.frame)
+                    code += self.emit.emitALOAD(typ.eleType, param.frame)
                 else:
-                    code += self.emit.ASTORE(typ.eleType, param.frame)
+                    code += self.emit.emitASTORE(typ.eleType, param.frame)
                 typ = typ.eleType
             else:
-                code += self.emit.ALOAD(typ, param.frame)
+                code += self.emit.emitALOAD(typ, param.frame)
                 typ.size.pop(0)
         return code, typ 
 

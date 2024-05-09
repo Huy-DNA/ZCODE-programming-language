@@ -40,7 +40,7 @@ class Emitter():
         elif typeIn is cgen.FuncType:
             return "(" + "".join(list(map(lambda x: self.getJVMType(x), inType.params))) + ")" + self.getJVMType(inType.ret)
 
-    def getFullType(inType):
+    def getFullType(self, inType):
         typeIn = type(inType)
         if typeIn is str:
             return inType
