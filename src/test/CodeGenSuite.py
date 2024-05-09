@@ -398,3 +398,25 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "an huy."
         self.assertTrue(TestCodeGen.test(input, expect, 527))
+
+        input = r"""
+        func getArr() return [[[0]], [[1]], [[2]]]
+        dynamic numArr 
+        func main ()
+        begin
+            numArr <- getArr()
+            var x <- 0
+            for x until x = 3 by 1
+            begin
+                var y <- 0
+                for y until y = 1 by 1
+                begin
+                    var z <- 0
+                    for z until z = 1 by 1
+                        writeNumber(numArr[x][y, z])
+                end
+            end
+        end
+        """
+        expect = "0.01.02.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 528))
