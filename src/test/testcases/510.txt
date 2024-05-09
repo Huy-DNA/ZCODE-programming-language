@@ -1,0 +1,20 @@
+
+        func main ()
+        begin
+            dynamic a1
+            var a2 <- 4
+            string a3 <- "anhuy"
+            begin
+                a1 <- false
+                var a2 <- 5
+                var a3 <- "huyan"
+                writeBool(a1)
+                writeNumber(a2)
+                writeString(a3)
+            end
+            writeString("\n")
+            writeBool(a1)
+            writeNumber(a2)
+            writeString(a3)
+        end
+        

@@ -125,3 +125,27 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "false4.0anhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 509))
 
+        input = r"""
+        func main ()
+        begin
+            dynamic a1
+            var a2 <- 4
+            string a3 <- "anhuy"
+            begin
+                a1 <- false
+                var a2 <- 5
+                var a3 <- "huyan"
+                writeBool(a1)
+                writeNumber(a2)
+                writeString(a3)
+            end
+            writeString("\n")
+            writeBool(a1)
+            writeNumber(a2)
+            writeString(a3)
+        end
+        """
+        expect = "false5.0huyan\nfalse4.0anhuy"
+        self.assertTrue(TestCodeGen.test(input, expect, 510))
+
+
