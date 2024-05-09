@@ -109,6 +109,7 @@ Label2:
 Label5:
 	ldc "YES"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+Label6:
 Label4:
 Label3:
 Label1:

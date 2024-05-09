@@ -409,6 +409,8 @@ class CodeGenVisitor(BaseVisitor):
         if ast.elseStmt:
             self.code += (self.emit.emitLABEL(elifLabel, param.frame))
             self.visit(ast.elseStmt, param)
+            elifLabel = param.frame.getNewLabel() 
+        self.code += (self.emit.emitLABEL(elifLabel, param.frame))
         self.code += (self.emit.emitLABEL(endLabel, param.frame))
 
     def visitFor(self, ast, param):

@@ -101,77 +101,49 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
-	ldc 1.0
-	ldc 1.0
-	fadd
-	ldc 2.0
-	fcmpl
-	ifeq Label4
-	iconst_1
-	goto Label5
+.var 1 is x F from Label2 to Label3
+	ldc 0.0
+	fstore_1
 Label4:
-	iconst_0
-Label5:
-	ifeq Label7
-	ldc "1 + 1 != 2"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	goto Label6
-Label7:
-	ldc 2.0
-	ldc 2.0
-	fadd
-	ldc 3.0
+	fload_1
+	ldc 10.0
 	fcmpl
-	ifne Label8
+	ifne Label6
 	iconst_1
-	goto Label9
-Label8:
-	iconst_0
-Label9:
-	ifeq Label10
-	ldc "2 + 2 = 3"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	goto Label6
-Label10:
-	ldc 1.0
-	ldc 3.0
-	fadd
-	ldc 4.0
-	fcmpl
-	ifeq Label11
-	iconst_1
-	goto Label12
-Label11:
-	iconst_0
-Label12:
-	ifeq Label13
-	ldc "1 + 3 != 4"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	goto Label6
-Label13:
-	ldc 1.0
-	ldc 3.0
-	fadd
-	ldc 4.0
-	fcmpl
-	ifne Label14
-	iconst_1
-	goto Label15
-Label14:
-	iconst_0
-Label15:
-	ifeq Label16
-	ldc "1 + 3 = 4"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	goto Label6
-Label16:
-	ldc "???"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-Label17:
+	goto Label7
 Label6:
+	iconst_0
+Label7:
+	ifne Label5
+Label8:
+	fload_1
+	ldc 2.0
+	fcmpl
+	ifne Label10
+	iconst_1
+	goto Label11
+Label10:
+	iconst_0
+Label11:
+	ifeq Label13
+Label14:
+	goto Label5
+Label15:
+	goto Label12
+Label13:
+Label12:
+	fload_1
+	invokestatic ZCodeClass/writeNumber(F)V
+Label9:
+	ldc 1.0
+	fload_1
+	fadd
+	fstore_1
+	goto Label4
+Label5:
 Label3:
 Label1:
 	return
-.limit stack 17
-.limit locals 1
+.limit stack 10
+.limit locals 2
 .end method
