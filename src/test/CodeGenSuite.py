@@ -90,4 +90,36 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "anhuyanhuyanhuyanhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 507))
 
+        input = """func main ()
+        begin
+            var a <- true
+            var b <- a
+            bool c <- b
+            dynamic d
+            d <- c
+            writeBool(a)
+            writeBool(b)
+            writeBool(c)
+            writeBool(d)
+        end
+        """
+        expect = "truetruetruetrue"
+        self.assertTrue(TestCodeGen.test(input, expect, 508))
+
+        input = """func main ()
+        begin
+            var a <- false
+            var b <- a
+            bool c <- b
+            dynamic d
+            d <- c
+            writeBool(a)
+            writeBool(b)
+            writeBool(c)
+            writeBool(d)
+        end
+        """
+        expect = "falsefalsefalsefalse"
+        self.assertTrue(TestCodeGen.test(input, expect, 508))
+
 

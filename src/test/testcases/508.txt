@@ -1,0 +1,13 @@
+func main ()
+        begin
+            var a <- false
+            var b <- a
+            bool c <- b
+            dynamic d
+            d <- c
+            writeBool(a)
+            writeBool(b)
+            writeBool(c)
+            writeBool(d)
+        end
+        
