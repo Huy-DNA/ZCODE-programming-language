@@ -104,46 +104,48 @@ Label2:
 .var 1 is x F from Label2 to Label3
 	ldc 0.0
 	fstore_1
+	goto Label6
 Label4:
-	fload_1
-	ldc 10.0
-	fcmpl
-	ifne Label6
-	iconst_1
-	goto Label7
-Label6:
-	iconst_0
-Label7:
-	ifne Label5
-Label8:
-	fload_1
-	ldc 2.0
-	fcmpl
-	ifne Label10
-	iconst_1
-	goto Label11
-Label10:
-	iconst_0
-Label11:
-	ifeq Label13
-Label14:
-	goto Label5
-Label15:
-	goto Label12
-Label13:
-Label12:
-	fload_1
-	invokestatic ZCodeClass/writeNumber(F)V
-Label9:
 	ldc 1.0
 	fload_1
 	fadd
 	fstore_1
+Label6:
+	fload_1
+	ldc 10.0
+	fcmpl
+	ifne Label7
+	iconst_1
+	goto Label8
+Label7:
+	iconst_0
+Label8:
+	ifne Label5
+Label9:
+	fload_1
+	ldc 2.0
+	fcmpl
+	ifne Label11
+	iconst_1
+	goto Label12
+Label11:
+	iconst_0
+Label12:
+	ifeq Label14
+Label15:
+	goto Label5
+Label16:
+	goto Label13
+Label14:
+Label13:
+	fload_1
+	invokestatic ZCodeClass/writeNumber(F)V
+Label10:
 	goto Label4
 Label5:
 Label3:
 Label1:
 	return
-.limit stack 10
+.limit stack 9
 .limit locals 2
 .end method

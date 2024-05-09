@@ -1,7 +1,6 @@
 .source ZCodeClass.java
 .class public ZCodeClass
 .super java/lang/Object
-.field static strArr [[Ljava/lang/String;
 
 .method public static <clinit>()V
 Label0:
@@ -98,49 +97,10 @@ Label1:
 .limit locals 1
 .end method
 
-.method public static getArr()[[Ljava/lang/String;
-Label0:
-	iconst_2
-	anewarray [Ljava/lang/String;
-	dup
-	iconst_0
-	iconst_2
-	anewarray java/lang/String
-	dup
-	iconst_0
-	ldc "an"
-	aastore
-	dup
-	iconst_1
-	ldc " "
-	aastore
-	aastore
-	dup
-	iconst_1
-	iconst_2
-	anewarray java/lang/String
-	dup
-	iconst_0
-	ldc "huy"
-	aastore
-	dup
-	iconst_1
-	ldc "."
-	aastore
-	aastore
-	areturn
-Label1:
-	return
-.limit stack 7
-.limit locals 0
-.end method
-
 .method public static main([Ljava/lang/String;)V
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
-	invokestatic ZCodeClass/getArr()[[Ljava/lang/String;
-	putstatic ZCodeClass/strArr [[Ljava/lang/String;
 .var 1 is x F from Label2 to Label3
 	ldc 0.0
 	fstore_1
@@ -152,7 +112,7 @@ Label4:
 	fstore_1
 Label6:
 	fload_1
-	ldc 2.0
+	ldc 10.0
 	fcmpl
 	ifne Label7
 	iconst_1
@@ -162,42 +122,32 @@ Label7:
 Label8:
 	ifne Label5
 Label9:
-.var 2 is y F from Label9 to Label10
-	ldc 0.0
-	fstore_2
-	goto Label13
-Label11:
-	ldc 1.0
-	fload_2
-	fadd
-	fstore_2
-Label13:
-	fload_2
-	ldc 2.0
-	fcmpl
-	ifne Label14
-	iconst_1
-	goto Label15
-Label14:
-	iconst_0
-Label15:
-	ifne Label12
-	getstatic ZCodeClass/strArr [[Ljava/lang/String;
 	fload_1
-	f2i
-	aaload
-	fload_2
-	f2i
-	aaload
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	goto Label11
+	ldc 2.0
+	frem
+	ldc 0.0
+	fcmpl
+	ifne Label11
+	iconst_1
+	goto Label12
+Label11:
+	iconst_0
 Label12:
+	ifeq Label14
+Label15:
+	goto Label4
+Label16:
+	goto Label13
+Label14:
+Label13:
+	fload_1
+	invokestatic ZCodeClass/writeNumber(F)V
 Label10:
 	goto Label4
 Label5:
 Label3:
 Label1:
 	return
-.limit stack 10
-.limit locals 3
+.limit stack 9
+.limit locals 2
 .end method

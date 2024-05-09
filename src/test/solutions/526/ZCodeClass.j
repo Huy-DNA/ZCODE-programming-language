@@ -126,26 +126,28 @@ Label2:
 .var 1 is x F from Label2 to Label3
 	ldc 0.0
 	fstore_1
+	goto Label6
 Label4:
+	ldc 1.0
+	fload_1
+	fadd
+	fstore_1
+Label6:
 	fload_1
 	ldc 2.0
 	fcmpl
-	ifne Label6
+	ifne Label7
 	iconst_1
-	goto Label7
-Label6:
-	iconst_0
+	goto Label8
 Label7:
+	iconst_0
+Label8:
 	ifne Label5
 	getstatic ZCodeClass/boolArr [Z
 	fload_1
 	f2i
 	baload
 	invokestatic ZCodeClass/writeBool(Z)V
-	ldc 1.0
-	fload_1
-	fadd
-	fstore_1
 	goto Label4
 Label5:
 Label3:

@@ -110,18 +110,24 @@ Label2:
 .var 3 is str2 Ljava/lang/String; from Label2 to Label3
 	ldc ""
 	astore_3
+	goto Label6
 Label4:
+	ldc 1.0
+	fload_1
+	fadd
+	fstore_1
+Label6:
 	fload_1
 	ldc 2.0
 	fcmpl
-	ifne Label6
+	ifne Label7
 	iconst_1
-	goto Label7
-Label6:
-	iconst_0
+	goto Label8
 Label7:
-	ifne Label5
+	iconst_0
 Label8:
+	ifne Label5
+Label9:
 	aload_2
 	aload_2
 	invokevirtual java/lang/String/concat(Ljava/lang/String;)Ljava/lang/String;
@@ -130,11 +136,7 @@ Label8:
 	ldc "huy"
 	invokevirtual java/lang/String/concat(Ljava/lang/String;)Ljava/lang/String;
 	astore_3
-Label9:
-	ldc 1.0
-	fload_1
-	fadd
-	fstore_1
+Label10:
 	goto Label4
 Label5:
 	aload_2

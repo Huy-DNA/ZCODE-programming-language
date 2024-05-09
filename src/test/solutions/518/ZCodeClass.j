@@ -104,32 +104,34 @@ Label0:
 Label2:
 	ldc 0.0
 	putstatic ZCodeClass/x F
+	goto Label6
 Label4:
-	getstatic ZCodeClass/x F
-	ldc 10.0
-	fcmpl
-	ifne Label6
-	iconst_1
-	goto Label7
-Label6:
-	iconst_0
-Label7:
-	ifne Label5
-Label8:
-	getstatic ZCodeClass/x F
-	invokestatic ZCodeClass/writeNumber(F)V
-	ldc " "
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-Label9:
 	ldc 1.0
 	getstatic ZCodeClass/x F
 	fadd
 	putstatic ZCodeClass/x F
+Label6:
+	getstatic ZCodeClass/x F
+	ldc 10.0
+	fcmpl
+	ifne Label7
+	iconst_1
+	goto Label8
+Label7:
+	iconst_0
+Label8:
+	ifne Label5
+Label9:
+	getstatic ZCodeClass/x F
+	invokestatic ZCodeClass/writeNumber(F)V
+	ldc " "
+	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+Label10:
 	goto Label4
 Label5:
 Label3:
 Label1:
 	return
-.limit stack 6
+.limit stack 5
 .limit locals 1
 .end method

@@ -160,47 +160,65 @@ Label2:
 .var 1 is x F from Label2 to Label3
 	ldc 0.0
 	fstore_1
+	goto Label6
 Label4:
+	ldc 1.0
+	fload_1
+	fadd
+	fstore_1
+Label6:
 	fload_1
 	ldc 3.0
 	fcmpl
-	ifne Label6
+	ifne Label7
 	iconst_1
-	goto Label7
-Label6:
-	iconst_0
+	goto Label8
 Label7:
-	ifne Label5
+	iconst_0
 Label8:
-.var 2 is y F from Label8 to Label9
+	ifne Label5
+Label9:
+.var 2 is y F from Label9 to Label10
 	ldc 0.0
 	fstore_2
-Label10:
+	goto Label13
+Label11:
+	ldc 1.0
+	fload_2
+	fadd
+	fstore_2
+Label13:
 	fload_2
 	ldc 1.0
 	fcmpl
-	ifne Label12
+	ifne Label14
 	iconst_1
-	goto Label13
-Label12:
-	iconst_0
-Label13:
-	ifne Label11
+	goto Label15
 Label14:
-.var 3 is z F from Label14 to Label15
+	iconst_0
+Label15:
+	ifne Label12
+Label16:
+.var 3 is z F from Label16 to Label17
 	ldc 0.0
 	fstore_3
-Label16:
+	goto Label20
+Label18:
+	ldc 1.0
+	fload_3
+	fadd
+	fstore_3
+Label20:
 	fload_3
 	ldc 1.0
 	fcmpl
-	ifne Label18
+	ifne Label21
 	iconst_1
-	goto Label19
-Label18:
+	goto Label22
+Label21:
 	iconst_0
-Label19:
-	ifne Label17
+Label22:
+	ifne Label19
 	getstatic ZCodeClass/numArr [[[F
 	fload_1
 	f2i
@@ -212,24 +230,12 @@ Label19:
 	f2i
 	faload
 	invokestatic ZCodeClass/writeNumber(F)V
-	ldc 1.0
-	fload_3
-	fadd
-	fstore_3
-	goto Label16
+	goto Label18
+Label19:
 Label17:
-Label15:
-	ldc 1.0
-	fload_2
-	fadd
-	fstore_2
-	goto Label10
-Label11:
-Label9:
-	ldc 1.0
-	fload_1
-	fadd
-	fstore_1
+	goto Label11
+Label12:
+Label10:
 	goto Label4
 Label5:
 Label3:
