@@ -640,4 +640,125 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "anhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 545))
 
+    def test_re_numeric_expression(self):
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x = 3)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 546))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x > 2)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 546))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x > 4)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 547))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x < 3)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 548))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x < 10)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 549))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x <= 3)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 550))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x <= 2)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 551))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x >= 3)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 552))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x >= 5)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 553))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x != 3)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 554))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x != 4)
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 555))
 

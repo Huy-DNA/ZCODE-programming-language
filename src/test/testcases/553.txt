@@ -1,0 +1,8 @@
+
+        dynamic x
+        func main ()
+        begin
+            x <- 3
+            writeBool(x >= 5)
+        end
+        

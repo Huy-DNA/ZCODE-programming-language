@@ -314,7 +314,7 @@ class CodeGenVisitor(BaseVisitor):
         elif op in ['*', '/', '%']:
             opIns = self.emit.emitMULOP(op, NumberType(), param.frame)
             typ = NumberType()
-        elif op in [">", ">=", "<=", "=", "!="]:
+        elif op in [">", ">=", "<=", "<", "=", "!="]:
             opIns = self.emit.emitREOP(op, NumberType(), param.frame)
             typ = BoolType()
         elif op == "==":
