@@ -906,3 +906,37 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "45.0"
         self.assertTrue(TestCodeGen.test(input, expect, 563))
+
+        input = r"""
+        dynamic x <- 1
+        func mul(number i) begin
+            x <- x * i
+        end
+
+        func main ()
+        begin
+            var y <- 1
+            for y until y = 10 by 1
+                mul(y)
+            writeNumber(x)
+        end
+        """
+        expect = "362880.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 564))
+
+        input = r"""
+        dynamic x <- 0
+        func div() begin
+            x <- x / 2
+        end
+
+        func main ()
+        begin
+            var y <- 0
+            for y until y = 5 by 1
+                div()
+            writeNumber(x)
+        end
+        """
+        expect = "0.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 565))

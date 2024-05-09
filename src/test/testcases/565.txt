@@ -1,0 +1,14 @@
+
+        dynamic x <- 0
+        func div() begin
+            x <- x / 2
+        end
+
+        func main ()
+        begin
+            var y <- 0
+            for y until y = 5 by 1
+                div()
+            writeNumber(x)
+        end
+        

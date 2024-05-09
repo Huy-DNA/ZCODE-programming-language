@@ -1,0 +1,14 @@
+
+        dynamic x <- 1
+        func mul(number i) begin
+            x <- x * i
+        end
+
+        func main ()
+        begin
+            var y <- 1
+            for y until y = 10 by 1
+                mul(y)
+            writeNumber(x)
+        end
+        
