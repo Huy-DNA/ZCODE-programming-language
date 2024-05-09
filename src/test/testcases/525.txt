@@ -1,0 +1,11 @@
+
+        func getArr() return ["an", "huy"]
+        dynamic strArr 
+        func main ()
+        begin
+            strArr <- getArr()
+            var x <- 0
+            for x until x = 2 by 1
+                writeString(strArr[x])
+        end
+        

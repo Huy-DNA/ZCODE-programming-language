@@ -686,7 +686,7 @@ class Emitter():
         # typ: Type
         
         frame.push()
-        return self.jvm.emitANEWARRAY(self.getJVMType(typ))
+        return self.jvm.emitANEWARRAY(self.getFullType(typ))
 
     def emitMULTIANEWARRAY(self, typ, dimensions, frame):
         # typ: Type
