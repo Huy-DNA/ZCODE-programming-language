@@ -826,3 +826,26 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "1.02.03.04.05.06.08.0"
         self.assertTrue(TestCodeGen.test(input, expect, 559))
+
+    def test_multi_functions(self):
+        input = r"""
+        dynamic x
+        dynamic y
+        func foo (number x1, number x2) begin
+            x <- x1
+            y <- x2
+        end
+        func main ()
+        begin
+            foo(1, 2)
+            writeNumber(x)
+            writeNumber(y)
+            foo(2, 3)
+            writeNumber(x)
+            writeNumber(y)
+        end
+        """
+        expect = "1.02.02.03.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 560))
+
+

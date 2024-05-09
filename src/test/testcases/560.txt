@@ -1,0 +1,17 @@
+
+        dynamic x
+        dynamic y
+        func foo (number x1, number x2) begin
+            x <- x1
+            y <- x2
+        end
+        func main ()
+        begin
+            foo(1, 2)
+            writeNumber(x)
+            writeNumber(y)
+            foo(2, 3)
+            writeNumber(x)
+            writeNumber(y)
+        end
+        
