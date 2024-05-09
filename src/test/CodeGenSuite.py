@@ -624,8 +624,20 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "false"
         self.assertTrue(TestCodeGen.test(input, expect, 544))
 
-
-
-
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- "an"
+            dynamic y
+            begin
+                y <- "huy"
+                var z <- x ... y
+                writeString(z) 
+            end
+        end
+        """
+        expect = "anhuy"
+        self.assertTrue(TestCodeGen.test(input, expect, 545))
 
 

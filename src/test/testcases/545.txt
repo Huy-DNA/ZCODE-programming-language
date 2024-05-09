@@ -1,0 +1,13 @@
+
+        dynamic x
+        func main ()
+        begin
+            x <- "an"
+            dynamic y
+            begin
+                y <- "huy"
+                var z <- x ... y
+                writeString(z) 
+            end
+        end
+        
