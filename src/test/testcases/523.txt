@@ -1,0 +1,15 @@
+
+        func main ()
+        begin
+            var x <- 0
+            var str <- "huy"
+            var str2 <- ""
+            for x until x = 2 by 1 begin
+                str <- str ... str
+                str2 <- str2 ... "huy"
+            end
+            writeString(str)
+            writeString("\n")
+            writeString(str2)
+        end
+        

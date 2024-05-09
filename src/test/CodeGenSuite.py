@@ -320,3 +320,21 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "0.01.00.01.00.0"
         self.assertTrue(TestCodeGen.test(input, expect, 522))
+        
+        input = r"""
+        func main ()
+        begin
+            var x <- 0
+            var str <- "huy"
+            var str2 <- ""
+            for x until x = 2 by 1 begin
+                str <- str ... str
+                str2 <- str2 ... "huy"
+            end
+            writeString(str)
+            writeString("\n")
+            writeString(str2)
+        end
+        """
+        expect = "huyhuyhuyhuy\nhuyhuy"
+        self.assertTrue(TestCodeGen.test(input, expect, 523))

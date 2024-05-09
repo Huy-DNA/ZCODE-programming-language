@@ -370,7 +370,7 @@ class Emitter():
                 return self.jvm.emitFSUB()
         elif type(in_) is StringType:
             if lexeme == "...":
-                return self.jvm.invokeVIRTUAL("java/lang/String/concat", "(Ljava/lang/String;)Ljava/lang/String;")
+                return self.jvm.emitINVOKEVIRTUAL("java/lang/String/concat", "(Ljava/lang/String;)Ljava/lang/String;")
     '''
     *   generate imul, idiv, fmul or fdiv.
     *   @param lexeme the lexeme of the operator.
