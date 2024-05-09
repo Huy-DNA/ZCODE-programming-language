@@ -605,5 +605,27 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "false"
         self.assertTrue(TestCodeGen.test(input, expect, 542))
 
+    def test_string_expressions(self):
+        input = r"""
+        func main ()
+        begin
+            writeBool(("an"..."huy") == "anhuy") 
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input, expect, 543))
+
+        input = r"""
+        func main ()
+        begin
+            writeBool(("an"..."huy") == "an huy") 
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 544))
+
+
+
+
 
 
