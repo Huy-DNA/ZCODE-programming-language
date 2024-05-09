@@ -1,0 +1,12 @@
+
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- 1 / 2
+            y <- 0
+            for y until y > 3 by 1
+                x <- x * 2
+            writeNumber(x)
+        end
+        

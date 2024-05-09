@@ -1,0 +1,16 @@
+
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- false
+            y <- false
+            var z <- 1
+            for z until x and y by 1 begin
+                x <- z % 2 = 0
+                y <- z % 3 = 0
+                writeNumber(z)
+            end
+            writeNumber(z + 1)
+        end
+        

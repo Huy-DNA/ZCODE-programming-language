@@ -762,3 +762,67 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "true"
         self.assertTrue(TestCodeGen.test(input, expect, 555))
 
+    def test_complex_expressions(self):
+        input = r"""
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- 1 + 2
+            y <- 0
+            for y until y > 3 by 1
+                x <- x * 2
+            writeNumber(x)
+        end
+        """
+        expect = "48.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 556))
+
+        input = r"""
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- 1 - 2
+            y <- 0
+            for y until y > 1 by 1
+                x <- x / 2
+            writeNumber(x)
+        end
+        """
+        expect = "-0.25"
+        self.assertTrue(TestCodeGen.test(input, expect, 557))
+
+        input = r"""
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- 1 / 2
+            y <- 0
+            for y until y > 3 by 1
+                x <- x * 2
+            writeNumber(x)
+        end
+        """
+        expect = "8.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 558))
+
+        input = r"""
+        dynamic x
+        dynamic y
+        func main ()
+        begin
+            x <- false
+            y <- false
+            var z <- 1
+            for z until x and y by 1 begin
+                x <- z % 2 = 0
+                y <- z % 3 = 0
+                writeNumber(z)
+            end
+            writeNumber(z + 1)
+        end
+        """
+        expect = "1.02.03.04.05.06.08.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 559))
