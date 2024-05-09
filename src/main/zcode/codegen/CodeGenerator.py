@@ -371,6 +371,7 @@ class CodeGenVisitor(BaseVisitor):
         typ = ArrayType([arrTyp.size], arrTyp.eleType)
         for idx in ast.idx:
             code += self.visit(idx, param)[0]
+            code += self.emit.emitF2I(param.frame)
             if len(typ.size) == 1:
                 if not param.isLeft:
                     code += self.emit.emitALOAD(typ.eleType, param.frame)

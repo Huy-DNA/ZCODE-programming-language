@@ -352,3 +352,4 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "1.02.03.04.0"
         self.assertTrue(TestCodeGen.test(input, expect, 524))
+

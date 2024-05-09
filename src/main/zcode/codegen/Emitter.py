@@ -569,6 +569,12 @@ class Emitter():
 
         return self.jvm.emitI2F()
 
+    def emitF2I(self, frame):
+        # frame: Frame
+        
+        return self.jvm.emitF2I()
+
+
     ''' generate code to return.
     *   <ul>
     *   <li>ireturn if the type is IntegerType or BoolType

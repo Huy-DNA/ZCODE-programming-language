@@ -147,6 +147,7 @@ Label7:
 	ifne Label5
 	getstatic ZCodeClass/numArr [F
 	fload_1
+	f2i
 	faload
 	invokestatic ZCodeClass/writeNumber(F)V
 	ldc 1.0
