@@ -1,0 +1,8 @@
+
+        func main ()
+        begin
+            var x <- 0
+            for x until x = 5 by 1
+                writeNumber(x % 2)
+        end
+        

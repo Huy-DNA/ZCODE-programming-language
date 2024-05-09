@@ -309,4 +309,14 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "5.0"
         self.assertTrue(TestCodeGen.test(input, expect, 521))
-               
+
+        input = r"""
+        func main ()
+        begin
+            var x <- 0
+            for x until x = 5 by 1
+                writeNumber(x % 2)
+        end
+        """
+        expect = "0.01.00.01.00.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 522))
