@@ -269,7 +269,7 @@ class CodeGenVisitor(BaseVisitor):
         scope = param.scope
         in_, _ = scope.lookup(name, Function())
         if name == "main":
-            paramType = [ArrayType([], StringType())]
+            paramType = [ArrayType([1], StringType())]
             in_ = FuncType(paramType, VoidType(), True)
         
         self.code += (self.emit.emitMETHOD(name, in_, param.frame))
@@ -368,7 +368,7 @@ class CodeGenVisitor(BaseVisitor):
         subParam = SubBody(param.frame, param.scope)
         arrCode, arrTyp = self.visit(ast.arr, param)
         code = arrCode
-        typ = ArrayType([arrTyp.size], arrTyp.eleType)
+        typ = ArrayType(arrTyp.size.copy(), arrTyp.eleType)
         for idx in ast.idx:
             code += self.visit(idx, param)[0]
             code += self.emit.emitF2I(param.frame)
@@ -477,16 +477,16 @@ class CodeGenVisitor(BaseVisitor):
         eleCode = ""
         eleTyp = None
         for index, expr in enumerate(ast.value):
-            c, typ = self.visit(expr, param)
+            _, typ = self.visit(expr, SubBody(Frame(param.frame.name, param.frame.returnType), param.scope))
             eleTyp = typ
             eleCode += self.emit.emitDUP(param.frame)
             eleCode += self.emit.emitPUSHICONST(index, param.frame)
-            eleCode += c
+            eleCode += self.visit(expr, param)[0]
             eleCode += self.emit.emitASTORE(eleTyp, param.frame)
         else:
             code += self.emit.emitARRAY(eleTyp, param.frame) + eleCode
 
-        return code, ArrayType([size], eleTyp) if type(eleTyp) is not ArrayType else ArrayType([size] + eleTyp.size, eleTyp.eleTyp)
+        return code, (ArrayType([size], eleTyp) if type(eleTyp) is not ArrayType else ArrayType([size] + eleTyp.size, eleTyp.eleType))
 
 class UninferredType(Type):
     pass

@@ -366,3 +366,35 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "anhuy"
         self.assertTrue(TestCodeGen.test(input, expect, 525))
+
+        input = r"""
+        func getArr() return [true, false]
+        dynamic boolArr 
+        func main ()
+        begin
+            boolArr <- getArr()
+            var x <- 0
+            for x until x = 2 by 1
+                writeBool(boolArr[x])
+        end
+        """
+        expect = "truefalse"
+        self.assertTrue(TestCodeGen.test(input, expect, 526))
+
+        input = r"""
+        func getArr() return [["an", " "], ["huy", "."]]
+        dynamic strArr 
+        func main ()
+        begin
+            strArr <- getArr()
+            var x <- 0
+            for x until x = 2 by 1
+            begin
+                var y <- 0
+                for y until y = 2 by 1
+                    writeString(strArr[x, y])
+            end
+        end
+        """
+        expect = "an huy."
+        self.assertTrue(TestCodeGen.test(input, expect, 527))

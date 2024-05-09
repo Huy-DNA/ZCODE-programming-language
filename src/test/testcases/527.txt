@@ -1,0 +1,15 @@
+
+        func getArr() return [["an", " "], ["huy", "."]]
+        dynamic strArr 
+        func main ()
+        begin
+            strArr <- getArr()
+            var x <- 0
+            for x until x = 2 by 1
+            begin
+                var y <- 0
+                for y until y = 2 by 1
+                    writeString(strArr[x, y])
+            end
+        end
+        

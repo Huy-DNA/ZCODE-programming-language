@@ -1,0 +1,11 @@
+
+        func getArr() return [true, false]
+        dynamic boolArr 
+        func main ()
+        begin
+            boolArr <- getArr()
+            var x <- 0
+            for x until x = 2 by 1
+                writeBool(boolArr[x])
+        end
+        
