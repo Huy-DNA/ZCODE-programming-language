@@ -294,3 +294,19 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = ""
         self.assertTrue(TestCodeGen.test(input, expect, 520))
         
+    def test_expression(self): 
+        input = r"""
+        func main ()
+        begin
+            var x <- (1 + 1) * 2
+            var y <- x * x
+            var z <- y / x
+            var t <- y % 3
+            var r <- z + t
+            writeNumber(r)
+        end
+ 
+        """
+        expect = "5.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 521))
+               

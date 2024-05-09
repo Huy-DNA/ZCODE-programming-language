@@ -1,0 +1,12 @@
+
+        func main ()
+        begin
+            var x <- (1 + 1) * 2
+            var y <- x * x
+            var z <- y / x
+            var t <- y % 3
+            var r <- z + t
+            writeNumber(r)
+        end
+ 
+        

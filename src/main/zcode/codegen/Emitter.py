@@ -16,29 +16,9 @@ def patch_Frame_class():
     Frame.getBreakLabel = getBreakLabel
 
 # Since the MachineCode.py file is not submitted, have to do it here
-def patch_Machine_Code_class():
-    def emitIREM(self):
-        return JasminCode.INDENT + "irem" + JasminCode.END
-    JasminCode.emitIREM = emitIREM    
-    
-    def emitFREM(self):
-        return JasminCode.INDENT + "frem" + JasminCode.END
-    JasminCode.emitFREM = emitFREM 
-
-    def emitICONST(self, i):
-        # i: Int
-        if i == -1:
-            return JasminCode.INDENT + "iconst_m1" + JasminCode.END
-        elif i >= 0 and i <= 5:
-            return JasminCode.INDENT + "iconst_" + str(i) + JasminCode.END
-        else:
-            raise IllegalOperandException(str(i))
-    JasminCode.emitICONST = emitICONST
-
 class Emitter():
     def __init__(self, filename):
         patch_Frame_class()
-        patch_Machine_Code_class()
         self.filename = filename
         self.buff = list()
         self.jvm = JasminCode()
@@ -408,7 +388,7 @@ class Emitter():
         elif lexeme == '/':
             return self.emitDIV(frame)
         else:
-            return self.emitREM(frame)
+            return self.emitMOD(frame)
 
     def emitMUL(self, frame):
         frame.pop()
