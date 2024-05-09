@@ -1,0 +1,15 @@
+
+        func main ()
+        begin
+            var x <- 0
+            for x until x = 10 by 1
+            begin
+                if ((x % 2 = 0) or (x % 3 = 0)) begin
+                    if (x % 6 = 0)
+                        break
+                    continue
+                end
+                writeNumber(x)
+            end
+        end
+        

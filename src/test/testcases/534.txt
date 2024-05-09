@@ -1,0 +1,19 @@
+
+        func main ()
+        begin
+            var x <- 0
+            for x until x = 3 by 1
+            begin
+                var y <- 0
+                for y until y = 3 by 1
+                begin
+                    if (x + y = 2)
+                        break
+                    writeNumber(x)
+                    writeString(":")
+                    writeNumber(y)
+                    writeString("-")
+                end
+            end
+        end
+        
