@@ -847,5 +847,62 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "1.02.02.03.0"
         self.assertTrue(TestCodeGen.test(input, expect, 560))
+ 
+        input = r"""
+        func say(string s) begin
+            writeString(s)
+        end
+        dynamic str
+        func main ()
+        begin
+            say("Hello World!\n")
+            str <- "Hi"
+            say(str)
+            say("\n")
+            say(str ... " World!\n")
+        end
+        """
+        expect = "Hello World!\nHi\nHi World!\n"
+        self.assertTrue(TestCodeGen.test(input, expect, 561))
 
+        input = r"""
+        func a()
+        func b()
+        func c()
+        
+        func main ()
+        begin
+            c()
+        end
 
+        func a() begin
+            writeString("a")
+        end
+        func b() begin
+            a()
+            writeString("b")
+        end
+        func c() begin
+            b()
+            writeString("c")
+        end
+        """
+        expect = "abc"
+        self.assertTrue(TestCodeGen.test(input, expect, 562))
+
+        input = r"""
+        dynamic x <- 0
+        func sum(number i) begin
+            x <- x + i
+        end
+
+        func main ()
+        begin
+            var y <- 0
+            for y until y = 10 by 1
+                sum(y)
+            writeNumber(x)
+        end
+        """
+        expect = "45.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 563))

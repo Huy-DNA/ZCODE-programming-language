@@ -1,0 +1,14 @@
+
+        dynamic x <- 0
+        func sum(number i) begin
+            x <- x + i
+        end
+
+        func main ()
+        begin
+            var y <- 0
+            for y until y = 10 by 1
+                sum(y)
+            writeNumber(x)
+        end
+        

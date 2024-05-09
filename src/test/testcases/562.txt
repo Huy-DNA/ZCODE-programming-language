@@ -1,0 +1,22 @@
+
+        func a()
+        func b()
+        func c()
+        
+        func main ()
+        begin
+            c()
+        end
+
+        func a() begin
+            writeString("a")
+        end
+        func b() begin
+            a()
+            writeString("b")
+        end
+        func c() begin
+            b()
+            writeString("c")
+        end
+        

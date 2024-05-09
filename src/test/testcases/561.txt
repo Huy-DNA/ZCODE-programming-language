@@ -1,0 +1,14 @@
+
+        func say(string s) begin
+            writeString(s)
+        end
+        dynamic str
+        func main ()
+        begin
+            say("Hello World!\n")
+            str <- "Hi"
+            say(str)
+            say("\n")
+            say(str ... " World!\n")
+        end
+        
