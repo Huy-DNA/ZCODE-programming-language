@@ -210,3 +210,21 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "NO"
         self.assertTrue(TestCodeGen.test(input, expect, 515))
+
+        input = r"""
+        func main ()
+        begin
+            if (1 + 1 != 2)
+                writeString("1 + 1 != 2")
+            elif (2 + 2 = 3)
+                writeString("2 + 2 = 3")
+            elif (1 + 3 != 4)
+                writeString("1 + 3 != 4")
+            elif (1 + 3 = 4)
+                writeString("1 + 3 = 4")
+            else
+                writeString("???")
+        end
+        """
+        expect = "1 + 3 = 4"
+        self.assertTrue(TestCodeGen.test(input, expect, 516))

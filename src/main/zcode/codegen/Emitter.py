@@ -459,7 +459,7 @@ class Emitter():
         frame.pop()
 
         if type(in_) is NumberType:
-            result.append(self.emitFCMPL())
+            result.append(self.jvm.emitFCMPL())
             if op == ">":
                 result.append(self.jvm.emitIFLE(labelF))
             elif op == ">=":
@@ -644,6 +644,10 @@ class Emitter():
     *   .class public MPC.CLASSNAME<p>
     *   .super java/lang/Object<p>
     '''
+
+    def emitFCMPL(self, name, frame):
+        frame.pop()
+        return self.jvm.emitFCMPL()
 
     def emitPROLOG(self, name, parent):
         # name: String
