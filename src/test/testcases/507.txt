@@ -1,0 +1,13 @@
+func main ()
+        begin
+            var a <- "anhuy"
+            var b <- a
+            string c <- b
+            dynamic d
+            d <- c
+            writeString(a)
+            writeString(b)
+            writeString(c)
+            writeString(d)
+        end
+        
