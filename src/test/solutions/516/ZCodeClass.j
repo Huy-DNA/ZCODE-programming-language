@@ -160,17 +160,29 @@ Label13:
 Label14:
 	iconst_0
 Label15:
-	ifle Label16
-	ldc "1 + 3 = 4"
+	ldc 1.0
+	ldc 1.0
+	fadd
+	ldc 3.0
+	fcmpl
+	ifne Label16
+	iconst_1
+	goto Label17
+Label16:
+	iconst_0
+Label17:
+	iand
+	ifle Label18
+	ldc "1 + 3 = 4 and 1 +1 = 3"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 	goto Label6
-Label16:
+Label18:
 	ldc "???"
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 Label6:
 Label3:
 Label1:
 	return
-.limit stack 17
+.limit stack 22
 .limit locals 1
 .end method
