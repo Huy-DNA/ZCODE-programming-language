@@ -278,3 +278,19 @@ class CheckCodeGenSuite(unittest.TestCase):
         """
         expect = "0.0 2.0 4.0 6.0 8.0 10.0 "
         self.assertTrue(TestCodeGen.test(input, expect, 519))
+
+        input = r"""
+        dynamic x
+        func main ()
+        begin
+            x <- 0
+            for x until true by 1 begin
+                writeNumber(x)
+                writeString(" ")
+            end
+        end
+ 
+        """
+        expect = ""
+        self.assertTrue(TestCodeGen.test(input, expect, 520))
+        
