@@ -1,0 +1,15 @@
+
+        dynamic a1
+        var a2 <- 4
+        string a3 <- "anhuy"
+        func main ()
+        begin
+            a1 <- false
+            var a <- a1
+            number b <- a2 
+            string c <- a3
+            writeBool(a)
+            writeNumber(b)
+            writeString(c)
+        end
+        

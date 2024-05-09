@@ -1,12 +1,19 @@
 .source ZCodeClass.java
 .class public ZCodeClass
 .super java/lang/Object
+.field static a1 Z
+.field static a2 F
+.field static a3 Ljava/lang/String;
 
 .method public static <clinit>()V
 Label0:
+	ldc 4.0
+	putstatic ZCodeClass/a2 F
+	ldc "anhuy"
+	putstatic ZCodeClass/a3 Ljava/lang/String;
 Label1:
 	return
-.limit stack 0
+.limit stack 1
 .limit locals 0
 .end method
 
@@ -101,29 +108,26 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
-.var 1 is a Ljava/lang/String; from Label2 to Label3
-	ldc "anhuy"
-	astore_1
-.var 2 is b Ljava/lang/String; from Label2 to Label3
-	aload_1
-	astore_2
+	iconst_0
+	putstatic ZCodeClass/a1 Z
+.var 1 is a Z from Label2 to Label3
+	getstatic ZCodeClass/a1 Z
+	istore_1
+.var 2 is b F from Label2 to Label3
+	getstatic ZCodeClass/a2 F
+	fstore_2
 .var 3 is c Ljava/lang/String; from Label2 to Label3
-	aload_2
+	getstatic ZCodeClass/a3 Ljava/lang/String;
 	astore_3
-.var 4 is d Ljava/lang/String; from Label2 to Label3
+	iload_1
+	invokestatic ZCodeClass/writeBool(Z)V
+	fload_2
+	invokestatic ZCodeClass/writeNumber(F)V
 	aload_3
-	astore 4
-	aload_1
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	aload_2
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	aload_3
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
-	aload 4
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 Label3:
 Label1:
 	return
-.limit stack 1
-.limit locals 5
+.limit stack 2
+.limit locals 4
 .end method

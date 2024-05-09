@@ -1,6 +1,6 @@
 func main ()
         begin
-            var a <- false
+            var a <- true
             var b <- a
             bool c <- b
             dynamic d

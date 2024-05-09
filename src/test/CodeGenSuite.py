@@ -106,20 +106,22 @@ class CheckCodeGenSuite(unittest.TestCase):
         expect = "truetruetruetrue"
         self.assertTrue(TestCodeGen.test(input, expect, 508))
 
-        input = """func main ()
+    def test_assign_across_scope(self):
+        input = """
+        dynamic a1
+        var a2 <- 4
+        string a3 <- "anhuy"
+        func main ()
         begin
-            var a <- false
-            var b <- a
-            bool c <- b
-            dynamic d
-            d <- c
+            a1 <- false
+            var a <- a1
+            number b <- a2 
+            string c <- a3
             writeBool(a)
-            writeBool(b)
-            writeBool(c)
-            writeBool(d)
+            writeNumber(b)
+            writeString(c)
         end
         """
-        expect = "falsefalsefalsefalse"
-        self.assertTrue(TestCodeGen.test(input, expect, 508))
-
+        expect = "false4.0anhuy"
+        self.assertTrue(TestCodeGen.test(input, expect, 509))
 

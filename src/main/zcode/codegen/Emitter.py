@@ -249,7 +249,7 @@ class Emitter():
     *   @param isFinal true in case of constant; false otherwise
     '''
 
-    def emitATTRIBUTE(self, lexeme, in_, isFinal, value):
+    def emitATTRIBUTE(self, lexeme, in_):
         # lexeme: String
         # in_: Type
         # isFinal: Boolean

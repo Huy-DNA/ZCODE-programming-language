@@ -2,6 +2,14 @@
 .class public ZCodeClass
 .super java/lang/Object
 
+.method public static <clinit>()V
+Label0:
+Label1:
+	return
+.limit stack 0
+.limit locals 0
+.end method
+
 .method public static readNumber()F
 Label0:
 .var 0 is arg F from Label0 to Label1
@@ -91,7 +99,7 @@ Label1:
 
 .method public static main([Ljava/lang/String;)V
 Label0:
-.var 0 is main [Ljava/lang/String; from Label0 to Label1
+.var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
 	ldc 1.0
 	invokestatic ZCodeClass/writeNumber(F)V
