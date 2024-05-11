@@ -21,7 +21,15 @@ class CheckCodeGenSuite(unittest.TestCase):
  #       """
  #       expect = "0.0"
  #       self.assertTrue(TestCodeGen.test(input, expect, 501))
-
+        
+        input = """func main ()
+        begin
+            writeNumber(-2)
+        end
+        """
+        expect = "-2.0"
+        self.assertTrue(TestCodeGen.test(input, expect, 501))
+  
     def test_bool(self):
         input = """func main ()
         begin
@@ -39,7 +47,15 @@ class CheckCodeGenSuite(unittest.TestCase):
 #        """
 #        expect = "true"
 #        self.assertTrue(TestCodeGen.test(input, expect, 503))
-
+        
+        input = """func main ()
+        begin
+            writeBool(false)
+        end
+        """
+        expect = "false"
+        self.assertTrue(TestCodeGen.test(input, expect, 503))
+  
     def test_string(self):
         input = """func main ()
         begin
@@ -56,7 +72,15 @@ class CheckCodeGenSuite(unittest.TestCase):
   #      """
   #      expect = ""
   #      self.assertTrue(TestCodeGen.test(input, expect, 505))
-
+        
+        input = """func main ()
+        begin
+            writeString("1")
+        end
+        """
+        expect = "1"
+        self.assertTrue(TestCodeGen.test(input, expect, 505))
+  
     def test_assign(self):
         input = """func main ()
         begin

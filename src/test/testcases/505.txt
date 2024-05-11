@@ -1,5 +1,5 @@
 func main ()
         begin
-            var a <- readString()
+            writeString("1")
         end
         

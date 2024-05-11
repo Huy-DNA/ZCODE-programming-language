@@ -330,7 +330,8 @@ class CodeGenVisitor(BaseVisitor):
         return code, typ
 
     def visitUnaryOp(self, ast, param):
-        code = self.visit(ast.operand, param)
+        op = ast.op
+        code, _ = self.visit(ast.operand, param)
         if op == "-":
             opIns = self.emit.emitNEGOP(NumberType(), param.frame)
             typ = NumberType()

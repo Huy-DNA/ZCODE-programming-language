@@ -1,6 +1,5 @@
 func main ()
         begin
-            var a <- readNumber()
-            writeNumber(a * 0)
+            writeNumber(-2)
         end
         
