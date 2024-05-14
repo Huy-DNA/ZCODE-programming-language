@@ -101,11 +101,45 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
-	ldc "1"
-	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+.var 1 is x F from Label2 to Label3
+	ldc 0.0
+	fstore_1
+	goto Label6
+Label4:
+	ldc 1.0
+	fload_1
+	fadd
+	fstore_1
+Label6:
+	fload_1
+	fstore_2
+	fload_1
+	ldc 10.0
+	fcmpl
+	iflt Label7
+	iconst_1
+	goto Label8
+Label7:
+	iconst_0
+Label8:
+	ifne Label5
+Label9:
+	fload_1
+	ldc 1.0
+	fadd
+	fstore_1
+	fload_1
+	invokestatic ZCodeClass/writeNumber(F)V
+Label10:
+	fload_2
+	fstore_1
+	goto Label4
+Label5:
+	fload_2
+	fstore_1
 Label3:
 Label1:
 	return
-.limit stack 1
-.limit locals 1
+.limit stack 6
+.limit locals 3
 .end method

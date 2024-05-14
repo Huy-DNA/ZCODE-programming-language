@@ -1,5 +1,5 @@
 func main ()
         begin
-            writeBool(false)
+            writeBool(not true)
         end
         

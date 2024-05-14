@@ -50,7 +50,7 @@ class CheckCodeGenSuite(unittest.TestCase):
         
         input = """func main ()
         begin
-            writeBool(false)
+            writeBool(not true)
         end
         """
         expect = "false"
@@ -73,12 +73,17 @@ class CheckCodeGenSuite(unittest.TestCase):
   #      expect = ""
   #      self.assertTrue(TestCodeGen.test(input, expect, 505))
         
-        input = """func main ()
+        input = r"""func main ()
         begin
-            writeString("1")
+            var x <- 0
+            for x until x >= 10 by 1
+            begin
+                x <- x + 1
+                writeNumber(x)
+            end
         end
         """
-        expect = "1"
+        expect = "1.02.03.04.05.06.07.08.09.010.0"
         self.assertTrue(TestCodeGen.test(input, expect, 505))
   
     def test_assign(self):

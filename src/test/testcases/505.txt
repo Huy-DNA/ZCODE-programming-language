@@ -1,5 +1,10 @@
 func main ()
         begin
-            writeString("1")
+            var x <- 0
+            for x until x >= 10 by 1
+            begin
+                x <- x + 1
+                writeNumber(x)
+            end
         end
         

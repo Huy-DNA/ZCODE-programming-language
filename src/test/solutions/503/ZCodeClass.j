@@ -101,11 +101,17 @@ Label1:
 Label0:
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label2:
+	iconst_1
+	ifne Label4
+	iconst_1
+	goto Label5
+Label4:
 	iconst_0
+Label5:
 	invokestatic ZCodeClass/writeBool(Z)V
 Label3:
 Label1:
 	return
-.limit stack 2
+.limit stack 5
 .limit locals 1
 .end method
