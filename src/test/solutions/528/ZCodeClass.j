@@ -168,6 +168,8 @@ Label4:
 	fstore_1
 Label6:
 	fload_1
+	fstore_2
+	fload_1
 	ldc 3.0
 	fcmpl
 	ifne Label7
@@ -178,17 +180,19 @@ Label7:
 Label8:
 	ifne Label5
 Label9:
-.var 2 is y F from Label9 to Label10
+.var 3 is y F from Label9 to Label10
 	ldc 0.0
-	fstore_2
+	fstore_3
 	goto Label13
 Label11:
 	ldc 1.0
-	fload_2
+	fload_3
 	fadd
-	fstore_2
+	fstore_3
 Label13:
-	fload_2
+	fload_3
+	fstore 4
+	fload_3
 	ldc 1.0
 	fcmpl
 	ifne Label14
@@ -199,17 +203,19 @@ Label14:
 Label15:
 	ifne Label12
 Label16:
-.var 3 is z F from Label16 to Label17
+.var 5 is z F from Label16 to Label17
 	ldc 0.0
-	fstore_3
+	fstore 5
 	goto Label20
 Label18:
 	ldc 1.0
-	fload_3
+	fload 5
 	fadd
-	fstore_3
+	fstore 5
 Label20:
-	fload_3
+	fload 5
+	fstore 6
+	fload 5
 	ldc 1.0
 	fcmpl
 	ifne Label21
@@ -223,24 +229,36 @@ Label22:
 	fload_1
 	f2i
 	aaload
-	fload_2
+	fload_3
 	f2i
 	aaload
-	fload_3
+	fload 5
 	f2i
 	faload
 	invokestatic ZCodeClass/writeNumber(F)V
+	fload 6
+	fstore 5
 	goto Label18
 Label19:
+	fload 6
+	fstore 5
 Label17:
+	fload 4
+	fstore_3
 	goto Label11
 Label12:
+	fload 4
+	fstore_3
 Label10:
+	fload_2
+	fstore_1
 	goto Label4
 Label5:
+	fload_2
+	fstore_1
 Label3:
 Label1:
 	return
 .limit stack 14
-.limit locals 4
+.limit locals 7
 .end method

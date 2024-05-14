@@ -130,6 +130,8 @@ Label4:
 	fstore_1
 Label6:
 	fload_1
+	fstore_2
+	fload_1
 	ldc 10.0
 	fcmpl
 	ifne Label7
@@ -141,13 +143,17 @@ Label8:
 	ifne Label5
 	fload_1
 	invokestatic ZCodeClass/mul(F)V
+	fload_2
+	fstore_1
 	goto Label4
 Label5:
+	fload_2
+	fstore_1
 	getstatic ZCodeClass/x F
 	invokestatic ZCodeClass/writeNumber(F)V
 Label3:
 Label1:
 	return
 .limit stack 5
-.limit locals 2
+.limit locals 3
 .end method

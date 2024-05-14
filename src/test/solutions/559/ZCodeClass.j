@@ -117,6 +117,8 @@ Label4:
 	fadd
 	fstore_1
 Label6:
+	fload_1
+	fstore_2
 	getstatic ZCodeClass/x Z
 	getstatic ZCodeClass/y Z
 	iand
@@ -149,8 +151,12 @@ Label12:
 	fload_1
 	invokestatic ZCodeClass/writeNumber(F)V
 Label8:
+	fload_2
+	fstore_1
 	goto Label4
 Label5:
+	fload_2
+	fstore_1
 	fload_1
 	ldc 1.0
 	fadd
@@ -159,5 +165,5 @@ Label3:
 Label1:
 	return
 .limit stack 12
-.limit locals 2
+.limit locals 3
 .end method

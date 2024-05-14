@@ -152,6 +152,8 @@ Label4:
 	fstore_1
 Label6:
 	fload_1
+	fstore_2
+	fload_1
 	ldc 2.0
 	fcmpl
 	ifne Label7
@@ -162,17 +164,19 @@ Label7:
 Label8:
 	ifne Label5
 Label9:
-.var 2 is y F from Label9 to Label10
+.var 3 is y F from Label9 to Label10
 	ldc 0.0
-	fstore_2
+	fstore_3
 	goto Label13
 Label11:
 	ldc 1.0
-	fload_2
+	fload_3
 	fadd
-	fstore_2
+	fstore_3
 Label13:
-	fload_2
+	fload_3
+	fstore 4
+	fload_3
 	ldc 2.0
 	fcmpl
 	ifne Label14
@@ -186,18 +190,26 @@ Label15:
 	fload_1
 	f2i
 	aaload
-	fload_2
+	fload_3
 	f2i
 	aaload
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
+	fload 4
+	fstore_3
 	goto Label11
 Label12:
+	fload 4
+	fstore_3
 Label10:
+	fload_2
+	fstore_1
 	goto Label4
 Label5:
+	fload_2
+	fstore_1
 Label3:
 Label1:
 	return
 .limit stack 10
-.limit locals 3
+.limit locals 5
 .end method

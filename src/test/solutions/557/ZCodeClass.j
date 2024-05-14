@@ -117,6 +117,8 @@ Label4:
 	putstatic ZCodeClass/y F
 Label6:
 	getstatic ZCodeClass/y F
+	fstore_1
+	getstatic ZCodeClass/y F
 	ldc 1.0
 	fcmpl
 	ifle Label7
@@ -130,13 +132,17 @@ Label8:
 	ldc 2.0
 	fdiv
 	putstatic ZCodeClass/x F
+	fload_1
+	putstatic ZCodeClass/y F
 	goto Label4
 Label5:
+	fload_1
+	putstatic ZCodeClass/y F
 	getstatic ZCodeClass/x F
 	invokestatic ZCodeClass/writeNumber(F)V
 Label3:
 Label1:
 	return
 .limit stack 6
-.limit locals 1
+.limit locals 2
 .end method

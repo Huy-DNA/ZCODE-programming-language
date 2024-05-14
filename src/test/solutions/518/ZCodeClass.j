@@ -112,6 +112,8 @@ Label4:
 	putstatic ZCodeClass/x F
 Label6:
 	getstatic ZCodeClass/x F
+	fstore_1
+	getstatic ZCodeClass/x F
 	ldc 10.0
 	fcmpl
 	ifne Label7
@@ -127,11 +129,15 @@ Label9:
 	ldc " "
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 Label10:
+	fload_1
+	putstatic ZCodeClass/x F
 	goto Label4
 Label5:
+	fload_1
+	putstatic ZCodeClass/x F
 Label3:
 Label1:
 	return
 .limit stack 5
-.limit locals 1
+.limit locals 2
 .end method

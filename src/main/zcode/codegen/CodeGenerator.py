@@ -426,6 +426,7 @@ class CodeGenVisitor(BaseVisitor):
         restartLoopLabel = param.frame.getContinueLabel()
         endLoopLabel = param.frame.getBreakLabel()
         startLoopLabel = param.frame.getNewLabel()
+        iterVarId = param.frame.getNewIndex()
         self.code += self.emit.emitGOTO(startLoopLabel, param.frame)
         self.code += self.emit.emitLABEL(restartLoopLabel, param.frame)
         self.code += (self.visit(ast.updExpr, param)[0])
@@ -434,11 +435,21 @@ class CodeGenVisitor(BaseVisitor):
         self.code += (self.visit(name, SubBody(param.frame, param.scope, True))[0])
 
         self.code += (self.emit.emitLABEL(startLoopLabel, param.frame))
+ 
+        self.code += (self.visit(name, SubBody(param.frame, param.scope, False))[0])
+        self.code += self.emit.emitWRITEVAR(NumberType(), iterVarId, param.frame)
         self.code += (self.visit(ast.condExpr, param)[0])
         self.code += (self.emit.emitIFTRUE(endLoopLabel, param.frame))
         self.visit(ast.body, param)
+
+        self.code += self.emit.emitREADVAR(NumberType(), iterVarId, param.frame)
+        self.code += (self.visit(name, SubBody(param.frame, param.scope, True))[0])
+
         self.code += (self.emit.emitGOTO(restartLoopLabel, param.frame))
         self.code += (self.emit.emitLABEL(endLoopLabel, param.frame))
+
+        self.code += self.emit.emitREADVAR(NumberType(), iterVarId, param.frame)
+        self.code += (self.visit(name, SubBody(param.frame, param.scope, True))[0])
         param.frame.exitLoop()
 
     def visitContinue(self, ast, param):

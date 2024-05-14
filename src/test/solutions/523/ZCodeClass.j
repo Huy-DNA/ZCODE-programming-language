@@ -118,6 +118,8 @@ Label4:
 	fstore_1
 Label6:
 	fload_1
+	fstore 4
+	fload_1
 	ldc 2.0
 	fcmpl
 	ifne Label7
@@ -137,8 +139,12 @@ Label9:
 	invokevirtual java/lang/String/concat(Ljava/lang/String;)Ljava/lang/String;
 	astore_3
 Label10:
+	fload 4
+	fstore_1
 	goto Label4
 Label5:
+	fload 4
+	fstore_1
 	aload_2
 	invokestatic ZCodeClass/writeString(Ljava/lang/String;)V
 	ldc "
@@ -150,5 +156,5 @@ Label3:
 Label1:
 	return
 .limit stack 6
-.limit locals 4
+.limit locals 5
 .end method
